@@ -1,0 +1,67 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import { gql } from '@apollo/client'
+
+gql`
+query Curso($id: Int!) {
+  curso(id: $id) {
+    ativo
+    createdAt
+    deletedAt
+    descricao
+    id
+    nome
+    updatedAt
+  }
+}
+
+`
+
+gql`
+query Cursos(
+  $filter: CursoTypeFilter
+  $paging: CursorPaging!
+  $sorting: [CursoTypeSort!]!
+) {
+  cursos(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        ativo
+        createdAt
+        deletedAt
+        descricao
+        id
+        nome
+        updatedAt
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+`
+
+gql`
+query CursosModuloSelect(
+  $filter: CursoTypeFilter
+  $paging: CursorPaging!
+  $sorting: [CursoTypeSort!]!
+) {
+  cursos(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node{
+        id
+        nome        
+        modulos{
+          id
+          titulo
+        }
+      }
+    }
+    
+  }
+}
+`
