@@ -5,19 +5,19 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 
-import { useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form'
 
 type InputFieldProps = {
-	name: string;
-	label: string;
-	placeholder?: string;
-	description?: string;
-	disabled?: boolean;
-	type?: 'text' | 'email' | 'password' | 'number';
-};
+	name: string
+	label: string
+	placeholder?: string
+	description?: string
+	disabled?: boolean
+	type?: 'text' | 'email' | 'password' | 'number'
+}
 
 export const InputField = ({
 	name,
@@ -27,7 +27,7 @@ export const InputField = ({
 	disabled = false,
 	type = 'text',
 }: InputFieldProps) => {
-	const { control } = useFormContext();
+	const { control } = useFormContext()
 
 	return (
 		<FormField
@@ -49,5 +49,5 @@ export const InputField = ({
 				</FormItem>
 			)}
 		/>
-	);
-};
+	)
+}
