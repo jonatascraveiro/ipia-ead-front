@@ -1,5 +1,6 @@
 import {
   type PaginationState,
+  type Table as TableType,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -16,15 +17,23 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-
+import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
+import { Button } from '../ui/button'
 import { SkeletonTable } from './SkeletonTable'
+
+type PageInfo = Partial<{
+  endCursor: string
+  hasNextPage: boolean | null
+  hasPreviousPage: boolean | null
+  startCursor: string
+}>
 
 type Props<T> = {
   data: T[]
 
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   columns: any
-  pagination?: PaginationState
+  pagination?: PageInfo
   setPagination?: React.Dispatch<React.SetStateAction<PaginationState>>
   loading?: boolean
 }
@@ -46,9 +55,6 @@ export default function DataTable<T>({
     data: dataQuery.rows ?? [],
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     columns: columns as any,
-    state: {
-      pagination,
-    },
     onPaginationChange: setPagination as unknown as () => void,
     rowCount: dataQuery.rowCount ?? 0,
     debugTable: true,
@@ -126,84 +132,62 @@ export default function DataTable<T>({
           )}
           {loading && (
             <SkeletonTable
-              rows={pagination?.pageSize || 10}
+              rows={5}
               columns={table.getHeaderGroups()[0].headers.length}
             />
           )}
         </TableBody>
       </Table>
 
-      {/* <Pagination table={table} /> */}
+      <Pagination table={table} pagination={pagination} />
     </div>
   )
 }
 
-// const Pagination = ({ table }: { table: TableType<any> }) => {
-//   if (table.getRowCount() === 0) return <></>
-//   return (
-//     <div className="flex items-center justify-end gap-2 my-2 text-gray-500 text-theme-sm dark:text-gray-400 flex-wrap">
-//       <span className="flex items-center gap-1">
-//         <Button
-//           variant="outline"
-//           onClick={() => table.setPageIndex(0)}
-//           disabled={!table.getCanPreviousPage()}
-//         >
-//           {'<<'}
-//         </Button>
-//         <Button
-//           variant="outline"
-//           onClick={() => table.previousPage()}
-//           disabled={!table.getCanPreviousPage()}
-//         >
-//           {'<'}
-//         </Button>
-//         <Button
-//           variant="outline"
-//           onClick={() => table.nextPage()}
-//           disabled={!table.getCanNextPage()}
-//         >
-//           {'>'}
-//         </Button>
-//         <Button
-//           variant="outline"
-//           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-//           disabled={!table.getCanNextPage()}
-//         >
-//           {'>>'}
-//         </Button>
-//       </span>
+const Pagination = ({
+  table,
+  pagination,
+}: { table: TableType<any>; pagination?: PageInfo }) => {
+  const { setPagePrevious, setPageNext, setLimit, limit } = useCursorPaginacao()
+  if (table.getRowCount() === 0) return <></>
+  return (
+    <div className="flex items-center justify-end gap-2 my-2 text-gray-500 text-theme-sm dark:text-gray-400 flex-wrap">
+      <span className="flex items-center gap-1">
+        <Button
+          variant="outline"
+          onClick={() => {
+            setPagePrevious(pagination?.startCursor || null)
+            setPageNext(null)
+          }}
+          disabled={pagination?.hasPreviousPage === false}
+        >
+          {'Anterior'}
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            setPagePrevious(null)
+            setPageNext(pagination?.endCursor || null)
+          }}
+          disabled={pagination?.hasNextPage === false}
+        >
+          {'Próxima'}
+        </Button>
+      </span>
 
-//       <span className="flex items-center gap-1">
-//         <div>Página</div>
-//         <strong>
-//           {table.getState().pagination.pageIndex + 1} de {table.getPageCount()}
-//         </strong>
-//       </span>
-//       <span className="flex items-center gap-1">
-//         | Ir para a página:
-//         <Input
-//           className="w-16 "
-//           type="number"
-//           value={table.getState().pagination.pageIndex + 1}
-//           onChange={(e) => {
-//             const page = e.target.value ? Number(e.target.value) - 1 : 0
-//             table.setPageIndex(page)
-//           }}
-//         />
-//       </span>
-//       <select
-//         className="py-2 text-gray-500 text-theme-sm dark:text-gray-400 h-10 appearance-none rounded-lg border border-gray-300 bg-transparent px-4.5  pr-11 text-sm shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-none focus:ring focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 text-gray-800 dark:text-white/90 dark:bg-dark-900"
-//         value={table.getState().pagination.pageSize}
-//         onChange={(e) => {
-//           table.setPageSize(Number(e.target.value))
-//         }}
-//       >
-//         {[10, 20, 30, 40, 50].map((pageSize) => (
-//           <option key={pageSize} value={pageSize}>
-//             Mostrar {pageSize}
-//           </option>
-//         ))}
-//       </select>
-//     </div>
-//   )
-// }
+      <select
+        className="py-2 text-gray-500 text-theme-sm dark:text-gray-400 h-10 appearance-none rounded-lg border border-gray-300 bg-transparent px-4.5  pr-11 text-sm shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-none focus:ring focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 text-gray-800 dark:text-white/90 dark:bg-dark-900"
+        value={limit}
+        onChange={(e) => {
+          setLimit(e.target.value)
+        }}
+      >
+        {[1, 10, 20, 30, 40, 50].map((pageSize) => (
+          <option key={pageSize} value={pageSize}>
+            Mostrar {pageSize}
+          </option>
+        ))}
+      </select>
+    </div>
+  )
+}

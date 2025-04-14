@@ -3,8 +3,8 @@ import {
   SortDirection,
   useModulosQuery,
 } from '@/gql/generated/graphql'
+import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
 import type { ModuloType } from '@/types/modulo'
-import { useQueryState } from 'nuqs'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
@@ -17,16 +17,17 @@ export const useTabelaModulo = () => {
     },
   })
 
-  const setPage = useQueryState('page')[1]
+  const { limparPaginacao, paging } = useCursorPaginacao()
 
   const nome = form.getValues('nome')
   console.log(nome)
   const limparFiltro = () => {
     form.reset()
+    limparPaginacao()
   }
 
   const handleFilter = () => {
-    setPage(null)
+    limparPaginacao()
   }
 
   const navigate = useNavigate()
@@ -48,9 +49,7 @@ export const useTabelaModulo = () => {
       filter: {
         titulo: { iLike: `%${nome || ''}%` },
       },
-      paging: {
-        first: 10,
-      },
+      paging,
       sorting: {
         field: ModuloTypeSortFields.Titulo,
         direction: SortDirection.Asc,
@@ -73,6 +72,7 @@ export const useTabelaModulo = () => {
       data: data?.modulos.edges.map((edge) => edge.node) || [],
       loading,
       columns,
+      pagination: data?.modulos.pageInfo,
     },
     form,
     handleFilter,

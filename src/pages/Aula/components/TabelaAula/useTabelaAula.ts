@@ -3,8 +3,8 @@ import {
   SortDirection,
   useAulasQuery,
 } from '@/gql/generated/graphql'
+import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
 import type { AulaType } from '@/types/aula'
-import { useQueryState } from 'nuqs'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
@@ -17,20 +17,16 @@ export const useTabelaAula = () => {
     },
   })
 
-  const setPage = useQueryState('page')[1]
-  const [search, setSearch] = useQueryState('searchTerm')
-  const [statusId, setStatusId] = useQueryState('statusId')
-  console.log(search, statusId)
-  const handleFilter = (data: { nome: string }) => {
-    setSearch(data.nome || '')
-    setPage(null)
-    setStatusId(null)
+  const { limparPaginacao, paging } = useCursorPaginacao()
+
+  const handleFilter = () => {
+    limparPaginacao()
   }
+
+  const nome = form.getValues('nome')
   const limparFiltro = () => {
-    setSearch(null)
-    setStatusId(null)
-    setPage(null)
     form.reset()
+    limparPaginacao()
   }
 
   const navigate = useNavigate()
@@ -50,11 +46,9 @@ export const useTabelaAula = () => {
   const { data, loading } = useAulasQuery({
     variables: {
       filter: {
-        titulo: { iLike: `%${search || ''}%` },
+        titulo: { iLike: `%${nome || ''}%` },
       },
-      paging: {
-        first: 10,
-      },
+      paging,
       sorting: {
         field: AulaTypeSortFields.Titulo,
         direction: SortDirection.Asc,
@@ -76,6 +70,7 @@ export const useTabelaAula = () => {
       data: data?.aulas.edges.map((edge) => edge.node) || [],
       loading,
       columns,
+      pagination: data?.aulas.pageInfo,
     },
     form,
     handleFilter,

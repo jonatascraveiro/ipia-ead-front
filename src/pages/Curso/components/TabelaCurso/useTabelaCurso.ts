@@ -3,8 +3,9 @@ import {
   SortDirection,
   useCursosQuery,
 } from '@/gql/generated/graphql'
+import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
+
 import type { CursoType } from '@/types/curso'
-import { useQueryState } from 'nuqs'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
@@ -18,17 +19,15 @@ export const useTabelaCurso = () => {
     },
   })
 
-  const setPage = useQueryState('page')[1]
-  // const [search, setSearch] = us('searchTerm')
-  // const [statusId, setStatusId] = useQueryState('statusId')
+  const { limparPaginacao, paging } = useCursorPaginacao()
 
   const [nome, status] = form.getValues(['nome', 'status'])
 
   const handleFilter = () => {
-    setPage(null)
+    limparPaginacao()
   }
   const limparFiltro = () => {
-    setPage(null)
+    limparPaginacao()
     form.reset()
   }
 
@@ -46,16 +45,16 @@ export const useTabelaCurso = () => {
     [navigate],
   )
 
-  const isActive = status === '' ? undefined : status === '1'
+  const isActive = status === '' ? undefined : status === 1
+  console.log(isActive, status)
+
   const { data, loading } = useCursosQuery({
     variables: {
       filter: {
         nome: { iLike: `%${nome || ''}%` },
         ativo: { is: isActive },
       },
-      paging: {
-        first: 10,
-      },
+      paging,
       sorting: {
         field: CursoTypeSortFields.Nome,
         direction: SortDirection.Asc,
@@ -78,6 +77,7 @@ export const useTabelaCurso = () => {
       data: data?.cursos.edges.map((edge) => edge.node) || [],
       loading,
       columns,
+      pagination: data?.cursos.pageInfo,
     },
     form,
     handleFilter,

@@ -3,6 +3,7 @@ import {
   createSerializer,
   parseAsInteger,
   parseAsString,
+  useQueryState,
   useQueryStates,
 } from 'nuqs'
 import { createSearchParamsCache } from 'nuqs/server'
@@ -48,6 +49,35 @@ export function usePaginacaoParametros() {
   return useQueryStates(paginationParsers, {
     urlKeys: paginationUrlKeys,
   })
+}
+
+export function useCursorPaginacao() {
+  const [pagePrevious, setPagePrevious] = useQueryState('pagePrevious')
+  const [pageNext, setPageNext] = useQueryState('pageNext')
+  const [limit, setLimit] = useQueryState('limit', { defaultValue: '10' })
+  const limparPaginacao = () => {
+    setPagePrevious(null)
+    setPageNext(null)
+  }
+
+  const first = pageNext ? +limit : pagePrevious ? undefined : +limit
+  const before = pagePrevious || undefined
+  const after = pageNext || undefined
+  const last = pagePrevious ? +limit : undefined
+
+  return {
+    limparPaginacao,
+    paging: {
+      first,
+      before,
+      after,
+      last,
+    },
+    limit,
+    setPagePrevious,
+    setPageNext,
+    setLimit,
+  }
 }
 
 export const serializaParametrosPaginacao = ({

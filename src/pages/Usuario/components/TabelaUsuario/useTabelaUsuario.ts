@@ -10,7 +10,7 @@ export const useTabelaUsuario = () => {
     },
   })
 
-  const setPage = useQueryState('page')[1]
+  const { limparPaginacao, paging } = useCursorPaginacao()
   const [search, setSearch] = useQueryState('searchTerm')
   const [statusId, setStatusId] = useQueryState('statusId')
 
