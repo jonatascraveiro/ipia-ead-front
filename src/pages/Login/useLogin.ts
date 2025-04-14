@@ -1,36 +1,56 @@
-import { useAuth } from "@/context/AuthContext"
-import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router"
-import { FormData, loginSchema } from "./schema"
+import { useAuth } from '@/context/AuthContext'
+import { useLoginMutation } from '@/gql/generated/graphql'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { type FormData, loginSchema } from './schema'
 
 const useLogin = () => {
+  const { login } = useAuth()
+  const [loginMutate] = useLoginMutation()
 
-	const { login } = useAuth();
+  const form = useForm<FormData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      password: 'password@2023',
+      email: 'administrador@admin.com',
+    },
+  })
 
-  const navigate = useNavigate();
-	const form = useForm<FormData>({
-		resolver: zodResolver(loginSchema),
-		defaultValues: {
-			password: '',
-			email: '',
-		},
-	});
+  const onSubmit = (values: FormData) => {
+    loginMutate({
+      variables: {
+        input: {
+          email: values.email,
+          password: values.password,
+        },
+      },
+      onCompleted(data) {
+        login(
+          {
+            token: data.login.token,
+            email: values.email,
+            nome: values.email,
+          },
+          () => {
+            window.location.href = '/'
+          },
+        )
+      },
+    })
 
-	const  onSubmit = (values: FormData)=> {
-    		
-        login(values.email, () => {
-          navigate('/', { replace: true });
-        })
-			
-		};
-	
-  return (
-    {
-      form,
-      onSubmit,
-    }
-  )
-};
+    // mutateLogin.mutate(values, {
+    //   onSuccess(data) {
+    //     login(data, () => {
+    //       window.location.href = '/'
+    //     })
+    //   },
+    // })
+  }
 
-export  {useLogin}
+  return {
+    form,
+    onSubmit,
+  }
+}
+
+export { useLogin }

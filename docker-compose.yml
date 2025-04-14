@@ -1,0 +1,22 @@
+networks:
+  network-EAD:
+    name: network-EAD
+    driver: bridge
+
+services:
+  dashboard-ead:
+    container_name: dashboard-ead
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - ./:/app
+      - /app/node_modules
+      - /app/dist
+    ports:
+      - '${APP_PORT:-5177}:5173'
+    networks:
+      - network-EAD
+    restart: unless-stopped
+    tty: true

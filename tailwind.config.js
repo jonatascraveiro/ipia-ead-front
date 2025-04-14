@@ -37,18 +37,17 @@ export default {
         backgroundAuth: 'hsl(var(--background-auth))',
         foreground: 'hsl(var(--foreground))',
         brand: {
-          "25": "#7A2A61",
-          "50": "#AE4790",
-          "100": "#C85EA8",
-          "200": "#AE4790",
-          "300": "#943078",
-          "400": "#7A2A61",
-          "500": "#601349",
-          "600": "#550F40",
-          "700": "#4A0C38",
-          "800": "#3F092F",
-          "900": "#340727",
-          "950": "#29051F"
+          DEFAULT: '#0086ff',
+          50: '#e6f3ff',
+          100: '#b2ddff',
+          200: '#80c7ff',
+          300: '#4db1ff',
+          400: '#1a9bff',
+          500: '#0086ff',
+          600: '#006bcc',
+          700: '#005099',
+          800: '#003566',
+          900: '#001a33'
         },
         gray: {
           dark: "#1A2231",
@@ -108,8 +107,7 @@ export default {
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
-        },
-        black: 'hsl(var(--black))',
+        },       
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
