@@ -11,24 +11,23 @@ import { useNavigate } from 'react-router'
 import { getColumns } from './columns'
 
 export const useTabelaCurso = () => {
-  const form = useForm<{ nome: string }>({
+  const form = useForm<{ nome: string; status: string | number }>({
     defaultValues: {
       nome: '',
+      status: '',
     },
   })
 
   const setPage = useQueryState('page')[1]
-  const [search, setSearch] = useQueryState('searchTerm')
-  const [statusId, setStatusId] = useQueryState('statusId')
-  console.log(search, statusId)
-  const handleFilter = (data: { nome: string }) => {
-    setSearch(data.nome || '')
+  // const [search, setSearch] = us('searchTerm')
+  // const [statusId, setStatusId] = useQueryState('statusId')
+
+  const [nome, status] = form.getValues(['nome', 'status'])
+
+  const handleFilter = () => {
     setPage(null)
-    setStatusId(null)
   }
   const limparFiltro = () => {
-    setSearch(null)
-    setStatusId(null)
     setPage(null)
     form.reset()
   }
@@ -47,10 +46,12 @@ export const useTabelaCurso = () => {
     [navigate],
   )
 
+  const isActive = status === '' ? undefined : status === '1'
   const { data, loading } = useCursosQuery({
     variables: {
       filter: {
-        nome: { iLike: `%${search || ''}%` },
+        nome: { iLike: `%${nome || ''}%` },
+        ativo: { is: isActive },
       },
       paging: {
         first: 10,

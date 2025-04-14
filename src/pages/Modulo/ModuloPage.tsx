@@ -21,14 +21,14 @@ export function ModuloPage() {
 
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(handleFilter)}
+          onSubmit={form.handleSubmit(() => handleFilter())}
           className="grid grid-cols-12 gap-4 md:gap-6 mb-2 mx-2"
         >
           <div className=" xl:col-span-3 col-span-12 md:col-span-6 ">
             <InputField
-              label="Nome"
-              placeholder="titulo do Modulo"
-              name="titulo"
+              label="Titulo"
+              placeholder="Titulo do Modulo"
+              name="nome"
             />
           </div>
 

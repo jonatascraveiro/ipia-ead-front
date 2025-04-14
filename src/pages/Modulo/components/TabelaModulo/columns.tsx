@@ -32,7 +32,7 @@ export const getColumns = ({
     },
     {
       accessorFn: (row) => row.cursoId,
-      accessorKey: 'ordem',
+      accessorKey: 'cursoId',
       header: () => <span>Curso</span>,
       cell: ({ row }) => {
         return <div>{row.original?.curso.nome}</div>

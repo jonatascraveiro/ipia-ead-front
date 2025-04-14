@@ -32,9 +32,9 @@ export const getColumns = ({
     {
       accessorFn: (row) => row.ativo,
       accessorKey: 'ativo',
-      header: () => <span>Ativo</span>,
+      header: () => <span>Status</span>,
       cell: ({ row }) => {
-        return <div>{row.original?.ativo ? 'Sim' : 'Não'}</div>
+        return <div>{row.original?.ativo ? 'Ativo' : 'Inativo'}</div>
       },
     },
 

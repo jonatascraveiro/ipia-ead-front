@@ -18,19 +18,15 @@ export const useTabelaModulo = () => {
   })
 
   const setPage = useQueryState('page')[1]
-  const [search, setSearch] = useQueryState('searchTerm')
-  const [statusId, setStatusId] = useQueryState('statusId')
-  console.log(search, statusId)
-  const handleFilter = (data: { nome: string }) => {
-    setSearch(data.nome || '')
-    setPage(null)
-    setStatusId(null)
-  }
+
+  const nome = form.getValues('nome')
+  console.log(nome)
   const limparFiltro = () => {
-    setSearch(null)
-    setStatusId(null)
-    setPage(null)
     form.reset()
+  }
+
+  const handleFilter = () => {
+    setPage(null)
   }
 
   const navigate = useNavigate()
@@ -50,7 +46,7 @@ export const useTabelaModulo = () => {
   const { data, loading } = useModulosQuery({
     variables: {
       filter: {
-        titulo: { iLike: `%${search || ''}%` },
+        titulo: { iLike: `%${nome || ''}%` },
       },
       paging: {
         first: 10,
