@@ -75,7 +75,7 @@ export const DatePickerField = ({
               <PopoverContent className="w-auto p-0">
                 <Calendar
                   mode="single"
-                  month={field.value}
+                  defaultMonth={field.value}
                   selected={field.value}
                   onSelect={(selectedDate) => {
                     field.onChange(selectedDate)
