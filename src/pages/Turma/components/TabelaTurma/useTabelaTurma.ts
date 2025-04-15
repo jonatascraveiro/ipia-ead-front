@@ -1,7 +1,10 @@
-import { useListarTurmas } from '@/services/turma'
-
+import {
+  SortDirection,
+  TurmaTypeSortFields,
+  useTurmasQuery,
+} from '@/gql/generated/graphql'
+import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
 import type { TurmaType } from '@/types/turma'
-import { useQueryState } from 'nuqs'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
@@ -15,18 +18,13 @@ export const useTabelaTurma = () => {
   })
 
   const { limparPaginacao, paging } = useCursorPaginacao()
-  const [search, setSearch] = useQueryState('searchTerm')
-  const [statusId, setStatusId] = useQueryState('statusId')
-  console.log(search, statusId)
-  const handleFilter = (data: { nome: string }) => {
-    setSearch(data.nome || '')
-    setPage(null)
-    setStatusId(null)
+
+  const [nome] = form.getValues(['nome'])
+  const handleFilter = () => {
+    limparPaginacao()
   }
   const limparFiltro = () => {
-    setSearch(null)
-    setStatusId(null)
-    setPage(null)
+    limparPaginacao()
     form.reset()
   }
 
@@ -44,7 +42,18 @@ export const useTabelaTurma = () => {
     [navigate],
   )
 
-  const data = useListarTurmas()
+  const { data, loading } = useTurmasQuery({
+    variables: {
+      filter: {
+        nome: { iLike: `%${nome || ''}%` },
+      },
+      paging,
+      sorting: {
+        field: TurmaTypeSortFields.Nome,
+        direction: SortDirection.Asc,
+      },
+    },
+  })
 
   const columns = useMemo(
     () =>
@@ -57,7 +66,12 @@ export const useTabelaTurma = () => {
 
   return {
     columns,
-    data,
+    tabela: {
+      data: data?.turmas.edges.map((edge) => edge.node) || [],
+      loading,
+      columns,
+      pagination: data?.turmas.pageInfo,
+    },
     form,
     handleFilter,
     limparFiltro,

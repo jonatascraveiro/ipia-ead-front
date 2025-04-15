@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
+import { jwtDecode } from 'jwt-decode'
 import type React from 'react'
 import { createContext, useContext, useEffect, useState } from 'react'
-
 type AuthContextType = {
   user: UserType | null
   login: (
@@ -27,8 +27,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = useState<UserType | null>(null)
-  const [token, setToken] = useState<string | null>(null)
+  const [token, setToken] = useState<string | null>(() => {
+    return Cookies.get('token') as string
+  })
   const [loading, setLoading] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     const storedToken = Cookies.get('token')
@@ -45,33 +48,48 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setLoading(false)
   }, [])
 
+  useEffect(() => {
+    setIsAuthenticated(isTokenValid(token))
+  }, [token])
+
   const login = (
     data: { token: string; nome: string; email: string },
     callback: VoidFunction,
   ) => {
-    Cookies.set('token', data.token, { expires: 1, secure: true })
+    setJwtCookie(data.token)
     Cookies.set(
       'user',
       JSON.stringify({ nome: data.nome, email: data.email }),
       { expires: 1, secure: true },
     )
-    console.log(data)
+
     setToken(() => token)
     setUser(() => ({ nome: data.email, email: data.email }))
     callback()
   }
 
-  const logout = (callback: VoidFunction) => {
+  const logout = (callback?: VoidFunction) => {
     Cookies.remove('token')
     Cookies.remove('user')
     setToken(null)
     setUser(null)
-
-    callback()
+    if (callback) callback()
   }
-  console.log(token)
-  const isAuthenticated = !!token
-  console.log(isAuthenticated)
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    if (!token) return
+
+    const interval = setInterval(() => {
+      console.log('verificando token')
+      if (!isTokenValid(token)) {
+        logout()
+      }
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [token])
+
   const value: AuthContextType = {
     user,
     login,
@@ -81,6 +99,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+}
+
+const isTokenValid = (token: string | null): boolean => {
+  if (!token) return false
+  try {
+    const decoded: { exp: number } = jwtDecode(token)
+    return decoded.exp > Date.now() / 1000
+  } catch {
+    return false
+  }
+}
+
+const setJwtCookie = (token: string) => {
+  const decoded: { exp: number } = jwtDecode(token)
+  const expires = new Date(decoded.exp * 1000)
+  Cookies.set('token', token, { expires, secure: true, sameSite: 'strict' })
 }
 
 export type UserType = {

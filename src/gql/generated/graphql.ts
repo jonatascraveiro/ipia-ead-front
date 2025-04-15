@@ -358,6 +358,17 @@ export type CreateCursoInput = {
   nome: Scalars['String']['input'];
 };
 
+export type CreateInscricaoInput = {
+  /** ID do aluno */
+  alunoId: Scalars['Float']['input'];
+  /** Data da inscrição */
+  dataInscricao: Scalars['DateTime']['input'];
+  /** Status da inscrição */
+  status: Scalars['Boolean']['input'];
+  /** ID da turma */
+  turmaId: Scalars['Float']['input'];
+};
+
 export type CreateModuloInput = {
   cursoId: Scalars['Float']['input'];
   descricao: Scalars['String']['input'];
@@ -375,9 +386,40 @@ export type CreateOneCursoTypeInput = {
   cursoType: CreateCursoInput;
 };
 
+export type CreateOneInscricaoTypeInput = {
+  /** The record to create */
+  inscricaoType: CreateInscricaoInput;
+};
+
 export type CreateOneModuloTypeInput = {
   /** The record to create */
   moduloType: CreateModuloInput;
+};
+
+export type CreateOneProgressoTypeInput = {
+  /** The record to create */
+  progressoType: CreateProgressoInput;
+};
+
+export type CreateOneTurmaTypeInput = {
+  /** The record to create */
+  turmaType: CreateTurmaInput;
+};
+
+export type CreateProgressoInput = {
+  alunoId: Scalars['Float']['input'];
+  aulaId: Scalars['Float']['input'];
+  cursoId: Scalars['Float']['input'];
+  moduloId: Scalars['Float']['input'];
+};
+
+export type CreateTurmaInput = {
+  cursoId: Scalars['Float']['input'];
+  descricao: Scalars['String']['input'];
+  duracao: Scalars['Float']['input'];
+  fim: Scalars['DateTime']['input'];
+  inicio: Scalars['DateTime']['input'];
+  nome: Scalars['String']['input'];
 };
 
 export type CursoType = {
@@ -572,7 +614,17 @@ export type DeleteOneCursoTypeInput = {
   id: Scalars['Int']['input'];
 };
 
+export type DeleteOneInscricaoTypeInput = {
+  /** The id of the record to delete. */
+  id: Scalars['Int']['input'];
+};
+
 export type DeleteOneModuloTypeInput = {
+  /** The id of the record to delete. */
+  id: Scalars['Int']['input'];
+};
+
+export type DeleteOneTurmaTypeInput = {
   /** The id of the record to delete. */
   id: Scalars['Int']['input'];
 };
@@ -580,6 +632,182 @@ export type DeleteOneModuloTypeInput = {
 export type DeleteOneUsuarioDtoInput = {
   /** The id of the record to delete. */
   id: Scalars['Int']['input'];
+};
+
+export type InscricaoType = {
+  __typename?: 'InscricaoType';
+  aluno?: Maybe<AlunoType>;
+  /** Id do aluno */
+  alunoId: Scalars['Float']['output'];
+  /** data criação do registro */
+  createdAt: Scalars['DateTime']['output'];
+  /** Data da inscrição */
+  dataInscricao: Scalars['DateTime']['output'];
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['Int']['output'];
+  /** Status da inscrição */
+  status: Scalars['Boolean']['output'];
+  turma?: Maybe<TurmaType>;
+  /** Id da turma */
+  turmaId: Scalars['Float']['output'];
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type InscricaoTypeAggregateGroupBy = {
+  __typename?: 'InscricaoTypeAggregateGroupBy';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  dataInscricao?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Boolean']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type InscricaoTypeAvgAggregate = {
+  __typename?: 'InscricaoTypeAvgAggregate';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+};
+
+export type InscricaoTypeConnection = {
+  __typename?: 'InscricaoTypeConnection';
+  /** Array of edges. */
+  edges: Array<InscricaoTypeEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+};
+
+export type InscricaoTypeCountAggregate = {
+  __typename?: 'InscricaoTypeCountAggregate';
+  alunoId?: Maybe<Scalars['Int']['output']>;
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  dataInscricao?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  turmaId?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type InscricaoTypeDeleteResponse = {
+  __typename?: 'InscricaoTypeDeleteResponse';
+  /** Id do aluno */
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  /** data criação do registro */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Data da inscrição */
+  dataInscricao?: Maybe<Scalars['DateTime']['output']>;
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  /** Status da inscrição */
+  status?: Maybe<Scalars['Boolean']['output']>;
+  /** Id da turma */
+  turmaId?: Maybe<Scalars['Float']['output']>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type InscricaoTypeEdge = {
+  __typename?: 'InscricaoTypeEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the InscricaoType */
+  node: InscricaoType;
+};
+
+export type InscricaoTypeFilter = {
+  aluno?: InputMaybe<InscricaoTypeFilterAlunoTypeFilter>;
+  alunoId?: InputMaybe<NumberFieldComparison>;
+  and?: InputMaybe<Array<InscricaoTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  dataInscricao?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  or?: InputMaybe<Array<InscricaoTypeFilter>>;
+  status?: InputMaybe<BooleanFieldComparison>;
+  turma?: InputMaybe<InscricaoTypeFilterTurmaTypeFilter>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type InscricaoTypeFilterAlunoTypeFilter = {
+  and?: InputMaybe<Array<InscricaoTypeFilterAlunoTypeFilter>>;
+  cpf?: InputMaybe<StringFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  email?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<InscricaoTypeFilterAlunoTypeFilter>>;
+  senha?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type InscricaoTypeFilterTurmaTypeFilter = {
+  and?: InputMaybe<Array<InscricaoTypeFilterTurmaTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  duracao?: InputMaybe<StringFieldComparison>;
+  fim?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  inicio?: InputMaybe<DateFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<InscricaoTypeFilterTurmaTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type InscricaoTypeMaxAggregate = {
+  __typename?: 'InscricaoTypeMaxAggregate';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  dataInscricao?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type InscricaoTypeMinAggregate = {
+  __typename?: 'InscricaoTypeMinAggregate';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  dataInscricao?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type InscricaoTypeSort = {
+  direction: SortDirection;
+  field: InscricaoTypeSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum InscricaoTypeSortFields {
+  AlunoId = 'alunoId',
+  CreatedAt = 'createdAt',
+  DataInscricao = 'dataInscricao',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  Status = 'status',
+  TurmaId = 'turmaId',
+  UpdatedAt = 'updatedAt'
+}
+
+export type InscricaoTypeSumAggregate = {
+  __typename?: 'InscricaoTypeSumAggregate';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
 };
 
 export type IntFieldComparison = {
@@ -766,15 +994,23 @@ export type Mutation = {
   __typename?: 'Mutation';
   CreateOneAula: AulaType;
   CreateOneCurso: CursoType;
+  CreateOneInscricao: InscricaoType;
   CreateOneModulo: ModuloType;
+  CreateOneProgresso: ProgressoType;
+  CreateOneTurma: TurmaType;
+  DeleteOneInscricao: InscricaoTypeDeleteResponse;
   UpdateOneAula: AulaType;
   UpdateOneCurso: CursoType;
+  UpdateOneInscricao: InscricaoType;
   UpdateOneModulo: ModuloType;
+  UpdateOneTurma: TurmaType;
   deleteAula: AulaTypeDeleteResponse;
   deleteCurso: CursoTypeDeleteResponse;
   deleteModulo: ModuloTypeDeleteResponse;
+  deleteTurma: TurmaTypeDeleteResponse;
   deleteUsuario: UsuarioDtoDeleteResponse;
   login: AuthType;
+  updateProgresso: ProgressoType;
 };
 
 
@@ -788,8 +1024,28 @@ export type MutationCreateOneCursoArgs = {
 };
 
 
+export type MutationCreateOneInscricaoArgs = {
+  input: CreateOneInscricaoTypeInput;
+};
+
+
 export type MutationCreateOneModuloArgs = {
   input: CreateOneModuloTypeInput;
+};
+
+
+export type MutationCreateOneProgressoArgs = {
+  input: CreateOneProgressoTypeInput;
+};
+
+
+export type MutationCreateOneTurmaArgs = {
+  input: CreateOneTurmaTypeInput;
+};
+
+
+export type MutationDeleteOneInscricaoArgs = {
+  input: DeleteOneInscricaoTypeInput;
 };
 
 
@@ -803,8 +1059,18 @@ export type MutationUpdateOneCursoArgs = {
 };
 
 
+export type MutationUpdateOneInscricaoArgs = {
+  input: UpdateOneInscricaoTypeInput;
+};
+
+
 export type MutationUpdateOneModuloArgs = {
   input: UpdateOneModuloTypeInput;
+};
+
+
+export type MutationUpdateOneTurmaArgs = {
+  input: UpdateOneTurmaTypeInput;
 };
 
 
@@ -823,6 +1089,11 @@ export type MutationDeleteModuloArgs = {
 };
 
 
+export type MutationDeleteTurmaArgs = {
+  input: DeleteOneTurmaTypeInput;
+};
+
+
 export type MutationDeleteUsuarioArgs = {
   input: DeleteOneUsuarioDtoInput;
 };
@@ -830,6 +1101,11 @@ export type MutationDeleteUsuarioArgs = {
 
 export type MutationLoginArgs = {
   input: AuthInput;
+};
+
+
+export type MutationUpdateProgressoArgs = {
+  updateProgressoInput: UpdateProgressoInput;
 };
 
 export type NumberFieldComparison = {
@@ -864,6 +1140,190 @@ export type PageInfo = {
   startCursor?: Maybe<Scalars['ConnectionCursor']['output']>;
 };
 
+export type ProgressoType = {
+  __typename?: 'ProgressoType';
+  /** Id do aluno */
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  /** assistido  */
+  assistido?: Maybe<Scalars['Boolean']['output']>;
+  aula?: Maybe<AulaType>;
+  /** Id da aula */
+  aulaId?: Maybe<Scalars['Float']['output']>;
+  /** data criação do registro */
+  createdAt: Scalars['DateTime']['output'];
+  curso?: Maybe<CursoType>;
+  /** Id do curso */
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Fim da aula */
+  fim?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['Int']['output'];
+  /** Inicio da aula */
+  inicio?: Maybe<Scalars['DateTime']['output']>;
+  /** Id do modulo */
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ProgressoTypeAggregateGroupBy = {
+  __typename?: 'ProgressoTypeAggregateGroupBy';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  assistido?: Maybe<Scalars['Boolean']['output']>;
+  aulaId?: Maybe<Scalars['Float']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  fim?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  inicio?: Maybe<Scalars['DateTime']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ProgressoTypeAvgAggregate = {
+  __typename?: 'ProgressoTypeAvgAggregate';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  aulaId?: Maybe<Scalars['Float']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ProgressoTypeConnection = {
+  __typename?: 'ProgressoTypeConnection';
+  /** Array of edges. */
+  edges: Array<ProgressoTypeEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+};
+
+export type ProgressoTypeCountAggregate = {
+  __typename?: 'ProgressoTypeCountAggregate';
+  alunoId?: Maybe<Scalars['Int']['output']>;
+  assistido?: Maybe<Scalars['Int']['output']>;
+  aulaId?: Maybe<Scalars['Int']['output']>;
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  cursoId?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  fim?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  inicio?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type ProgressoTypeEdge = {
+  __typename?: 'ProgressoTypeEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the ProgressoType */
+  node: ProgressoType;
+};
+
+export type ProgressoTypeFilter = {
+  alunoId?: InputMaybe<NumberFieldComparison>;
+  and?: InputMaybe<Array<ProgressoTypeFilter>>;
+  assistido?: InputMaybe<BooleanFieldComparison>;
+  aula?: InputMaybe<ProgressoTypeFilterAulaTypeFilter>;
+  aulaId?: InputMaybe<NumberFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  curso?: InputMaybe<ProgressoTypeFilterCursoTypeFilter>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  fim?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  inicio?: InputMaybe<DateFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<ProgressoTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ProgressoTypeFilterAulaTypeFilter = {
+  and?: InputMaybe<Array<ProgressoTypeFilterAulaTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  duracao?: InputMaybe<NumberFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<ProgressoTypeFilterAulaTypeFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  videoUrl?: InputMaybe<StringFieldComparison>;
+};
+
+export type ProgressoTypeFilterCursoTypeFilter = {
+  and?: InputMaybe<Array<ProgressoTypeFilterCursoTypeFilter>>;
+  ativo?: InputMaybe<BooleanFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ProgressoTypeFilterCursoTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ProgressoTypeMaxAggregate = {
+  __typename?: 'ProgressoTypeMaxAggregate';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  aulaId?: Maybe<Scalars['Float']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  fim?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  inicio?: Maybe<Scalars['DateTime']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ProgressoTypeMinAggregate = {
+  __typename?: 'ProgressoTypeMinAggregate';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  aulaId?: Maybe<Scalars['Float']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  fim?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  inicio?: Maybe<Scalars['DateTime']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ProgressoTypeSort = {
+  direction: SortDirection;
+  field: ProgressoTypeSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum ProgressoTypeSortFields {
+  AlunoId = 'alunoId',
+  Assistido = 'assistido',
+  AulaId = 'aulaId',
+  CreatedAt = 'createdAt',
+  CursoId = 'cursoId',
+  DeletedAt = 'deletedAt',
+  Fim = 'fim',
+  Id = 'id',
+  Inicio = 'inicio',
+  ModuloId = 'moduloId',
+  UpdatedAt = 'updatedAt'
+}
+
+export type ProgressoTypeSumAggregate = {
+  __typename?: 'ProgressoTypeSumAggregate';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  aulaId?: Maybe<Scalars['Float']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   aluno?: Maybe<AlunoType>;
@@ -872,8 +1332,14 @@ export type Query = {
   aulas: AulaTypeConnection;
   curso?: Maybe<CursoType>;
   cursos: CursoTypeConnection;
+  inscricao?: Maybe<InscricaoType>;
+  inscricoes: InscricaoTypeConnection;
   modulo?: Maybe<ModuloType>;
   modulos: ModuloTypeConnection;
+  progresso?: Maybe<ProgressoType>;
+  progressos: ProgressoTypeConnection;
+  turma?: Maybe<TurmaType>;
+  turmas: TurmaTypeConnection;
   usuario?: Maybe<UsuarioDto>;
   usuarios: UsuarioDtoConnection;
 };
@@ -915,6 +1381,18 @@ export type QueryCursosArgs = {
 };
 
 
+export type QueryInscricaoArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type QueryInscricoesArgs = {
+  filter?: InscricaoTypeFilter;
+  paging?: CursorPaging;
+  sorting?: Array<InscricaoTypeSort>;
+};
+
+
 export type QueryModuloArgs = {
   id: Scalars['Int']['input'];
 };
@@ -924,6 +1402,30 @@ export type QueryModulosArgs = {
   filter?: ModuloTypeFilter;
   paging?: CursorPaging;
   sorting?: Array<ModuloTypeSort>;
+};
+
+
+export type QueryProgressoArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type QueryProgressosArgs = {
+  filter?: ProgressoTypeFilter;
+  paging?: CursorPaging;
+  sorting?: Array<ProgressoTypeSort>;
+};
+
+
+export type QueryTurmaArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type QueryTurmasArgs = {
+  filter?: TurmaTypeFilter;
+  paging?: CursorPaging;
+  sorting?: Array<TurmaTypeSort>;
 };
 
 
@@ -967,6 +1469,184 @@ export type StringFieldComparison = {
   notLike?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type TurmaType = {
+  __typename?: 'TurmaType';
+  /** data criação do registro */
+  createdAt: Scalars['DateTime']['output'];
+  curso?: Maybe<CursoType>;
+  /** id do curso */
+  cursoId: Scalars['Float']['output'];
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** descricao da turma */
+  descricao: Scalars['String']['output'];
+  /** duracao da turma */
+  duracao: Scalars['String']['output'];
+  /** fim da turma */
+  fim: Scalars['DateTime']['output'];
+  id: Scalars['Int']['output'];
+  /** inicio da turma */
+  inicio: Scalars['DateTime']['output'];
+  /** nome da turma */
+  nome: Scalars['String']['output'];
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type TurmaTypeAggregateGroupBy = {
+  __typename?: 'TurmaTypeAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  duracao?: Maybe<Scalars['String']['output']>;
+  fim?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  inicio?: Maybe<Scalars['DateTime']['output']>;
+  nome?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type TurmaTypeAvgAggregate = {
+  __typename?: 'TurmaTypeAvgAggregate';
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type TurmaTypeConnection = {
+  __typename?: 'TurmaTypeConnection';
+  /** Array of edges. */
+  edges: Array<TurmaTypeEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+};
+
+export type TurmaTypeCountAggregate = {
+  __typename?: 'TurmaTypeCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  cursoId?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  descricao?: Maybe<Scalars['Int']['output']>;
+  duracao?: Maybe<Scalars['Int']['output']>;
+  fim?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  inicio?: Maybe<Scalars['Int']['output']>;
+  nome?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type TurmaTypeDeleteResponse = {
+  __typename?: 'TurmaTypeDeleteResponse';
+  /** data criação do registro */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  /** id do curso */
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** descricao da turma */
+  descricao?: Maybe<Scalars['String']['output']>;
+  /** duracao da turma */
+  duracao?: Maybe<Scalars['String']['output']>;
+  /** fim da turma */
+  fim?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  /** inicio da turma */
+  inicio?: Maybe<Scalars['DateTime']['output']>;
+  /** nome da turma */
+  nome?: Maybe<Scalars['String']['output']>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type TurmaTypeEdge = {
+  __typename?: 'TurmaTypeEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the TurmaType */
+  node: TurmaType;
+};
+
+export type TurmaTypeFilter = {
+  and?: InputMaybe<Array<TurmaTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  curso?: InputMaybe<TurmaTypeFilterCursoTypeFilter>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  duracao?: InputMaybe<StringFieldComparison>;
+  fim?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  inicio?: InputMaybe<DateFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<TurmaTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type TurmaTypeFilterCursoTypeFilter = {
+  and?: InputMaybe<Array<TurmaTypeFilterCursoTypeFilter>>;
+  ativo?: InputMaybe<BooleanFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<TurmaTypeFilterCursoTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type TurmaTypeMaxAggregate = {
+  __typename?: 'TurmaTypeMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  duracao?: Maybe<Scalars['String']['output']>;
+  fim?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  inicio?: Maybe<Scalars['DateTime']['output']>;
+  nome?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type TurmaTypeMinAggregate = {
+  __typename?: 'TurmaTypeMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  duracao?: Maybe<Scalars['String']['output']>;
+  fim?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  inicio?: Maybe<Scalars['DateTime']['output']>;
+  nome?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type TurmaTypeSort = {
+  direction: SortDirection;
+  field: TurmaTypeSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum TurmaTypeSortFields {
+  CreatedAt = 'createdAt',
+  CursoId = 'cursoId',
+  DeletedAt = 'deletedAt',
+  Descricao = 'descricao',
+  Duracao = 'duracao',
+  Fim = 'fim',
+  Id = 'id',
+  Inicio = 'inicio',
+  Nome = 'nome',
+  UpdatedAt = 'updatedAt'
+}
+
+export type TurmaTypeSumAggregate = {
+  __typename?: 'TurmaTypeSumAggregate';
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
 export type UpdateAulaInput = {
   descricao?: InputMaybe<Scalars['String']['input']>;
   duracao?: InputMaybe<Scalars['Float']['input']>;
@@ -983,6 +1663,17 @@ export type UpdateCursoInput = {
   descricao?: InputMaybe<Scalars['String']['input']>;
   /** nome do curso */
   nome?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UpdateInscricaoInput = {
+  /** ID do aluno */
+  alunoId?: InputMaybe<Scalars['Float']['input']>;
+  /** Data da inscrição */
+  dataInscricao?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Status da inscrição */
+  status?: InputMaybe<Scalars['Boolean']['input']>;
+  /** ID da turma */
+  turmaId?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type UpdateModuloInput = {
@@ -1006,11 +1697,42 @@ export type UpdateOneCursoTypeInput = {
   update: UpdateCursoInput;
 };
 
+export type UpdateOneInscricaoTypeInput = {
+  /** The id of the record to update */
+  id: Scalars['Int']['input'];
+  /** The update to apply. */
+  update: UpdateInscricaoInput;
+};
+
 export type UpdateOneModuloTypeInput = {
   /** The id of the record to update */
   id: Scalars['Int']['input'];
   /** The update to apply. */
   update: UpdateModuloInput;
+};
+
+export type UpdateOneTurmaTypeInput = {
+  /** The id of the record to update */
+  id: Scalars['Int']['input'];
+  /** The update to apply. */
+  update: UpdateTurmaInput;
+};
+
+export type UpdateProgressoInput = {
+  alunoId?: InputMaybe<Scalars['Float']['input']>;
+  aulaId?: InputMaybe<Scalars['Float']['input']>;
+  cursoId?: InputMaybe<Scalars['Float']['input']>;
+  id: Scalars['Float']['input'];
+  moduloId?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type UpdateTurmaInput = {
+  cursoId?: InputMaybe<Scalars['Float']['input']>;
+  descricao?: InputMaybe<Scalars['String']['input']>;
+  duracao?: InputMaybe<Scalars['Float']['input']>;
+  fim?: InputMaybe<Scalars['DateTime']['input']>;
+  inicio?: InputMaybe<Scalars['DateTime']['input']>;
+  nome?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UsuarioDto = {
@@ -1213,6 +1935,27 @@ export type DeleteOneModuloMutationVariables = Exact<{
 
 export type DeleteOneModuloMutation = { __typename?: 'Mutation', deleteModulo: { __typename?: 'ModuloTypeDeleteResponse', titulo?: string | null } };
 
+export type CreateOneTurmaMutationVariables = Exact<{
+  input: CreateOneTurmaTypeInput;
+}>;
+
+
+export type CreateOneTurmaMutation = { __typename?: 'Mutation', CreateOneTurma: { __typename?: 'TurmaType', id: number } };
+
+export type UpdateOneTurmaMutationVariables = Exact<{
+  input: UpdateOneTurmaTypeInput;
+}>;
+
+
+export type UpdateOneTurmaMutation = { __typename?: 'Mutation', UpdateOneTurma: { __typename?: 'TurmaType', id: number } };
+
+export type DeleteOneTurmaMutationVariables = Exact<{
+  input: DeleteOneTurmaTypeInput;
+}>;
+
+
+export type DeleteOneTurmaMutation = { __typename?: 'Mutation', deleteTurma: { __typename?: 'TurmaTypeDeleteResponse', id?: number | null } };
+
 export type AulaQueryVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
@@ -1278,6 +2021,31 @@ export type ModulosSelectQueryVariables = Exact<{
 
 
 export type ModulosSelectQuery = { __typename?: 'Query', modulos: { __typename?: 'ModuloTypeConnection', edges: Array<{ __typename?: 'ModuloTypeEdge', node: { __typename?: 'ModuloType', id: number, titulo: string } }> } };
+
+export type TurmaQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type TurmaQuery = { __typename?: 'Query', turma?: { __typename?: 'TurmaType', duracao: string, fim: any, inicio: any, cursoId: number, descricao: string, id: number, nome: string, curso?: { __typename?: 'CursoType', nome: string, id: number } | null } | null };
+
+export type TurmasQueryVariables = Exact<{
+  filter?: InputMaybe<TurmaTypeFilter>;
+  paging: CursorPaging;
+  sorting: Array<TurmaTypeSort> | TurmaTypeSort;
+}>;
+
+
+export type TurmasQuery = { __typename?: 'Query', turmas: { __typename?: 'TurmaTypeConnection', edges: Array<{ __typename?: 'TurmaTypeEdge', node: { __typename?: 'TurmaType', duracao: string, fim: any, inicio: any, cursoId: number, descricao: string, id: number, nome: string, curso?: { __typename?: 'CursoType', nome: string, id: number } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+
+export type TurmasSelectQueryVariables = Exact<{
+  filter?: InputMaybe<TurmaTypeFilter>;
+  paging: CursorPaging;
+  sorting: Array<TurmaTypeSort> | TurmaTypeSort;
+}>;
+
+
+export type TurmasSelectQuery = { __typename?: 'Query', turmas: { __typename?: 'TurmaTypeConnection', edges: Array<{ __typename?: 'TurmaTypeEdge', node: { __typename?: 'TurmaType', id: number, nome: string } }> } };
 
 
 export const CreateOneAulaDocument = gql`
@@ -1610,6 +2378,105 @@ export function useDeleteOneModuloMutation(baseOptions?: Apollo.MutationHookOpti
 export type DeleteOneModuloMutationHookResult = ReturnType<typeof useDeleteOneModuloMutation>;
 export type DeleteOneModuloMutationResult = Apollo.MutationResult<DeleteOneModuloMutation>;
 export type DeleteOneModuloMutationOptions = Apollo.BaseMutationOptions<DeleteOneModuloMutation, DeleteOneModuloMutationVariables>;
+export const CreateOneTurmaDocument = gql`
+    mutation createOneTurma($input: CreateOneTurmaTypeInput!) {
+  CreateOneTurma(input: $input) {
+    id
+  }
+}
+    `;
+export type CreateOneTurmaMutationFn = Apollo.MutationFunction<CreateOneTurmaMutation, CreateOneTurmaMutationVariables>;
+
+/**
+ * __useCreateOneTurmaMutation__
+ *
+ * To run a mutation, you first call `useCreateOneTurmaMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneTurmaMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneTurmaMutation, { data, loading, error }] = useCreateOneTurmaMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateOneTurmaMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneTurmaMutation, CreateOneTurmaMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOneTurmaMutation, CreateOneTurmaMutationVariables>(CreateOneTurmaDocument, options);
+      }
+export type CreateOneTurmaMutationHookResult = ReturnType<typeof useCreateOneTurmaMutation>;
+export type CreateOneTurmaMutationResult = Apollo.MutationResult<CreateOneTurmaMutation>;
+export type CreateOneTurmaMutationOptions = Apollo.BaseMutationOptions<CreateOneTurmaMutation, CreateOneTurmaMutationVariables>;
+export const UpdateOneTurmaDocument = gql`
+    mutation updateOneTurma($input: UpdateOneTurmaTypeInput!) {
+  UpdateOneTurma(input: $input) {
+    id
+  }
+}
+    `;
+export type UpdateOneTurmaMutationFn = Apollo.MutationFunction<UpdateOneTurmaMutation, UpdateOneTurmaMutationVariables>;
+
+/**
+ * __useUpdateOneTurmaMutation__
+ *
+ * To run a mutation, you first call `useUpdateOneTurmaMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneTurmaMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOneTurmaMutation, { data, loading, error }] = useUpdateOneTurmaMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateOneTurmaMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneTurmaMutation, UpdateOneTurmaMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOneTurmaMutation, UpdateOneTurmaMutationVariables>(UpdateOneTurmaDocument, options);
+      }
+export type UpdateOneTurmaMutationHookResult = ReturnType<typeof useUpdateOneTurmaMutation>;
+export type UpdateOneTurmaMutationResult = Apollo.MutationResult<UpdateOneTurmaMutation>;
+export type UpdateOneTurmaMutationOptions = Apollo.BaseMutationOptions<UpdateOneTurmaMutation, UpdateOneTurmaMutationVariables>;
+export const DeleteOneTurmaDocument = gql`
+    mutation deleteOneTurma($input: DeleteOneTurmaTypeInput!) {
+  deleteTurma(input: $input) {
+    id
+  }
+}
+    `;
+export type DeleteOneTurmaMutationFn = Apollo.MutationFunction<DeleteOneTurmaMutation, DeleteOneTurmaMutationVariables>;
+
+/**
+ * __useDeleteOneTurmaMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneTurmaMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneTurmaMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneTurmaMutation, { data, loading, error }] = useDeleteOneTurmaMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDeleteOneTurmaMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneTurmaMutation, DeleteOneTurmaMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOneTurmaMutation, DeleteOneTurmaMutationVariables>(DeleteOneTurmaDocument, options);
+      }
+export type DeleteOneTurmaMutationHookResult = ReturnType<typeof useDeleteOneTurmaMutation>;
+export type DeleteOneTurmaMutationResult = Apollo.MutationResult<DeleteOneTurmaMutation>;
+export type DeleteOneTurmaMutationOptions = Apollo.BaseMutationOptions<DeleteOneTurmaMutation, DeleteOneTurmaMutationVariables>;
 export const AulaDocument = gql`
     query Aula($id: Int!) {
   aula(id: $id) {
@@ -2033,3 +2900,162 @@ export type ModulosSelectQueryHookResult = ReturnType<typeof useModulosSelectQue
 export type ModulosSelectLazyQueryHookResult = ReturnType<typeof useModulosSelectLazyQuery>;
 export type ModulosSelectSuspenseQueryHookResult = ReturnType<typeof useModulosSelectSuspenseQuery>;
 export type ModulosSelectQueryResult = Apollo.QueryResult<ModulosSelectQuery, ModulosSelectQueryVariables>;
+export const TurmaDocument = gql`
+    query Turma($id: Int!) {
+  turma(id: $id) {
+    duracao
+    fim
+    inicio
+    cursoId
+    descricao
+    id
+    nome
+    curso {
+      nome
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useTurmaQuery__
+ *
+ * To run a query within a React component, call `useTurmaQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTurmaQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTurmaQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useTurmaQuery(baseOptions: Apollo.QueryHookOptions<TurmaQuery, TurmaQueryVariables> & ({ variables: TurmaQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TurmaQuery, TurmaQueryVariables>(TurmaDocument, options);
+      }
+export function useTurmaLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TurmaQuery, TurmaQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TurmaQuery, TurmaQueryVariables>(TurmaDocument, options);
+        }
+export function useTurmaSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<TurmaQuery, TurmaQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<TurmaQuery, TurmaQueryVariables>(TurmaDocument, options);
+        }
+export type TurmaQueryHookResult = ReturnType<typeof useTurmaQuery>;
+export type TurmaLazyQueryHookResult = ReturnType<typeof useTurmaLazyQuery>;
+export type TurmaSuspenseQueryHookResult = ReturnType<typeof useTurmaSuspenseQuery>;
+export type TurmaQueryResult = Apollo.QueryResult<TurmaQuery, TurmaQueryVariables>;
+export const TurmasDocument = gql`
+    query Turmas($filter: TurmaTypeFilter, $paging: CursorPaging!, $sorting: [TurmaTypeSort!]!) {
+  turmas(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        duracao
+        fim
+        inicio
+        cursoId
+        curso {
+          nome
+          id
+        }
+        descricao
+        id
+        nome
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __useTurmasQuery__
+ *
+ * To run a query within a React component, call `useTurmasQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTurmasQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTurmasQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      paging: // value for 'paging'
+ *      sorting: // value for 'sorting'
+ *   },
+ * });
+ */
+export function useTurmasQuery(baseOptions: Apollo.QueryHookOptions<TurmasQuery, TurmasQueryVariables> & ({ variables: TurmasQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TurmasQuery, TurmasQueryVariables>(TurmasDocument, options);
+      }
+export function useTurmasLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TurmasQuery, TurmasQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TurmasQuery, TurmasQueryVariables>(TurmasDocument, options);
+        }
+export function useTurmasSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<TurmasQuery, TurmasQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<TurmasQuery, TurmasQueryVariables>(TurmasDocument, options);
+        }
+export type TurmasQueryHookResult = ReturnType<typeof useTurmasQuery>;
+export type TurmasLazyQueryHookResult = ReturnType<typeof useTurmasLazyQuery>;
+export type TurmasSuspenseQueryHookResult = ReturnType<typeof useTurmasSuspenseQuery>;
+export type TurmasQueryResult = Apollo.QueryResult<TurmasQuery, TurmasQueryVariables>;
+export const TurmasSelectDocument = gql`
+    query TurmasSelect($filter: TurmaTypeFilter, $paging: CursorPaging!, $sorting: [TurmaTypeSort!]!) {
+  turmas(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        id
+        nome
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useTurmasSelectQuery__
+ *
+ * To run a query within a React component, call `useTurmasSelectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTurmasSelectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTurmasSelectQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      paging: // value for 'paging'
+ *      sorting: // value for 'sorting'
+ *   },
+ * });
+ */
+export function useTurmasSelectQuery(baseOptions: Apollo.QueryHookOptions<TurmasSelectQuery, TurmasSelectQueryVariables> & ({ variables: TurmasSelectQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TurmasSelectQuery, TurmasSelectQueryVariables>(TurmasSelectDocument, options);
+      }
+export function useTurmasSelectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TurmasSelectQuery, TurmasSelectQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TurmasSelectQuery, TurmasSelectQueryVariables>(TurmasSelectDocument, options);
+        }
+export function useTurmasSelectSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<TurmasSelectQuery, TurmasSelectQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<TurmasSelectQuery, TurmasSelectQueryVariables>(TurmasSelectDocument, options);
+        }
+export type TurmasSelectQueryHookResult = ReturnType<typeof useTurmasSelectQuery>;
+export type TurmasSelectLazyQueryHookResult = ReturnType<typeof useTurmasSelectLazyQuery>;
+export type TurmasSelectSuspenseQueryHookResult = ReturnType<typeof useTurmasSelectSuspenseQuery>;
+export type TurmasSelectQueryResult = Apollo.QueryResult<TurmasSelectQuery, TurmasSelectQueryVariables>;

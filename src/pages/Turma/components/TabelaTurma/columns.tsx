@@ -1,23 +1,18 @@
 import { ColumnAction } from '@/components/DataTable/ColumnAction'
-import type { CursoType } from '@/types/curso'
+import type { TurmaType } from '@/types/turma'
 import type { ColumnDef } from '@tanstack/react-table'
+import { format } from 'date-fns'
 import { Eye, Pencil } from 'lucide-react'
 
 type Acoes = {
-  visualizar: (data: CursoType) => void
-  editar: (data: CursoType) => void
+  visualizar: (data: TurmaType) => void
+  editar: (data: TurmaType) => void
 }
 
 export const getColumns = ({
   visualizar,
   editar,
-}: Acoes): ColumnDef<{
-  id: number
-  fisica: number
-  juridica: number
-  nome: string
-  created_at: string
-}>[] => {
+}: Acoes): ColumnDef<TurmaType>[] => {
   return [
     {
       accessorFn: (row) => row.id,
@@ -28,12 +23,29 @@ export const getColumns = ({
     {
       accessorFn: (row) => row.nome,
       accessorKey: 'nome',
-      header: () => <span>Descrição</span>,
+      header: () => <span>Nome da turma</span>,
+    },
+    {
+      accessorKey: 'inicio',
+      header: () => <span>Inicio - Fim</span>,
+      cell: ({ row }) => {
+        return (
+          <div>
+            {format(row.original?.inicio, 'dd/MM/yyyy')} -{' '}
+            {format(row.original?.fim, 'dd/MM/yyyy')}
+          </div>
+        )
+      },
+    },
+    {
+      accessorFn: (row) => row.curso.nome,
+      accessorKey: 'curso',
+      header: () => <span>Curso</span>,
     },
 
     {
-      accessorFn: (row) => row.created_at,
-      ...ColumnAction<CursoType>({
+      accessorFn: (row) => row.id,
+      ...ColumnAction<TurmaType>({
         actions: [
           {
             label: 'Visualizar',

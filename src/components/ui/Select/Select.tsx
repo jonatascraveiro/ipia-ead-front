@@ -16,8 +16,8 @@ type SelectOption =
   | number
 
 type SelectProps = {
-  name: string
-  label: string
+  name?: string
+  label?: string
   options: SelectOption[]
   placeholder?: string
   description?: string
