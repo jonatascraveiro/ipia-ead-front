@@ -178,20 +178,12 @@ const Pagination = ({
       </span>
 
       <Select
-        // className="py-2 text-gray-500 text-theme-sm dark:text-gray-400 h-10 appearance-none rounded-lg border border-gray-300 bg-transparent px-4.5  pr-11 text-sm shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-none focus:ring focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 text-gray-800 dark:text-white/90 dark:bg-dark-900"
         value={limit}
         onChange={(e) => {
           setLimit(String(e))
         }}
         options={[10, 20, 30, 40, 50]}
-      >
-        {/*         
-        {[10, 20, 30, 40, 50].map((pageSize) => (
-          <option key={pageSize} value={pageSize}>
-            Mostrar {pageSize}
-          </option>
-        ))} */}
-      </Select>
+      />
     </div>
   )
 }

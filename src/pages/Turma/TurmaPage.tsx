@@ -4,15 +4,19 @@ import { InputField } from '@/components/form/InputField'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { Search, Trash2Icon } from 'lucide-react'
+import { Link } from 'react-router'
 import { useTabelaTurma } from './components/TabelaTurma/useTabelaTurma'
 
 export function TurmaPage() {
-  const { data, columns, form, handleFilter, limparFiltro } = useTabelaTurma()
+  const { tabela, form, handleFilter, limparFiltro } = useTabelaTurma()
 
   return (
     <Page>
       <Page.Header>
         <Page.Titulo>Turmas</Page.Titulo>
+        <Link to="/turma/criar">
+          <Button>Nova Turma</Button>
+        </Link>
       </Page.Header>
 
       <Form {...form}>
@@ -40,11 +44,7 @@ export function TurmaPage() {
         </form>
       </Form>
 
-      <DataTable
-        data={data?.data?.data || []}
-        loading={data?.isLoading}
-        columns={columns}
-      />
+      <DataTable {...tabela} />
     </Page>
   )
 }
