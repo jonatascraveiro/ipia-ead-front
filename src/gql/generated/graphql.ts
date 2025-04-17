@@ -17,6 +17,7 @@ export type Scalars = {
   Float: { input: number; output: number; }
   ConnectionCursor: { input: any; output: any; }
   DateTime: { input: any; output: any; }
+  Upload: { input: any; output: any; }
 };
 
 export type AlunoType = {
@@ -30,12 +31,19 @@ export type AlunoType = {
   /** email do aluno */
   email: Scalars['String']['output'];
   id: Scalars['Int']['output'];
+  inscricoes?: Maybe<Array<InscricaoType>>;
   /** nome do aluno */
   nome: Scalars['String']['output'];
   /** senha do aluno */
   senha: Scalars['String']['output'];
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type AlunoTypeInscricoesArgs = {
+  filter?: InscricaoTypeFilter;
+  sorting?: Array<InscricaoTypeSort>;
 };
 
 export type AlunoTypeAggregateGroupBy = {
@@ -90,9 +98,23 @@ export type AlunoTypeFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
+  inscricoes?: InputMaybe<AlunoTypeFilterInscricaoTypeFilter>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AlunoTypeFilter>>;
   senha?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type AlunoTypeFilterInscricaoTypeFilter = {
+  alunoId?: InputMaybe<NumberFieldComparison>;
+  and?: InputMaybe<Array<AlunoTypeFilterInscricaoTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  dataInscricao?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  or?: InputMaybe<Array<AlunoTypeFilterInscricaoTypeFilter>>;
+  status?: InputMaybe<BooleanFieldComparison>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -139,6 +161,140 @@ export enum AlunoTypeSortFields {
 
 export type AlunoTypeSumAggregate = {
   __typename?: 'AlunoTypeSumAggregate';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Arquivo = {
+  __typename?: 'Arquivo';
+  /** data criação do registro */
+  createdAt: Scalars['DateTime']['output'];
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** extensão do arquivo */
+  extensao: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  /** mimetype do arquivo */
+  mimetype: Scalars['String']['output'];
+  /** nome do arquivo */
+  nome: Scalars['String']['output'];
+  /** path bucket */
+  pathBucket?: Maybe<Scalars['String']['output']>;
+  /** tamanho do arquivo */
+  tamanho: Scalars['Float']['output'];
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** url do arquivo */
+  url: Scalars['String']['output'];
+};
+
+export type ArquivoAggregateGroupBy = {
+  __typename?: 'ArquivoAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  nome?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ArquivoAvgAggregate = {
+  __typename?: 'ArquivoAvgAggregate';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ArquivoConnection = {
+  __typename?: 'ArquivoConnection';
+  /** Array of edges. */
+  edges: Array<ArquivoEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type ArquivoCountAggregate = {
+  __typename?: 'ArquivoCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  nome?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type ArquivoDeleteResponse = {
+  __typename?: 'ArquivoDeleteResponse';
+  /** data criação do registro */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** extensão do arquivo */
+  extensao?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  /** mimetype do arquivo */
+  mimetype?: Maybe<Scalars['String']['output']>;
+  /** nome do arquivo */
+  nome?: Maybe<Scalars['String']['output']>;
+  /** path bucket */
+  pathBucket?: Maybe<Scalars['String']['output']>;
+  /** tamanho do arquivo */
+  tamanho?: Maybe<Scalars['Float']['output']>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** url do arquivo */
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type ArquivoEdge = {
+  __typename?: 'ArquivoEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the Arquivo */
+  node: Arquivo;
+};
+
+export type ArquivoFilter = {
+  and?: InputMaybe<Array<ArquivoFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ArquivoFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ArquivoMaxAggregate = {
+  __typename?: 'ArquivoMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  nome?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ArquivoMinAggregate = {
+  __typename?: 'ArquivoMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  nome?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ArquivoSort = {
+  direction: SortDirection;
+  field: ArquivoSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum ArquivoSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  Nome = 'nome',
+  UpdatedAt = 'updatedAt'
+}
+
+export type ArquivoSumAggregate = {
+  __typename?: 'ArquivoSumAggregate';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -259,6 +415,7 @@ export type AulaTypeFilter = {
 
 export type AulaTypeFilterModuloTypeFilter = {
   and?: InputMaybe<Array<AulaTypeFilterModuloTypeFilter>>;
+  biblioteca?: InputMaybe<BooleanFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   cursoId?: InputMaybe<NumberFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
@@ -340,6 +497,28 @@ export type BooleanFieldComparison = {
   isNot?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+export type CreateArquivo = {
+  /** data criação do registro */
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** data da exclusão do registro */
+  deletedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** extensão do arquivo */
+  extensao?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** mimetype do arquivo */
+  mimetype?: InputMaybe<Scalars['String']['input']>;
+  /** nome do arquivo */
+  nome?: InputMaybe<Scalars['String']['input']>;
+  /** path bucket */
+  pathBucket?: InputMaybe<Scalars['String']['input']>;
+  /** tamanho do arquivo */
+  tamanho?: InputMaybe<Scalars['Float']['input']>;
+  /** data atualização do registro */
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** url do arquivo */
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type CreateAulaInput = {
   descricao: Scalars['String']['input'];
   duracao: Scalars['Float']['input'];
@@ -354,8 +533,12 @@ export type CreateCursoInput = {
   ativo: Scalars['Boolean']['input'];
   /** descrição do curso */
   descricao: Scalars['String']['input'];
+  /** icone do curso */
+  icone: Scalars['String']['input'];
   /** nome do curso */
   nome: Scalars['String']['input'];
+  /** url do curso */
+  url: Scalars['String']['input'];
 };
 
 export type CreateInscricaoInput = {
@@ -369,11 +552,22 @@ export type CreateInscricaoInput = {
   turmaId: Scalars['Float']['input'];
 };
 
+export type CreateManyArquivosInput = {
+  /** Array of records to create */
+  arquivos: Array<CreateArquivo>;
+};
+
 export type CreateModuloInput = {
+  biblioteca: Scalars['Boolean']['input'];
   cursoId: Scalars['Float']['input'];
   descricao: Scalars['String']['input'];
   ordem: Scalars['Float']['input'];
   titulo: Scalars['String']['input'];
+};
+
+export type CreateOneArquivoInput = {
+  /** The record to create */
+  arquivo: CreateArquivo;
 };
 
 export type CreateOneAulaTypeInput = {
@@ -416,7 +610,7 @@ export type CreateProgressoInput = {
 export type CreateTurmaInput = {
   cursoId: Scalars['Float']['input'];
   descricao: Scalars['String']['input'];
-  duracao: Scalars['Float']['input'];
+  duracao: Scalars['String']['input'];
   fim: Scalars['DateTime']['input'];
   inicio: Scalars['DateTime']['input'];
   nome: Scalars['String']['input'];
@@ -432,12 +626,16 @@ export type CursoType = {
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   /** descricao do curso */
   descricao: Scalars['String']['output'];
+  /** icone do curso */
+  icone: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   modulos?: Maybe<Array<ModuloType>>;
   /** nome do curso */
   nome: Scalars['String']['output'];
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** url da imagem do curso */
+  url: Scalars['String']['output'];
 };
 
 
@@ -452,9 +650,11 @@ export type CursoTypeAggregateGroupBy = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   descricao?: Maybe<Scalars['String']['output']>;
+  icone?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 export type CursoTypeAvgAggregate = {
@@ -476,9 +676,11 @@ export type CursoTypeCountAggregate = {
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
   descricao?: Maybe<Scalars['Int']['output']>;
+  icone?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   nome?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
+  url?: Maybe<Scalars['Int']['output']>;
 };
 
 export type CursoTypeDeleteResponse = {
@@ -491,11 +693,15 @@ export type CursoTypeDeleteResponse = {
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   /** descricao do curso */
   descricao?: Maybe<Scalars['String']['output']>;
+  /** icone do curso */
+  icone?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   /** nome do curso */
   nome?: Maybe<Scalars['String']['output']>;
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** url da imagem do curso */
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 export type CursoTypeEdge = {
@@ -512,15 +718,18 @@ export type CursoTypeFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   descricao?: InputMaybe<StringFieldComparison>;
+  icone?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   modulos?: InputMaybe<CursoTypeFilterModuloTypeFilter>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<CursoTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
+  url?: InputMaybe<StringFieldComparison>;
 };
 
 export type CursoTypeFilterModuloTypeFilter = {
   and?: InputMaybe<Array<CursoTypeFilterModuloTypeFilter>>;
+  biblioteca?: InputMaybe<BooleanFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   cursoId?: InputMaybe<NumberFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
@@ -537,9 +746,11 @@ export type CursoTypeMaxAggregate = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   descricao?: Maybe<Scalars['String']['output']>;
+  icone?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 export type CursoTypeMinAggregate = {
@@ -547,9 +758,11 @@ export type CursoTypeMinAggregate = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   descricao?: Maybe<Scalars['String']['output']>;
+  icone?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 export type CursoTypeSort = {
@@ -563,9 +776,11 @@ export enum CursoTypeSortFields {
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
   Descricao = 'descricao',
+  Icone = 'icone',
   Id = 'id',
   Nome = 'nome',
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
+  Url = 'url'
 }
 
 export type CursoTypeSumAggregate = {
@@ -602,6 +817,11 @@ export type DateFieldComparison = {
 export type DateFieldComparisonBetween = {
   lower: Scalars['DateTime']['input'];
   upper: Scalars['DateTime']['input'];
+};
+
+export type DeleteOneArquivoInput = {
+  /** The id of the record to delete. */
+  id: Scalars['Int']['input'];
 };
 
 export type DeleteOneAulaTypeInput = {
@@ -832,6 +1052,9 @@ export type IntFieldComparisonBetween = {
 
 export type ModuloType = {
   __typename?: 'ModuloType';
+  aulas?: Maybe<Array<AulaType>>;
+  /** modulo biblioteca */
+  biblioteca: Scalars['Boolean']['output'];
   /** data criação do registro */
   createdAt: Scalars['DateTime']['output'];
   curso?: Maybe<CursoType>;
@@ -850,8 +1073,15 @@ export type ModuloType = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
+
+export type ModuloTypeAulasArgs = {
+  filter?: AulaTypeFilter;
+  sorting?: Array<AulaTypeSort>;
+};
+
 export type ModuloTypeAggregateGroupBy = {
   __typename?: 'ModuloTypeAggregateGroupBy';
+  biblioteca?: Maybe<Scalars['Boolean']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   cursoId?: Maybe<Scalars['Float']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -879,6 +1109,7 @@ export type ModuloTypeConnection = {
 
 export type ModuloTypeCountAggregate = {
   __typename?: 'ModuloTypeCountAggregate';
+  biblioteca?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['Int']['output']>;
   cursoId?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
@@ -891,6 +1122,8 @@ export type ModuloTypeCountAggregate = {
 
 export type ModuloTypeDeleteResponse = {
   __typename?: 'ModuloTypeDeleteResponse';
+  /** modulo biblioteca */
+  biblioteca?: Maybe<Scalars['Boolean']['output']>;
   /** data criação do registro */
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   /** id do curso */
@@ -918,6 +1151,8 @@ export type ModuloTypeEdge = {
 
 export type ModuloTypeFilter = {
   and?: InputMaybe<Array<ModuloTypeFilter>>;
+  aulas?: InputMaybe<ModuloTypeFilterAulaTypeFilter>;
+  biblioteca?: InputMaybe<BooleanFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   curso?: InputMaybe<ModuloTypeFilterCursoTypeFilter>;
   cursoId?: InputMaybe<NumberFieldComparison>;
@@ -930,16 +1165,33 @@ export type ModuloTypeFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
+export type ModuloTypeFilterAulaTypeFilter = {
+  and?: InputMaybe<Array<ModuloTypeFilterAulaTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  duracao?: InputMaybe<NumberFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<ModuloTypeFilterAulaTypeFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  videoUrl?: InputMaybe<StringFieldComparison>;
+};
+
 export type ModuloTypeFilterCursoTypeFilter = {
   and?: InputMaybe<Array<ModuloTypeFilterCursoTypeFilter>>;
   ativo?: InputMaybe<BooleanFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   descricao?: InputMaybe<StringFieldComparison>;
+  icone?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ModuloTypeFilterCursoTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
+  url?: InputMaybe<StringFieldComparison>;
 };
 
 export type ModuloTypeMaxAggregate = {
@@ -973,6 +1225,7 @@ export type ModuloTypeSort = {
 };
 
 export enum ModuloTypeSortFields {
+  Biblioteca = 'biblioteca',
   CreatedAt = 'createdAt',
   CursoId = 'cursoId',
   DeletedAt = 'deletedAt',
@@ -1004,12 +1257,17 @@ export type Mutation = {
   UpdateOneInscricao: InscricaoType;
   UpdateOneModulo: ModuloType;
   UpdateOneTurma: TurmaType;
+  createArquivo?: Maybe<Arquivo>;
+  createManyArquivos: Array<Arquivo>;
+  createOneArquivo: Arquivo;
+  deleteArquivo: ArquivoDeleteResponse;
   deleteAula: AulaTypeDeleteResponse;
   deleteCurso: CursoTypeDeleteResponse;
   deleteModulo: ModuloTypeDeleteResponse;
   deleteTurma: TurmaTypeDeleteResponse;
   deleteUsuario: UsuarioDtoDeleteResponse;
   login: AuthType;
+  updateArquivo: Arquivo;
   updateProgresso: ProgressoType;
 };
 
@@ -1074,6 +1332,26 @@ export type MutationUpdateOneTurmaArgs = {
 };
 
 
+export type MutationCreateArquivoArgs = {
+  arquivo: Scalars['Upload']['input'];
+};
+
+
+export type MutationCreateManyArquivosArgs = {
+  input: CreateManyArquivosInput;
+};
+
+
+export type MutationCreateOneArquivoArgs = {
+  input: CreateOneArquivoInput;
+};
+
+
+export type MutationDeleteArquivoArgs = {
+  input: DeleteOneArquivoInput;
+};
+
+
 export type MutationDeleteAulaArgs = {
   input: DeleteOneAulaTypeInput;
 };
@@ -1101,6 +1379,11 @@ export type MutationDeleteUsuarioArgs = {
 
 export type MutationLoginArgs = {
   input: AuthInput;
+};
+
+
+export type MutationUpdateArquivoArgs = {
+  input: UpdateOneArquivoInput;
 };
 
 
@@ -1261,10 +1544,12 @@ export type ProgressoTypeFilterCursoTypeFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   descricao?: InputMaybe<StringFieldComparison>;
+  icone?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProgressoTypeFilterCursoTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
+  url?: InputMaybe<StringFieldComparison>;
 };
 
 export type ProgressoTypeMaxAggregate = {
@@ -1328,6 +1613,8 @@ export type Query = {
   __typename?: 'Query';
   aluno?: Maybe<AlunoType>;
   alunos: AlunoTypeConnection;
+  arquivo?: Maybe<Arquivo>;
+  arquivos: ArquivoConnection;
   aula?: Maybe<AulaType>;
   aulas: AulaTypeConnection;
   curso?: Maybe<CursoType>;
@@ -1354,6 +1641,18 @@ export type QueryAlunosArgs = {
   filter?: AlunoTypeFilter;
   paging?: CursorPaging;
   sorting?: Array<AlunoTypeSort>;
+};
+
+
+export type QueryArquivoArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type QueryArquivosArgs = {
+  filter?: ArquivoFilter;
+  paging?: CursorPaging;
+  sorting?: Array<ArquivoSort>;
 };
 
 
@@ -1588,10 +1887,12 @@ export type TurmaTypeFilterCursoTypeFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   descricao?: InputMaybe<StringFieldComparison>;
+  icone?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<TurmaTypeFilterCursoTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
+  url?: InputMaybe<StringFieldComparison>;
 };
 
 export type TurmaTypeMaxAggregate = {
@@ -1647,6 +1948,28 @@ export type TurmaTypeSumAggregate = {
   id?: Maybe<Scalars['Float']['output']>;
 };
 
+export type UpdateArquivo = {
+  /** data criação do registro */
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** data da exclusão do registro */
+  deletedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** extensão do arquivo */
+  extensao?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** mimetype do arquivo */
+  mimetype?: InputMaybe<Scalars['String']['input']>;
+  /** nome do arquivo */
+  nome?: InputMaybe<Scalars['String']['input']>;
+  /** path bucket */
+  pathBucket?: InputMaybe<Scalars['String']['input']>;
+  /** tamanho do arquivo */
+  tamanho?: InputMaybe<Scalars['Float']['input']>;
+  /** data atualização do registro */
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** url do arquivo */
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type UpdateAulaInput = {
   descricao?: InputMaybe<Scalars['String']['input']>;
   duracao?: InputMaybe<Scalars['Float']['input']>;
@@ -1661,8 +1984,12 @@ export type UpdateCursoInput = {
   ativo?: InputMaybe<Scalars['Boolean']['input']>;
   /** descrição do curso */
   descricao?: InputMaybe<Scalars['String']['input']>;
+  /** icone do curso */
+  icone?: InputMaybe<Scalars['String']['input']>;
   /** nome do curso */
   nome?: InputMaybe<Scalars['String']['input']>;
+  /** url do curso */
+  url?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateInscricaoInput = {
@@ -1677,10 +2004,18 @@ export type UpdateInscricaoInput = {
 };
 
 export type UpdateModuloInput = {
+  biblioteca?: InputMaybe<Scalars['Boolean']['input']>;
   cursoId?: InputMaybe<Scalars['Float']['input']>;
   descricao?: InputMaybe<Scalars['String']['input']>;
   ordem?: InputMaybe<Scalars['Float']['input']>;
   titulo?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UpdateOneArquivoInput = {
+  /** The id of the record to update */
+  id: Scalars['Int']['input'];
+  /** The update to apply. */
+  update: UpdateArquivo;
 };
 
 export type UpdateOneAulaTypeInput = {
@@ -1729,7 +2064,7 @@ export type UpdateProgressoInput = {
 export type UpdateTurmaInput = {
   cursoId?: InputMaybe<Scalars['Float']['input']>;
   descricao?: InputMaybe<Scalars['String']['input']>;
-  duracao?: InputMaybe<Scalars['Float']['input']>;
+  duracao?: InputMaybe<Scalars['String']['input']>;
   fim?: InputMaybe<Scalars['DateTime']['input']>;
   inicio?: InputMaybe<Scalars['DateTime']['input']>;
   nome?: InputMaybe<Scalars['String']['input']>;
@@ -1956,6 +2291,15 @@ export type DeleteOneTurmaMutationVariables = Exact<{
 
 export type DeleteOneTurmaMutation = { __typename?: 'Mutation', deleteTurma: { __typename?: 'TurmaTypeDeleteResponse', id?: number | null } };
 
+export type AlunosQueryVariables = Exact<{
+  filter?: InputMaybe<AlunoTypeFilter>;
+  paging: CursorPaging;
+  sorting: Array<AlunoTypeSort> | AlunoTypeSort;
+}>;
+
+
+export type AlunosQuery = { __typename?: 'Query', alunos: { __typename?: 'AlunoTypeConnection', edges: Array<{ __typename?: 'AlunoTypeEdge', node: { __typename?: 'AlunoType', id: number, nome: string, cpf: string, email: string } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+
 export type AulaQueryVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
@@ -1977,7 +2321,7 @@ export type CursoQueryVariables = Exact<{
 }>;
 
 
-export type CursoQuery = { __typename?: 'Query', curso?: { __typename?: 'CursoType', ativo: boolean, createdAt: any, deletedAt?: any | null, descricao: string, id: number, nome: string, updatedAt?: any | null } | null };
+export type CursoQuery = { __typename?: 'Query', curso?: { __typename?: 'CursoType', ativo: boolean, createdAt: any, deletedAt?: any | null, descricao: string, id: number, nome: string, icone: string, url: string, updatedAt?: any | null } | null };
 
 export type CursosQueryVariables = Exact<{
   filter?: InputMaybe<CursoTypeFilter>;
@@ -1986,7 +2330,7 @@ export type CursosQueryVariables = Exact<{
 }>;
 
 
-export type CursosQuery = { __typename?: 'Query', cursos: { __typename?: 'CursoTypeConnection', edges: Array<{ __typename?: 'CursoTypeEdge', node: { __typename?: 'CursoType', ativo: boolean, createdAt: any, deletedAt?: any | null, descricao: string, id: number, nome: string, updatedAt?: any | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type CursosQuery = { __typename?: 'Query', cursos: { __typename?: 'CursoTypeConnection', edges: Array<{ __typename?: 'CursoTypeEdge', node: { __typename?: 'CursoType', ativo: boolean, createdAt: any, deletedAt?: any | null, descricao: string, id: number, nome: string, updatedAt?: any | null, icone: string, url: string } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type CursosModuloSelectQueryVariables = Exact<{
   filter?: InputMaybe<CursoTypeFilter>;
@@ -2002,7 +2346,7 @@ export type ModuloQueryVariables = Exact<{
 }>;
 
 
-export type ModuloQuery = { __typename?: 'Query', modulo?: { __typename?: 'ModuloType', ordem: number, cursoId: number, descricao: string, id: number, titulo: string, curso?: { __typename?: 'CursoType', nome: string } | null } | null };
+export type ModuloQuery = { __typename?: 'Query', modulo?: { __typename?: 'ModuloType', ordem: number, cursoId: number, descricao: string, id: number, titulo: string, biblioteca: boolean, curso?: { __typename?: 'CursoType', nome: string } | null } | null };
 
 export type ModulosQueryVariables = Exact<{
   filter?: InputMaybe<ModuloTypeFilter>;
@@ -2011,7 +2355,7 @@ export type ModulosQueryVariables = Exact<{
 }>;
 
 
-export type ModulosQuery = { __typename?: 'Query', modulos: { __typename?: 'ModuloTypeConnection', edges: Array<{ __typename?: 'ModuloTypeEdge', node: { __typename?: 'ModuloType', ordem: number, cursoId: number, descricao: string, id: number, titulo: string, curso?: { __typename?: 'CursoType', nome: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type ModulosQuery = { __typename?: 'Query', modulos: { __typename?: 'ModuloTypeConnection', edges: Array<{ __typename?: 'ModuloTypeEdge', node: { __typename?: 'ModuloType', ordem: number, cursoId: number, descricao: string, id: number, titulo: string, biblioteca: boolean, curso?: { __typename?: 'CursoType', nome: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type ModulosSelectQueryVariables = Exact<{
   filter?: InputMaybe<ModuloTypeFilter>;
@@ -2477,6 +2821,61 @@ export function useDeleteOneTurmaMutation(baseOptions?: Apollo.MutationHookOptio
 export type DeleteOneTurmaMutationHookResult = ReturnType<typeof useDeleteOneTurmaMutation>;
 export type DeleteOneTurmaMutationResult = Apollo.MutationResult<DeleteOneTurmaMutation>;
 export type DeleteOneTurmaMutationOptions = Apollo.BaseMutationOptions<DeleteOneTurmaMutation, DeleteOneTurmaMutationVariables>;
+export const AlunosDocument = gql`
+    query Alunos($filter: AlunoTypeFilter, $paging: CursorPaging!, $sorting: [AlunoTypeSort!]!) {
+  alunos(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        id
+        nome
+        cpf
+        email
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __useAlunosQuery__
+ *
+ * To run a query within a React component, call `useAlunosQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAlunosQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAlunosQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      paging: // value for 'paging'
+ *      sorting: // value for 'sorting'
+ *   },
+ * });
+ */
+export function useAlunosQuery(baseOptions: Apollo.QueryHookOptions<AlunosQuery, AlunosQueryVariables> & ({ variables: AlunosQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AlunosQuery, AlunosQueryVariables>(AlunosDocument, options);
+      }
+export function useAlunosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AlunosQuery, AlunosQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AlunosQuery, AlunosQueryVariables>(AlunosDocument, options);
+        }
+export function useAlunosSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<AlunosQuery, AlunosQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<AlunosQuery, AlunosQueryVariables>(AlunosDocument, options);
+        }
+export type AlunosQueryHookResult = ReturnType<typeof useAlunosQuery>;
+export type AlunosLazyQueryHookResult = ReturnType<typeof useAlunosLazyQuery>;
+export type AlunosSuspenseQueryHookResult = ReturnType<typeof useAlunosSuspenseQuery>;
+export type AlunosQueryResult = Apollo.QueryResult<AlunosQuery, AlunosQueryVariables>;
 export const AulaDocument = gql`
     query Aula($id: Int!) {
   aula(id: $id) {
@@ -2601,6 +3000,8 @@ export const CursoDocument = gql`
     descricao
     id
     nome
+    icone
+    url
     updatedAt
   }
 }
@@ -2650,6 +3051,8 @@ export const CursosDocument = gql`
         id
         nome
         updatedAt
+        icone
+        url
       }
     }
     pageInfo {
@@ -2758,6 +3161,7 @@ export const ModuloDocument = gql`
     curso {
       nome
     }
+    biblioteca
   }
 }
     `;
@@ -2807,6 +3211,7 @@ export const ModulosDocument = gql`
         descricao
         id
         titulo
+        biblioteca
       }
     }
     pageInfo {

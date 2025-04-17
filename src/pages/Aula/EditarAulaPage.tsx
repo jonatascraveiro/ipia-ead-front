@@ -4,7 +4,9 @@ import { useParams } from 'react-router'
 import { FormAula } from './components/FormAula'
 import { SkeletonForm } from './components/FormAula/skeletonForm'
 
-export function EditarAulaPage() {
+export function EditarAulaPage({
+  biblioteca = false,
+}: { biblioteca?: boolean }) {
   const id = useParams().id as string
   const { data, loading } = useAulaQuery({
     variables: {
@@ -16,10 +18,12 @@ export function EditarAulaPage() {
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo>Editar Aula</Page.Titulo>
+        <Page.Titulo>Editar Aula {biblioteca && 'Complementar'}</Page.Titulo>
       </Page.Header>
       {loading && <SkeletonForm />}
-      {!loading && data?.aula && <FormAula aula={data.aula} />}
+      {!loading && data?.aula && (
+        <FormAula biblioteca={biblioteca} aula={data.aula} />
+      )}
     </Page>
   )
 }

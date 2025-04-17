@@ -22,7 +22,7 @@ export const getColumns = ({
     {
       accessorFn: (row) => row.nome,
       accessorKey: 'nome',
-      header: () => <span>Descrição</span>,
+      header: () => <span>Nome</span>,
     },
     {
       accessorFn: (row) => row.descricao,

@@ -1,15 +1,15 @@
 import {
+  type CursoQuery,
   useCreateOneCursoMutation,
   useUpdateOneCursoMutation,
 } from '@/gql/generated/graphql'
-import type { CursoType } from '@/types/curso'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 import { type CursoSchema, schema } from './schema'
 
-export const useFormCurso = ({ curso }: { curso?: CursoType }) => {
+export const useFormCurso = ({ curso }: { curso?: CursoQuery['curso'] }) => {
   const navigate = useNavigate()
 
   const form = useForm<CursoSchema>({
@@ -19,6 +19,8 @@ export const useFormCurso = ({ curso }: { curso?: CursoType }) => {
       nome: curso?.nome || '',
       descricao: curso?.descricao || '',
       ativo: !!curso?.ativo as boolean,
+      url: curso?.url || '',
+      icone: curso?.icone || '',
     },
   })
 
@@ -30,11 +32,7 @@ export const useFormCurso = ({ curso }: { curso?: CursoType }) => {
         variables: {
           input: {
             id: data.id,
-            update: {
-              nome: data.nome,
-              ativo: data.ativo,
-              descricao: data.descricao,
-            },
+            update: data,
           },
         },
 
@@ -48,11 +46,7 @@ export const useFormCurso = ({ curso }: { curso?: CursoType }) => {
     criar({
       variables: {
         input: {
-          cursoType: {
-            nome: data.nome,
-            ativo: data.ativo,
-            descricao: data.descricao,
-          },
+          cursoType: data,
         },
       },
 

@@ -16,6 +16,7 @@ export const schema = z
     ordem: z
       .number({ required_error: 'Ordem é obrigatório' })
       .min(1, 'Ordem é obrigatório'),
+    biblioteca: z.boolean(),
   })
   .transform((data) => {
     return {

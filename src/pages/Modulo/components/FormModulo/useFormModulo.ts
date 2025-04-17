@@ -25,6 +25,7 @@ export const useFormModulo = ({
       descricao: modulo?.descricao || '',
       ordem: modulo?.ordem || 1,
       cursoId: modulo?.cursoId || 1,
+      biblioteca: modulo?.biblioteca ?? false,
     },
   })
 
@@ -60,6 +61,7 @@ export const useFormModulo = ({
               ordem: data.ordem,
               cursoId: +data.cursoId,
               descricao: data.descricao,
+              biblioteca: data.biblioteca,
             },
           },
         },
@@ -79,6 +81,7 @@ export const useFormModulo = ({
             ordem: data.ordem,
             cursoId: data.cursoId,
             descricao: data.descricao,
+            biblioteca: data.biblioteca,
           },
         },
       },

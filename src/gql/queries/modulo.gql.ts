@@ -9,9 +9,10 @@ query Modulo($id: Int!) {
     descricao
     id
     titulo
-    curso{
-          nome
-        }
+    curso {
+      nome
+    }
+    biblioteca
     
   }
 }
@@ -35,7 +36,7 @@ query Modulos(
         descricao
         id
         titulo
-        
+        biblioteca
       }
     }
     pageInfo {

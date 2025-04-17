@@ -1,5 +1,13 @@
 import { ROTAS } from '@/routes/rotas'
-import { ClockAlert, DiamondPlus, Group, Home, SpellCheck } from 'lucide-react'
+import {
+  BookPlus,
+  ClockAlert,
+  DiamondPlus,
+  Group,
+  Home,
+  SpellCheck,
+  Users2,
+} from 'lucide-react'
 import type React from 'react'
 
 export type NavItem = {
@@ -34,6 +42,16 @@ const menuOpcoes: NavItem[] = [
     name: 'Aulas',
     icon: <ClockAlert />,
     path: ROTAS.AULA,
+  },
+  {
+    name: 'Material Complementar',
+    icon: <BookPlus />,
+    path: ROTAS.AULA_COMPLEMENTAR,
+  },
+  {
+    name: 'Alunos',
+    icon: <Users2 />,
+    path: ROTAS.ALUNOS,
   },
   // {
   //   name: 'Usuários',

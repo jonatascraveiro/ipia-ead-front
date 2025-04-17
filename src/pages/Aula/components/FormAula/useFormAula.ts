@@ -7,6 +7,7 @@ import {
   useModulosSelectQuery,
   useUpdateOneAulaMutation,
 } from '@/gql/generated/graphql'
+import { ROTAS } from '@/routes/rotas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
@@ -14,7 +15,10 @@ import { toast } from 'react-toastify'
 import { CursoTypeSortFields } from './../../../../gql/generated/graphql'
 import { type AulaSchemaInput, type AulaSchemaOutput, schema } from './schema'
 
-export const useFormAula = ({ aula }: { aula?: AulaQuery['aula'] }) => {
+export const useFormAula = ({
+  aula,
+  biblioteca,
+}: { aula?: AulaQuery['aula']; biblioteca?: boolean }) => {
   const navigate = useNavigate()
 
   const form = useForm<AulaSchemaInput>({
@@ -60,6 +64,7 @@ export const useFormAula = ({ aula }: { aula?: AulaQuery['aula'] }) => {
       },
       filter: {
         cursoId: { eq: Number(form.watch('cursoId')) },
+        biblioteca: { is: biblioteca },
       },
       sorting: {
         field: ModuloTypeSortFields.Titulo,
@@ -73,6 +78,10 @@ export const useFormAula = ({ aula }: { aula?: AulaQuery['aula'] }) => {
       value: node.id,
       label: node.titulo,
     })) || []
+
+  const handleVoltar = () => {
+    navigate(biblioteca ? ROTAS.AULA_COMPLEMENTAR : ROTAS.AULA)
+  }
 
   const onSubmit = (data: AulaSchemaOutput) => {
     if (data.id) {
@@ -93,7 +102,7 @@ export const useFormAula = ({ aula }: { aula?: AulaQuery['aula'] }) => {
 
         onCompleted() {
           toast.success('Aula editado com sucesso')
-          navigate('/aula')
+          handleVoltar()
         },
       })
       return
@@ -114,7 +123,7 @@ export const useFormAula = ({ aula }: { aula?: AulaQuery['aula'] }) => {
 
       onCompleted() {
         toast.success('Aula criado com sucesso')
-        navigate('/aula')
+        handleVoltar()
       },
     })
   }

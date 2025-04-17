@@ -7,4 +7,5 @@ export type ModuloType = {
   ordem: number
   titulo: string
   curso: CursoType
+  biblioteca: boolean
 }

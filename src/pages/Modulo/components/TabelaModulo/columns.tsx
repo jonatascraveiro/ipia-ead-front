@@ -46,6 +46,14 @@ export const getColumns = ({
         return <div>{row.original?.ordem}</div>
       },
     },
+    {
+      accessorFn: (row) => row.biblioteca,
+      accessorKey: 'Material complementar',
+      header: () => <span>Material complementar</span>,
+      cell: ({ row }) => {
+        return <div>{row.original?.biblioteca ? 'Sim' : 'Não'}</div>
+      },
+    },
 
     {
       accessorFn: (row) => row.id,

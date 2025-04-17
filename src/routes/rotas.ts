@@ -1,10 +1,17 @@
 const ROTAS = {
   DASHBOARD: '/',
 
+  ALUNOS: '/alunos',
+
   AULA: '/aula',
   AULA_CRIAR: '/aula/criar',
   AULA_VISUALIZAR: '/aula/:id',
   AULA_EDITAR: '/aula/:id/editar',
+
+  AULA_COMPLEMENTAR: '/material-complementar',
+  AULA_COMPLEMENTAR_CRIAR: '/material-complementar/criar',
+  AULA_COMPLEMENTAR_VISUALIZAR: '/material-complementar/:id',
+  AULA_COMPLEMENTAR_EDITAR: '/material-complementar/:id/editar',
 
   CURSO: '/curso',
   CURSO_CRIAR: '/curso/criar',

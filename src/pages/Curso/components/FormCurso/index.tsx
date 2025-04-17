@@ -3,14 +3,14 @@ import { Button } from '@/components/ui/button'
 
 import { CheckboxField } from '@/components/form/CheckboxField'
 import { Form } from '@/components/ui/form'
-import type { CursoType } from '@/types/curso'
+import type { CursoQuery } from '@/gql/generated/graphql'
 import { Link } from 'react-router'
 import { useFormCurso } from './useFormCurso'
 
 function FormCurso({
   curso,
   disabled = false,
-}: { curso?: CursoType; disabled?: boolean }) {
+}: { curso?: CursoQuery['curso']; disabled?: boolean }) {
   const { form, onSubmit } = useFormCurso({ curso })
 
   return (
@@ -42,6 +42,22 @@ function FormCurso({
             label="Ativo"
             description="Status do curso"
             name="ativo"
+          />
+        </div>
+        <div className="col-span-6  ">
+          <InputField
+            disabled={disabled}
+            label="Icone do card"
+            placeholder="Nome do icone do card"
+            name="icone"
+          />
+        </div>
+        <div className="col-span-6  ">
+          <InputField
+            disabled={disabled}
+            label="Imagem do fundo do card"
+            placeholder="Url da imagem"
+            name="url"
           />
         </div>
 

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 
 import { Form } from '@/components/ui/form'
 
+import { CheckboxField } from '@/components/form/CheckboxField'
 import { InputNumberField } from '@/components/form/InputNumberField'
 import { SelectField } from '@/components/form/SelectField'
 import type { ModuloQuery } from '@/gql/generated/graphql'
@@ -38,7 +39,7 @@ function FormModulo({
           />
         </div>
 
-        <div className="col-span-3  ">
+        <div className="col-span-6 md:col-span-3  ">
           <InputNumberField
             disabled={disabled}
             label="Ordem"
@@ -47,13 +48,22 @@ function FormModulo({
           />
         </div>
 
-        <div className="col-span-3  ">
+        <div className="col-span-6 md:col-span-3  ">
           <SelectField
             disabled={disabled}
             label="Curso"
             description="Selecione o curso "
             options={cursoOptions}
             name="cursoId"
+          />
+        </div>
+
+        <div className="col-span-12 md:col-span-6  ">
+          <CheckboxField
+            disabled={disabled}
+            label="Aula complementar"
+            description="Se for verdadeiro o modulo terá aula complementar (BIBLIOTECA)"
+            name="biblioteca"
           />
         </div>
 

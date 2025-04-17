@@ -14,9 +14,11 @@ import { useFormAula } from './useFormAula'
 function FormAula({
   aula,
   disabled = false,
-}: { aula?: AulaQuery['aula']; disabled?: boolean }) {
+  biblioteca = false,
+}: { aula?: AulaQuery['aula']; disabled?: boolean; biblioteca: boolean }) {
   const { form, onSubmit, moduloOptions, cursoOptions } = useFormAula({
     aula,
+    biblioteca,
   })
 
   return (

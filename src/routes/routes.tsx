@@ -12,6 +12,7 @@ import { VisualizarAulaPage } from '@/pages/Aula/VisualizarAulaPage'
 import { CriarCursoPage } from '@/pages/Curso/CriarCursoPage'
 import { CursoPage } from '@/pages/Curso/CursoPage'
 
+import { AlunosPage } from '@/pages/Aluno/AlunosPage'
 import { EditarCursoPage } from '@/pages/Curso/EditarCursoPage'
 import { VisualizarCursoPage } from '@/pages/Curso/VisualizarCursoPage'
 import { CriarModuloPage } from '@/pages/Modulo/CriarModuloPage'
@@ -40,6 +41,8 @@ export default function AppRoutes() {
         >
           <Route path={ROTAS.DASHBOARD} index element={<Dashboard />} />
 
+          <Route path={ROTAS.ALUNOS} element={<AlunosPage />} />
+
           <Route path={ROTAS.AULA} element={<AulaPage />} />
           <Route path={ROTAS.AULA_CRIAR} element={<CriarAulaPage />} />
           <Route
@@ -47,6 +50,23 @@ export default function AppRoutes() {
             element={<VisualizarAulaPage />}
           />
           <Route path={ROTAS.AULA_EDITAR} element={<EditarAulaPage />} />
+
+          <Route
+            path={ROTAS.AULA_COMPLEMENTAR}
+            element={<AulaPage biblioteca={true} />}
+          />
+          <Route
+            path={ROTAS.AULA_COMPLEMENTAR_CRIAR}
+            element={<CriarAulaPage biblioteca={true} />}
+          />
+          <Route
+            path={ROTAS.AULA_COMPLEMENTAR_VISUALIZAR}
+            element={<VisualizarAulaPage biblioteca={true} />}
+          />
+          <Route
+            path={ROTAS.AULA_COMPLEMENTAR_EDITAR}
+            element={<EditarAulaPage biblioteca={true} />}
+          />
 
           <Route path={ROTAS.CURSO} element={<CursoPage />} />
           <Route path={ROTAS.CURSO_CRIAR} element={<CriarCursoPage />} />

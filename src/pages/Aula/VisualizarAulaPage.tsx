@@ -4,7 +4,9 @@ import { useParams } from 'react-router'
 import { FormAula } from './components/FormAula'
 import { SkeletonForm } from './components/FormAula/skeletonForm'
 
-export function VisualizarAulaPage() {
+export function VisualizarAulaPage({
+  biblioteca = false,
+}: { biblioteca?: boolean }) {
   const id = useParams().id as string
   const { data, loading } = useAulaQuery({
     variables: {
@@ -19,7 +21,9 @@ export function VisualizarAulaPage() {
         <Page.Titulo>Visualizar Aula</Page.Titulo>
       </Page.Header>
       {loading && <SkeletonForm />}
-      {!loading && data && <FormAula disabled aula={data.aula} />}
+      {!loading && data && (
+        <FormAula disabled biblioteca={biblioteca} aula={data.aula} />
+      )}
     </Page>
   )
 }

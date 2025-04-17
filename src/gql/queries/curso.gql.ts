@@ -10,6 +10,8 @@ query Curso($id: Int!) {
     descricao
     id
     nome
+    icone 
+    url
     updatedAt
   }
 }
@@ -32,6 +34,8 @@ query Cursos(
         id
         nome
         updatedAt
+        icone 
+        url
       }
     }
     pageInfo {
