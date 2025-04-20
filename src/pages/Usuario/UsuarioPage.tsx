@@ -7,7 +7,7 @@ import { Search, Trash2Icon } from 'lucide-react'
 import { useTabelaUsuario } from './components/TabelaUsuario/useTabelaUsuario'
 
 export function UsuariosPage() {
-  const { data, columns, form, handleFilter, limparFiltro } = useTabelaUsuario()
+  const { tabela, form, handleFilter, limparFiltro } = useTabelaUsuario()
 
   return (
     <Page>
@@ -23,7 +23,7 @@ export function UsuariosPage() {
           <div className=" xl:col-span-3 col-span-12 md:col-span-6 ">
             <InputField
               label="Nome"
-              placeholder="nome do documento"
+              placeholder="nome do usuario"
               name="nome"
             />
           </div>
@@ -44,11 +44,7 @@ export function UsuariosPage() {
         </form>
       </Form>
 
-      <DataTable
-        data={data?.data?.data || []}
-        loading={data?.isLoading}
-        columns={columns}
-      />
+      <DataTable {...tabela} />
     </Page>
   )
 }

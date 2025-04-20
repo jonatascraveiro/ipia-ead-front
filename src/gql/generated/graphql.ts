@@ -3296,6 +3296,15 @@ export type TurmasSelectQueryVariables = Exact<{
 
 export type TurmasSelectQuery = { __typename?: 'Query', turmas: { __typename?: 'TurmaTypeConnection', edges: Array<{ __typename?: 'TurmaTypeEdge', node: { __typename?: 'TurmaType', id: number, nome: string } }> } };
 
+export type UsuariosQueryVariables = Exact<{
+  filter?: InputMaybe<UsuarioDtoFilter>;
+  paging: CursorPaging;
+  sorting: Array<UsuarioDtoSort> | UsuarioDtoSort;
+}>;
+
+
+export type UsuariosQuery = { __typename?: 'Query', usuarios: { __typename?: 'UsuarioDtoConnection', edges: Array<{ __typename?: 'UsuarioDtoEdge', node: { __typename?: 'UsuarioDto', ativo: boolean, nome: string, email: string, id: number } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+
 
 export const CreateOneAulaDocument = gql`
     mutation createOneAula($input: CreateOneAulaTypeInput!) {
@@ -4867,3 +4876,59 @@ export type TurmasSelectQueryHookResult = ReturnType<typeof useTurmasSelectQuery
 export type TurmasSelectLazyQueryHookResult = ReturnType<typeof useTurmasSelectLazyQuery>;
 export type TurmasSelectSuspenseQueryHookResult = ReturnType<typeof useTurmasSelectSuspenseQuery>;
 export type TurmasSelectQueryResult = Apollo.QueryResult<TurmasSelectQuery, TurmasSelectQueryVariables>;
+export const UsuariosDocument = gql`
+    query Usuarios($filter: UsuarioDtoFilter, $paging: CursorPaging!, $sorting: [UsuarioDtoSort!]!) {
+  usuarios(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        ativo
+        nome
+        email
+        ativo
+        id
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __useUsuariosQuery__
+ *
+ * To run a query within a React component, call `useUsuariosQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUsuariosQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUsuariosQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      paging: // value for 'paging'
+ *      sorting: // value for 'sorting'
+ *   },
+ * });
+ */
+export function useUsuariosQuery(baseOptions: Apollo.QueryHookOptions<UsuariosQuery, UsuariosQueryVariables> & ({ variables: UsuariosQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UsuariosQuery, UsuariosQueryVariables>(UsuariosDocument, options);
+      }
+export function useUsuariosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UsuariosQuery, UsuariosQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UsuariosQuery, UsuariosQueryVariables>(UsuariosDocument, options);
+        }
+export function useUsuariosSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<UsuariosQuery, UsuariosQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<UsuariosQuery, UsuariosQueryVariables>(UsuariosDocument, options);
+        }
+export type UsuariosQueryHookResult = ReturnType<typeof useUsuariosQuery>;
+export type UsuariosLazyQueryHookResult = ReturnType<typeof useUsuariosLazyQuery>;
+export type UsuariosSuspenseQueryHookResult = ReturnType<typeof useUsuariosSuspenseQuery>;
+export type UsuariosQueryResult = Apollo.QueryResult<UsuariosQuery, UsuariosQueryVariables>;

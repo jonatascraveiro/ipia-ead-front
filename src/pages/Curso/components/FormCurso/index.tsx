@@ -58,7 +58,7 @@ function FormCurso({
             disabled={disabled}
             label="Imagem de fundo do card do curso"
             name="imagem"
-            urlPreview={curso?.url}
+            urlPreview={curso?.url || undefined}
           />
         </div>
 

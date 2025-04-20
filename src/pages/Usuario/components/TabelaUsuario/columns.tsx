@@ -12,7 +12,7 @@ export const getColumns = (): ColumnDef<{
       maxSize: 50,
     },
     {
-      accessorKey: 'name',
+      accessorKey: 'nome',
       header: () => <span>Nome</span>,
     },
     {

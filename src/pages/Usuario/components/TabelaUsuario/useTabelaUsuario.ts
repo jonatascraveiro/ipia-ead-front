@@ -1,5 +1,9 @@
-import { useListarUsuarios } from '@/services/usuario'
-import { useQueryState } from 'nuqs'
+import {
+  SortDirection,
+  UsuarioDtoSortFields,
+  useUsuariosQuery,
+} from '@/gql/generated/graphql'
+import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
 import { useForm } from 'react-hook-form'
 import { getColumns } from './columns'
 
@@ -11,28 +15,36 @@ export const useTabelaUsuario = () => {
   })
 
   const { limparPaginacao, paging } = useCursorPaginacao()
-  const [search, setSearch] = useQueryState('searchTerm')
-  const [statusId, setStatusId] = useQueryState('statusId')
-
-  const handleFilter = (data: { nome: string }) => {
-    setSearch(data.nome || '')
-    setPage(null)
-    setStatusId(null)
+  const [nome] = form.getValues(['nome'])
+  const handleFilter = () => {
+    limparPaginacao()
   }
   const limparFiltro = () => {
-    setSearch(null)
-    setStatusId(null)
-    setPage(null)
+    limparPaginacao()
     form.reset()
   }
 
-  console.log(search, statusId)
-  const data = useListarUsuarios()
+  const { data, loading } = useUsuariosQuery({
+    variables: {
+      filter: {
+        nome: { iLike: `%${nome || ''}%` },
+      },
+      paging,
+      sorting: {
+        field: UsuarioDtoSortFields.Nome,
+        direction: SortDirection.Asc,
+      },
+    },
+  })
 
   const columns = getColumns()
   return {
-    columns,
-    data,
+    tabela: {
+      data: data?.usuarios.edges.map((edge) => edge.node) || [],
+      loading,
+      columns,
+      pagination: data?.usuarios.pageInfo,
+    },
     form,
     handleFilter,
     limparFiltro,
