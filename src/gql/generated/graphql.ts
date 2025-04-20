@@ -22,6 +22,7 @@ export type Scalars = {
 
 export type AlunoType = {
   __typename?: 'AlunoType';
+  alunosProgressos?: Maybe<Array<ProgressoType>>;
   /** cpf do aluno */
   cpf: Scalars['String']['output'];
   /** data criação do registro */
@@ -38,6 +39,12 @@ export type AlunoType = {
   senha: Scalars['String']['output'];
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type AlunoTypeAlunosProgressosArgs = {
+  filter?: ProgressoTypeFilter;
+  sorting?: Array<ProgressoTypeSort>;
 };
 
 
@@ -92,6 +99,7 @@ export type AlunoTypeEdge = {
 };
 
 export type AlunoTypeFilter = {
+  alunosProgressos?: InputMaybe<AlunoTypeFilterProgressoTypeFilter>;
   and?: InputMaybe<Array<AlunoTypeFilter>>;
   cpf?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
@@ -115,6 +123,22 @@ export type AlunoTypeFilterInscricaoTypeFilter = {
   or?: InputMaybe<Array<AlunoTypeFilterInscricaoTypeFilter>>;
   status?: InputMaybe<BooleanFieldComparison>;
   turmaId?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type AlunoTypeFilterProgressoTypeFilter = {
+  alunoId?: InputMaybe<NumberFieldComparison>;
+  and?: InputMaybe<Array<AlunoTypeFilterProgressoTypeFilter>>;
+  assistido?: InputMaybe<BooleanFieldComparison>;
+  aulaId?: InputMaybe<NumberFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  fim?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  inicio?: InputMaybe<DateFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<AlunoTypeFilterProgressoTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -300,6 +324,7 @@ export type ArquivoSumAggregate = {
 
 export type AulaType = {
   __typename?: 'AulaType';
+  aulasProgressos?: Maybe<Array<ProgressoType>>;
   /** data criação do registro */
   createdAt: Scalars['DateTime']['output'];
   /** data da exclusão do registro */
@@ -320,6 +345,12 @@ export type AulaType = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   /** video url da aula */
   videoUrl: Scalars['String']['output'];
+};
+
+
+export type AulaTypeAulasProgressosArgs = {
+  filter?: ProgressoTypeFilter;
+  sorting?: Array<ProgressoTypeSort>;
 };
 
 export type AulaTypeAggregateGroupBy = {
@@ -399,6 +430,7 @@ export type AulaTypeEdge = {
 
 export type AulaTypeFilter = {
   and?: InputMaybe<Array<AulaTypeFilter>>;
+  aulasProgressos?: InputMaybe<AulaTypeFilterProgressoTypeFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   descricao?: InputMaybe<StringFieldComparison>;
@@ -424,6 +456,22 @@ export type AulaTypeFilterModuloTypeFilter = {
   or?: InputMaybe<Array<AulaTypeFilterModuloTypeFilter>>;
   ordem?: InputMaybe<NumberFieldComparison>;
   titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type AulaTypeFilterProgressoTypeFilter = {
+  alunoId?: InputMaybe<NumberFieldComparison>;
+  and?: InputMaybe<Array<AulaTypeFilterProgressoTypeFilter>>;
+  assistido?: InputMaybe<BooleanFieldComparison>;
+  aulaId?: InputMaybe<NumberFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  fim?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  inicio?: InputMaybe<DateFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<AulaTypeFilterProgressoTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -537,8 +585,13 @@ export type CreateCursoInput = {
   icone: Scalars['String']['input'];
   /** nome do curso */
   nome: Scalars['String']['input'];
-  /** url do curso */
-  url: Scalars['String']['input'];
+};
+
+export type CreateFormularioInput = {
+  /** id do modulo */
+  moduloId: Scalars['Float']['input'];
+  /** nome da formulário */
+  nome: Scalars['String']['input'];
 };
 
 export type CreateInscricaoInput = {
@@ -575,9 +628,9 @@ export type CreateOneAulaTypeInput = {
   aulaType: CreateAulaInput;
 };
 
-export type CreateOneCursoTypeInput = {
+export type CreateOneFormulariosInput = {
   /** The record to create */
-  cursoType: CreateCursoInput;
+  formularios: CreateFormularioInput;
 };
 
 export type CreateOneInscricaoTypeInput = {
@@ -590,9 +643,19 @@ export type CreateOneModuloTypeInput = {
   moduloType: CreateModuloInput;
 };
 
+export type CreateOnePerguntasInput = {
+  /** The record to create */
+  perguntas: CreatePerguntaInput;
+};
+
 export type CreateOneProgressoTypeInput = {
   /** The record to create */
   progressoType: CreateProgressoInput;
+};
+
+export type CreateOneRespostasInput = {
+  /** The record to create */
+  respostas: CreateRespostaInput;
 };
 
 export type CreateOneTurmaTypeInput = {
@@ -600,11 +663,29 @@ export type CreateOneTurmaTypeInput = {
   turmaType: CreateTurmaInput;
 };
 
+export type CreatePerguntaInput = {
+  /** descreva a pergunta */
+  descricao: Scalars['String']['input'];
+  /** selecione o formulário */
+  formularioId: Scalars['Float']['input'];
+  /** pergunta é multi escolha */
+  multiEscolha: Scalars['Boolean']['input'];
+  /** tipo */
+  tipo?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type CreateProgressoInput = {
   alunoId: Scalars['Float']['input'];
   aulaId: Scalars['Float']['input'];
   cursoId: Scalars['Float']['input'];
   moduloId: Scalars['Float']['input'];
+};
+
+export type CreateRespostaInput = {
+  /** descreva a resposta */
+  descricao?: InputMaybe<Scalars['String']['input']>;
+  /** selecione a pergunta */
+  perguntaId: Scalars['Float']['input'];
 };
 
 export type CreateTurmaInput = {
@@ -618,16 +699,20 @@ export type CreateTurmaInput = {
 
 export type CursoType = {
   __typename?: 'CursoType';
+  arquivo?: Maybe<Arquivo>;
+  /** id do arquivo */
+  arquivoId?: Maybe<Scalars['Float']['output']>;
   /** curso está ativo */
   ativo: Scalars['Boolean']['output'];
   /** data criação do registro */
   createdAt: Scalars['DateTime']['output'];
+  cursosProgressos?: Maybe<Array<ProgressoType>>;
   /** data da exclusão do registro */
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   /** descricao do curso */
   descricao: Scalars['String']['output'];
   /** icone do curso */
-  icone: Scalars['String']['output'];
+  icone?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   modulos?: Maybe<Array<ModuloType>>;
   /** nome do curso */
@@ -635,7 +720,13 @@ export type CursoType = {
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   /** url da imagem do curso */
-  url: Scalars['String']['output'];
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type CursoTypeCursosProgressosArgs = {
+  filter?: ProgressoTypeFilter;
+  sorting?: Array<ProgressoTypeSort>;
 };
 
 
@@ -646,6 +737,7 @@ export type CursoTypeModulosArgs = {
 
 export type CursoTypeAggregateGroupBy = {
   __typename?: 'CursoTypeAggregateGroupBy';
+  arquivoId?: Maybe<Scalars['Float']['output']>;
   ativo?: Maybe<Scalars['Boolean']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -659,6 +751,7 @@ export type CursoTypeAggregateGroupBy = {
 
 export type CursoTypeAvgAggregate = {
   __typename?: 'CursoTypeAvgAggregate';
+  arquivoId?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -672,6 +765,7 @@ export type CursoTypeConnection = {
 
 export type CursoTypeCountAggregate = {
   __typename?: 'CursoTypeCountAggregate';
+  arquivoId?: Maybe<Scalars['Int']['output']>;
   ativo?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
@@ -685,6 +779,8 @@ export type CursoTypeCountAggregate = {
 
 export type CursoTypeDeleteResponse = {
   __typename?: 'CursoTypeDeleteResponse';
+  /** id do arquivo */
+  arquivoId?: Maybe<Scalars['Float']['output']>;
   /** curso está ativo */
   ativo?: Maybe<Scalars['Boolean']['output']>;
   /** data criação do registro */
@@ -714,8 +810,11 @@ export type CursoTypeEdge = {
 
 export type CursoTypeFilter = {
   and?: InputMaybe<Array<CursoTypeFilter>>;
+  arquivo?: InputMaybe<CursoTypeFilterArquivoFilter>;
+  arquivoId?: InputMaybe<NumberFieldComparison>;
   ativo?: InputMaybe<BooleanFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
+  cursosProgressos?: InputMaybe<CursoTypeFilterProgressoTypeFilter>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   descricao?: InputMaybe<StringFieldComparison>;
   icone?: InputMaybe<StringFieldComparison>;
@@ -725,6 +824,16 @@ export type CursoTypeFilter = {
   or?: InputMaybe<Array<CursoTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   url?: InputMaybe<StringFieldComparison>;
+};
+
+export type CursoTypeFilterArquivoFilter = {
+  and?: InputMaybe<Array<CursoTypeFilterArquivoFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<CursoTypeFilterArquivoFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type CursoTypeFilterModuloTypeFilter = {
@@ -741,8 +850,25 @@ export type CursoTypeFilterModuloTypeFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
+export type CursoTypeFilterProgressoTypeFilter = {
+  alunoId?: InputMaybe<NumberFieldComparison>;
+  and?: InputMaybe<Array<CursoTypeFilterProgressoTypeFilter>>;
+  assistido?: InputMaybe<BooleanFieldComparison>;
+  aulaId?: InputMaybe<NumberFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  fim?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  inicio?: InputMaybe<DateFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<CursoTypeFilterProgressoTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
 export type CursoTypeMaxAggregate = {
   __typename?: 'CursoTypeMaxAggregate';
+  arquivoId?: Maybe<Scalars['Float']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   descricao?: Maybe<Scalars['String']['output']>;
@@ -755,6 +881,7 @@ export type CursoTypeMaxAggregate = {
 
 export type CursoTypeMinAggregate = {
   __typename?: 'CursoTypeMinAggregate';
+  arquivoId?: Maybe<Scalars['Float']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   descricao?: Maybe<Scalars['String']['output']>;
@@ -772,6 +899,7 @@ export type CursoTypeSort = {
 };
 
 export enum CursoTypeSortFields {
+  ArquivoId = 'arquivoId',
   Ativo = 'ativo',
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
@@ -785,6 +913,7 @@ export enum CursoTypeSortFields {
 
 export type CursoTypeSumAggregate = {
   __typename?: 'CursoTypeSumAggregate';
+  arquivoId?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -834,12 +963,27 @@ export type DeleteOneCursoTypeInput = {
   id: Scalars['Int']['input'];
 };
 
+export type DeleteOneFormulariosInput = {
+  /** The id of the record to delete. */
+  id: Scalars['Int']['input'];
+};
+
 export type DeleteOneInscricaoTypeInput = {
   /** The id of the record to delete. */
   id: Scalars['Int']['input'];
 };
 
 export type DeleteOneModuloTypeInput = {
+  /** The id of the record to delete. */
+  id: Scalars['Int']['input'];
+};
+
+export type DeleteOnePerguntasInput = {
+  /** The id of the record to delete. */
+  id: Scalars['Int']['input'];
+};
+
+export type DeleteOneRespostasInput = {
   /** The id of the record to delete. */
   id: Scalars['Int']['input'];
 };
@@ -852,6 +996,169 @@ export type DeleteOneTurmaTypeInput = {
 export type DeleteOneUsuarioDtoInput = {
   /** The id of the record to delete. */
   id: Scalars['Int']['input'];
+};
+
+export type Formularios = {
+  __typename?: 'Formularios';
+  /** data criação do registro */
+  createdAt: Scalars['DateTime']['output'];
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['Int']['output'];
+  modulo?: Maybe<ModuloType>;
+  /** id do modulo */
+  moduloId: Scalars['Float']['output'];
+  /** nome do formulário */
+  nome: Scalars['String']['output'];
+  perguntas?: Maybe<Array<Perguntas>>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type FormulariosPerguntasArgs = {
+  filter?: PerguntasFilter;
+  sorting?: Array<PerguntasSort>;
+};
+
+export type FormulariosAggregateGroupBy = {
+  __typename?: 'FormulariosAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  nome?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type FormulariosAvgAggregate = {
+  __typename?: 'FormulariosAvgAggregate';
+  id?: Maybe<Scalars['Float']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+};
+
+export type FormulariosConnection = {
+  __typename?: 'FormulariosConnection';
+  /** Array of edges. */
+  edges: Array<FormulariosEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type FormulariosCountAggregate = {
+  __typename?: 'FormulariosCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Int']['output']>;
+  nome?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type FormulariosDeleteResponse = {
+  __typename?: 'FormulariosDeleteResponse';
+  /** data criação do registro */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  /** id do modulo */
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  /** nome do formulário */
+  nome?: Maybe<Scalars['String']['output']>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type FormulariosEdge = {
+  __typename?: 'FormulariosEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the Formularios */
+  node: Formularios;
+};
+
+export type FormulariosFilter = {
+  and?: InputMaybe<Array<FormulariosFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  modulo?: InputMaybe<FormulariosFilterModuloTypeFilter>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<FormulariosFilter>>;
+  perguntas?: InputMaybe<FormulariosFilterPerguntasFilter>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type FormulariosFilterModuloTypeFilter = {
+  and?: InputMaybe<Array<FormulariosFilterModuloTypeFilter>>;
+  biblioteca?: InputMaybe<BooleanFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  or?: InputMaybe<Array<FormulariosFilterModuloTypeFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type FormulariosFilterPerguntasFilter = {
+  and?: InputMaybe<Array<FormulariosFilterPerguntasFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  formularioId?: InputMaybe<NumberFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  multiEscolha?: InputMaybe<BooleanFieldComparison>;
+  or?: InputMaybe<Array<FormulariosFilterPerguntasFilter>>;
+  tipo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type FormulariosMaxAggregate = {
+  __typename?: 'FormulariosMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  nome?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type FormulariosMinAggregate = {
+  __typename?: 'FormulariosMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  nome?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type FormulariosSort = {
+  direction: SortDirection;
+  field: FormulariosSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum FormulariosSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  ModuloId = 'moduloId',
+  Nome = 'nome',
+  UpdatedAt = 'updatedAt'
+}
+
+export type FormulariosSumAggregate = {
+  __typename?: 'FormulariosSumAggregate';
+  id?: Maybe<Scalars['Float']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
 };
 
 export type InscricaoType = {
@@ -1065,6 +1372,7 @@ export type ModuloType = {
   /** descricao do modulo */
   descricao: Scalars['String']['output'];
   id: Scalars['Int']['output'];
+  modulosProgressos?: Maybe<Array<ProgressoType>>;
   /** ordem do modulo */
   ordem: Scalars['Float']['output'];
   /** titulo do modulo */
@@ -1077,6 +1385,12 @@ export type ModuloType = {
 export type ModuloTypeAulasArgs = {
   filter?: AulaTypeFilter;
   sorting?: Array<AulaTypeSort>;
+};
+
+
+export type ModuloTypeModulosProgressosArgs = {
+  filter?: ProgressoTypeFilter;
+  sorting?: Array<ProgressoTypeSort>;
 };
 
 export type ModuloTypeAggregateGroupBy = {
@@ -1159,6 +1473,7 @@ export type ModuloTypeFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   descricao?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
+  modulosProgressos?: InputMaybe<ModuloTypeFilterProgressoTypeFilter>;
   or?: InputMaybe<Array<ModuloTypeFilter>>;
   ordem?: InputMaybe<NumberFieldComparison>;
   titulo?: InputMaybe<StringFieldComparison>;
@@ -1182,6 +1497,7 @@ export type ModuloTypeFilterAulaTypeFilter = {
 
 export type ModuloTypeFilterCursoTypeFilter = {
   and?: InputMaybe<Array<ModuloTypeFilterCursoTypeFilter>>;
+  arquivoId?: InputMaybe<NumberFieldComparison>;
   ativo?: InputMaybe<BooleanFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
@@ -1192,6 +1508,22 @@ export type ModuloTypeFilterCursoTypeFilter = {
   or?: InputMaybe<Array<ModuloTypeFilterCursoTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   url?: InputMaybe<StringFieldComparison>;
+};
+
+export type ModuloTypeFilterProgressoTypeFilter = {
+  alunoId?: InputMaybe<NumberFieldComparison>;
+  and?: InputMaybe<Array<ModuloTypeFilterProgressoTypeFilter>>;
+  assistido?: InputMaybe<BooleanFieldComparison>;
+  aulaId?: InputMaybe<NumberFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  fim?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  inicio?: InputMaybe<DateFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<ModuloTypeFilterProgressoTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type ModuloTypeMaxAggregate = {
@@ -1246,39 +1578,43 @@ export type ModuloTypeSumAggregate = {
 export type Mutation = {
   __typename?: 'Mutation';
   CreateOneAula: AulaType;
-  CreateOneCurso: CursoType;
   CreateOneInscricao: InscricaoType;
   CreateOneModulo: ModuloType;
   CreateOneProgresso: ProgressoType;
   CreateOneTurma: TurmaType;
   DeleteOneInscricao: InscricaoTypeDeleteResponse;
   UpdateOneAula: AulaType;
-  UpdateOneCurso: CursoType;
   UpdateOneInscricao: InscricaoType;
   UpdateOneModulo: ModuloType;
   UpdateOneTurma: TurmaType;
   createArquivo?: Maybe<Arquivo>;
   createManyArquivos: Array<Arquivo>;
   createOneArquivo: Arquivo;
+  createOneCurso?: Maybe<CursoType>;
+  createOneFormulario: Formularios;
+  createOnePergunta: Perguntas;
+  createOneResposta: Respostas;
   deleteArquivo: ArquivoDeleteResponse;
   deleteAula: AulaTypeDeleteResponse;
   deleteCurso: CursoTypeDeleteResponse;
   deleteModulo: ModuloTypeDeleteResponse;
+  deleteOneFormulario: FormulariosDeleteResponse;
+  deleteOnePergunta: PerguntasDeleteResponse;
+  deleteOneResposta: RespostasDeleteResponse;
   deleteTurma: TurmaTypeDeleteResponse;
   deleteUsuario: UsuarioDtoDeleteResponse;
   login: AuthType;
   updateArquivo: Arquivo;
+  updateOneCurso?: Maybe<CursoType>;
+  updateOneFormulario: Formularios;
+  updateOnePergunta: Perguntas;
+  updateOneResposta: Respostas;
   updateProgresso: ProgressoType;
 };
 
 
 export type MutationCreateOneAulaArgs = {
   input: CreateOneAulaTypeInput;
-};
-
-
-export type MutationCreateOneCursoArgs = {
-  input: CreateOneCursoTypeInput;
 };
 
 
@@ -1312,11 +1648,6 @@ export type MutationUpdateOneAulaArgs = {
 };
 
 
-export type MutationUpdateOneCursoArgs = {
-  input: UpdateOneCursoTypeInput;
-};
-
-
 export type MutationUpdateOneInscricaoArgs = {
   input: UpdateOneInscricaoTypeInput;
 };
@@ -1347,6 +1678,27 @@ export type MutationCreateOneArquivoArgs = {
 };
 
 
+export type MutationCreateOneCursoArgs = {
+  arquivo?: InputMaybe<Scalars['Upload']['input']>;
+  input: CreateCursoInput;
+};
+
+
+export type MutationCreateOneFormularioArgs = {
+  input: CreateOneFormulariosInput;
+};
+
+
+export type MutationCreateOnePerguntaArgs = {
+  input: CreateOnePerguntasInput;
+};
+
+
+export type MutationCreateOneRespostaArgs = {
+  input: CreateOneRespostasInput;
+};
+
+
 export type MutationDeleteArquivoArgs = {
   input: DeleteOneArquivoInput;
 };
@@ -1367,6 +1719,21 @@ export type MutationDeleteModuloArgs = {
 };
 
 
+export type MutationDeleteOneFormularioArgs = {
+  input: DeleteOneFormulariosInput;
+};
+
+
+export type MutationDeleteOnePerguntaArgs = {
+  input: DeleteOnePerguntasInput;
+};
+
+
+export type MutationDeleteOneRespostaArgs = {
+  input: DeleteOneRespostasInput;
+};
+
+
 export type MutationDeleteTurmaArgs = {
   input: DeleteOneTurmaTypeInput;
 };
@@ -1384,6 +1751,28 @@ export type MutationLoginArgs = {
 
 export type MutationUpdateArquivoArgs = {
   input: UpdateOneArquivoInput;
+};
+
+
+export type MutationUpdateOneCursoArgs = {
+  arquivo?: InputMaybe<Scalars['Upload']['input']>;
+  id: Scalars['Float']['input'];
+  update: UpdateCursoInput;
+};
+
+
+export type MutationUpdateOneFormularioArgs = {
+  input: UpdateOneFormulariosInput;
+};
+
+
+export type MutationUpdateOnePerguntaArgs = {
+  input: UpdateOnePerguntasInput;
+};
+
+
+export type MutationUpdateOneRespostaArgs = {
+  input: UpdateOneRespostasInput;
 };
 
 
@@ -1423,8 +1812,187 @@ export type PageInfo = {
   startCursor?: Maybe<Scalars['ConnectionCursor']['output']>;
 };
 
+export type Perguntas = {
+  __typename?: 'Perguntas';
+  /** data criação do registro */
+  createdAt: Scalars['DateTime']['output'];
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** descrição da pergunta */
+  descricao: Scalars['String']['output'];
+  formulario?: Maybe<Formularios>;
+  /** id do formulário */
+  formularioId: Scalars['Float']['output'];
+  id: Scalars['Int']['output'];
+  /** pergunta é multi escolha */
+  multiEscolha: Scalars['Boolean']['output'];
+  respostas?: Maybe<Array<Respostas>>;
+  /** tipo */
+  tipo?: Maybe<Scalars['String']['output']>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type PerguntasRespostasArgs = {
+  filter?: RespostasFilter;
+  sorting?: Array<RespostasSort>;
+};
+
+export type PerguntasAggregateGroupBy = {
+  __typename?: 'PerguntasAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  formularioId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  multiEscolha?: Maybe<Scalars['Boolean']['output']>;
+  tipo?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type PerguntasAvgAggregate = {
+  __typename?: 'PerguntasAvgAggregate';
+  formularioId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type PerguntasConnection = {
+  __typename?: 'PerguntasConnection';
+  /** Array of edges. */
+  edges: Array<PerguntasEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type PerguntasCountAggregate = {
+  __typename?: 'PerguntasCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  descricao?: Maybe<Scalars['Int']['output']>;
+  formularioId?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  multiEscolha?: Maybe<Scalars['Int']['output']>;
+  tipo?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type PerguntasDeleteResponse = {
+  __typename?: 'PerguntasDeleteResponse';
+  /** data criação do registro */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** descrição da pergunta */
+  descricao?: Maybe<Scalars['String']['output']>;
+  /** id do formulário */
+  formularioId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  /** pergunta é multi escolha */
+  multiEscolha?: Maybe<Scalars['Boolean']['output']>;
+  /** tipo */
+  tipo?: Maybe<Scalars['String']['output']>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type PerguntasEdge = {
+  __typename?: 'PerguntasEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the Perguntas */
+  node: Perguntas;
+};
+
+export type PerguntasFilter = {
+  and?: InputMaybe<Array<PerguntasFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  formulario?: InputMaybe<PerguntasFilterFormulariosFilter>;
+  formularioId?: InputMaybe<NumberFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  multiEscolha?: InputMaybe<BooleanFieldComparison>;
+  or?: InputMaybe<Array<PerguntasFilter>>;
+  respostas?: InputMaybe<PerguntasFilterRespostasFilter>;
+  tipo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type PerguntasFilterFormulariosFilter = {
+  and?: InputMaybe<Array<PerguntasFilterFormulariosFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<PerguntasFilterFormulariosFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type PerguntasFilterRespostasFilter = {
+  and?: InputMaybe<Array<PerguntasFilterRespostasFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  or?: InputMaybe<Array<PerguntasFilterRespostasFilter>>;
+  perguntaId?: InputMaybe<NumberFieldComparison>;
+  resposta?: InputMaybe<StringFieldComparison>;
+  selecionada?: InputMaybe<BooleanFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type PerguntasMaxAggregate = {
+  __typename?: 'PerguntasMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  formularioId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  tipo?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type PerguntasMinAggregate = {
+  __typename?: 'PerguntasMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  formularioId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  tipo?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type PerguntasSort = {
+  direction: SortDirection;
+  field: PerguntasSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum PerguntasSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Descricao = 'descricao',
+  FormularioId = 'formularioId',
+  Id = 'id',
+  MultiEscolha = 'multiEscolha',
+  Tipo = 'tipo',
+  UpdatedAt = 'updatedAt'
+}
+
+export type PerguntasSumAggregate = {
+  __typename?: 'PerguntasSumAggregate';
+  formularioId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
 export type ProgressoType = {
   __typename?: 'ProgressoType';
+  aluno?: Maybe<AlunoType>;
   /** Id do aluno */
   alunoId?: Maybe<Scalars['Float']['output']>;
   /** assistido  */
@@ -1444,6 +2012,7 @@ export type ProgressoType = {
   id: Scalars['Int']['output'];
   /** Inicio da aula */
   inicio?: Maybe<Scalars['DateTime']['output']>;
+  modulo?: Maybe<ModuloType>;
   /** Id do modulo */
   moduloId?: Maybe<Scalars['Float']['output']>;
   /** data atualização do registro */
@@ -1506,6 +2075,7 @@ export type ProgressoTypeEdge = {
 };
 
 export type ProgressoTypeFilter = {
+  aluno?: InputMaybe<ProgressoTypeFilterAlunoTypeFilter>;
   alunoId?: InputMaybe<NumberFieldComparison>;
   and?: InputMaybe<Array<ProgressoTypeFilter>>;
   assistido?: InputMaybe<BooleanFieldComparison>;
@@ -1518,8 +2088,22 @@ export type ProgressoTypeFilter = {
   fim?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   inicio?: InputMaybe<DateFieldComparison>;
+  modulo?: InputMaybe<ProgressoTypeFilterModuloTypeFilter>;
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<ProgressoTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ProgressoTypeFilterAlunoTypeFilter = {
+  and?: InputMaybe<Array<ProgressoTypeFilterAlunoTypeFilter>>;
+  cpf?: InputMaybe<StringFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  email?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ProgressoTypeFilterAlunoTypeFilter>>;
+  senha?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -1540,6 +2124,7 @@ export type ProgressoTypeFilterAulaTypeFilter = {
 
 export type ProgressoTypeFilterCursoTypeFilter = {
   and?: InputMaybe<Array<ProgressoTypeFilterCursoTypeFilter>>;
+  arquivoId?: InputMaybe<NumberFieldComparison>;
   ativo?: InputMaybe<BooleanFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
@@ -1550,6 +2135,20 @@ export type ProgressoTypeFilterCursoTypeFilter = {
   or?: InputMaybe<Array<ProgressoTypeFilterCursoTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   url?: InputMaybe<StringFieldComparison>;
+};
+
+export type ProgressoTypeFilterModuloTypeFilter = {
+  and?: InputMaybe<Array<ProgressoTypeFilterModuloTypeFilter>>;
+  biblioteca?: InputMaybe<BooleanFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  or?: InputMaybe<Array<ProgressoTypeFilterModuloTypeFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type ProgressoTypeMaxAggregate = {
@@ -1619,12 +2218,16 @@ export type Query = {
   aulas: AulaTypeConnection;
   curso?: Maybe<CursoType>;
   cursos: CursoTypeConnection;
+  formulario?: Maybe<Formularios>;
+  formularios: FormulariosConnection;
   inscricao?: Maybe<InscricaoType>;
   inscricoes: InscricaoTypeConnection;
   modulo?: Maybe<ModuloType>;
   modulos: ModuloTypeConnection;
+  perguntas: PerguntasConnection;
   progresso?: Maybe<ProgressoType>;
   progressos: ProgressoTypeConnection;
+  respostas: RespostasConnection;
   turma?: Maybe<TurmaType>;
   turmas: TurmaTypeConnection;
   usuario?: Maybe<UsuarioDto>;
@@ -1680,6 +2283,18 @@ export type QueryCursosArgs = {
 };
 
 
+export type QueryFormularioArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type QueryFormulariosArgs = {
+  filter?: FormulariosFilter;
+  paging?: CursorPaging;
+  sorting?: Array<FormulariosSort>;
+};
+
+
 export type QueryInscricaoArgs = {
   id: Scalars['Int']['input'];
 };
@@ -1704,6 +2319,13 @@ export type QueryModulosArgs = {
 };
 
 
+export type QueryPerguntasArgs = {
+  filter?: PerguntasFilter;
+  paging?: CursorPaging;
+  sorting?: Array<PerguntasSort>;
+};
+
+
 export type QueryProgressoArgs = {
   id: Scalars['Int']['input'];
 };
@@ -1713,6 +2335,13 @@ export type QueryProgressosArgs = {
   filter?: ProgressoTypeFilter;
   paging?: CursorPaging;
   sorting?: Array<ProgressoTypeSort>;
+};
+
+
+export type QueryRespostasArgs = {
+  filter?: RespostasFilter;
+  paging?: CursorPaging;
+  sorting?: Array<RespostasSort>;
 };
 
 
@@ -1737,6 +2366,150 @@ export type QueryUsuariosArgs = {
   filter?: UsuarioDtoFilter;
   paging?: CursorPaging;
   sorting?: Array<UsuarioDtoSort>;
+};
+
+export type Respostas = {
+  __typename?: 'Respostas';
+  /** data criação do registro */
+  createdAt: Scalars['DateTime']['output'];
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** descrição da resposta */
+  descricao: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  /** id da pergunta */
+  perguntaId: Scalars['Float']['output'];
+  /** resposta dissertativa */
+  resposta?: Maybe<Scalars['String']['output']>;
+  /** selecionada sim ou não */
+  selecionada?: Maybe<Scalars['Boolean']['output']>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type RespostasAggregateGroupBy = {
+  __typename?: 'RespostasAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  perguntaId?: Maybe<Scalars['Float']['output']>;
+  resposta?: Maybe<Scalars['String']['output']>;
+  selecionada?: Maybe<Scalars['Boolean']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type RespostasAvgAggregate = {
+  __typename?: 'RespostasAvgAggregate';
+  id?: Maybe<Scalars['Float']['output']>;
+  perguntaId?: Maybe<Scalars['Float']['output']>;
+};
+
+export type RespostasConnection = {
+  __typename?: 'RespostasConnection';
+  /** Array of edges. */
+  edges: Array<RespostasEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type RespostasCountAggregate = {
+  __typename?: 'RespostasCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  descricao?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  perguntaId?: Maybe<Scalars['Int']['output']>;
+  resposta?: Maybe<Scalars['Int']['output']>;
+  selecionada?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type RespostasDeleteResponse = {
+  __typename?: 'RespostasDeleteResponse';
+  /** data criação do registro */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** descrição da resposta */
+  descricao?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  /** id da pergunta */
+  perguntaId?: Maybe<Scalars['Float']['output']>;
+  /** resposta dissertativa */
+  resposta?: Maybe<Scalars['String']['output']>;
+  /** selecionada sim ou não */
+  selecionada?: Maybe<Scalars['Boolean']['output']>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type RespostasEdge = {
+  __typename?: 'RespostasEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the Respostas */
+  node: Respostas;
+};
+
+export type RespostasFilter = {
+  and?: InputMaybe<Array<RespostasFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  or?: InputMaybe<Array<RespostasFilter>>;
+  perguntaId?: InputMaybe<NumberFieldComparison>;
+  resposta?: InputMaybe<StringFieldComparison>;
+  selecionada?: InputMaybe<BooleanFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type RespostasMaxAggregate = {
+  __typename?: 'RespostasMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  perguntaId?: Maybe<Scalars['Float']['output']>;
+  resposta?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type RespostasMinAggregate = {
+  __typename?: 'RespostasMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  perguntaId?: Maybe<Scalars['Float']['output']>;
+  resposta?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type RespostasSort = {
+  direction: SortDirection;
+  field: RespostasSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum RespostasSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Descricao = 'descricao',
+  Id = 'id',
+  PerguntaId = 'perguntaId',
+  Resposta = 'resposta',
+  Selecionada = 'selecionada',
+  UpdatedAt = 'updatedAt'
+}
+
+export type RespostasSumAggregate = {
+  __typename?: 'RespostasSumAggregate';
+  id?: Maybe<Scalars['Float']['output']>;
+  perguntaId?: Maybe<Scalars['Float']['output']>;
 };
 
 /** Sort Directions */
@@ -1883,6 +2656,7 @@ export type TurmaTypeFilter = {
 
 export type TurmaTypeFilterCursoTypeFilter = {
   and?: InputMaybe<Array<TurmaTypeFilterCursoTypeFilter>>;
+  arquivoId?: InputMaybe<NumberFieldComparison>;
   ativo?: InputMaybe<BooleanFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
@@ -1988,8 +2762,13 @@ export type UpdateCursoInput = {
   icone?: InputMaybe<Scalars['String']['input']>;
   /** nome do curso */
   nome?: InputMaybe<Scalars['String']['input']>;
-  /** url do curso */
-  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UpdateFormularioInput = {
+  /** id do modulo */
+  moduloId?: InputMaybe<Scalars['Float']['input']>;
+  /** nome da formulário */
+  nome?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateInscricaoInput = {
@@ -2025,11 +2804,11 @@ export type UpdateOneAulaTypeInput = {
   update: UpdateAulaInput;
 };
 
-export type UpdateOneCursoTypeInput = {
+export type UpdateOneFormulariosInput = {
   /** The id of the record to update */
   id: Scalars['Int']['input'];
   /** The update to apply. */
-  update: UpdateCursoInput;
+  update: UpdateFormularioInput;
 };
 
 export type UpdateOneInscricaoTypeInput = {
@@ -2046,11 +2825,36 @@ export type UpdateOneModuloTypeInput = {
   update: UpdateModuloInput;
 };
 
+export type UpdateOnePerguntasInput = {
+  /** The id of the record to update */
+  id: Scalars['Int']['input'];
+  /** The update to apply. */
+  update: UpdatePerguntaInput;
+};
+
+export type UpdateOneRespostasInput = {
+  /** The id of the record to update */
+  id: Scalars['Int']['input'];
+  /** The update to apply. */
+  update: UpdateRespostaInput;
+};
+
 export type UpdateOneTurmaTypeInput = {
   /** The id of the record to update */
   id: Scalars['Int']['input'];
   /** The update to apply. */
   update: UpdateTurmaInput;
+};
+
+export type UpdatePerguntaInput = {
+  /** descreva a pergunta */
+  descricao?: InputMaybe<Scalars['String']['input']>;
+  /** selecione o formulário */
+  formularioId?: InputMaybe<Scalars['Float']['input']>;
+  /** pergunta é multi escolha */
+  multiEscolha?: InputMaybe<Scalars['Boolean']['input']>;
+  /** tipo */
+  tipo?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateProgressoInput = {
@@ -2059,6 +2863,14 @@ export type UpdateProgressoInput = {
   cursoId?: InputMaybe<Scalars['Float']['input']>;
   id: Scalars['Float']['input'];
   moduloId?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type UpdateRespostaInput = {
+  /** descreva a resposta */
+  descricao?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['Int']['input'];
+  /** selecione a pergunta */
+  perguntaId?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type UpdateTurmaInput = {
@@ -2229,25 +3041,42 @@ export type LoginMutationVariables = Exact<{
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthType', token: string } };
 
 export type CreateOneCursoMutationVariables = Exact<{
-  input: CreateOneCursoTypeInput;
+  input: CreateCursoInput;
+  arquivo?: InputMaybe<Scalars['Upload']['input']>;
 }>;
 
 
-export type CreateOneCursoMutation = { __typename?: 'Mutation', CreateOneCurso: { __typename?: 'CursoType', id: number } };
+export type CreateOneCursoMutation = { __typename?: 'Mutation', createOneCurso?: { __typename?: 'CursoType', id: number } | null };
 
 export type UpdateOneCursoMutationVariables = Exact<{
-  input: UpdateOneCursoTypeInput;
+  arquivo?: InputMaybe<Scalars['Upload']['input']>;
+  update: UpdateCursoInput;
+  id: Scalars['Float']['input'];
 }>;
 
 
-export type UpdateOneCursoMutation = { __typename?: 'Mutation', UpdateOneCurso: { __typename?: 'CursoType', id: number } };
+export type UpdateOneCursoMutation = { __typename?: 'Mutation', updateOneCurso?: { __typename?: 'CursoType', id: number } | null };
 
-export type DeleteOneCursoMutationVariables = Exact<{
-  input: DeleteOneCursoTypeInput;
+export type CreateOneFormularioMutationVariables = Exact<{
+  input: CreateOneFormulariosInput;
 }>;
 
 
-export type DeleteOneCursoMutation = { __typename?: 'Mutation', deleteCurso: { __typename?: 'CursoTypeDeleteResponse', id?: number | null } };
+export type CreateOneFormularioMutation = { __typename?: 'Mutation', createOneFormulario: { __typename?: 'Formularios', id: number } };
+
+export type UpdateOneFormularioMutationVariables = Exact<{
+  input: UpdateOneFormulariosInput;
+}>;
+
+
+export type UpdateOneFormularioMutation = { __typename?: 'Mutation', updateOneFormulario: { __typename?: 'Formularios', id: number } };
+
+export type DeleteOneFormularioMutationVariables = Exact<{
+  input: DeleteOneFormulariosInput;
+}>;
+
+
+export type DeleteOneFormularioMutation = { __typename?: 'Mutation', deleteOneFormulario: { __typename?: 'FormulariosDeleteResponse', id?: number | null } };
 
 export type CreateOneModuloMutationVariables = Exact<{
   input: CreateOneModuloTypeInput;
@@ -2269,6 +3098,48 @@ export type DeleteOneModuloMutationVariables = Exact<{
 
 
 export type DeleteOneModuloMutation = { __typename?: 'Mutation', deleteModulo: { __typename?: 'ModuloTypeDeleteResponse', titulo?: string | null } };
+
+export type CreateOnePerguntaMutationVariables = Exact<{
+  input: CreateOnePerguntasInput;
+}>;
+
+
+export type CreateOnePerguntaMutation = { __typename?: 'Mutation', createOnePergunta: { __typename?: 'Perguntas', id: number } };
+
+export type UpdateOnePerguntaMutationVariables = Exact<{
+  input: UpdateOnePerguntasInput;
+}>;
+
+
+export type UpdateOnePerguntaMutation = { __typename?: 'Mutation', updateOnePergunta: { __typename?: 'Perguntas', id: number } };
+
+export type DeleteOnePerguntaMutationVariables = Exact<{
+  input: DeleteOnePerguntasInput;
+}>;
+
+
+export type DeleteOnePerguntaMutation = { __typename?: 'Mutation', deleteOnePergunta: { __typename?: 'PerguntasDeleteResponse', id?: number | null } };
+
+export type CreateOneRespostaMutationVariables = Exact<{
+  input: CreateOneRespostasInput;
+}>;
+
+
+export type CreateOneRespostaMutation = { __typename?: 'Mutation', createOneResposta: { __typename?: 'Respostas', id: number } };
+
+export type UpdateOneRespostaMutationVariables = Exact<{
+  input: UpdateOneRespostasInput;
+}>;
+
+
+export type UpdateOneRespostaMutation = { __typename?: 'Mutation', updateOneResposta: { __typename?: 'Respostas', id: number } };
+
+export type DeleteOneRespostaMutationVariables = Exact<{
+  input: DeleteOneRespostasInput;
+}>;
+
+
+export type DeleteOneRespostaMutation = { __typename?: 'Mutation', deleteOneResposta: { __typename?: 'RespostasDeleteResponse', id?: number | null } };
 
 export type CreateOneTurmaMutationVariables = Exact<{
   input: CreateOneTurmaTypeInput;
@@ -2321,7 +3192,7 @@ export type CursoQueryVariables = Exact<{
 }>;
 
 
-export type CursoQuery = { __typename?: 'Query', curso?: { __typename?: 'CursoType', ativo: boolean, createdAt: any, deletedAt?: any | null, descricao: string, id: number, nome: string, icone: string, url: string, updatedAt?: any | null } | null };
+export type CursoQuery = { __typename?: 'Query', curso?: { __typename?: 'CursoType', ativo: boolean, createdAt: any, deletedAt?: any | null, descricao: string, id: number, nome: string, icone?: string | null, url?: string | null, updatedAt?: any | null } | null };
 
 export type CursosQueryVariables = Exact<{
   filter?: InputMaybe<CursoTypeFilter>;
@@ -2330,7 +3201,7 @@ export type CursosQueryVariables = Exact<{
 }>;
 
 
-export type CursosQuery = { __typename?: 'Query', cursos: { __typename?: 'CursoTypeConnection', edges: Array<{ __typename?: 'CursoTypeEdge', node: { __typename?: 'CursoType', ativo: boolean, createdAt: any, deletedAt?: any | null, descricao: string, id: number, nome: string, updatedAt?: any | null, icone: string, url: string } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type CursosQuery = { __typename?: 'Query', cursos: { __typename?: 'CursoTypeConnection', edges: Array<{ __typename?: 'CursoTypeEdge', node: { __typename?: 'CursoType', ativo: boolean, createdAt: any, deletedAt?: any | null, descricao: string, id: number, nome: string, updatedAt?: any | null, icone?: string | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type CursosModuloSelectQueryVariables = Exact<{
   filter?: InputMaybe<CursoTypeFilter>;
@@ -2340,6 +3211,31 @@ export type CursosModuloSelectQueryVariables = Exact<{
 
 
 export type CursosModuloSelectQuery = { __typename?: 'Query', cursos: { __typename?: 'CursoTypeConnection', edges: Array<{ __typename?: 'CursoTypeEdge', node: { __typename?: 'CursoType', id: number, nome: string, modulos?: Array<{ __typename?: 'ModuloType', id: number, titulo: string }> | null } }> } };
+
+export type FormularioQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type FormularioQuery = { __typename?: 'Query', formulario?: { __typename?: 'Formularios', id: number, nome: string, modulo?: { __typename?: 'ModuloType', titulo: string, id: number, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } | null };
+
+export type FormulariosQueryVariables = Exact<{
+  filter?: InputMaybe<FormulariosFilter>;
+  paging: CursorPaging;
+  sorting: Array<FormulariosSort> | FormulariosSort;
+}>;
+
+
+export type FormulariosQuery = { __typename?: 'Query', formularios: { __typename?: 'FormulariosConnection', edges: Array<{ __typename?: 'FormulariosEdge', node: { __typename?: 'Formularios', id: number, nome: string, modulo?: { __typename?: 'ModuloType', titulo: string, id: number, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+
+export type FormulariosSelectQueryVariables = Exact<{
+  filter?: InputMaybe<FormulariosFilter>;
+  paging: CursorPaging;
+  sorting: Array<FormulariosSort> | FormulariosSort;
+}>;
+
+
+export type FormulariosSelectQuery = { __typename?: 'Query', formularios: { __typename?: 'FormulariosConnection', edges: Array<{ __typename?: 'FormulariosEdge', node: { __typename?: 'Formularios', id: number, nome: string } }> } };
 
 export type ModuloQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -2365,6 +3261,15 @@ export type ModulosSelectQueryVariables = Exact<{
 
 
 export type ModulosSelectQuery = { __typename?: 'Query', modulos: { __typename?: 'ModuloTypeConnection', edges: Array<{ __typename?: 'ModuloTypeEdge', node: { __typename?: 'ModuloType', id: number, titulo: string } }> } };
+
+export type PerguntasQueryVariables = Exact<{
+  filter?: InputMaybe<PerguntasFilter>;
+  paging: CursorPaging;
+  sorting: Array<PerguntasSort> | PerguntasSort;
+}>;
+
+
+export type PerguntasQuery = { __typename?: 'Query', perguntas: { __typename?: 'PerguntasConnection', edges: Array<{ __typename?: 'PerguntasEdge', node: { __typename?: 'Perguntas', id: number, descricao: string, multiEscolha: boolean, tipo?: string | null, formularioId: number, formulario?: { __typename?: 'Formularios', nome: string, id: number, modulo?: { __typename?: 'ModuloType', titulo: string, id: number, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } | null, respostas?: Array<{ __typename?: 'Respostas', descricao: string, id: number, perguntaId: number, resposta?: string | null, selecionada?: boolean | null }> | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type TurmaQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -2525,8 +3430,8 @@ export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
 export const CreateOneCursoDocument = gql`
-    mutation createOneCurso($input: CreateOneCursoTypeInput!) {
-  CreateOneCurso(input: $input) {
+    mutation createOneCurso($input: CreateCursoInput!, $arquivo: Upload) {
+  createOneCurso(input: $input, arquivo: $arquivo) {
     id
   }
 }
@@ -2547,6 +3452,7 @@ export type CreateOneCursoMutationFn = Apollo.MutationFunction<CreateOneCursoMut
  * const [createOneCursoMutation, { data, loading, error }] = useCreateOneCursoMutation({
  *   variables: {
  *      input: // value for 'input'
+ *      arquivo: // value for 'arquivo'
  *   },
  * });
  */
@@ -2558,8 +3464,8 @@ export type CreateOneCursoMutationHookResult = ReturnType<typeof useCreateOneCur
 export type CreateOneCursoMutationResult = Apollo.MutationResult<CreateOneCursoMutation>;
 export type CreateOneCursoMutationOptions = Apollo.BaseMutationOptions<CreateOneCursoMutation, CreateOneCursoMutationVariables>;
 export const UpdateOneCursoDocument = gql`
-    mutation updateOneCurso($input: UpdateOneCursoTypeInput!) {
-  UpdateOneCurso(input: $input) {
+    mutation updateOneCurso($arquivo: Upload, $update: UpdateCursoInput!, $id: Float!) {
+  updateOneCurso(arquivo: $arquivo, id: $id, update: $update) {
     id
   }
 }
@@ -2579,7 +3485,9 @@ export type UpdateOneCursoMutationFn = Apollo.MutationFunction<UpdateOneCursoMut
  * @example
  * const [updateOneCursoMutation, { data, loading, error }] = useUpdateOneCursoMutation({
  *   variables: {
- *      input: // value for 'input'
+ *      arquivo: // value for 'arquivo'
+ *      update: // value for 'update'
+ *      id: // value for 'id'
  *   },
  * });
  */
@@ -2590,39 +3498,105 @@ export function useUpdateOneCursoMutation(baseOptions?: Apollo.MutationHookOptio
 export type UpdateOneCursoMutationHookResult = ReturnType<typeof useUpdateOneCursoMutation>;
 export type UpdateOneCursoMutationResult = Apollo.MutationResult<UpdateOneCursoMutation>;
 export type UpdateOneCursoMutationOptions = Apollo.BaseMutationOptions<UpdateOneCursoMutation, UpdateOneCursoMutationVariables>;
-export const DeleteOneCursoDocument = gql`
-    mutation deleteOneCurso($input: DeleteOneCursoTypeInput!) {
-  deleteCurso(input: $input) {
+export const CreateOneFormularioDocument = gql`
+    mutation createOneFormulario($input: CreateOneFormulariosInput!) {
+  createOneFormulario(input: $input) {
     id
   }
 }
     `;
-export type DeleteOneCursoMutationFn = Apollo.MutationFunction<DeleteOneCursoMutation, DeleteOneCursoMutationVariables>;
+export type CreateOneFormularioMutationFn = Apollo.MutationFunction<CreateOneFormularioMutation, CreateOneFormularioMutationVariables>;
 
 /**
- * __useDeleteOneCursoMutation__
+ * __useCreateOneFormularioMutation__
  *
- * To run a mutation, you first call `useDeleteOneCursoMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteOneCursoMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useCreateOneFormularioMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneFormularioMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [deleteOneCursoMutation, { data, loading, error }] = useDeleteOneCursoMutation({
+ * const [createOneFormularioMutation, { data, loading, error }] = useCreateOneFormularioMutation({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useDeleteOneCursoMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneCursoMutation, DeleteOneCursoMutationVariables>) {
+export function useCreateOneFormularioMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneFormularioMutation, CreateOneFormularioMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteOneCursoMutation, DeleteOneCursoMutationVariables>(DeleteOneCursoDocument, options);
+        return Apollo.useMutation<CreateOneFormularioMutation, CreateOneFormularioMutationVariables>(CreateOneFormularioDocument, options);
       }
-export type DeleteOneCursoMutationHookResult = ReturnType<typeof useDeleteOneCursoMutation>;
-export type DeleteOneCursoMutationResult = Apollo.MutationResult<DeleteOneCursoMutation>;
-export type DeleteOneCursoMutationOptions = Apollo.BaseMutationOptions<DeleteOneCursoMutation, DeleteOneCursoMutationVariables>;
+export type CreateOneFormularioMutationHookResult = ReturnType<typeof useCreateOneFormularioMutation>;
+export type CreateOneFormularioMutationResult = Apollo.MutationResult<CreateOneFormularioMutation>;
+export type CreateOneFormularioMutationOptions = Apollo.BaseMutationOptions<CreateOneFormularioMutation, CreateOneFormularioMutationVariables>;
+export const UpdateOneFormularioDocument = gql`
+    mutation updateOneFormulario($input: UpdateOneFormulariosInput!) {
+  updateOneFormulario(input: $input) {
+    id
+  }
+}
+    `;
+export type UpdateOneFormularioMutationFn = Apollo.MutationFunction<UpdateOneFormularioMutation, UpdateOneFormularioMutationVariables>;
+
+/**
+ * __useUpdateOneFormularioMutation__
+ *
+ * To run a mutation, you first call `useUpdateOneFormularioMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneFormularioMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOneFormularioMutation, { data, loading, error }] = useUpdateOneFormularioMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateOneFormularioMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneFormularioMutation, UpdateOneFormularioMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOneFormularioMutation, UpdateOneFormularioMutationVariables>(UpdateOneFormularioDocument, options);
+      }
+export type UpdateOneFormularioMutationHookResult = ReturnType<typeof useUpdateOneFormularioMutation>;
+export type UpdateOneFormularioMutationResult = Apollo.MutationResult<UpdateOneFormularioMutation>;
+export type UpdateOneFormularioMutationOptions = Apollo.BaseMutationOptions<UpdateOneFormularioMutation, UpdateOneFormularioMutationVariables>;
+export const DeleteOneFormularioDocument = gql`
+    mutation deleteOneFormulario($input: DeleteOneFormulariosInput!) {
+  deleteOneFormulario(input: $input) {
+    id
+  }
+}
+    `;
+export type DeleteOneFormularioMutationFn = Apollo.MutationFunction<DeleteOneFormularioMutation, DeleteOneFormularioMutationVariables>;
+
+/**
+ * __useDeleteOneFormularioMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneFormularioMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneFormularioMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneFormularioMutation, { data, loading, error }] = useDeleteOneFormularioMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDeleteOneFormularioMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneFormularioMutation, DeleteOneFormularioMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOneFormularioMutation, DeleteOneFormularioMutationVariables>(DeleteOneFormularioDocument, options);
+      }
+export type DeleteOneFormularioMutationHookResult = ReturnType<typeof useDeleteOneFormularioMutation>;
+export type DeleteOneFormularioMutationResult = Apollo.MutationResult<DeleteOneFormularioMutation>;
+export type DeleteOneFormularioMutationOptions = Apollo.BaseMutationOptions<DeleteOneFormularioMutation, DeleteOneFormularioMutationVariables>;
 export const CreateOneModuloDocument = gql`
     mutation createOneModulo($input: CreateOneModuloTypeInput!) {
   CreateOneModulo(input: $input) {
@@ -2722,6 +3696,204 @@ export function useDeleteOneModuloMutation(baseOptions?: Apollo.MutationHookOpti
 export type DeleteOneModuloMutationHookResult = ReturnType<typeof useDeleteOneModuloMutation>;
 export type DeleteOneModuloMutationResult = Apollo.MutationResult<DeleteOneModuloMutation>;
 export type DeleteOneModuloMutationOptions = Apollo.BaseMutationOptions<DeleteOneModuloMutation, DeleteOneModuloMutationVariables>;
+export const CreateOnePerguntaDocument = gql`
+    mutation createOnePergunta($input: CreateOnePerguntasInput!) {
+  createOnePergunta(input: $input) {
+    id
+  }
+}
+    `;
+export type CreateOnePerguntaMutationFn = Apollo.MutationFunction<CreateOnePerguntaMutation, CreateOnePerguntaMutationVariables>;
+
+/**
+ * __useCreateOnePerguntaMutation__
+ *
+ * To run a mutation, you first call `useCreateOnePerguntaMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOnePerguntaMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOnePerguntaMutation, { data, loading, error }] = useCreateOnePerguntaMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateOnePerguntaMutation(baseOptions?: Apollo.MutationHookOptions<CreateOnePerguntaMutation, CreateOnePerguntaMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOnePerguntaMutation, CreateOnePerguntaMutationVariables>(CreateOnePerguntaDocument, options);
+      }
+export type CreateOnePerguntaMutationHookResult = ReturnType<typeof useCreateOnePerguntaMutation>;
+export type CreateOnePerguntaMutationResult = Apollo.MutationResult<CreateOnePerguntaMutation>;
+export type CreateOnePerguntaMutationOptions = Apollo.BaseMutationOptions<CreateOnePerguntaMutation, CreateOnePerguntaMutationVariables>;
+export const UpdateOnePerguntaDocument = gql`
+    mutation updateOnePergunta($input: UpdateOnePerguntasInput!) {
+  updateOnePergunta(input: $input) {
+    id
+  }
+}
+    `;
+export type UpdateOnePerguntaMutationFn = Apollo.MutationFunction<UpdateOnePerguntaMutation, UpdateOnePerguntaMutationVariables>;
+
+/**
+ * __useUpdateOnePerguntaMutation__
+ *
+ * To run a mutation, you first call `useUpdateOnePerguntaMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOnePerguntaMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOnePerguntaMutation, { data, loading, error }] = useUpdateOnePerguntaMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateOnePerguntaMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOnePerguntaMutation, UpdateOnePerguntaMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOnePerguntaMutation, UpdateOnePerguntaMutationVariables>(UpdateOnePerguntaDocument, options);
+      }
+export type UpdateOnePerguntaMutationHookResult = ReturnType<typeof useUpdateOnePerguntaMutation>;
+export type UpdateOnePerguntaMutationResult = Apollo.MutationResult<UpdateOnePerguntaMutation>;
+export type UpdateOnePerguntaMutationOptions = Apollo.BaseMutationOptions<UpdateOnePerguntaMutation, UpdateOnePerguntaMutationVariables>;
+export const DeleteOnePerguntaDocument = gql`
+    mutation deleteOnePergunta($input: DeleteOnePerguntasInput!) {
+  deleteOnePergunta(input: $input) {
+    id
+  }
+}
+    `;
+export type DeleteOnePerguntaMutationFn = Apollo.MutationFunction<DeleteOnePerguntaMutation, DeleteOnePerguntaMutationVariables>;
+
+/**
+ * __useDeleteOnePerguntaMutation__
+ *
+ * To run a mutation, you first call `useDeleteOnePerguntaMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOnePerguntaMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOnePerguntaMutation, { data, loading, error }] = useDeleteOnePerguntaMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDeleteOnePerguntaMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOnePerguntaMutation, DeleteOnePerguntaMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOnePerguntaMutation, DeleteOnePerguntaMutationVariables>(DeleteOnePerguntaDocument, options);
+      }
+export type DeleteOnePerguntaMutationHookResult = ReturnType<typeof useDeleteOnePerguntaMutation>;
+export type DeleteOnePerguntaMutationResult = Apollo.MutationResult<DeleteOnePerguntaMutation>;
+export type DeleteOnePerguntaMutationOptions = Apollo.BaseMutationOptions<DeleteOnePerguntaMutation, DeleteOnePerguntaMutationVariables>;
+export const CreateOneRespostaDocument = gql`
+    mutation createOneResposta($input: CreateOneRespostasInput!) {
+  createOneResposta(input: $input) {
+    id
+  }
+}
+    `;
+export type CreateOneRespostaMutationFn = Apollo.MutationFunction<CreateOneRespostaMutation, CreateOneRespostaMutationVariables>;
+
+/**
+ * __useCreateOneRespostaMutation__
+ *
+ * To run a mutation, you first call `useCreateOneRespostaMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneRespostaMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneRespostaMutation, { data, loading, error }] = useCreateOneRespostaMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateOneRespostaMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneRespostaMutation, CreateOneRespostaMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOneRespostaMutation, CreateOneRespostaMutationVariables>(CreateOneRespostaDocument, options);
+      }
+export type CreateOneRespostaMutationHookResult = ReturnType<typeof useCreateOneRespostaMutation>;
+export type CreateOneRespostaMutationResult = Apollo.MutationResult<CreateOneRespostaMutation>;
+export type CreateOneRespostaMutationOptions = Apollo.BaseMutationOptions<CreateOneRespostaMutation, CreateOneRespostaMutationVariables>;
+export const UpdateOneRespostaDocument = gql`
+    mutation updateOneResposta($input: UpdateOneRespostasInput!) {
+  updateOneResposta(input: $input) {
+    id
+  }
+}
+    `;
+export type UpdateOneRespostaMutationFn = Apollo.MutationFunction<UpdateOneRespostaMutation, UpdateOneRespostaMutationVariables>;
+
+/**
+ * __useUpdateOneRespostaMutation__
+ *
+ * To run a mutation, you first call `useUpdateOneRespostaMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneRespostaMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOneRespostaMutation, { data, loading, error }] = useUpdateOneRespostaMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateOneRespostaMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneRespostaMutation, UpdateOneRespostaMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOneRespostaMutation, UpdateOneRespostaMutationVariables>(UpdateOneRespostaDocument, options);
+      }
+export type UpdateOneRespostaMutationHookResult = ReturnType<typeof useUpdateOneRespostaMutation>;
+export type UpdateOneRespostaMutationResult = Apollo.MutationResult<UpdateOneRespostaMutation>;
+export type UpdateOneRespostaMutationOptions = Apollo.BaseMutationOptions<UpdateOneRespostaMutation, UpdateOneRespostaMutationVariables>;
+export const DeleteOneRespostaDocument = gql`
+    mutation deleteOneResposta($input: DeleteOneRespostasInput!) {
+  deleteOneResposta(input: $input) {
+    id
+  }
+}
+    `;
+export type DeleteOneRespostaMutationFn = Apollo.MutationFunction<DeleteOneRespostaMutation, DeleteOneRespostaMutationVariables>;
+
+/**
+ * __useDeleteOneRespostaMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneRespostaMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneRespostaMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneRespostaMutation, { data, loading, error }] = useDeleteOneRespostaMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDeleteOneRespostaMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneRespostaMutation, DeleteOneRespostaMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOneRespostaMutation, DeleteOneRespostaMutationVariables>(DeleteOneRespostaDocument, options);
+      }
+export type DeleteOneRespostaMutationHookResult = ReturnType<typeof useDeleteOneRespostaMutation>;
+export type DeleteOneRespostaMutationResult = Apollo.MutationResult<DeleteOneRespostaMutation>;
+export type DeleteOneRespostaMutationOptions = Apollo.BaseMutationOptions<DeleteOneRespostaMutation, DeleteOneRespostaMutationVariables>;
 export const CreateOneTurmaDocument = gql`
     mutation createOneTurma($input: CreateOneTurmaTypeInput!) {
   CreateOneTurma(input: $input) {
@@ -3052,7 +4224,6 @@ export const CursosDocument = gql`
         nome
         updatedAt
         icone
-        url
       }
     }
     pageInfo {
@@ -3150,6 +4321,163 @@ export type CursosModuloSelectQueryHookResult = ReturnType<typeof useCursosModul
 export type CursosModuloSelectLazyQueryHookResult = ReturnType<typeof useCursosModuloSelectLazyQuery>;
 export type CursosModuloSelectSuspenseQueryHookResult = ReturnType<typeof useCursosModuloSelectSuspenseQuery>;
 export type CursosModuloSelectQueryResult = Apollo.QueryResult<CursosModuloSelectQuery, CursosModuloSelectQueryVariables>;
+export const FormularioDocument = gql`
+    query Formulario($id: Int!) {
+  formulario(id: $id) {
+    id
+    nome
+    modulo {
+      titulo
+      id
+      curso {
+        id
+        nome
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useFormularioQuery__
+ *
+ * To run a query within a React component, call `useFormularioQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFormularioQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFormularioQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useFormularioQuery(baseOptions: Apollo.QueryHookOptions<FormularioQuery, FormularioQueryVariables> & ({ variables: FormularioQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FormularioQuery, FormularioQueryVariables>(FormularioDocument, options);
+      }
+export function useFormularioLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FormularioQuery, FormularioQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FormularioQuery, FormularioQueryVariables>(FormularioDocument, options);
+        }
+export function useFormularioSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<FormularioQuery, FormularioQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<FormularioQuery, FormularioQueryVariables>(FormularioDocument, options);
+        }
+export type FormularioQueryHookResult = ReturnType<typeof useFormularioQuery>;
+export type FormularioLazyQueryHookResult = ReturnType<typeof useFormularioLazyQuery>;
+export type FormularioSuspenseQueryHookResult = ReturnType<typeof useFormularioSuspenseQuery>;
+export type FormularioQueryResult = Apollo.QueryResult<FormularioQuery, FormularioQueryVariables>;
+export const FormulariosDocument = gql`
+    query Formularios($filter: FormulariosFilter, $paging: CursorPaging!, $sorting: [FormulariosSort!]!) {
+  formularios(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        id
+        nome
+        modulo {
+          titulo
+          id
+          curso {
+            id
+            nome
+          }
+        }
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __useFormulariosQuery__
+ *
+ * To run a query within a React component, call `useFormulariosQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFormulariosQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFormulariosQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      paging: // value for 'paging'
+ *      sorting: // value for 'sorting'
+ *   },
+ * });
+ */
+export function useFormulariosQuery(baseOptions: Apollo.QueryHookOptions<FormulariosQuery, FormulariosQueryVariables> & ({ variables: FormulariosQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FormulariosQuery, FormulariosQueryVariables>(FormulariosDocument, options);
+      }
+export function useFormulariosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FormulariosQuery, FormulariosQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FormulariosQuery, FormulariosQueryVariables>(FormulariosDocument, options);
+        }
+export function useFormulariosSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<FormulariosQuery, FormulariosQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<FormulariosQuery, FormulariosQueryVariables>(FormulariosDocument, options);
+        }
+export type FormulariosQueryHookResult = ReturnType<typeof useFormulariosQuery>;
+export type FormulariosLazyQueryHookResult = ReturnType<typeof useFormulariosLazyQuery>;
+export type FormulariosSuspenseQueryHookResult = ReturnType<typeof useFormulariosSuspenseQuery>;
+export type FormulariosQueryResult = Apollo.QueryResult<FormulariosQuery, FormulariosQueryVariables>;
+export const FormulariosSelectDocument = gql`
+    query FormulariosSelect($filter: FormulariosFilter, $paging: CursorPaging!, $sorting: [FormulariosSort!]!) {
+  formularios(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        id
+        nome
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useFormulariosSelectQuery__
+ *
+ * To run a query within a React component, call `useFormulariosSelectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFormulariosSelectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFormulariosSelectQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      paging: // value for 'paging'
+ *      sorting: // value for 'sorting'
+ *   },
+ * });
+ */
+export function useFormulariosSelectQuery(baseOptions: Apollo.QueryHookOptions<FormulariosSelectQuery, FormulariosSelectQueryVariables> & ({ variables: FormulariosSelectQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FormulariosSelectQuery, FormulariosSelectQueryVariables>(FormulariosSelectDocument, options);
+      }
+export function useFormulariosSelectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FormulariosSelectQuery, FormulariosSelectQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FormulariosSelectQuery, FormulariosSelectQueryVariables>(FormulariosSelectDocument, options);
+        }
+export function useFormulariosSelectSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<FormulariosSelectQuery, FormulariosSelectQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<FormulariosSelectQuery, FormulariosSelectQueryVariables>(FormulariosSelectDocument, options);
+        }
+export type FormulariosSelectQueryHookResult = ReturnType<typeof useFormulariosSelectQuery>;
+export type FormulariosSelectLazyQueryHookResult = ReturnType<typeof useFormulariosSelectLazyQuery>;
+export type FormulariosSelectSuspenseQueryHookResult = ReturnType<typeof useFormulariosSelectSuspenseQuery>;
+export type FormulariosSelectQueryResult = Apollo.QueryResult<FormulariosSelectQuery, FormulariosSelectQueryVariables>;
 export const ModuloDocument = gql`
     query Modulo($id: Int!) {
   modulo(id: $id) {
@@ -3305,6 +4633,81 @@ export type ModulosSelectQueryHookResult = ReturnType<typeof useModulosSelectQue
 export type ModulosSelectLazyQueryHookResult = ReturnType<typeof useModulosSelectLazyQuery>;
 export type ModulosSelectSuspenseQueryHookResult = ReturnType<typeof useModulosSelectSuspenseQuery>;
 export type ModulosSelectQueryResult = Apollo.QueryResult<ModulosSelectQuery, ModulosSelectQueryVariables>;
+export const PerguntasDocument = gql`
+    query Perguntas($filter: PerguntasFilter, $paging: CursorPaging!, $sorting: [PerguntasSort!]!) {
+  perguntas(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        id
+        descricao
+        multiEscolha
+        tipo
+        formularioId
+        formulario {
+          nome
+          id
+          modulo {
+            titulo
+            id
+            curso {
+              id
+              nome
+            }
+          }
+        }
+        respostas {
+          descricao
+          id
+          perguntaId
+          resposta
+          selecionada
+        }
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __usePerguntasQuery__
+ *
+ * To run a query within a React component, call `usePerguntasQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePerguntasQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePerguntasQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      paging: // value for 'paging'
+ *      sorting: // value for 'sorting'
+ *   },
+ * });
+ */
+export function usePerguntasQuery(baseOptions: Apollo.QueryHookOptions<PerguntasQuery, PerguntasQueryVariables> & ({ variables: PerguntasQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PerguntasQuery, PerguntasQueryVariables>(PerguntasDocument, options);
+      }
+export function usePerguntasLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PerguntasQuery, PerguntasQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PerguntasQuery, PerguntasQueryVariables>(PerguntasDocument, options);
+        }
+export function usePerguntasSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<PerguntasQuery, PerguntasQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<PerguntasQuery, PerguntasQueryVariables>(PerguntasDocument, options);
+        }
+export type PerguntasQueryHookResult = ReturnType<typeof usePerguntasQuery>;
+export type PerguntasLazyQueryHookResult = ReturnType<typeof usePerguntasLazyQuery>;
+export type PerguntasSuspenseQueryHookResult = ReturnType<typeof usePerguntasSuspenseQuery>;
+export type PerguntasQueryResult = Apollo.QueryResult<PerguntasQuery, PerguntasQueryVariables>;
 export const TurmaDocument = gql`
     query Turma($id: Int!) {
   turma(id: $id) {

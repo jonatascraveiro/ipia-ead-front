@@ -35,7 +35,7 @@ query Cursos(
         nome
         updatedAt
         icone 
-        url
+       # url
       }
     }
     pageInfo {

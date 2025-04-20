@@ -53,6 +53,16 @@ const menuOpcoes: NavItem[] = [
     icon: <Users2 />,
     path: ROTAS.ALUNOS,
   },
+  {
+    name: 'Formularios',
+    icon: <BookPlus />,
+    path: ROTAS.FORMULARIO,
+  },
+  {
+    name: 'Perguntas',
+    icon: <BookPlus />,
+    path: ROTAS.PERGUNTA,
+  },
   // {
   //   name: 'Usuários',
   //   icon: <User />,

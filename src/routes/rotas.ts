@@ -18,6 +18,16 @@ const ROTAS = {
   CURSO_VISUALIZAR: '/curso/:id',
   CURSO_EDITAR: '/curso/:id/editar',
 
+  FORMULARIO: '/formulario',
+  FORMULARIO_CRIAR: '/formulario/criar',
+  FORMULARIO_VISUALIZAR: '/formulario/:id',
+  FORMULARIO_EDITAR: '/formulario/:id/editar',
+
+  PERGUNTA: '/pergunta',
+  PERGUNTA_CRIAR: '/pergunta/criar',
+  PERGUNTA_VISUALIZAR: '/pergunta/:id',
+  PERGUNTA_EDITAR: '/pergunta/:id/editar',
+
   MODULO: '/modulo',
   MODULO_CRIAR: '/modulo/criar',
   MODULO_VISUALIZAR: '/modulo/:id',

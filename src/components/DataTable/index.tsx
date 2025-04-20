@@ -68,7 +68,7 @@ export default function DataTable<T>({
   })
 
   return (
-    <div>
+    <div className="overflow-x-auto ">
       <Table>
         <TableHeader className="border-gray-100 dark:border-gray-800 border-y">
           {table.getHeaderGroups().map((headerGroup) => (

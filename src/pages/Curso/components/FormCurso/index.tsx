@@ -2,6 +2,7 @@ import { InputField } from '@/components/form/InputField'
 import { Button } from '@/components/ui/button'
 
 import { CheckboxField } from '@/components/form/CheckboxField'
+import { InputFileField } from '@/components/form/InputFileField'
 import { Form } from '@/components/ui/form'
 import type { CursoQuery } from '@/gql/generated/graphql'
 import { Link } from 'react-router'
@@ -53,11 +54,11 @@ function FormCurso({
           />
         </div>
         <div className="col-span-6  ">
-          <InputField
+          <InputFileField
             disabled={disabled}
-            label="Imagem do fundo do card"
-            placeholder="Url da imagem"
-            name="url"
+            label="Imagem de fundo do card do curso"
+            name="imagem"
+            urlPreview={curso?.url}
           />
         </div>
 

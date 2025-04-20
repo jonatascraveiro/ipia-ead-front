@@ -1,18 +1,17 @@
-import { CellTextarea } from '@/components/DataTable/CellTextarea'
 import { ColumnAction } from '@/components/DataTable/ColumnAction'
-import type { CursoType } from '@/types/curso'
+import type { FormularioType } from '@/types/formulario'
 import type { ColumnDef } from '@tanstack/react-table'
 import { Eye, Pencil } from 'lucide-react'
 
 type Acoes = {
-  visualizar: (data: CursoType) => void
-  editar: (data: CursoType) => void
+  visualizar: (data: FormularioType) => void
+  editar: (data: FormularioType) => void
 }
 
 export const getColumns = ({
-  visualizar,
   editar,
-}: Acoes): ColumnDef<CursoType>[] => {
+  visualizar,
+}: Acoes): ColumnDef<FormularioType>[] => {
   return [
     {
       accessorFn: (row) => row.id,
@@ -22,32 +21,28 @@ export const getColumns = ({
     },
     {
       accessorFn: (row) => row.nome,
-      accessorKey: 'nome',
-      header: () => <span>Nome</span>,
+      accessorKey: 'Nome',
+      header: () => <span>Titulo</span>,
     },
+
     {
-      accessorKey: 'descricao',
-      header: () => <span>Descrição</span>,
-      minSize: 600,
-      cell: ({ row }) => <CellTextarea>{row.original.descricao}</CellTextarea>,
-    },
-    {
-      accessorFn: (row) => row.ativo,
-      accessorKey: 'ativo',
-      header: () => <span>Status</span>,
+      accessorFn: (row) => row.moduloId,
+      accessorKey: 'moduloId',
+      header: () => <span>Curso</span>,
       cell: ({ row }) => {
-        return <div>{row.original?.ativo ? 'Ativo' : 'Inativo'}</div>
+        return <div>{row.original?.modulo?.titulo}</div>
       },
     },
 
     {
       accessorFn: (row) => row.id,
-      ...ColumnAction<CursoType>({
+      ...ColumnAction<FormularioType>({
         actions: [
           {
             label: 'Visualizar',
             icon: <Eye className="h-6 w-6" />,
             onClick: (row) => visualizar(row),
+            omit: () => true,
           },
           {
             label: 'Editar',

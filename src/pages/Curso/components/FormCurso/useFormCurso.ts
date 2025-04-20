@@ -19,7 +19,7 @@ export const useFormCurso = ({ curso }: { curso?: CursoQuery['curso'] }) => {
       nome: curso?.nome || '',
       descricao: curso?.descricao || '',
       ativo: !!curso?.ativo as boolean,
-      url: curso?.url || '',
+      imagem: undefined,
       icone: curso?.icone || '',
     },
   })
@@ -27,13 +27,15 @@ export const useFormCurso = ({ curso }: { curso?: CursoQuery['curso'] }) => {
   const [criar] = useCreateOneCursoMutation()
   const [editar] = useUpdateOneCursoMutation()
   const onSubmit = (data: CursoSchema) => {
-    if (data.id) {
+    const { imagem, id } = data
+    data.imagem = undefined
+    data.id = undefined
+    if (id) {
       editar({
         variables: {
-          input: {
-            id: data.id,
-            update: data,
-          },
+          id: id,
+          update: { ...data },
+          arquivo: imagem || undefined,
         },
 
         onCompleted() {
@@ -45,9 +47,8 @@ export const useFormCurso = ({ curso }: { curso?: CursoQuery['curso'] }) => {
     }
     criar({
       variables: {
-        input: {
-          cursoType: data,
-        },
+        arquivo: imagem,
+        input: data,
       },
 
       onCompleted() {

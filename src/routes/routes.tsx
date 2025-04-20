@@ -15,9 +15,15 @@ import { CursoPage } from '@/pages/Curso/CursoPage'
 import { AlunosPage } from '@/pages/Aluno/AlunosPage'
 import { EditarCursoPage } from '@/pages/Curso/EditarCursoPage'
 import { VisualizarCursoPage } from '@/pages/Curso/VisualizarCursoPage'
+import { CriarFormularioPage } from '@/pages/Formulario/CriarFormularioPage'
+import { EditarFormularioPage } from '@/pages/Formulario/EditarFormularioPage'
+import { FormularioPage } from '@/pages/Formulario/FormularioPage'
 import { CriarModuloPage } from '@/pages/Modulo/CriarModuloPage'
 import { EditarModuloPage } from '@/pages/Modulo/EditarModuloPage'
 import { ModuloPage } from '@/pages/Modulo/ModuloPage'
+import { CriarPerguntaPage } from '@/pages/Pergunta/CriarPerguntaPage'
+import { EditarPerguntaPage } from '@/pages/Pergunta/EditarPerguntaPage'
+import { PerguntaPage } from '@/pages/Pergunta/PerguntaPage'
 import { CriarTurmaPage } from '@/pages/Turma/CriarTurmaPage'
 import { EditarTurmaPage } from '@/pages/Turma/EditarTurmaPage'
 import { TurmaPage } from '@/pages/Turma/TurmaPage'
@@ -42,6 +48,20 @@ export default function AppRoutes() {
           <Route path={ROTAS.DASHBOARD} index element={<Dashboard />} />
 
           <Route path={ROTAS.ALUNOS} element={<AlunosPage />} />
+
+          <Route path={ROTAS.FORMULARIO} element={<FormularioPage />} />
+          <Route
+            path={ROTAS.FORMULARIO_CRIAR}
+            element={<CriarFormularioPage />}
+          />
+          {/* <Route
+            path={ROTAS.FORMULARIO_VISUALIZAR}
+            element={<VisualizarFormu />}
+          /> */}
+          <Route
+            path={ROTAS.FORMULARIO_EDITAR}
+            element={<EditarFormularioPage />}
+          />
 
           <Route path={ROTAS.AULA} element={<AulaPage />} />
           <Route path={ROTAS.AULA_CRIAR} element={<CriarAulaPage />} />
@@ -75,6 +95,14 @@ export default function AppRoutes() {
             element={<VisualizarCursoPage />}
           />
           <Route path={ROTAS.CURSO_EDITAR} element={<EditarCursoPage />} />
+
+          <Route path={ROTAS.PERGUNTA} element={<PerguntaPage />} />
+          <Route path={ROTAS.PERGUNTA_CRIAR} element={<CriarPerguntaPage />} />
+
+          <Route
+            path={ROTAS.PERGUNTA_EDITAR}
+            element={<EditarPerguntaPage />}
+          />
 
           <Route path={ROTAS.MODULO} element={<ModuloPage />} />
           <Route path={ROTAS.MODULO_CRIAR} element={<CriarModuloPage />} />
