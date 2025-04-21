@@ -25,6 +25,9 @@ export const getColumns = (): ColumnDef<AlunoType>[] => {
                 </div>
               )
             })}
+            {row.original.inscricoes?.length === 0 && (
+              <span className="text-gray-400">Nenhuma turma matriculada</span>
+            )}
           </div>
         )
       },
