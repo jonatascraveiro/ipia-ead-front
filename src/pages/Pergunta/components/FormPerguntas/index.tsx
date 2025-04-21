@@ -36,7 +36,7 @@ function FormPerguntas({
         </div>
         <div className="col-span-12  ">
           <InputField
-            // disabled
+            disabled
             label="Tipo"
             placeholder="Tipo da pergunta"
             name="tipo"
@@ -49,6 +49,10 @@ function FormPerguntas({
             label="Curso"
             description="Selecione o curso "
             options={cursoOptions}
+            onChange={() => {
+              form.setValue('moduloId', 0)
+              form.setValue('formularioId', 0)
+            }}
             name="cursoId"
           />
         </div>

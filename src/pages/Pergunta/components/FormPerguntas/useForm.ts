@@ -26,10 +26,10 @@ export const useFormPerguntas = ({
     defaultValues: {
       id: pergunta?.id || undefined,
       descricao: pergunta?.descricao || '',
-      formularioId: pergunta?.formulario?.id || 1,
-      moduloId: pergunta?.formulario?.modulo?.id || 1,
-      cursoId: pergunta?.formulario?.modulo?.curso?.id || 1,
-      tipo: pergunta?.tipo || 'selecao unica',
+      formularioId: pergunta?.formulario?.id || 0,
+      moduloId: pergunta?.formulario?.modulo?.id || 0,
+      cursoId: pergunta?.formulario?.modulo?.curso?.id || 0,
+      tipo: pergunta?.tipo || 'Múltipla escolha',
       multiEscolha: pergunta?.multiEscolha ?? false,
     },
   })
@@ -90,9 +90,14 @@ export const useFormPerguntas = ({
         direction: SortDirection.Asc,
       },
     },
-    skip: !form.watch('moduloId'),
+    skip: !form.watch('moduloId') || !form.watch('cursoId'),
   })
-
+  console.log(
+    formularios,
+    form.watch('moduloId'),
+    form.watch('cursoId'),
+    form.watch('formularioId'),
+  )
   const formularioOptions =
     formularios?.formularios.edges.map(({ node }) => ({
       value: node.id,

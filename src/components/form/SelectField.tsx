@@ -27,6 +27,7 @@ type SelectFieldProps = {
   placeholder?: string
   description?: string
   disabled?: boolean
+  onChange?: (value: number | string) => void
 }
 
 export const SelectField = ({
@@ -36,6 +37,7 @@ export const SelectField = ({
   placeholder,
   description,
   disabled = false,
+  onChange,
 }: SelectFieldProps) => {
   const { control } = useFormContext()
   return (
@@ -50,7 +52,10 @@ export const SelectField = ({
             <Select
               {...field}
               disabled={disabled}
-              onValueChange={(value) => field.onChange(+value)}
+              onValueChange={(value) => {
+                field.onChange(+value)
+                onChange?.(value)
+              }}
               value={String(field.value || '')}
             >
               <FormControl className="w-full">
@@ -59,14 +64,21 @@ export const SelectField = ({
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                {options.map((option) => (
-                  <SelectItem
-                    key={String(option.value)}
-                    value={String(option.value)}
-                  >
-                    {option.label}
-                  </SelectItem>
-                ))}
+                <>
+                  {options.map((option) => (
+                    <SelectItem
+                      key={String(option.value)}
+                      value={String(option.value)}
+                    >
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                  {options.length === 0 && (
+                    <SelectItem value="disabled" disabled>
+                      Nenhum valor encontrado
+                    </SelectItem>
+                  )}
+                </>
               </SelectContent>
             </Select>
             {description && <FormDescription>{description}</FormDescription>}

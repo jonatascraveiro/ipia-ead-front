@@ -69,6 +69,9 @@ function FormAula({
             description="Selecione o curso "
             options={cursoOptions}
             name="cursoId"
+            onChange={() => {
+              form.setValue('moduloId', 0)
+            }}
           />
         </div>
 
