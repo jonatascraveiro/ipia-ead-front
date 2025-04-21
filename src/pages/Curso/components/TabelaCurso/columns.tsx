@@ -15,12 +15,6 @@ export const getColumns = ({
 }: Acoes): ColumnDef<CursoType>[] => {
   return [
     {
-      accessorFn: (row) => row.id,
-      accessorKey: 'id',
-      header: () => <span>#</span>,
-      maxSize: 50,
-    },
-    {
       accessorFn: (row) => row.nome,
       accessorKey: 'nome',
       header: () => <span>Nome</span>,

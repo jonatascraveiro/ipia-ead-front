@@ -3,6 +3,7 @@ import {
   useDeleteOneRespostaMutation,
 } from '@/gql/generated/graphql'
 
+import { apolloClient } from '@/services/Apollo/client'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -19,7 +20,7 @@ export const useTabelaRespostas = ({
     perguntaId: number
     resposta?: string | null
     selecionada?: boolean | null
-    respostaCerta: boolean
+    correta: boolean
   }[]
   handleEditarForm: (data: Respostas) => void
 }) => {
@@ -41,6 +42,7 @@ export const useTabelaRespostas = ({
         },
         onCompleted() {
           toast.success('Resposta deletada com sucesso')
+          apolloClient.cache.evict({ fieldName: 'pergunta' })
         },
       })
     },
@@ -48,7 +50,6 @@ export const useTabelaRespostas = ({
   )
   const handleEditar = useCallback(
     (data: Respostas) => {
-      console.log(data)
       handleEditarForm(data)
     },
     [handleEditarForm],
@@ -62,7 +63,7 @@ export const useTabelaRespostas = ({
       }),
     [handleEditar, handleDeletar],
   )
-  console.log(respostas)
+
   return {
     tabela: {
       columns,

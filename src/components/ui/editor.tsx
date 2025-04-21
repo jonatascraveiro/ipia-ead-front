@@ -38,7 +38,7 @@ type Props = {
 
 import 'ckeditor5/ckeditor5.css'
 
-function EditorTeste({ data, setData, minHeight = '300px' }: Props) {
+function EditorFormularioHtml({ data, setData, minHeight = '300px' }: Props) {
   return (
     <CKEditor
       editor={ClassicEditor}
@@ -186,4 +186,4 @@ function EditorTeste({ data, setData, minHeight = '300px' }: Props) {
   )
 }
 
-export default EditorTeste
+export { EditorFormularioHtml }

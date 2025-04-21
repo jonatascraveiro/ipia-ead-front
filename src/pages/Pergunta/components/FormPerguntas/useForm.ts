@@ -29,7 +29,7 @@ export const useFormPerguntas = ({
       formularioId: pergunta?.formulario?.id || 1,
       moduloId: pergunta?.formulario?.modulo?.id || 1,
       cursoId: pergunta?.formulario?.modulo?.curso?.id || 1,
-      tipo: pergunta?.tipo || 'texto',
+      tipo: pergunta?.tipo || 'selecao unica',
       multiEscolha: pergunta?.multiEscolha ?? false,
     },
   })

@@ -2,6 +2,39 @@
 import { gql } from '@apollo/client'
 
 gql`
+query Pergunta($id: Int!) {
+  pergunta(id: $id)   {        
+         id
+        descricao  
+        multiEscolha
+        tipo
+        formularioId
+        formulario{
+          nome
+          id
+          modulo{
+          titulo
+          id
+          curso{
+            id
+            nome
+          }
+        }
+        }
+       
+        respostas {
+            descricao
+            id
+            perguntaId
+            correta          
+          }      
+      
+    }
+}
+
+`
+
+gql`
 query Perguntas(
   $filter: PerguntasFilter
   $paging: CursorPaging!
@@ -32,11 +65,8 @@ query Perguntas(
             descricao
             id
             perguntaId
-            resposta
-            selecionada            
-          }
-       
-       
+            correta          
+          }      
       }
     }
     pageInfo {

@@ -14,12 +14,6 @@ export const getColumns = ({
 }: Acoes): ColumnDef<PerguntaType>[] => {
   return [
     {
-      accessorFn: (row) => row.id,
-      accessorKey: 'id',
-      header: () => <span>#</span>,
-      maxSize: 50,
-    },
-    {
       accessorFn: (row) => row.descricao,
       accessorKey: 'descricao',
       header: () => <span>Pergunta</span>,
@@ -35,7 +29,7 @@ export const getColumns = ({
     },
     {
       accessorFn: (row) => row.formulario.id,
-      accessorKey: 'formularioId',
+      accessorKey: 'moduloId',
       header: () => <span>Módulo</span>,
       cell: ({ row }) => {
         return <div>{row.original?.formulario.modulo.titulo}</div>

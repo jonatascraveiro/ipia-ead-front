@@ -1,22 +1,69 @@
-import { CardAlunos } from './components/CardAlunos'
-import { CardAulas } from './components/CardAulas'
-import { CardCursos } from './components/CardCursos'
-import { CardModulos } from './components/CardModulos'
+import { CardDashboard } from '@/components/common/CardDashboard'
+import { useDashboardQuery } from '@/gql/generated/graphql'
+import {
+  ClockAlert,
+  DiamondPlus,
+  FileQuestion,
+  Group,
+  ListTodo,
+  NotebookText,
+  SpellCheck,
+  User2,
+} from 'lucide-react'
 
 function Dashboard() {
+  const { data, loading } = useDashboardQuery()
+  console.log(data, loading)
   const dashboard = {
-    alunos: { quantidade: 100, percentual: 200.6 },
-    cursos: { quantidade: 2, percentual: 12.6 },
-    modulos: { quantidade: 6, percentual: 20.6 },
-    aulas: { quantidade: 10, percentual: 26.6 },
+    alunos: {
+      quantidade: data?.alunos.totalCount || 0,
+      title: 'Alunos Cadastrados',
+      icon: <User2 />,
+    },
+    cursos: {
+      quantidade: data?.cursos.totalCount || 0,
+      title: 'Cursos Cadastrados',
+      icon: <DiamondPlus />,
+    },
+    modulos: {
+      quantidade: data?.modulos.totalCount || 0,
+      title: 'Módulos Cadastrados',
+      icon: <Group />,
+    },
+    aulas: {
+      quantidade: data?.aulas.totalCount || 0,
+      title: 'Aulas Cadastradas',
+      icon: <ClockAlert />,
+    },
+    turmas: {
+      quantidade: data?.turmas.totalCount || 0,
+      title: 'Turmas Cadastradas',
+      icon: <SpellCheck />,
+    },
+
+    formulario: {
+      quantidade: data?.formularios.totalCount || 0,
+      title: 'Formulários Cadastradas',
+      icon: <FileQuestion />,
+    },
+    perguntas: {
+      quantidade: data?.perguntas.totalCount || 0,
+      title: 'Perguntas Cadastradas',
+      icon: <ListTodo />,
+    },
+    inscricao: {
+      quantidade: data?.inscricoes.totalCount || 0,
+      title: 'Incrições Cadastradas',
+      icon: <NotebookText />,
+    },
   }
+  const dashboardArray = Object.entries(dashboard)
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-4 md:gap-6">
-      <CardAlunos {...dashboard.alunos} />
-      <CardCursos {...dashboard.cursos} />
-      <CardModulos {...dashboard.modulos} />
-      <CardAulas {...dashboard.aulas} />
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4 md:gap-6">
+      {dashboardArray.map(([key, card]) => (
+        <CardDashboard key={key} {...card} loading={loading} />
+      ))}
     </div>
   )
 }

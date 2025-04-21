@@ -17,9 +17,9 @@ export function AulaPage({ biblioteca = false }: { biblioteca?: boolean }) {
     <Page>
       {biblioteca && (
         <Page.Header>
-          <Page.Titulo>Aulas Complementares</Page.Titulo>
+          <Page.Titulo>Aula Complementar</Page.Titulo>
           <Link to={ROTAS.AULA_COMPLEMENTAR_CRIAR}>
-            <Button>Nova Aula</Button>
+            <Button>Nova Aula Complementar</Button>
           </Link>
         </Page.Header>
       )}
@@ -38,7 +38,11 @@ export function AulaPage({ biblioteca = false }: { biblioteca?: boolean }) {
           className="grid grid-cols-12 gap-4 md:gap-6 mb-2 mx-2"
         >
           <div className=" xl:col-span-3 col-span-12 md:col-span-6 ">
-            <InputField label="Nome" placeholder="nome do Aula" name="nome" />
+            <InputField
+              label="Nome"
+              placeholder="Buscar por nome"
+              name="nome"
+            />
           </div>
 
           <div className=" xl:col-span-3 col-span-12 md:col-span-6 flex  items-end gap-3">

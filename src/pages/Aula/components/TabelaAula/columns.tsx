@@ -14,12 +14,6 @@ export const getColumns = ({
 }: Acoes): ColumnDef<AulaType>[] => {
   return [
     {
-      accessorFn: (row) => row.id,
-      accessorKey: 'id',
-      header: () => <span>#</span>,
-      maxSize: 50,
-    },
-    {
       accessorFn: (row) => row.titulo,
       accessorKey: 'titulo',
       header: () => <span>Nome da aula</span>,

@@ -18,6 +18,7 @@ import { VisualizarCursoPage } from '@/pages/Curso/VisualizarCursoPage'
 import { CriarFormularioPage } from '@/pages/Formulario/CriarFormularioPage'
 import { EditarFormularioPage } from '@/pages/Formulario/EditarFormularioPage'
 import { FormularioPage } from '@/pages/Formulario/FormularioPage'
+import { InscricaoPage } from '@/pages/Inscricao/IncricaoPage'
 import { CriarModuloPage } from '@/pages/Modulo/CriarModuloPage'
 import { EditarModuloPage } from '@/pages/Modulo/EditarModuloPage'
 import { ModuloPage } from '@/pages/Modulo/ModuloPage'
@@ -48,6 +49,8 @@ export default function AppRoutes() {
           <Route path={ROTAS.DASHBOARD} index element={<Dashboard />} />
 
           <Route path={ROTAS.ALUNOS} element={<AlunosPage />} />
+
+          <Route path={ROTAS.INSCRICOES} element={<InscricaoPage />} />
 
           <Route path={ROTAS.FORMULARIO} element={<FormularioPage />} />
           <Route

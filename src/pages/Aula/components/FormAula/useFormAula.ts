@@ -28,7 +28,7 @@ export const useFormAula = ({
       titulo: aula?.titulo || '',
       descricao: aula?.descricao || '',
       ordem: aula?.ordem || 1,
-      duracao: aula?.duracao || 1,
+      duracao: aula?.duracao || 30,
       moduloId: aula?.modulo?.id || undefined,
       cursoId: aula?.modulo?.curso?.id || undefined,
 
@@ -101,7 +101,7 @@ export const useFormAula = ({
         },
 
         onCompleted() {
-          toast.success('Aula editado com sucesso')
+          toast.success('Aula editada com sucesso')
           handleVoltar()
         },
       })
@@ -122,7 +122,7 @@ export const useFormAula = ({
       },
 
       onCompleted() {
-        toast.success('Aula criado com sucesso')
+        toast.success('Aula criada com sucesso')
         handleVoltar()
       },
     })

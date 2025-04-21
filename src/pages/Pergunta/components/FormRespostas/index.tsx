@@ -20,22 +20,25 @@ function FormResposta({
   resposta,
   respostas,
 }: {
-  resposta?: { id: number; descricao: string; perguntaId: number }
+  resposta?: {
+    id: number
+    descricao: string
+    perguntaId: number
+    correta: boolean
+  }
   respostas?: {
     __typename?: 'Respostas'
     descricao: string
     id: number
     perguntaId: number
-    resposta?: string | null
-    selecionada?: boolean | null
-    respostaCerta: boolean
+    correta: boolean
   }[]
 }) {
+  const { isOpen, toggleModal, openModal } = useModal()
   const { form, onSubmit } = useFormPerguntas({
     resposta,
+    toggleModal: toggleModal,
   })
-
-  const { isOpen, toggleModal, openModal } = useModal()
 
   const { tabela } = useTabelaRespostas({
     respostas,
@@ -44,7 +47,7 @@ function FormResposta({
         descricao: data?.descricao,
         id: data?.id,
         perguntaId: data?.perguntaId,
-        respostaCerta: String(data?.respostaCerta),
+        correta: String(data?.correta),
       })
       openModal()
     },
@@ -55,7 +58,7 @@ function FormResposta({
       descricao: '',
       id: undefined,
       perguntaId: resposta?.perguntaId,
-      respostaCerta: 'false',
+      correta: 'false',
     })
     toggleModal()
   }
@@ -83,7 +86,7 @@ function FormResposta({
             <div className="col-span-2  ">
               <FormField
                 control={form.control}
-                name="respostaCerta"
+                name="correta"
                 render={({ field }) => (
                   <FormItem className="space-y-3">
                     <FormLabel>Resposta.</FormLabel>

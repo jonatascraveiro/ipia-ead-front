@@ -18,7 +18,10 @@ export function EditarAulaPage({
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo>Editar Aula {biblioteca && 'Complementar'}</Page.Titulo>
+        <Page.Titulo>
+          {' '}
+          {biblioteca ? 'Editar Aula Complementar' : 'Editar Aula'}
+        </Page.Titulo>
       </Page.Header>
       {loading && <SkeletonForm />}
       {!loading && data?.aula && (

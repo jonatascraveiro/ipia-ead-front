@@ -15,19 +15,13 @@ export const getColumns = ({
 }: Acoes): ColumnDef<TurmaType>[] => {
   return [
     {
-      accessorFn: (row) => row.id,
-      accessorKey: 'id',
-      header: () => <span>#</span>,
-      maxSize: 50,
-    },
-    {
       accessorFn: (row) => row.nome,
       accessorKey: 'nome',
       header: () => <span>Nome da turma</span>,
     },
     {
       accessorKey: 'inicio',
-      header: () => <span>Inicio - Fim</span>,
+      header: () => <span>Período</span>,
       cell: ({ row }) => {
         return (
           <div>
@@ -36,6 +30,11 @@ export const getColumns = ({
           </div>
         )
       },
+    },
+    {
+      accessorFn: (row) => row.duracao,
+      accessorKey: 'duracao',
+      header: () => <span>Duração</span>,
     },
     {
       accessorFn: (row) => row.curso.nome,

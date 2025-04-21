@@ -15,7 +15,14 @@ query Alunos(
         nome      
         cpf
         email
-        
+        inscricoes{
+          id
+          status
+          turma{
+            nome
+            id
+          }
+        }
       }
     }    
      pageInfo {

@@ -16,14 +16,17 @@ import { type TurmaSchema, schema } from './schema'
 export const useFormTurma = ({ turma }: { turma?: TurmaQuery['turma'] }) => {
   const navigate = useNavigate()
 
+  const dataInicio = turma?.inicio ? new Date(turma?.inicio) : new Date()
+  const dataFim = turma?.fim ? new Date(turma?.fim) : new Date()
+
   const form = useForm<z.input<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
       id: turma?.id || undefined,
       nome: turma?.nome || '',
       descricao: turma?.descricao || '',
-      inicio: new Date(turma?.inicio || ''),
-      fim: new Date(turma?.fim || ''),
+      inicio: dataInicio,
+      fim: dataFim,
       cursoId: turma?.cursoId || undefined,
       duracao: turma?.duracao || '10',
     },

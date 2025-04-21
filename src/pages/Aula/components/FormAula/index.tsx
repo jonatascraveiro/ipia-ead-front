@@ -3,10 +3,11 @@ import { Button } from '@/components/ui/button'
 
 import { Form } from '@/components/ui/form'
 
-import EditorTeste from '@/components/ui/editor'
+import { EditorFormularioHtml } from '@/components/ui/editor'
 
 import { InputNumberField } from '@/components/form/InputNumberField'
 import { SelectField } from '@/components/form/SelectField'
+import { Label } from '@/components/ui/label'
 import type { AulaQuery } from '@/gql/generated/graphql'
 import { Link } from 'react-router'
 import { useFormAula } from './useFormAula'
@@ -36,7 +37,8 @@ function FormAula({
           />
         </div>
         <div className="col-span-12  ">
-          <EditorTeste
+          <Label className="mb-2"> Conteúdo da aula</Label>
+          <EditorFormularioHtml
             data={form.getValues('descricao')}
             setData={(val) => {
               form.setValue('descricao', val)
@@ -74,7 +76,7 @@ function FormAula({
           <SelectField
             disabled={disabled}
             label="Módulo"
-            description="Modulo da aula"
+            description="Módulo da aula"
             options={moduloOptions}
             name="moduloId"
           />

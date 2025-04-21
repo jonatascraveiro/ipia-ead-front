@@ -7,6 +7,7 @@ import {
   Group,
   Home,
   ListTodo,
+  NotebookText,
   SpellCheck,
   Users2,
 } from 'lucide-react'
@@ -23,40 +24,34 @@ const menuOpcoes: NavItem[] = [
   {
     icon: <Home />,
     name: 'Inicio',
-    path: '/',
-  },
-  {
-    name: 'Turmas',
-    icon: <SpellCheck />,
-    path: ROTAS.TURMA,
+    path: ROTAS.DASHBOARD,
   },
   {
     name: 'Cursos',
     icon: <DiamondPlus />,
     path: ROTAS.CURSO,
   },
+
   {
-    name: 'Modulos',
+    name: 'Módulos',
     icon: <Group />,
     path: ROTAS.MODULO,
   },
+
   {
     name: 'Aulas',
     icon: <ClockAlert />,
     path: ROTAS.AULA,
   },
+
   {
-    name: 'Material Complementar',
+    name: 'Aula Complementar',
     icon: <BookPlus />,
     path: ROTAS.AULA_COMPLEMENTAR,
   },
+
   {
-    name: 'Alunos',
-    icon: <Users2 />,
-    path: ROTAS.ALUNOS,
-  },
-  {
-    name: 'Formularios',
+    name: 'Formulários',
     icon: <FileQuestion />,
     path: ROTAS.FORMULARIO,
   },
@@ -65,15 +60,23 @@ const menuOpcoes: NavItem[] = [
     icon: <ListTodo />,
     path: ROTAS.PERGUNTA,
   },
-  // {
-  //   name: 'Usuários',
-  //   icon: <User />,
-  //   path: ROTAS.USUARIO,
-  //   // subItems: [
-  //   //   { name: 'Listar Usuários', path: ROTAS.USUARIO },
-  //   //   { name: 'Criar Usuário', path: ROTAS.USUARIO_CRIAR },
-  //   // ],
-  // },
+
+  {
+    name: 'Turmas',
+    icon: <SpellCheck />,
+    path: ROTAS.TURMA,
+  },
+
+  {
+    name: 'Alunos',
+    icon: <Users2 />,
+    path: ROTAS.ALUNOS,
+  },
+  {
+    name: 'Inscrições',
+    icon: <NotebookText />,
+    path: ROTAS.INSCRICOES,
+  },
 ]
 
 export { menuOpcoes }

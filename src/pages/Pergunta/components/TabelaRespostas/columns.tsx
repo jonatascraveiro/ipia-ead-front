@@ -12,7 +12,7 @@ type Acoes = {
 export const getColumns = ({
   editar,
   deletar,
-}: Acoes): ColumnDef<Respostas & { respostaCerta: boolean }>[] => {
+}: Acoes): ColumnDef<Respostas & { correta: boolean }>[] => {
   return [
     {
       accessorFn: (row) => row.id,
@@ -31,9 +31,9 @@ export const getColumns = ({
     },
 
     {
-      accessorKey: 'respostaCerta',
+      accessorKey: 'correta',
       header: () => <span>Correto</span>,
-      cell: ({ row }) => <>{row.original.respostaCerta ? 'Sim' : 'Nao'}</>,
+      cell: ({ row }) => <>{row.original.correta ? 'Sim' : 'Nao'}</>,
       maxSize: 20,
     },
 

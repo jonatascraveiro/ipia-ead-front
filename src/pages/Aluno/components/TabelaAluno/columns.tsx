@@ -1,17 +1,8 @@
+import type { AlunoType } from '@/gql/generated/graphql'
 import type { ColumnDef } from '@tanstack/react-table'
 
-export const getColumns = (): ColumnDef<{
-  id: number
-  nome: string
-  email: string
-  cpf: string
-}>[] => {
+export const getColumns = (): ColumnDef<AlunoType>[] => {
   return [
-    {
-      accessorKey: 'id',
-      header: () => <span>#</span>,
-      maxSize: 50,
-    },
     {
       accessorKey: 'nome',
       header: () => <span>Nome</span>,
@@ -19,6 +10,24 @@ export const getColumns = (): ColumnDef<{
     {
       accessorKey: 'email',
       header: () => <span>Email</span>,
+    },
+    {
+      accessorKey: 'turmasMatriculadas',
+      header: () => <span>Turmas matriculadas</span>,
+      cell: ({ row }) => {
+        return (
+          <div className="flex flex-col gap-2">
+            {row.original.inscricoes?.map((inscricao) => {
+              return (
+                <div key={inscricao.id}>
+                  {inscricao.turma?.nome} -{' '}
+                  {inscricao.status ? 'Matriculado' : 'Pré-matriculado'}{' '}
+                </div>
+              )
+            })}
+          </div>
+        )
+      },
     },
     {
       accessorKey: 'cpf',

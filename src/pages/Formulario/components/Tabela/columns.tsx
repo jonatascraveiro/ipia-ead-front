@@ -14,12 +14,6 @@ export const getColumns = ({
 }: Acoes): ColumnDef<FormularioType>[] => {
   return [
     {
-      accessorFn: (row) => row.id,
-      accessorKey: 'id',
-      header: () => <span>#</span>,
-      maxSize: 50,
-    },
-    {
       accessorFn: (row) => row.nome,
       accessorKey: 'Nome',
       header: () => <span>Titulo</span>,

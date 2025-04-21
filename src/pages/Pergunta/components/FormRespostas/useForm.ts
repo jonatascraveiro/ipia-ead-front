@@ -2,6 +2,7 @@ import {
   useCreateOneRespostaMutation,
   useUpdateOneRespostaMutation,
 } from '@/gql/generated/graphql'
+import { apolloClient } from '@/services/Apollo/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -9,13 +10,15 @@ import { type RespostaSchema, schema } from './schema'
 
 export const useFormPerguntas = ({
   resposta,
+  toggleModal,
 }: {
   resposta?: {
     id: number
     descricao: string
     perguntaId: number
-    respostaCerta: boolean
+    correta: boolean
   }
+  toggleModal: () => void
 }) => {
   const form = useForm<RespostaSchema>({
     resolver: zodResolver(schema),
@@ -23,7 +26,7 @@ export const useFormPerguntas = ({
       id: resposta?.id || undefined,
       descricao: resposta?.descricao || '',
       perguntaId: resposta?.perguntaId || 1,
-      respostaCerta: String(resposta?.respostaCerta) || 'false',
+      correta: String(resposta?.correta) || 'false',
     },
   })
 
@@ -37,7 +40,6 @@ export const useFormPerguntas = ({
           input: {
             id: data.id,
             update: {
-              id: data.id,
               descricao: data.descricao,
               perguntaId: data.perguntaId,
             },
@@ -46,6 +48,8 @@ export const useFormPerguntas = ({
 
         onCompleted() {
           toast.success('Resposta editada com sucesso')
+          toggleModal()
+          apolloClient.cache.evict({ fieldName: 'pergunta' })
         },
       })
       return
@@ -56,11 +60,14 @@ export const useFormPerguntas = ({
           respostas: {
             descricao: data.descricao,
             perguntaId: data.perguntaId,
+            correta: data.correta === 'true',
           },
         },
       },
       onCompleted() {
         toast.success('Resposta criada com sucesso')
+        toggleModal()
+        apolloClient.cache.evict({ fieldName: 'pergunta' })
       },
     })
   }

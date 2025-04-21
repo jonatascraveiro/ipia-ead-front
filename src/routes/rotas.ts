@@ -3,6 +3,8 @@ const ROTAS = {
 
   ALUNOS: '/alunos',
 
+  INSCRICOES: '/inscricoes',
+
   AULA: '/aula',
   AULA_CRIAR: '/aula/criar',
   AULA_VISUALIZAR: '/aula/:id',
