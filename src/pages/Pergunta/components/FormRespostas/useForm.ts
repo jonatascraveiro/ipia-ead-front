@@ -9,13 +9,21 @@ import { type RespostaSchema, schema } from './schema'
 
 export const useFormPerguntas = ({
   resposta,
-}: { resposta?: { id: number; descricao: string; perguntaId: number } }) => {
+}: {
+  resposta?: {
+    id: number
+    descricao: string
+    perguntaId: number
+    respostaCerta: boolean
+  }
+}) => {
   const form = useForm<RespostaSchema>({
     resolver: zodResolver(schema),
     defaultValues: {
       id: resposta?.id || undefined,
       descricao: resposta?.descricao || '',
       perguntaId: resposta?.perguntaId || 1,
+      respostaCerta: String(resposta?.respostaCerta) || 'false',
     },
   })
 

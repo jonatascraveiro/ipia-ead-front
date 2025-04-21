@@ -11,15 +11,17 @@ import { useNavigate } from 'react-router'
 import { getColumns } from './columns'
 
 export const useTabelaPerguntas = () => {
-  const form = useForm<{ nome: string }>({
+  const form = useForm<{ nome: string; modulo: string; formulario: string }>({
     defaultValues: {
       nome: '',
+      modulo: '',
+      formulario: '',
     },
   })
 
   const { limparPaginacao, paging } = useCursorPaginacao()
 
-  const nome = form.getValues('nome')
+  const [nome, formulario] = form.getValues(['nome', 'formulario'])
 
   const limparFiltro = () => {
     form.reset()
@@ -48,6 +50,7 @@ export const useTabelaPerguntas = () => {
     variables: {
       filter: {
         descricao: { iLike: `%${nome || ''}%` },
+        formulario: { nome: { iLike: `%${formulario || ''}%` } },
       },
       paging,
       sorting: {

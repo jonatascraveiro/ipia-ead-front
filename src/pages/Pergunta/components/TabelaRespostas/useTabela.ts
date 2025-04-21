@@ -19,6 +19,7 @@ export const useTabelaRespostas = ({
     perguntaId: number
     resposta?: string | null
     selecionada?: boolean | null
+    respostaCerta: boolean
   }[]
   handleEditarForm: (data: Respostas) => void
 }) => {
@@ -61,7 +62,7 @@ export const useTabelaRespostas = ({
       }),
     [handleEditar, handleDeletar],
   )
-
+  console.log(respostas)
   return {
     tabela: {
       columns,

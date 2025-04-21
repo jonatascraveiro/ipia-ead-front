@@ -38,6 +38,7 @@ type Props<T> = {
   pagination?: PageInfo
   setPagination?: React.Dispatch<React.SetStateAction<PaginationState>>
   loading?: boolean
+  omitPagination?: boolean
 }
 
 export default function DataTable<T>({
@@ -45,6 +46,7 @@ export default function DataTable<T>({
   columns,
   pagination,
   setPagination,
+  omitPagination = false,
   loading = false,
 }: Props<T>) {
   const dataQuery = {
@@ -140,8 +142,7 @@ export default function DataTable<T>({
           )}
         </TableBody>
       </Table>
-
-      <Pagination table={table} pagination={pagination} />
+      {!omitPagination && <Pagination table={table} pagination={pagination} />}
     </div>
   )
 }

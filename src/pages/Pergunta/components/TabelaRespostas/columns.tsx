@@ -12,7 +12,7 @@ type Acoes = {
 export const getColumns = ({
   editar,
   deletar,
-}: Acoes): ColumnDef<Respostas>[] => {
+}: Acoes): ColumnDef<Respostas & { respostaCerta: boolean }>[] => {
   return [
     {
       accessorFn: (row) => row.id,
@@ -24,14 +24,21 @@ export const getColumns = ({
     {
       accessorFn: (row) => row.descricao,
       accessorKey: 'descricao',
-      header: () => <span>Pergunta</span>,
+      header: () => <span>Resposta</span>,
 
       cell: ({ row }) => <CellTextarea>{row.original.descricao}</CellTextarea>,
       minSize: 600,
     },
 
     {
-      accessorKey: 'id',
+      accessorKey: 'respostaCerta',
+      header: () => <span>Correto</span>,
+      cell: ({ row }) => <>{row.original.respostaCerta ? 'Sim' : 'Nao'}</>,
+      maxSize: 20,
+    },
+
+    {
+      accessorKey: 'acoes',
       header: () => <span>Ações</span>,
       size: 30,
       maxSize: 30,

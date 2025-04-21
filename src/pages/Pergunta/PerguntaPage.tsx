@@ -26,9 +26,16 @@ export function PerguntaPage() {
         >
           <div className=" xl:col-span-3 col-span-12 md:col-span-6 ">
             <InputField
-              label="Nome"
-              placeholder="Nome do Pergunta"
+              label="Descrição"
+              placeholder="Descrição da Pergunta"
               name="nome"
+            />
+          </div>
+          <div className=" xl:col-span-3 col-span-12 md:col-span-6 ">
+            <InputField
+              label="Formulário"
+              placeholder="Nome do formulário"
+              name="formulario"
             />
           </div>
 

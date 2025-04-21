@@ -28,7 +28,7 @@ export const getColumns = ({
     {
       accessorFn: (row) => row.moduloId,
       accessorKey: 'moduloId',
-      header: () => <span>Curso</span>,
+      header: () => <span>Módulo</span>,
       cell: ({ row }) => {
         return <div>{row.original?.modulo?.titulo}</div>
       },

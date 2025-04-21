@@ -34,12 +34,14 @@ export function EditarPerguntaPage() {
       id: 3,
       descricao: 'Resposta 3',
       perguntaId: 1,
+      respostaCerta: true,
     },
     {
       id: 2,
       descricao:
         'A principal diferença entre AngularJS (ou Angular 1) e Angular 4 está na arquitetura e tecnologia usada. Eles são frameworks completamente diferentes, apesar do nome parecido. Aqui vai um resumo das principais diferenças e um exemplo de código para mostrar isso na prática.A principal diferença entre AngularJS (ou Angular 1) e Angular 4 está na arquitetura e tecnologia usada. Eles são frameworks completamente diferentes, apesar do nome parecido. Aqui vai um resumo das principais diferenças e um exemplo de código para mostrar isso na prática.',
       perguntaId: 1,
+      respostaCerta: false,
     },
   ]
 

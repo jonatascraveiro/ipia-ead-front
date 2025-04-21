@@ -3,8 +3,10 @@ import {
   BookPlus,
   ClockAlert,
   DiamondPlus,
+  FileQuestion,
   Group,
   Home,
+  ListTodo,
   SpellCheck,
   Users2,
 } from 'lucide-react'
@@ -55,12 +57,12 @@ const menuOpcoes: NavItem[] = [
   },
   {
     name: 'Formularios',
-    icon: <BookPlus />,
+    icon: <FileQuestion />,
     path: ROTAS.FORMULARIO,
   },
   {
     name: 'Perguntas',
-    icon: <BookPlus />,
+    icon: <ListTodo />,
     path: ROTAS.PERGUNTA,
   },
   // {

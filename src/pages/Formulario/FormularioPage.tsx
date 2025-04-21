@@ -27,8 +27,15 @@ export function FormularioPage() {
           <div className=" xl:col-span-3 col-span-12 md:col-span-6 ">
             <InputField
               label="Titulo"
-              placeholder="Titulo do Modulo"
+              placeholder="Titulo do Formulário"
               name="nome"
+            />
+          </div>
+          <div className=" xl:col-span-3 col-span-12 md:col-span-6 ">
+            <InputField
+              label="Módulo"
+              placeholder="Nome do módulo"
+              name="modulo"
             />
           </div>
 

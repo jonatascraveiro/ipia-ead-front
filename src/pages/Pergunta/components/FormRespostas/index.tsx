@@ -1,9 +1,17 @@
 import { Button } from '@/components/ui/button'
 
-import { Form } from '@/components/ui/form'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
 
 import DataTable from '@/components/DataTable'
 import { TextareaField } from '@/components/form/TextareaField'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { useModal } from '@/hooks/useModal'
 import { useTabelaRespostas } from '../TabelaRespostas/useTabela'
 import { useFormPerguntas } from './useForm'
@@ -20,13 +28,14 @@ function FormResposta({
     perguntaId: number
     resposta?: string | null
     selecionada?: boolean | null
+    respostaCerta: boolean
   }[]
 }) {
   const { form, onSubmit } = useFormPerguntas({
     resposta,
   })
 
-  const { isOpen, toggleModal } = useModal()
+  const { isOpen, toggleModal, openModal } = useModal()
 
   const { tabela } = useTabelaRespostas({
     respostas,
@@ -35,8 +44,9 @@ function FormResposta({
         descricao: data?.descricao,
         id: data?.id,
         perguntaId: data?.perguntaId,
+        respostaCerta: String(data?.respostaCerta),
       })
-      toggleModal()
+      openModal()
     },
   })
 
@@ -45,6 +55,7 @@ function FormResposta({
       descricao: '',
       id: undefined,
       perguntaId: resposta?.perguntaId,
+      respostaCerta: 'false',
     })
     toggleModal()
   }
@@ -53,20 +64,52 @@ function FormResposta({
     <>
       {!isOpen && (
         <Button onClick={toggleFormulario} className="my-2">
-          Nova reposta
+          Adicionar resposta
         </Button>
       )}
       {isOpen && (
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit((data) => onSubmit(data))}
-            className="mx-2 mb-2 grid grid-cols-12 gap-4 md:gap-6"
+            className="m-4 mb-2 grid grid-cols-12 gap-4 md:gap-6 items-center"
           >
-            <div className="col-span-10  ">
+            <div className="col-span-8  ">
               <TextareaField
-                label="Resposta"
+                label="Descrição"
                 placeholder="descrição da resposta"
                 name="descricao"
+              />
+            </div>
+            <div className="col-span-2  ">
+              <FormField
+                control={form.control}
+                name="respostaCerta"
+                render={({ field }) => (
+                  <FormItem className="space-y-3">
+                    <FormLabel>Resposta.</FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        value={String(field.value)}
+                        className="flex flex-col space-y-1"
+                      >
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="true" />
+                          </FormControl>
+                          <FormLabel className="font-normal">Correta</FormLabel>
+                        </FormItem>
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="false" />
+                          </FormControl>
+                          <FormLabel className="font-normal">Errada</FormLabel>
+                        </FormItem>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
             </div>
 
@@ -85,7 +128,7 @@ function FormResposta({
         </Form>
       )}
 
-      <DataTable {...tabela} />
+      <DataTable omitPagination {...tabela} />
     </>
   )
 }
