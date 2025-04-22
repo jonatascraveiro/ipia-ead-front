@@ -56,7 +56,8 @@ function FormCurso({
         <div className="col-span-6  ">
           <InputFileField
             disabled={disabled}
-            label="Imagem de fundo do card do curso"
+            label="Imagem de fundo do card do curso (TAMANHO 1280x720px)"
+            description="Imagem deve ser no tamanho 1280x720px"
             name="imagem"
             urlPreview={curso?.url || undefined}
           />
