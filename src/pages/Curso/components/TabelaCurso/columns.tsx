@@ -1,17 +1,23 @@
 import { CellTextarea } from '@/components/DataTable/CellTextarea'
 import { ColumnAction } from '@/components/DataTable/ColumnAction'
+import { Icone } from '@/components/common/Icons'
 import type { CursoType } from '@/types/curso'
 import type { ColumnDef } from '@tanstack/react-table'
-import { Eye, Pencil } from 'lucide-react'
 
 type Acoes = {
   visualizar: (data: CursoType) => void
   editar: (data: CursoType) => void
+  modulo: (data: CursoType) => void
+  biblioteca: (data: CursoType) => void
+  turma: (data: CursoType) => void
 }
 
 export const getColumns = ({
   visualizar,
   editar,
+  modulo,
+  biblioteca,
+  turma,
 }: Acoes): ColumnDef<CursoType>[] => {
   return [
     {
@@ -40,13 +46,28 @@ export const getColumns = ({
         actions: [
           {
             label: 'Visualizar',
-            icon: <Eye className="h-6 w-6" />,
+            icon: <Icone.visualizar />,
             onClick: (row) => visualizar(row),
           },
           {
             label: 'Editar',
-            icon: <Pencil className="h-6 w-6" />,
+            icon: <Icone.editar />,
             onClick: (row) => editar(row),
+          },
+          {
+            label: 'Modulos',
+            icon: <Icone.modulo />,
+            onClick: (row) => modulo(row),
+          },
+          {
+            label: 'Biblioteca',
+            icon: <Icone.biblioteca />,
+            onClick: (row) => biblioteca(row),
+          },
+          {
+            label: 'Turma',
+            icon: <Icone.turmas />,
+            onClick: (row) => turma(row),
           },
         ],
       }),

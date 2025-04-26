@@ -5,13 +5,15 @@ export const schema = z.object({
   titulo: z
     .string({ required_error: 'Título é obrigatório' })
     .min(1, 'Título é obrigatório'),
-  descricao: z.string().optional(),
+  descricao: z
+    .string({ invalid_type_error: 'Descrição é obrigatório' })
+    .optional(),
   videoUrl: z
     .string({
       invalid_type_error: 'Formato inválido da URL do vídeo',
     })
     .optional(),
-  subModuloId: z
+  moduloId: z
     .number({ required_error: 'Modulo é obrigatório' })
     .min(1, 'Modulo é obrigatório'),
 

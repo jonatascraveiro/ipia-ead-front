@@ -1,5 +1,6 @@
 import { Page } from '@/components/Page'
 import { useCursoQuery } from '@/gql/generated/graphql'
+import { ROTAS } from '@/routes/rotas'
 import { useParams } from 'react-router'
 import { FormCurso } from './components/FormCurso'
 import { SkeletonForm } from './components/FormCurso/skeletonForm'
@@ -19,7 +20,9 @@ export function VisualizarCursoPage() {
         <Page.Titulo>Visualizar Curso</Page.Titulo>
       </Page.Header>
       {loading && <SkeletonForm />}
-      {!loading && data?.curso && <FormCurso disabled curso={data?.curso} />}
+      {!loading && data?.curso && (
+        <FormCurso disabled curso={data?.curso} urlVoltar={ROTAS.CURSO} />
+      )}
     </Page>
   )
 }

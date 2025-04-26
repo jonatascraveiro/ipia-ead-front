@@ -3,18 +3,32 @@ import { Page } from '@/components/Page'
 import { InputField } from '@/components/form/InputField'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
+import { useModuloQuery } from '@/gql/generated/graphql'
+import { ROTAS } from '@/routes/rotas'
 import { Search, Trash2Icon } from 'lucide-react'
-import { Link } from 'react-router'
+import { Link, generatePath, useParams } from 'react-router'
 import { useTabelaFormulario } from './components/Tabela/useTabela'
 
 export function FormularioPage() {
+  const moduloId = useParams().moduloId as string
+  const { data: modulo } = useModuloQuery({
+    variables: {
+      id: +moduloId,
+    },
+    skip: !moduloId,
+  })
+
   const { tabela, form, handleFilter, limparFiltro } = useTabelaFormulario()
 
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo>Formulários</Page.Titulo>
-        <Link to="/formulario/criar">
+        <Page.Titulo>Formulários do {modulo?.modulo?.titulo}</Page.Titulo>
+        <Link
+          to={generatePath(ROTAS.MODULO, {
+            cursoId: modulo?.modulo?.curso?.id,
+          })}
+        >
           <Button>Novo Formulário</Button>
         </Link>
       </Page.Header>

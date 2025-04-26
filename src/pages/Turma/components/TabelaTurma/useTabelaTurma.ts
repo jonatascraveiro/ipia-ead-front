@@ -4,13 +4,14 @@ import {
   useTurmasQuery,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
+import { ROTAS } from '@/routes/rotas'
 import type { TurmaType } from '@/types/turma'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router'
+import { generatePath, useNavigate } from 'react-router'
 import { getColumns } from './columns'
 
-export const useTabelaTurma = () => {
+export const useTabelaTurma = ({ cursoId }: { cursoId?: string }) => {
   const form = useForm<{ nome: string }>({
     defaultValues: {
       nome: '',
@@ -31,21 +32,22 @@ export const useTabelaTurma = () => {
   const navigate = useNavigate()
   const handleEditar = useCallback(
     (data: TurmaType) => {
-      navigate(`/turma/${data.id}/editar`)
+      navigate(generatePath(ROTAS.TURMA_EDITAR, { cursoId, id: data.id }))
     },
-    [navigate],
+    [cursoId, navigate],
   )
-  const handleVisualizar = useCallback(
-    (data: TurmaType) => {
-      navigate(`/turma/${data.id}`)
-    },
-    [navigate],
-  )
+  // const handleVisualizar = useCallback(
+  //   (data: TurmaType) => {
+  //     navigate(`/turma/${data.id}`)
+  //   },
+  //   [navigate],
+  // )
 
   const { data, loading } = useTurmasQuery({
     variables: {
       filter: {
         nome: { iLike: `%${nome || ''}%` },
+        cursoId: { eq: Number(cursoId) },
       },
       paging,
       sorting: {
@@ -58,10 +60,10 @@ export const useTabelaTurma = () => {
   const columns = useMemo(
     () =>
       getColumns({
-        visualizar: handleVisualizar,
+        // visualizar: handleVisualizar,
         editar: handleEditar,
       }),
-    [handleVisualizar, handleEditar],
+    [handleEditar],
   )
 
   return {

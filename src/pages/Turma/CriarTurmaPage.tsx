@@ -1,14 +1,25 @@
 import { Page } from '@/components/Page'
+import { useCursoQuery } from '@/gql/generated/graphql'
+import { ROTAS } from '@/routes/rotas'
+import { generatePath, useParams } from 'react-router'
 import { FormTurma } from './components/FormTurma'
 
 export function CriarTurmaPage() {
+  const cursoId = useParams().cursoId as string
+  const { data: curso } = useCursoQuery({
+    variables: {
+      id: +cursoId,
+    },
+    skip: !cursoId,
+  })
+
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo>Criar Turma</Page.Titulo>
+        <Page.Titulo>Criar Turma do curso {curso?.curso?.nome}</Page.Titulo>
       </Page.Header>
 
-      <FormTurma />
+      <FormTurma urlVoltar={generatePath(ROTAS.TURMA, { cursoId })} />
     </Page>
   )
 }

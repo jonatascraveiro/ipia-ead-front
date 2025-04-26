@@ -1,9 +1,6 @@
 import {
-  CursoTypeSortFields,
   type ModuloQuery,
-  SortDirection,
   useCreateOneModuloMutation,
-  useCursosModuloSelectQuery,
   useUpdateOneModuloMutation,
 } from '@/gql/generated/graphql'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,7 +11,13 @@ import { type ModuloSchema, schema } from './schema'
 
 export const useFormModulo = ({
   modulo,
-}: { modulo?: ModuloQuery['modulo'] }) => {
+  biblioteca,
+  urlVoltar,
+}: {
+  modulo?: ModuloQuery['modulo']
+  biblioteca: boolean
+  urlVoltar: string
+}) => {
   const navigate = useNavigate()
 
   const form = useForm<ModuloSchema>({
@@ -25,30 +28,30 @@ export const useFormModulo = ({
       descricao: modulo?.descricao || '',
       ordem: modulo?.ordem || 1,
       cursoId: modulo?.cursoId || 1,
-      biblioteca: modulo?.biblioteca ?? false,
+      biblioteca: biblioteca,
     },
   })
 
   const [criar] = useCreateOneModuloMutation()
   const [editar] = useUpdateOneModuloMutation()
 
-  const { data: cursos } = useCursosModuloSelectQuery({
-    variables: {
-      paging: {
-        first: 99,
-      },
-      sorting: {
-        field: CursoTypeSortFields.Nome,
-        direction: SortDirection.Asc,
-      },
-    },
-  })
+  // const { data: cursos } = useCursosModuloSelectQuery({
+  //   variables: {
+  //     paging: {
+  //       first: 99,
+  //     },
+  //     sorting: {
+  //       field: CursoTypeSortFields.Nome,
+  //       direction: SortDirection.Asc,
+  //     },
+  //   },
+  // })
 
-  const cursoOptions =
-    cursos?.cursos.edges.map(({ node }) => ({
-      value: node.id,
-      label: node.nome,
-    })) || []
+  // const cursoOptions =
+  //   cursos?.cursos.edges.map(({ node }) => ({
+  //     value: node.id,
+  //     label: node.nome,
+  //   })) || []
 
   const onSubmit = (data: ModuloSchema) => {
     if (data.id) {
@@ -67,8 +70,10 @@ export const useFormModulo = ({
         },
 
         onCompleted() {
-          toast.success('Módulo editado com sucesso')
-          navigate('/modulo')
+          toast.success(
+            `${biblioteca ? 'Biblioteca editada' : 'Módulo editado'}  com sucesso`,
+          )
+          navigate(urlVoltar)
         },
       })
       return
@@ -87,11 +92,13 @@ export const useFormModulo = ({
       },
 
       onCompleted() {
-        toast.success('Módulo criado com sucesso')
-        navigate('/modulo')
+        toast.success(
+          `${biblioteca ? 'Biblioteca criada' : 'Módulo criado'}  com sucesso`,
+        )
+        navigate(urlVoltar)
       },
     })
   }
 
-  return { form, onSubmit, cursoOptions }
+  return { form, onSubmit }
 }

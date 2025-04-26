@@ -332,21 +332,24 @@ export type AulaType = {
   /** data da exclusão do registro */
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   /** descricao do modulo */
-  descricao: Scalars['String']['output'];
+  descricao?: Maybe<Scalars['String']['output']>;
   /** video url do modulo */
   duracao: Scalars['Float']['output'];
   id: Scalars['Int']['output'];
   modulo?: Maybe<ModuloType>;
   /** id do modulo */
-  moduloId: Scalars['Float']['output'];
+  moduloId?: Maybe<Scalars['Float']['output']>;
   /** ordem do modulo */
   ordem: Scalars['Float']['output'];
+  subModulo?: Maybe<SubModuloType>;
+  /** id do sub modulo */
+  subModuloId?: Maybe<Scalars['Float']['output']>;
   /** titulo do modulo */
   titulo: Scalars['String']['output'];
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   /** video url da aula */
-  videoUrl: Scalars['String']['output'];
+  videoUrl?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -364,6 +367,7 @@ export type AulaTypeAggregateGroupBy = {
   id?: Maybe<Scalars['Int']['output']>;
   moduloId?: Maybe<Scalars['Float']['output']>;
   ordem?: Maybe<Scalars['Float']['output']>;
+  subModuloId?: Maybe<Scalars['Float']['output']>;
   titulo?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   videoUrl?: Maybe<Scalars['String']['output']>;
@@ -375,6 +379,7 @@ export type AulaTypeAvgAggregate = {
   id?: Maybe<Scalars['Float']['output']>;
   moduloId?: Maybe<Scalars['Float']['output']>;
   ordem?: Maybe<Scalars['Float']['output']>;
+  subModuloId?: Maybe<Scalars['Float']['output']>;
 };
 
 export type AulaTypeConnection = {
@@ -396,6 +401,7 @@ export type AulaTypeCountAggregate = {
   id?: Maybe<Scalars['Int']['output']>;
   moduloId?: Maybe<Scalars['Int']['output']>;
   ordem?: Maybe<Scalars['Int']['output']>;
+  subModuloId?: Maybe<Scalars['Int']['output']>;
   titulo?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
   videoUrl?: Maybe<Scalars['Int']['output']>;
@@ -416,6 +422,8 @@ export type AulaTypeDeleteResponse = {
   moduloId?: Maybe<Scalars['Float']['output']>;
   /** ordem do modulo */
   ordem?: Maybe<Scalars['Float']['output']>;
+  /** id do sub modulo */
+  subModuloId?: Maybe<Scalars['Float']['output']>;
   /** titulo do modulo */
   titulo?: Maybe<Scalars['String']['output']>;
   /** data atualização do registro */
@@ -444,6 +452,8 @@ export type AulaTypeFilter = {
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<AulaTypeFilter>>;
   ordem?: InputMaybe<NumberFieldComparison>;
+  subModulo?: InputMaybe<AulaTypeFilterSubModuloTypeFilter>;
+  subModuloId?: InputMaybe<NumberFieldComparison>;
   titulo?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   videoUrl?: InputMaybe<StringFieldComparison>;
@@ -479,6 +489,21 @@ export type AulaTypeFilterProgressoTypeFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
+export type AulaTypeFilterSubModuloTypeFilter = {
+  and?: InputMaybe<Array<AulaTypeFilterSubModuloTypeFilter>>;
+  arquivoId?: InputMaybe<NumberFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  mensagem?: InputMaybe<StringFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<AulaTypeFilterSubModuloTypeFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  url?: InputMaybe<StringFieldComparison>;
+};
+
 export type AulaTypeMaxAggregate = {
   __typename?: 'AulaTypeMaxAggregate';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
@@ -488,6 +513,7 @@ export type AulaTypeMaxAggregate = {
   id?: Maybe<Scalars['Int']['output']>;
   moduloId?: Maybe<Scalars['Float']['output']>;
   ordem?: Maybe<Scalars['Float']['output']>;
+  subModuloId?: Maybe<Scalars['Float']['output']>;
   titulo?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   videoUrl?: Maybe<Scalars['String']['output']>;
@@ -502,6 +528,7 @@ export type AulaTypeMinAggregate = {
   id?: Maybe<Scalars['Int']['output']>;
   moduloId?: Maybe<Scalars['Float']['output']>;
   ordem?: Maybe<Scalars['Float']['output']>;
+  subModuloId?: Maybe<Scalars['Float']['output']>;
   titulo?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   videoUrl?: Maybe<Scalars['String']['output']>;
@@ -521,6 +548,7 @@ export enum AulaTypeSortFields {
   Id = 'id',
   ModuloId = 'moduloId',
   Ordem = 'ordem',
+  SubModuloId = 'subModuloId',
   Titulo = 'titulo',
   UpdatedAt = 'updatedAt',
   VideoUrl = 'videoUrl'
@@ -532,6 +560,7 @@ export type AulaTypeSumAggregate = {
   id?: Maybe<Scalars['Float']['output']>;
   moduloId?: Maybe<Scalars['Float']['output']>;
   ordem?: Maybe<Scalars['Float']['output']>;
+  subModuloId?: Maybe<Scalars['Float']['output']>;
 };
 
 export type AuthAuloInput = {
@@ -577,12 +606,13 @@ export type CreateArquivo = {
 };
 
 export type CreateAulaInput = {
-  descricao: Scalars['String']['input'];
+  descricao?: InputMaybe<Scalars['String']['input']>;
   duracao: Scalars['Float']['input'];
-  moduloId: Scalars['Float']['input'];
+  moduloId?: InputMaybe<Scalars['Float']['input']>;
   ordem: Scalars['Float']['input'];
+  subModuloId?: InputMaybe<Scalars['Float']['input']>;
   titulo: Scalars['String']['input'];
-  videoUrl: Scalars['String']['input'];
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CreateCursoInput = {
@@ -667,6 +697,11 @@ export type CreateOneRespostasInput = {
   respostas: CreateRespostaInput;
 };
 
+export type CreateOneRespostasPerguntasInput = {
+  /** The record to create */
+  respostasPerguntas: CreateRespostaPerguntaInput;
+};
+
 export type CreateOneTurmaTypeInput = {
   /** The record to create */
   turmaType: CreateTurmaInput;
@@ -699,6 +734,30 @@ export type CreateRespostaInput = {
   perguntaId: Scalars['Float']['input'];
 };
 
+export type CreateRespostaPerguntaInput = {
+  /** Id do aluno */
+  aluno_id?: InputMaybe<Scalars['Float']['input']>;
+  /** Id do curso */
+  curso_id?: InputMaybe<Scalars['Float']['input']>;
+  /** Id do módulo */
+  modulo_id?: InputMaybe<Scalars['Float']['input']>;
+  /** Id da pergunta */
+  pergunta_id?: InputMaybe<Scalars['Float']['input']>;
+  /** Id da resposta */
+  resposta_id?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type CreateSubModuloInput = {
+  /** mensagem do modulo */
+  mensagem: Scalars['String']['input'];
+  /** id do modulo */
+  moduloId: Scalars['Float']['input'];
+  /** ordem do modulo */
+  ordem: Scalars['Float']['input'];
+  /** titulo do modulo */
+  titulo: Scalars['String']['input'];
+};
+
 export type CreateTurmaInput = {
   cursoId: Scalars['Float']['input'];
   descricao: Scalars['String']['input'];
@@ -728,6 +787,7 @@ export type CursoType = {
   modulos?: Maybe<Array<ModuloType>>;
   /** nome do curso */
   nome: Scalars['String']['output'];
+  turma?: Maybe<TurmaType>;
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   /** url da imagem do curso */
@@ -835,6 +895,7 @@ export type CursoTypeFilter = {
   modulos?: InputMaybe<CursoTypeFilterModuloTypeFilter>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<CursoTypeFilter>>;
+  turma?: InputMaybe<CursoTypeFilterTurmaTypeFilter>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   url?: InputMaybe<StringFieldComparison>;
 };
@@ -876,6 +937,21 @@ export type CursoTypeFilterProgressoTypeFilter = {
   inicio?: InputMaybe<DateFieldComparison>;
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<CursoTypeFilterProgressoTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type CursoTypeFilterTurmaTypeFilter = {
+  and?: InputMaybe<Array<CursoTypeFilterTurmaTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  duracao?: InputMaybe<StringFieldComparison>;
+  fim?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  inicio?: InputMaybe<DateFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<CursoTypeFilterTurmaTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -997,6 +1073,16 @@ export type DeleteOnePerguntasInput = {
 };
 
 export type DeleteOneRespostasInput = {
+  /** The id of the record to delete. */
+  id: Scalars['Int']['input'];
+};
+
+export type DeleteOneRespostasPerguntasInput = {
+  /** The id of the record to delete. */
+  id: Scalars['Int']['input'];
+};
+
+export type DeleteOneSubModuloTypeInput = {
   /** The id of the record to delete. */
   id: Scalars['Int']['input'];
 };
@@ -1390,6 +1476,7 @@ export type ModuloType = {
   modulosProgressos?: Maybe<Array<ProgressoType>>;
   /** ordem do modulo */
   ordem: Scalars['Float']['output'];
+  subModulos?: Maybe<Array<SubModuloType>>;
   /** titulo do modulo */
   titulo: Scalars['String']['output'];
   /** data atualização do registro */
@@ -1406,6 +1493,12 @@ export type ModuloTypeAulasArgs = {
 export type ModuloTypeModulosProgressosArgs = {
   filter?: ProgressoTypeFilter;
   sorting?: Array<ProgressoTypeSort>;
+};
+
+
+export type ModuloTypeSubModulosArgs = {
+  filter?: SubModuloTypeFilter;
+  sorting?: Array<SubModuloTypeSort>;
 };
 
 export type ModuloTypeAggregateGroupBy = {
@@ -1493,6 +1586,7 @@ export type ModuloTypeFilter = {
   modulosProgressos?: InputMaybe<ModuloTypeFilterProgressoTypeFilter>;
   or?: InputMaybe<Array<ModuloTypeFilter>>;
   ordem?: InputMaybe<NumberFieldComparison>;
+  subModulos?: InputMaybe<ModuloTypeFilterSubModuloTypeFilter>;
   titulo?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -1507,6 +1601,7 @@ export type ModuloTypeFilterAulaTypeFilter = {
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<ModuloTypeFilterAulaTypeFilter>>;
   ordem?: InputMaybe<NumberFieldComparison>;
+  subModuloId?: InputMaybe<NumberFieldComparison>;
   titulo?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   videoUrl?: InputMaybe<StringFieldComparison>;
@@ -1541,6 +1636,21 @@ export type ModuloTypeFilterProgressoTypeFilter = {
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<ModuloTypeFilterProgressoTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ModuloTypeFilterSubModuloTypeFilter = {
+  and?: InputMaybe<Array<ModuloTypeFilterSubModuloTypeFilter>>;
+  arquivoId?: InputMaybe<NumberFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  mensagem?: InputMaybe<StringFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<ModuloTypeFilterSubModuloTypeFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  url?: InputMaybe<StringFieldComparison>;
 };
 
 export type ModuloTypeMaxAggregate = {
@@ -1611,6 +1721,8 @@ export type Mutation = {
   createOneFormulario: Formularios;
   createOnePergunta: Perguntas;
   createOneResposta: Respostas;
+  createOneRespostaPergunta: RespostasPerguntas;
+  createOneSubModulo?: Maybe<SubModuloType>;
   deleteArquivo: ArquivoDeleteResponse;
   deleteAula: AulaTypeDeleteResponse;
   deleteCurso: CursoTypeDeleteResponse;
@@ -1618,6 +1730,8 @@ export type Mutation = {
   deleteOneFormulario: FormulariosDeleteResponse;
   deleteOnePergunta: PerguntasDeleteResponse;
   deleteOneResposta: RespostasDeleteResponse;
+  deleteOneRespostaPergunta: RespostasPerguntasDeleteResponse;
+  deleteOneSubModulo: SubModuloTypeDeleteResponse;
   deleteTurma: TurmaTypeDeleteResponse;
   deleteUsuario: UsuarioDtoDeleteResponse;
   login: AuthType;
@@ -1627,6 +1741,8 @@ export type Mutation = {
   updateOneFormulario: Formularios;
   updateOnePergunta: Perguntas;
   updateOneResposta: Respostas;
+  updateOneRespostaPergunta: RespostasPerguntas;
+  updateOneSubModulo?: Maybe<SubModuloType>;
   updateProgresso: ProgressoType;
 };
 
@@ -1717,6 +1833,17 @@ export type MutationCreateOneRespostaArgs = {
 };
 
 
+export type MutationCreateOneRespostaPerguntaArgs = {
+  input: CreateOneRespostasPerguntasInput;
+};
+
+
+export type MutationCreateOneSubModuloArgs = {
+  arquivo?: InputMaybe<Scalars['Upload']['input']>;
+  input: CreateSubModuloInput;
+};
+
+
 export type MutationDeleteArquivoArgs = {
   input: DeleteOneArquivoInput;
 };
@@ -1749,6 +1876,16 @@ export type MutationDeleteOnePerguntaArgs = {
 
 export type MutationDeleteOneRespostaArgs = {
   input: DeleteOneRespostasInput;
+};
+
+
+export type MutationDeleteOneRespostaPerguntaArgs = {
+  input: DeleteOneRespostasPerguntasInput;
+};
+
+
+export type MutationDeleteOneSubModuloArgs = {
+  input: DeleteOneSubModuloTypeInput;
 };
 
 
@@ -1796,6 +1933,18 @@ export type MutationUpdateOnePerguntaArgs = {
 
 export type MutationUpdateOneRespostaArgs = {
   input: UpdateOneRespostasInput;
+};
+
+
+export type MutationUpdateOneRespostaPerguntaArgs = {
+  input: UpdateOneRespostasPerguntasInput;
+};
+
+
+export type MutationUpdateOneSubModuloArgs = {
+  arquivo?: InputMaybe<Scalars['Upload']['input']>;
+  id: Scalars['Float']['input'];
+  update: UpdateSubModuloInput;
 };
 
 
@@ -2012,6 +2161,13 @@ export type PerguntasSumAggregate = {
   id?: Maybe<Scalars['Float']['output']>;
 };
 
+export type ProgressoCursoInput = {
+  /** id do curso */
+  cursoId: Scalars['Float']['input'];
+  /** id da turma */
+  turmaId: Scalars['Float']['input'];
+};
+
 export type ProgressoType = {
   __typename?: 'ProgressoType';
   aluno?: Maybe<AlunoType>;
@@ -2037,6 +2193,8 @@ export type ProgressoType = {
   modulo?: Maybe<ModuloType>;
   /** Id do modulo */
   moduloId?: Maybe<Scalars['Float']['output']>;
+  subModulo?: Maybe<SubModuloType>;
+  turma?: Maybe<TurmaType>;
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -2113,6 +2271,8 @@ export type ProgressoTypeFilter = {
   modulo?: InputMaybe<ProgressoTypeFilterModuloTypeFilter>;
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<ProgressoTypeFilter>>;
+  subModulo?: InputMaybe<ProgressoTypeFilterSubModuloTypeFilter>;
+  turma?: InputMaybe<ProgressoTypeFilterTurmaTypeFilter>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -2139,6 +2299,7 @@ export type ProgressoTypeFilterAulaTypeFilter = {
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<ProgressoTypeFilterAulaTypeFilter>>;
   ordem?: InputMaybe<NumberFieldComparison>;
+  subModuloId?: InputMaybe<NumberFieldComparison>;
   titulo?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   videoUrl?: InputMaybe<StringFieldComparison>;
@@ -2170,6 +2331,36 @@ export type ProgressoTypeFilterModuloTypeFilter = {
   or?: InputMaybe<Array<ProgressoTypeFilterModuloTypeFilter>>;
   ordem?: InputMaybe<NumberFieldComparison>;
   titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ProgressoTypeFilterSubModuloTypeFilter = {
+  and?: InputMaybe<Array<ProgressoTypeFilterSubModuloTypeFilter>>;
+  arquivoId?: InputMaybe<NumberFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  mensagem?: InputMaybe<StringFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<ProgressoTypeFilterSubModuloTypeFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  url?: InputMaybe<StringFieldComparison>;
+};
+
+export type ProgressoTypeFilterTurmaTypeFilter = {
+  and?: InputMaybe<Array<ProgressoTypeFilterTurmaTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  duracao?: InputMaybe<StringFieldComparison>;
+  fim?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  inicio?: InputMaybe<DateFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ProgressoTypeFilterTurmaTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -2238,6 +2429,8 @@ export type Query = {
   arquivos: ArquivoConnection;
   aula?: Maybe<AulaType>;
   aulas: AulaTypeConnection;
+  calculaProgressoCurso?: Maybe<Scalars['Float']['output']>;
+  calculaProgressoModulo?: Maybe<Scalars['Float']['output']>;
   curso?: Maybe<CursoType>;
   cursos: CursoTypeConnection;
   formulario?: Maybe<Formularios>;
@@ -2251,7 +2444,11 @@ export type Query = {
   progresso?: Maybe<ProgressoType>;
   progressos: ProgressoTypeConnection;
   resposta?: Maybe<Respostas>;
+  respostaPergunta?: Maybe<RespostasPerguntas>;
   respostas: RespostasConnection;
+  respostasPerguntas: RespostasPerguntasConnection;
+  subModulo?: Maybe<SubModuloType>;
+  subModulos: SubModuloTypeConnection;
   turma?: Maybe<TurmaType>;
   turmas: TurmaTypeConnection;
   usuario?: Maybe<UsuarioDto>;
@@ -2292,6 +2489,16 @@ export type QueryAulasArgs = {
   filter?: AulaTypeFilter;
   paging?: CursorPaging;
   sorting?: Array<AulaTypeSort>;
+};
+
+
+export type QueryCalculaProgressoCursoArgs = {
+  input: ProgressoCursoInput;
+};
+
+
+export type QueryCalculaProgressoModuloArgs = {
+  input: ProgressoCursoInput;
 };
 
 
@@ -2372,10 +2579,34 @@ export type QueryRespostaArgs = {
 };
 
 
+export type QueryRespostaPerguntaArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
 export type QueryRespostasArgs = {
   filter?: RespostasFilter;
   paging?: CursorPaging;
   sorting?: Array<RespostasSort>;
+};
+
+
+export type QueryRespostasPerguntasArgs = {
+  filter?: RespostasPerguntasFilter;
+  paging?: CursorPaging;
+  sorting?: Array<RespostasPerguntasSort>;
+};
+
+
+export type QuerySubModuloArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type QuerySubModulosArgs = {
+  filter?: SubModuloTypeFilter;
+  paging?: CursorPaging;
+  sorting?: Array<SubModuloTypeSort>;
 };
 
 
@@ -2529,6 +2760,158 @@ export type RespostasMinAggregate = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
+export type RespostasPerguntas = {
+  __typename?: 'RespostasPerguntas';
+  alunoId: Scalars['Float']['output'];
+  /** data criação do registro */
+  createdAt: Scalars['DateTime']['output'];
+  cursoId: Scalars['Float']['output'];
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['Int']['output'];
+  moduloId: Scalars['Float']['output'];
+  perguntaId: Scalars['Float']['output'];
+  respostaId: Scalars['Float']['output'];
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type RespostasPerguntasAggregateGroupBy = {
+  __typename?: 'RespostasPerguntasAggregateGroupBy';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  perguntaId?: Maybe<Scalars['Float']['output']>;
+  respostaId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type RespostasPerguntasAvgAggregate = {
+  __typename?: 'RespostasPerguntasAvgAggregate';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  perguntaId?: Maybe<Scalars['Float']['output']>;
+  respostaId?: Maybe<Scalars['Float']['output']>;
+};
+
+export type RespostasPerguntasConnection = {
+  __typename?: 'RespostasPerguntasConnection';
+  /** Array of edges. */
+  edges: Array<RespostasPerguntasEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+};
+
+export type RespostasPerguntasCountAggregate = {
+  __typename?: 'RespostasPerguntasCountAggregate';
+  alunoId?: Maybe<Scalars['Int']['output']>;
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  cursoId?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Int']['output']>;
+  perguntaId?: Maybe<Scalars['Int']['output']>;
+  respostaId?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type RespostasPerguntasDeleteResponse = {
+  __typename?: 'RespostasPerguntasDeleteResponse';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  /** data criação do registro */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  perguntaId?: Maybe<Scalars['Float']['output']>;
+  respostaId?: Maybe<Scalars['Float']['output']>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type RespostasPerguntasEdge = {
+  __typename?: 'RespostasPerguntasEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the RespostasPerguntas */
+  node: RespostasPerguntas;
+};
+
+export type RespostasPerguntasFilter = {
+  alunoId?: InputMaybe<NumberFieldComparison>;
+  and?: InputMaybe<Array<RespostasPerguntasFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<RespostasPerguntasFilter>>;
+  perguntaId?: InputMaybe<NumberFieldComparison>;
+  respostaId?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type RespostasPerguntasMaxAggregate = {
+  __typename?: 'RespostasPerguntasMaxAggregate';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  perguntaId?: Maybe<Scalars['Float']['output']>;
+  respostaId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type RespostasPerguntasMinAggregate = {
+  __typename?: 'RespostasPerguntasMinAggregate';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  perguntaId?: Maybe<Scalars['Float']['output']>;
+  respostaId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type RespostasPerguntasSort = {
+  direction: SortDirection;
+  field: RespostasPerguntasSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum RespostasPerguntasSortFields {
+  AlunoId = 'alunoId',
+  CreatedAt = 'createdAt',
+  CursoId = 'cursoId',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  ModuloId = 'moduloId',
+  PerguntaId = 'perguntaId',
+  RespostaId = 'respostaId',
+  UpdatedAt = 'updatedAt'
+}
+
+export type RespostasPerguntasSumAggregate = {
+  __typename?: 'RespostasPerguntasSumAggregate';
+  alunoId?: Maybe<Scalars['Float']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  perguntaId?: Maybe<Scalars['Float']['output']>;
+  respostaId?: Maybe<Scalars['Float']['output']>;
+};
+
 export type RespostasSort = {
   direction: SortDirection;
   field: RespostasSortFields;
@@ -2578,6 +2961,240 @@ export type StringFieldComparison = {
   notILike?: InputMaybe<Scalars['String']['input']>;
   notIn?: InputMaybe<Array<Scalars['String']['input']>>;
   notLike?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SubModuloType = {
+  __typename?: 'SubModuloType';
+  /** id do arquivo */
+  arquivoId: Scalars['Float']['output'];
+  aulas?: Maybe<Array<AulaType>>;
+  /** data criação do registro */
+  createdAt: Scalars['DateTime']['output'];
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['Int']['output'];
+  /** mensagem do modulo */
+  mensagem: Scalars['String']['output'];
+  modulo?: Maybe<ModuloType>;
+  /** id do modulo */
+  moduloId: Scalars['Float']['output'];
+  /** ordem do modulo */
+  ordem: Scalars['Float']['output'];
+  subModulosProgressos?: Maybe<Array<ProgressoType>>;
+  /** titulo do modulo */
+  titulo: Scalars['String']['output'];
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** url do modulo */
+  url: Scalars['String']['output'];
+};
+
+
+export type SubModuloTypeAulasArgs = {
+  filter?: AulaTypeFilter;
+  sorting?: Array<AulaTypeSort>;
+};
+
+
+export type SubModuloTypeSubModulosProgressosArgs = {
+  filter?: ProgressoTypeFilter;
+  sorting?: Array<ProgressoTypeSort>;
+};
+
+export type SubModuloTypeAggregateGroupBy = {
+  __typename?: 'SubModuloTypeAggregateGroupBy';
+  arquivoId?: Maybe<Scalars['Float']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  mensagem?: Maybe<Scalars['String']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  ordem?: Maybe<Scalars['Float']['output']>;
+  titulo?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type SubModuloTypeAvgAggregate = {
+  __typename?: 'SubModuloTypeAvgAggregate';
+  arquivoId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  ordem?: Maybe<Scalars['Float']['output']>;
+};
+
+export type SubModuloTypeConnection = {
+  __typename?: 'SubModuloTypeConnection';
+  /** Array of edges. */
+  edges: Array<SubModuloTypeEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type SubModuloTypeCountAggregate = {
+  __typename?: 'SubModuloTypeCountAggregate';
+  arquivoId?: Maybe<Scalars['Int']['output']>;
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  mensagem?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Int']['output']>;
+  ordem?: Maybe<Scalars['Int']['output']>;
+  titulo?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+  url?: Maybe<Scalars['Int']['output']>;
+};
+
+export type SubModuloTypeDeleteResponse = {
+  __typename?: 'SubModuloTypeDeleteResponse';
+  /** id do arquivo */
+  arquivoId?: Maybe<Scalars['Float']['output']>;
+  /** data criação do registro */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  /** mensagem do modulo */
+  mensagem?: Maybe<Scalars['String']['output']>;
+  /** id do modulo */
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  /** ordem do modulo */
+  ordem?: Maybe<Scalars['Float']['output']>;
+  /** titulo do modulo */
+  titulo?: Maybe<Scalars['String']['output']>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** url do modulo */
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type SubModuloTypeEdge = {
+  __typename?: 'SubModuloTypeEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the SubModuloType */
+  node: SubModuloType;
+};
+
+export type SubModuloTypeFilter = {
+  and?: InputMaybe<Array<SubModuloTypeFilter>>;
+  arquivoId?: InputMaybe<NumberFieldComparison>;
+  aulas?: InputMaybe<SubModuloTypeFilterAulaTypeFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  mensagem?: InputMaybe<StringFieldComparison>;
+  modulo?: InputMaybe<SubModuloTypeFilterModuloTypeFilter>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<SubModuloTypeFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  subModulosProgressos?: InputMaybe<SubModuloTypeFilterProgressoTypeFilter>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  url?: InputMaybe<StringFieldComparison>;
+};
+
+export type SubModuloTypeFilterAulaTypeFilter = {
+  and?: InputMaybe<Array<SubModuloTypeFilterAulaTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  duracao?: InputMaybe<NumberFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<SubModuloTypeFilterAulaTypeFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  subModuloId?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  videoUrl?: InputMaybe<StringFieldComparison>;
+};
+
+export type SubModuloTypeFilterModuloTypeFilter = {
+  and?: InputMaybe<Array<SubModuloTypeFilterModuloTypeFilter>>;
+  biblioteca?: InputMaybe<BooleanFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  or?: InputMaybe<Array<SubModuloTypeFilterModuloTypeFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type SubModuloTypeFilterProgressoTypeFilter = {
+  alunoId?: InputMaybe<NumberFieldComparison>;
+  and?: InputMaybe<Array<SubModuloTypeFilterProgressoTypeFilter>>;
+  assistido?: InputMaybe<BooleanFieldComparison>;
+  aulaId?: InputMaybe<NumberFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  fim?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  inicio?: InputMaybe<DateFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<SubModuloTypeFilterProgressoTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type SubModuloTypeMaxAggregate = {
+  __typename?: 'SubModuloTypeMaxAggregate';
+  arquivoId?: Maybe<Scalars['Float']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  mensagem?: Maybe<Scalars['String']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  ordem?: Maybe<Scalars['Float']['output']>;
+  titulo?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type SubModuloTypeMinAggregate = {
+  __typename?: 'SubModuloTypeMinAggregate';
+  arquivoId?: Maybe<Scalars['Float']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  mensagem?: Maybe<Scalars['String']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  ordem?: Maybe<Scalars['Float']['output']>;
+  titulo?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type SubModuloTypeSort = {
+  direction: SortDirection;
+  field: SubModuloTypeSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum SubModuloTypeSortFields {
+  ArquivoId = 'arquivoId',
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  Mensagem = 'mensagem',
+  ModuloId = 'moduloId',
+  Ordem = 'ordem',
+  Titulo = 'titulo',
+  UpdatedAt = 'updatedAt',
+  Url = 'url'
+}
+
+export type SubModuloTypeSumAggregate = {
+  __typename?: 'SubModuloTypeSumAggregate';
+  arquivoId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  ordem?: Maybe<Scalars['Float']['output']>;
 };
 
 export type TurmaType = {
@@ -2790,6 +3407,7 @@ export type UpdateAulaInput = {
   duracao?: InputMaybe<Scalars['Float']['input']>;
   moduloId?: InputMaybe<Scalars['Float']['input']>;
   ordem?: InputMaybe<Scalars['Float']['input']>;
+  subModuloId?: InputMaybe<Scalars['Float']['input']>;
   titulo?: InputMaybe<Scalars['String']['input']>;
   videoUrl?: InputMaybe<Scalars['String']['input']>;
 };
@@ -2880,6 +3498,13 @@ export type UpdateOneRespostasInput = {
   update: UpdateRespostaInput;
 };
 
+export type UpdateOneRespostasPerguntasInput = {
+  /** The id of the record to update */
+  id: Scalars['Int']['input'];
+  /** The update to apply. */
+  update: UpdateRespostaPerguntaInput;
+};
+
 export type UpdateOneTurmaTypeInput = {
   /** The id of the record to update */
   id: Scalars['Int']['input'];
@@ -2913,6 +3538,30 @@ export type UpdateRespostaInput = {
   descricao?: InputMaybe<Scalars['String']['input']>;
   /** selecione a pergunta */
   perguntaId?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type UpdateRespostaPerguntaInput = {
+  /** Id do aluno */
+  aluno_id?: InputMaybe<Scalars['Float']['input']>;
+  /** Id do curso */
+  curso_id?: InputMaybe<Scalars['Float']['input']>;
+  /** Id do módulo */
+  modulo_id?: InputMaybe<Scalars['Float']['input']>;
+  /** Id da pergunta */
+  pergunta_id?: InputMaybe<Scalars['Float']['input']>;
+  /** Id da resposta */
+  resposta_id?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type UpdateSubModuloInput = {
+  /** mensagem do modulo */
+  mensagem?: InputMaybe<Scalars['String']['input']>;
+  /** id do modulo */
+  moduloId?: InputMaybe<Scalars['Float']['input']>;
+  /** ordem do modulo */
+  ordem?: InputMaybe<Scalars['Float']['input']>;
+  /** titulo do modulo */
+  titulo?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateTurmaInput = {
@@ -3204,6 +3853,30 @@ export type DeleteOneRespostaMutationVariables = Exact<{
 
 export type DeleteOneRespostaMutation = { __typename?: 'Mutation', deleteOneResposta: { __typename?: 'RespostasDeleteResponse', id?: number | null } };
 
+export type CreateOneSubModuloMutationVariables = Exact<{
+  input: CreateSubModuloInput;
+  arquivo?: InputMaybe<Scalars['Upload']['input']>;
+}>;
+
+
+export type CreateOneSubModuloMutation = { __typename?: 'Mutation', createOneSubModulo?: { __typename?: 'SubModuloType', id: number } | null };
+
+export type UpdateOneSubModuloMutationVariables = Exact<{
+  update: UpdateSubModuloInput;
+  arquivo?: InputMaybe<Scalars['Upload']['input']>;
+  id: Scalars['Float']['input'];
+}>;
+
+
+export type UpdateOneSubModuloMutation = { __typename?: 'Mutation', updateOneSubModulo?: { __typename?: 'SubModuloType', id: number } | null };
+
+export type DeleteOneSubModuloMutationVariables = Exact<{
+  input: DeleteOneSubModuloTypeInput;
+}>;
+
+
+export type DeleteOneSubModuloMutation = { __typename?: 'Mutation', deleteOneSubModulo: { __typename?: 'SubModuloTypeDeleteResponse', id?: number | null } };
+
 export type CreateOneTurmaMutationVariables = Exact<{
   input: CreateOneTurmaTypeInput;
 }>;
@@ -3239,7 +3912,7 @@ export type AulaQueryVariables = Exact<{
 }>;
 
 
-export type AulaQuery = { __typename?: 'Query', aula?: { __typename?: 'AulaType', ordem: number, moduloId: number, descricao: string, id: number, titulo: string, videoUrl: string, duracao: number, modulo?: { __typename?: 'ModuloType', titulo: string, id: number, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } | null };
+export type AulaQuery = { __typename?: 'Query', aula?: { __typename?: 'AulaType', ordem: number, moduloId?: number | null, descricao?: string | null, id: number, titulo: string, videoUrl?: string | null, duracao: number, modulo?: { __typename?: 'ModuloType', titulo: string, id: number, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } | null };
 
 export type AulasQueryVariables = Exact<{
   filter?: InputMaybe<AulaTypeFilter>;
@@ -3248,7 +3921,7 @@ export type AulasQueryVariables = Exact<{
 }>;
 
 
-export type AulasQuery = { __typename?: 'Query', aulas: { __typename?: 'AulaTypeConnection', edges: Array<{ __typename?: 'AulaTypeEdge', node: { __typename?: 'AulaType', ordem: number, moduloId: number, descricao: string, id: number, titulo: string, videoUrl: string, duracao: number, modulo?: { __typename?: 'ModuloType', titulo: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type AulasQuery = { __typename?: 'Query', aulas: { __typename?: 'AulaTypeConnection', edges: Array<{ __typename?: 'AulaTypeEdge', node: { __typename?: 'AulaType', ordem: number, moduloId?: number | null, descricao?: string | null, id: number, titulo: string, videoUrl?: string | null, duracao: number, modulo?: { __typename?: 'ModuloType', titulo: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type CursoQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -3326,7 +3999,7 @@ export type ModuloQueryVariables = Exact<{
 }>;
 
 
-export type ModuloQuery = { __typename?: 'Query', modulo?: { __typename?: 'ModuloType', ordem: number, cursoId: number, descricao: string, id: number, titulo: string, biblioteca: boolean, curso?: { __typename?: 'CursoType', nome: string } | null } | null };
+export type ModuloQuery = { __typename?: 'Query', modulo?: { __typename?: 'ModuloType', ordem: number, cursoId: number, descricao: string, id: number, titulo: string, biblioteca: boolean, curso?: { __typename?: 'CursoType', nome: string, id: number } | null, subModulos?: Array<{ __typename?: 'SubModuloType', arquivoId: number, id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, url: string, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null }> | null } | null };
 
 export type ModulosQueryVariables = Exact<{
   filter?: InputMaybe<ModuloTypeFilter>;
@@ -3335,7 +4008,7 @@ export type ModulosQueryVariables = Exact<{
 }>;
 
 
-export type ModulosQuery = { __typename?: 'Query', modulos: { __typename?: 'ModuloTypeConnection', edges: Array<{ __typename?: 'ModuloTypeEdge', node: { __typename?: 'ModuloType', ordem: number, cursoId: number, descricao: string, id: number, titulo: string, biblioteca: boolean, curso?: { __typename?: 'CursoType', nome: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type ModulosQuery = { __typename?: 'Query', modulos: { __typename?: 'ModuloTypeConnection', edges: Array<{ __typename?: 'ModuloTypeEdge', node: { __typename?: 'ModuloType', ordem: number, cursoId: number, descricao: string, id: number, titulo: string, biblioteca: boolean, curso?: { __typename?: 'CursoType', nome: string, id: number } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type ModulosSelectQueryVariables = Exact<{
   filter?: InputMaybe<ModuloTypeFilter>;
@@ -3361,6 +4034,22 @@ export type PerguntasQueryVariables = Exact<{
 
 
 export type PerguntasQuery = { __typename?: 'Query', perguntas: { __typename?: 'PerguntasConnection', edges: Array<{ __typename?: 'PerguntasEdge', node: { __typename?: 'Perguntas', id: number, descricao: string, multiEscolha: boolean, tipo?: string | null, formularioId: number, formulario?: { __typename?: 'Formularios', nome: string, id: number, modulo?: { __typename?: 'ModuloType', titulo: string, id: number, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } | null, respostas?: Array<{ __typename?: 'Respostas', descricao: string, id: number, perguntaId: number, correta: boolean }> | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+
+export type SubModuloQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type SubModuloQuery = { __typename?: 'Query', subModulo?: { __typename?: 'SubModuloType', arquivoId: number, id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, url: string, modulo?: { __typename?: 'ModuloType', id: number, titulo: string, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } | null };
+
+export type SubModulosQueryVariables = Exact<{
+  filter: SubModuloTypeFilter;
+  paging: CursorPaging;
+  sorting: Array<SubModuloTypeSort> | SubModuloTypeSort;
+}>;
+
+
+export type SubModulosQuery = { __typename?: 'Query', subModulos: { __typename?: 'SubModuloTypeConnection', edges: Array<{ __typename?: 'SubModuloTypeEdge', node: { __typename?: 'SubModuloType', arquivoId: number, id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, url: string, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type TurmaQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -4093,6 +4782,108 @@ export function useDeleteOneRespostaMutation(baseOptions?: Apollo.MutationHookOp
 export type DeleteOneRespostaMutationHookResult = ReturnType<typeof useDeleteOneRespostaMutation>;
 export type DeleteOneRespostaMutationResult = Apollo.MutationResult<DeleteOneRespostaMutation>;
 export type DeleteOneRespostaMutationOptions = Apollo.BaseMutationOptions<DeleteOneRespostaMutation, DeleteOneRespostaMutationVariables>;
+export const CreateOneSubModuloDocument = gql`
+    mutation createOneSubModulo($input: CreateSubModuloInput!, $arquivo: Upload) {
+  createOneSubModulo(input: $input, arquivo: $arquivo) {
+    id
+  }
+}
+    `;
+export type CreateOneSubModuloMutationFn = Apollo.MutationFunction<CreateOneSubModuloMutation, CreateOneSubModuloMutationVariables>;
+
+/**
+ * __useCreateOneSubModuloMutation__
+ *
+ * To run a mutation, you first call `useCreateOneSubModuloMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneSubModuloMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneSubModuloMutation, { data, loading, error }] = useCreateOneSubModuloMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *      arquivo: // value for 'arquivo'
+ *   },
+ * });
+ */
+export function useCreateOneSubModuloMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneSubModuloMutation, CreateOneSubModuloMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOneSubModuloMutation, CreateOneSubModuloMutationVariables>(CreateOneSubModuloDocument, options);
+      }
+export type CreateOneSubModuloMutationHookResult = ReturnType<typeof useCreateOneSubModuloMutation>;
+export type CreateOneSubModuloMutationResult = Apollo.MutationResult<CreateOneSubModuloMutation>;
+export type CreateOneSubModuloMutationOptions = Apollo.BaseMutationOptions<CreateOneSubModuloMutation, CreateOneSubModuloMutationVariables>;
+export const UpdateOneSubModuloDocument = gql`
+    mutation updateOneSubModulo($update: UpdateSubModuloInput!, $arquivo: Upload, $id: Float!) {
+  updateOneSubModulo(update: $update, arquivo: $arquivo, id: $id) {
+    id
+  }
+}
+    `;
+export type UpdateOneSubModuloMutationFn = Apollo.MutationFunction<UpdateOneSubModuloMutation, UpdateOneSubModuloMutationVariables>;
+
+/**
+ * __useUpdateOneSubModuloMutation__
+ *
+ * To run a mutation, you first call `useUpdateOneSubModuloMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneSubModuloMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOneSubModuloMutation, { data, loading, error }] = useUpdateOneSubModuloMutation({
+ *   variables: {
+ *      update: // value for 'update'
+ *      arquivo: // value for 'arquivo'
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useUpdateOneSubModuloMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneSubModuloMutation, UpdateOneSubModuloMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOneSubModuloMutation, UpdateOneSubModuloMutationVariables>(UpdateOneSubModuloDocument, options);
+      }
+export type UpdateOneSubModuloMutationHookResult = ReturnType<typeof useUpdateOneSubModuloMutation>;
+export type UpdateOneSubModuloMutationResult = Apollo.MutationResult<UpdateOneSubModuloMutation>;
+export type UpdateOneSubModuloMutationOptions = Apollo.BaseMutationOptions<UpdateOneSubModuloMutation, UpdateOneSubModuloMutationVariables>;
+export const DeleteOneSubModuloDocument = gql`
+    mutation deleteOneSubModulo($input: DeleteOneSubModuloTypeInput!) {
+  deleteOneSubModulo(input: $input) {
+    id
+  }
+}
+    `;
+export type DeleteOneSubModuloMutationFn = Apollo.MutationFunction<DeleteOneSubModuloMutation, DeleteOneSubModuloMutationVariables>;
+
+/**
+ * __useDeleteOneSubModuloMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneSubModuloMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneSubModuloMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneSubModuloMutation, { data, loading, error }] = useDeleteOneSubModuloMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDeleteOneSubModuloMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneSubModuloMutation, DeleteOneSubModuloMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOneSubModuloMutation, DeleteOneSubModuloMutationVariables>(DeleteOneSubModuloDocument, options);
+      }
+export type DeleteOneSubModuloMutationHookResult = ReturnType<typeof useDeleteOneSubModuloMutation>;
+export type DeleteOneSubModuloMutationResult = Apollo.MutationResult<DeleteOneSubModuloMutation>;
+export type DeleteOneSubModuloMutationOptions = Apollo.BaseMutationOptions<DeleteOneSubModuloMutation, DeleteOneSubModuloMutationVariables>;
 export const CreateOneTurmaDocument = gql`
     mutation createOneTurma($input: CreateOneTurmaTypeInput!) {
   CreateOneTurma(input: $input) {
@@ -4881,6 +5672,21 @@ export const ModuloDocument = gql`
     titulo
     curso {
       nome
+      id
+    }
+    subModulos {
+      arquivoId
+      id
+      mensagem
+      modulo {
+        id
+        titulo
+      }
+      moduloId
+      ordem
+      titulo
+      updatedAt
+      url
     }
     biblioteca
   }
@@ -4928,6 +5734,7 @@ export const ModulosDocument = gql`
         cursoId
         curso {
           nome
+          id
         }
         descricao
         id
@@ -5162,6 +5969,124 @@ export type PerguntasQueryHookResult = ReturnType<typeof usePerguntasQuery>;
 export type PerguntasLazyQueryHookResult = ReturnType<typeof usePerguntasLazyQuery>;
 export type PerguntasSuspenseQueryHookResult = ReturnType<typeof usePerguntasSuspenseQuery>;
 export type PerguntasQueryResult = Apollo.QueryResult<PerguntasQuery, PerguntasQueryVariables>;
+export const SubModuloDocument = gql`
+    query SubModulo($id: Int!) {
+  subModulo(id: $id) {
+    arquivoId
+    id
+    mensagem
+    modulo {
+      id
+      titulo
+      curso {
+        id
+        nome
+      }
+    }
+    moduloId
+    ordem
+    titulo
+    updatedAt
+    url
+  }
+}
+    `;
+
+/**
+ * __useSubModuloQuery__
+ *
+ * To run a query within a React component, call `useSubModuloQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubModuloQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubModuloQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useSubModuloQuery(baseOptions: Apollo.QueryHookOptions<SubModuloQuery, SubModuloQueryVariables> & ({ variables: SubModuloQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SubModuloQuery, SubModuloQueryVariables>(SubModuloDocument, options);
+      }
+export function useSubModuloLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubModuloQuery, SubModuloQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SubModuloQuery, SubModuloQueryVariables>(SubModuloDocument, options);
+        }
+export function useSubModuloSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<SubModuloQuery, SubModuloQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<SubModuloQuery, SubModuloQueryVariables>(SubModuloDocument, options);
+        }
+export type SubModuloQueryHookResult = ReturnType<typeof useSubModuloQuery>;
+export type SubModuloLazyQueryHookResult = ReturnType<typeof useSubModuloLazyQuery>;
+export type SubModuloSuspenseQueryHookResult = ReturnType<typeof useSubModuloSuspenseQuery>;
+export type SubModuloQueryResult = Apollo.QueryResult<SubModuloQuery, SubModuloQueryVariables>;
+export const SubModulosDocument = gql`
+    query SubModulos($filter: SubModuloTypeFilter!, $paging: CursorPaging!, $sorting: [SubModuloTypeSort!]!) {
+  subModulos(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        arquivoId
+        id
+        mensagem
+        modulo {
+          id
+          titulo
+        }
+        moduloId
+        ordem
+        titulo
+        updatedAt
+        url
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __useSubModulosQuery__
+ *
+ * To run a query within a React component, call `useSubModulosQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubModulosQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubModulosQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      paging: // value for 'paging'
+ *      sorting: // value for 'sorting'
+ *   },
+ * });
+ */
+export function useSubModulosQuery(baseOptions: Apollo.QueryHookOptions<SubModulosQuery, SubModulosQueryVariables> & ({ variables: SubModulosQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SubModulosQuery, SubModulosQueryVariables>(SubModulosDocument, options);
+      }
+export function useSubModulosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubModulosQuery, SubModulosQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SubModulosQuery, SubModulosQueryVariables>(SubModulosDocument, options);
+        }
+export function useSubModulosSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<SubModulosQuery, SubModulosQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<SubModulosQuery, SubModulosQueryVariables>(SubModulosDocument, options);
+        }
+export type SubModulosQueryHookResult = ReturnType<typeof useSubModulosQuery>;
+export type SubModulosLazyQueryHookResult = ReturnType<typeof useSubModulosLazyQuery>;
+export type SubModulosSuspenseQueryHookResult = ReturnType<typeof useSubModulosSuspenseQuery>;
+export type SubModulosQueryResult = Apollo.QueryResult<SubModulosQuery, SubModulosQueryVariables>;
 export const TurmaDocument = gql`
     query Turma($id: Int!) {
   turma(id: $id) {

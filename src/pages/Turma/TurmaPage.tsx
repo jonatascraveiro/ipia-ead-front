@@ -3,18 +3,32 @@ import { Page } from '@/components/Page'
 import { InputField } from '@/components/form/InputField'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
+import { useCursoQuery } from '@/gql/generated/graphql'
+import { ROTAS } from '@/routes/rotas'
 import { Search, Trash2Icon } from 'lucide-react'
-import { Link } from 'react-router'
+import { Link, generatePath, useParams } from 'react-router'
 import { useTabelaTurma } from './components/TabelaTurma/useTabelaTurma'
 
 export function TurmaPage() {
-  const { tabela, form, handleFilter, limparFiltro } = useTabelaTurma()
+  const cursoId = useParams().cursoId as string
+  const { data: curso } = useCursoQuery({
+    variables: {
+      id: +cursoId,
+    },
+    skip: !cursoId,
+  })
+
+  const { tabela, form, handleFilter, limparFiltro } = useTabelaTurma({
+    cursoId,
+  })
 
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo>Turmas</Page.Titulo>
-        <Link to="/turma/criar">
+        <Page.Titulo url={ROTAS.CURSO}>
+          Turmas do curso {curso?.curso?.nome}
+        </Page.Titulo>
+        <Link to={generatePath(ROTAS.TURMA_CRIAR, { cursoId })}>
           <Button>Nova Turma</Button>
         </Link>
       </Page.Header>

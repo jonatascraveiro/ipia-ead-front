@@ -2,20 +2,18 @@ import {
   AulaTypeSortFields,
   SortDirection,
   useAulasQuery,
-  useDeleteOneAulaMutation,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
 import { ROTAS } from '@/routes/rotas'
 import type { AulaType } from '@/types/aula'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
-import { generatePath, useNavigate } from 'react-router'
+import { generatePath, useNavigate, useParams } from 'react-router'
 import { getColumns } from './columns'
 
-export const useTabelaAula = ({
-  biblioteca,
-  subModuloId,
-}: { biblioteca: boolean; subModuloId: string }) => {
+export const useTabelaAula = ({ biblioteca }: { biblioteca: boolean }) => {
+  const moduloId = useParams().moduloId as string
+
   const form = useForm<{ nome: string }>({
     defaultValues: {
       nome: '',
@@ -41,37 +39,28 @@ export const useTabelaAula = ({
   const handleEditar = useCallback(
     (data: AulaType) => {
       navigate(
-        generatePath(ROTAS.AULA_EDITAR, {
-          subModuloId: subModuloId,
+        generatePath(ROTAS.MATERIAL_COMPLEMENTAR_EDITAR, {
           id: data.id,
-        }),
+          moduloId,
+        }) as string,
       )
     },
-    [navigate, subModuloId],
+    [moduloId, navigate],
   )
-
-  const [mutateDelete] = useDeleteOneAulaMutation()
-  const handleDeletar = useCallback(
+  const handleVisualizar = useCallback(
     (data: AulaType) => {
-      mutateDelete({
-        variables: {
-          input: {
-            id: data.id,
-          },
-        },
-        onCompleted() {
-          navigate(rotaUrl)
-        },
-      })
+      navigate(`${rotaUrl}/${data.id}`)
     },
-    [mutateDelete, navigate, rotaUrl],
+    [navigate, rotaUrl],
   )
 
   const { data, loading } = useAulasQuery({
     variables: {
       filter: {
         titulo: { iLike: `%${nome || ''}%` },
-        subModuloId: { eq: +subModuloId },
+        modulo: {
+          biblioteca: { is: biblioteca },
+        },
       },
       paging,
       sorting: {
@@ -84,10 +73,10 @@ export const useTabelaAula = ({
   const columns = useMemo(
     () =>
       getColumns({
-        deletar: handleDeletar,
+        visualizar: handleVisualizar,
         editar: handleEditar,
       }),
-    [handleDeletar, handleEditar],
+    [handleVisualizar, handleEditar],
   )
 
   return {

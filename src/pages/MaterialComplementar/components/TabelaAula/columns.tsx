@@ -1,15 +1,15 @@
 import { ColumnAction } from '@/components/DataTable/ColumnAction'
-import { Icone } from '@/components/common/Icons'
 import type { AulaType } from '@/types/aula'
 import type { ColumnDef } from '@tanstack/react-table'
+import { Eye, Pencil } from 'lucide-react'
 
 type Acoes = {
-  deletar: (data: AulaType) => void
+  visualizar: (data: AulaType) => void
   editar: (data: AulaType) => void
 }
 
 export const getColumns = ({
-  deletar,
+  visualizar,
   editar,
 }: Acoes): ColumnDef<AulaType>[] => {
   return [
@@ -39,14 +39,14 @@ export const getColumns = ({
       ...ColumnAction<AulaType>({
         actions: [
           {
-            label: 'Deletar',
-            icon: <Icone.deletar />,
-            onClick: (row) => deletar(row),
+            label: 'Visualizar',
+            icon: <Eye className="h-6 w-6" />,
+            onClick: (row) => visualizar(row),
             omit: () => true,
           },
           {
             label: 'Editar',
-            icon: <Icone.editar />,
+            icon: <Pencil className="h-6 w-6" />,
             onClick: (row) => editar(row),
           },
         ],

@@ -2,19 +2,44 @@
 import { gql } from '@apollo/client'
 
 gql`
-query Modulo($id: Int!) {
-  modulo(id: $id) {
-    ordem
-    cursoId    
-    descricao
-    id
-    titulo
-    curso {
-      nome
-      id
-    }
-    subModulos {
+query SubModulo($id: Int!) {
+  subModulo(id: $id) {
+ 
       arquivoId
+      
+      id
+      mensagem
+      modulo{
+        id
+        titulo
+        curso{
+
+            id 
+            nome
+                    }
+      }
+      moduloId
+      ordem
+      titulo
+      updatedAt
+      url
+  
+    
+  }
+}
+
+`
+
+gql`
+query SubModulos(
+  $filter: SubModuloTypeFilter!
+  $paging: CursorPaging!
+  $sorting: [SubModuloTypeSort!]!
+) {
+  subModulos(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        arquivoId
       
       id
       mensagem
@@ -27,33 +52,6 @@ query Modulo($id: Int!) {
       titulo
       updatedAt
       url
-    }
-    biblioteca
-    
-  }
-}
-
-`
-
-gql`
-query Modulos(
-  $filter: ModuloTypeFilter
-  $paging: CursorPaging!
-  $sorting: [ModuloTypeSort!]!
-) {
-  modulos(filter: $filter, paging: $paging, sorting: $sorting) {
-    edges {
-      node {
-        ordem
-        cursoId       
-        curso {
-      nome
-      id
-    }
-        descricao
-        id
-        titulo
-        biblioteca
       }
     }
     pageInfo {

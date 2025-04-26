@@ -19,6 +19,9 @@ import { CriarFormularioPage } from '@/pages/Formulario/CriarFormularioPage'
 import { EditarFormularioPage } from '@/pages/Formulario/EditarFormularioPage'
 import { FormularioPage } from '@/pages/Formulario/FormularioPage'
 import { InscricaoPage } from '@/pages/Inscricao/IncricaoPage'
+import { CriarMaterialComplementarPage } from '@/pages/MaterialComplementar/CriarMaterialComplementarPage'
+import { EditarMaterialComplementarPage } from '@/pages/MaterialComplementar/EditarMaterialComplementarPage'
+import { MaterialComplementarPage } from '@/pages/MaterialComplementar/MaterialComplementarPage'
 import { CriarModuloPage } from '@/pages/Modulo/CriarModuloPage'
 import { EditarModuloPage } from '@/pages/Modulo/EditarModuloPage'
 import { ModuloPage } from '@/pages/Modulo/ModuloPage'
@@ -75,20 +78,20 @@ export default function AppRoutes() {
           <Route path={ROTAS.AULA_EDITAR} element={<EditarAulaPage />} />
 
           <Route
-            path={ROTAS.AULA_COMPLEMENTAR}
-            element={<AulaPage biblioteca={true} />}
+            path={ROTAS.MATERIAL_COMPLEMENTAR}
+            element={<MaterialComplementarPage biblioteca={true} />}
           />
           <Route
-            path={ROTAS.AULA_COMPLEMENTAR_CRIAR}
-            element={<CriarAulaPage biblioteca={true} />}
+            path={ROTAS.MATERIAL_COMPLEMENTAR_CRIAR}
+            element={<CriarMaterialComplementarPage biblioteca={true} />}
           />
-          <Route
-            path={ROTAS.AULA_COMPLEMENTAR_VISUALIZAR}
+          {/* <Route
+            path={ROTAS.MATERIAL_COMPLEMENTAR_VISUALIZAR}
             element={<VisualizarAulaPage biblioteca={true} />}
-          />
+          /> */}
           <Route
-            path={ROTAS.AULA_COMPLEMENTAR_EDITAR}
-            element={<EditarAulaPage biblioteca={true} />}
+            path={ROTAS.MATERIAL_COMPLEMENTAR_EDITAR}
+            element={<EditarMaterialComplementarPage biblioteca={true} />}
           />
 
           <Route path={ROTAS.CURSO} element={<CursoPage />} />
@@ -111,6 +114,17 @@ export default function AppRoutes() {
           <Route path={ROTAS.MODULO_CRIAR} element={<CriarModuloPage />} />
 
           <Route path={ROTAS.MODULO_EDITAR} element={<EditarModuloPage />} />
+
+          <Route path={ROTAS.BIBLIOTECA} element={<ModuloPage biblioteca />} />
+          <Route
+            path={ROTAS.BIBLIOTECA_CRIAR}
+            element={<CriarModuloPage biblioteca />}
+          />
+
+          <Route
+            path={ROTAS.BIBLIOTECA_EDITAR}
+            element={<EditarModuloPage biblioteca />}
+          />
 
           <Route path={ROTAS.TURMA} element={<TurmaPage />} />
           <Route path={ROTAS.TURMA_CRIAR} element={<CriarTurmaPage />} />

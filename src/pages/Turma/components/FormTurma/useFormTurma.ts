@@ -1,20 +1,21 @@
 import {
-  CursoTypeSortFields,
-  SortDirection,
   type TurmaQuery,
   useCreateOneTurmaMutation,
-  useCursosModuloSelectQuery,
   useUpdateOneTurmaMutation,
 } from '@/gql/generated/graphql'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { toast } from 'react-toastify'
 import type { z } from 'zod'
 import { type TurmaSchema, schema } from './schema'
 
-export const useFormTurma = ({ turma }: { turma?: TurmaQuery['turma'] }) => {
+export const useFormTurma = ({
+  turma,
+  urlVoltar,
+}: { turma?: TurmaQuery['turma']; urlVoltar: string }) => {
   const navigate = useNavigate()
+  const cursoId = useParams().cursoId as string
 
   const dataInicio = turma?.inicio ? new Date(turma?.inicio) : new Date()
   const dataFim = turma?.fim ? new Date(turma?.fim) : new Date()
@@ -27,7 +28,7 @@ export const useFormTurma = ({ turma }: { turma?: TurmaQuery['turma'] }) => {
       descricao: turma?.descricao || '',
       inicio: dataInicio,
       fim: dataFim,
-      cursoId: turma?.cursoId || undefined,
+      cursoId: +cursoId,
       duracao: turma?.duracao || '10',
     },
   })
@@ -53,7 +54,7 @@ export const useFormTurma = ({ turma }: { turma?: TurmaQuery['turma'] }) => {
 
         onCompleted() {
           toast.success('Turma editado com sucesso')
-          navigate('/turma')
+          navigate(urlVoltar)
         },
       })
       return
@@ -74,28 +75,10 @@ export const useFormTurma = ({ turma }: { turma?: TurmaQuery['turma'] }) => {
 
       onCompleted() {
         toast.success('Turma criado com sucesso')
-        navigate('/turma')
+        navigate(urlVoltar)
       },
     })
   }
 
-  const { data: cursos } = useCursosModuloSelectQuery({
-    variables: {
-      paging: {
-        first: 99,
-      },
-      sorting: {
-        field: CursoTypeSortFields.Nome,
-        direction: SortDirection.Asc,
-      },
-    },
-  })
-
-  const cursoOptions =
-    cursos?.cursos.edges.map(({ node }) => ({
-      value: node.id,
-      label: node.nome,
-    })) || []
-
-  return { form, onSubmit, cursoOptions }
+  return { form, onSubmit }
 }

@@ -3,49 +3,49 @@ import { Page } from '@/components/Page'
 import { InputField } from '@/components/form/InputField'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
-import { useSubModuloQuery } from '@/gql/generated/graphql'
+import { useModuloQuery } from '@/gql/generated/graphql'
 import { ROTAS } from '@/routes/rotas'
 import { Search, Trash2Icon } from 'lucide-react'
 import { Link, generatePath, useParams } from 'react-router'
 import { useTabelaAula } from './components/TabelaAula/useTabelaAula'
 
-export function AulaPage({ biblioteca = false }: { biblioteca?: boolean }) {
-  const subModuloId = useParams().subModuloId as string
-  const { data: subModulo } = useSubModuloQuery({
+export function MaterialComplementarPage({
+  biblioteca = false,
+}: { biblioteca?: boolean }) {
+  const moduloId = useParams().moduloId as string
+  const { data: modulo } = useModuloQuery({
     variables: {
-      id: +subModuloId,
+      id: +moduloId,
     },
-    skip: !subModuloId,
+    skip: !moduloId,
   })
 
   const { tabela, form, handleFilter, limparFiltro } = useTabelaAula({
     biblioteca,
-    subModuloId,
+  })
+
+  const urlVoltar = generatePath(ROTAS.BIBLIOTECA, {
+    cursoId: modulo?.modulo?.curso?.id || 0,
   })
 
   return (
     <Page>
-      {/* {biblioteca && (
+      {biblioteca && (
         <Page.Header>
-          <Page.Titulo>
-            Material complementar {subModulo?.subModulo?.titulo}
+          <Page.Titulo url={urlVoltar}>
+            Material complementar {modulo?.modulo?.titulo}
           </Page.Titulo>
-          <Link to={ROTAS.MATERIAL_COMPLEMENTAR_CRIAR}>
+          <Link
+            to={generatePath(ROTAS.MATERIAL_COMPLEMENTAR_CRIAR, { moduloId })}
+          >
             <Button>Nova Aula </Button>
           </Link>
         </Page.Header>
-      )} */}
+      )}
       {!biblioteca && (
         <Page.Header>
-          <Page.Titulo
-            url={generatePath(ROTAS.MODULO_EDITAR, {
-              id: subModulo?.subModulo?.modulo?.id || 0,
-              cursoId: subModulo?.subModulo?.modulo?.curso?.id || 0,
-            })}
-          >
-            Aulas {subModulo?.subModulo?.titulo}
-          </Page.Titulo>
-          <Link to={generatePath(ROTAS.AULA_CRIAR, { subModuloId })}>
+          <Page.Titulo>Aulas</Page.Titulo>
+          <Link to={ROTAS.AULA_CRIAR}>
             <Button>Nova Aula</Button>
           </Link>
         </Page.Header>

@@ -14,20 +14,16 @@ import { useFormAula } from './useFormAula'
 function FormAula({
   aula,
   disabled = false,
-  biblioteca = false,
-  subModuloId,
+
   urlVoltar,
 }: {
   aula?: AulaQuery['aula']
   disabled?: boolean
   biblioteca: boolean
-  subModuloId: string
   urlVoltar: string
 }) {
   const { form, onSubmit } = useFormAula({
     aula,
-    biblioteca,
-    subModuloId,
     urlVoltar,
   })
 
@@ -70,29 +66,6 @@ function FormAula({
             name="duracao"
           />
         </div>
-
-        {/* <div className="col-span-3  ">
-          <SelectField
-            disabled={disabled}
-            label="Curso"
-            description="Selecione o curso "
-            options={cursoOptions}
-            name="cursoId"
-            onChange={() => {
-              form.setValue('moduloId', 0)
-            }}
-          />
-        </div>
-
-        <div className="col-span-3  ">
-          <SelectField
-            disabled={disabled}
-            label="Módulo"
-            description="Módulo da aula"
-            options={moduloOptions}
-            name="moduloId"
-          />
-        </div> */}
 
         <div className="col-span-12  ">
           <InputField

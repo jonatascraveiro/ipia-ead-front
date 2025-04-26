@@ -1,4 +1,5 @@
 import { Page } from '@/components/Page'
+import { ROTAS } from '@/routes/rotas'
 import { FormCurso } from './components/FormCurso'
 
 export function CriarCursoPage() {
@@ -8,7 +9,7 @@ export function CriarCursoPage() {
         <Page.Titulo>Criar Curso</Page.Titulo>
       </Page.Header>
 
-      <FormCurso />
+      <FormCurso urlVoltar={ROTAS.CURSO} />
     </Page>
   )
 }

@@ -11,7 +11,12 @@ import { useFormFormulario } from './useForm'
 function FormFormulario({
   formulario,
   disabled = false,
-}: { formulario?: FormularioQuery['formulario']; disabled?: boolean }) {
+  urlVoltar,
+}: {
+  formulario?: FormularioQuery['formulario']
+  disabled?: boolean
+  urlVoltar: string
+}) {
   const { form, onSubmit, cursoOptions, moduloOptions } = useFormFormulario({
     formulario,
   })
@@ -51,7 +56,7 @@ function FormFormulario({
         </div>
         <div className=" col-span-12  flex  items-end gap-3">
           {!disabled && <Button type="submit">Salvar</Button>}
-          <Link to="/formulario">
+          <Link to={urlVoltar}>
             <Button variant={'outline'} type="reset">
               Voltar
             </Button>

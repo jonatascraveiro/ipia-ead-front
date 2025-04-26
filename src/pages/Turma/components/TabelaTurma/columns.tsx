@@ -2,17 +2,13 @@ import { ColumnAction } from '@/components/DataTable/ColumnAction'
 import type { TurmaType } from '@/types/turma'
 import type { ColumnDef } from '@tanstack/react-table'
 import { format } from 'date-fns'
-import { Eye, Pencil } from 'lucide-react'
+import { Pencil } from 'lucide-react'
 
 type Acoes = {
-  visualizar: (data: TurmaType) => void
   editar: (data: TurmaType) => void
 }
 
-export const getColumns = ({
-  visualizar,
-  editar,
-}: Acoes): ColumnDef<TurmaType>[] => {
+export const getColumns = ({ editar }: Acoes): ColumnDef<TurmaType>[] => {
   return [
     {
       accessorFn: (row) => row.nome,
@@ -46,11 +42,6 @@ export const getColumns = ({
       accessorFn: (row) => row.id,
       ...ColumnAction<TurmaType>({
         actions: [
-          {
-            label: 'Visualizar',
-            icon: <Eye className="h-6 w-6" />,
-            onClick: (row) => visualizar(row),
-          },
           {
             label: 'Editar',
             icon: <Pencil className="h-6 w-6" />,

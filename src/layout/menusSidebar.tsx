@@ -1,16 +1,5 @@
 import { ROTAS } from '@/routes/rotas'
-import {
-  BookPlus,
-  ClockAlert,
-  DiamondPlus,
-  FileQuestion,
-  Group,
-  Home,
-  ListTodo,
-  NotebookText,
-  SpellCheck,
-  Users2,
-} from 'lucide-react'
+import { DiamondPlus, Home, NotebookText, Users2 } from 'lucide-react'
 import type React from 'react'
 
 export type NavItem = {
@@ -32,40 +21,40 @@ const menuOpcoes: NavItem[] = [
     path: ROTAS.CURSO,
   },
 
-  {
-    name: 'Módulos',
-    icon: <Group />,
-    path: ROTAS.MODULO,
-  },
+  // {
+  //   name: 'Módulos',
+  //   icon: <Group />,
+  //   path: ROTAS.MODULO,
+  // },
 
-  {
-    name: 'Aulas',
-    icon: <ClockAlert />,
-    path: ROTAS.AULA,
-  },
+  // {
+  //   name: 'Aulas',
+  //   icon: <ClockAlert />,
+  //   path: ROTAS.AULA,
+  // },
 
-  {
-    name: 'Aula Complementar',
-    icon: <BookPlus />,
-    path: ROTAS.AULA_COMPLEMENTAR,
-  },
+  // {
+  //   name: 'Aula Complementar',
+  //   icon: <BookPlus />,
+  //   path: ROTAS.AULA_COMPLEMENTAR,
+  // },
 
-  {
-    name: 'Formulários',
-    icon: <FileQuestion />,
-    path: ROTAS.FORMULARIO,
-  },
-  {
-    name: 'Perguntas',
-    icon: <ListTodo />,
-    path: ROTAS.PERGUNTA,
-  },
+  // {
+  //   name: 'Formulários',
+  //   icon: <FileQuestion />,
+  //   path: ROTAS.FORMULARIO,
+  // },
+  // {
+  //   name: 'Perguntas',
+  //   icon: <ListTodo />,
+  //   path: ROTAS.PERGUNTA,
+  // },
 
-  {
-    name: 'Turmas',
-    icon: <SpellCheck />,
-    path: ROTAS.TURMA,
-  },
+  // {
+  //   name: 'Turmas',
+  //   icon: <SpellCheck />,
+  //   path: ROTAS.TURMA,
+  // },
 
   {
     name: 'Alunos',

@@ -5,23 +5,16 @@ import {
 } from '@/gql/generated/graphql'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { toast } from 'react-toastify'
 import { type AulaSchemaInput, type AulaSchemaOutput, schema } from './schema'
 
 export const useFormAula = ({
   aula,
-
   urlVoltar,
-  subModuloId,
-}: {
-  aula?: AulaQuery['aula']
-  biblioteca?: boolean
-  subModuloId: string
-  urlVoltar: string
-}) => {
+}: { aula?: AulaQuery['aula']; urlVoltar: string }) => {
   const navigate = useNavigate()
-
+  const moduloId = useParams().moduloId as string
   const form = useForm<AulaSchemaInput>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -30,12 +23,11 @@ export const useFormAula = ({
       descricao: aula?.descricao || '',
       ordem: aula?.ordem || 1,
       duracao: aula?.duracao || 30,
-      subModuloId: +subModuloId || undefined,
+      moduloId: +moduloId,
 
-      videoUrl: aula?.videoUrl || '',
+      videoUrl: aula?.videoUrl,
     },
   })
-  console.log('aula', form.getValues(), form.formState.errors)
 
   const [criar] = useCreateOneAulaMutation()
   const [editar] = useUpdateOneAulaMutation()
@@ -93,7 +85,7 @@ export const useFormAula = ({
             update: {
               titulo: data.titulo,
               ordem: data.ordem,
-              subModuloId: +data.subModuloId,
+              moduloId: +data.moduloId,
               descricao: data.descricao,
               duracao: data.duracao,
               videoUrl: data.videoUrl,
@@ -114,8 +106,8 @@ export const useFormAula = ({
           aulaType: {
             titulo: data.titulo,
             ordem: data.ordem,
-            subModuloId: +data.subModuloId,
-            descricao: data.descricao,
+            moduloId: +data.moduloId,
+            descricao: data.descricao || '',
             duracao: +data.duracao,
             videoUrl: data.videoUrl || '',
           },

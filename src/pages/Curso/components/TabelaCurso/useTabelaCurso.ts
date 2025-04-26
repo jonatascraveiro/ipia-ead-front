@@ -38,6 +38,27 @@ export const useTabelaCurso = () => {
     },
     [navigate],
   )
+
+  const handleModulo = useCallback(
+    (data: CursoType) => {
+      navigate(`/curso/${data.id}/modulo`)
+    },
+    [navigate],
+  )
+
+  const handleBiblioteca = useCallback(
+    (data: CursoType) => {
+      navigate(`/curso/${data.id}/biblioteca`)
+    },
+    [navigate],
+  )
+  const handleTurma = useCallback(
+    (data: CursoType) => {
+      navigate(`/curso/${data.id}/turma`)
+    },
+    [navigate],
+  )
+
   const handleVisualizar = useCallback(
     (data: CursoType) => {
       navigate(`/curso/${data.id}`)
@@ -67,8 +88,17 @@ export const useTabelaCurso = () => {
       getColumns({
         visualizar: handleVisualizar,
         editar: handleEditar,
+        modulo: handleModulo,
+        biblioteca: handleBiblioteca,
+        turma: handleTurma,
       }),
-    [handleVisualizar, handleEditar],
+    [
+      handleVisualizar,
+      handleEditar,
+      handleModulo,
+      handleBiblioteca,
+      handleTurma,
+    ],
   )
 
   return {

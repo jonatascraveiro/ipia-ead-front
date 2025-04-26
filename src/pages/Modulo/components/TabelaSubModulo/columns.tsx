@@ -1,21 +1,19 @@
 import { ColumnAction } from '@/components/DataTable/ColumnAction'
 import { Icone } from '@/components/common/Icons'
-import type { ModuloType } from '@/types/modulo'
+import type { SubModuloType } from '@/gql/generated/graphql'
 import type { ColumnDef } from '@tanstack/react-table'
 
 type Acoes = {
-  visualizar: (data: ModuloType) => void
-  editar: (data: ModuloType) => void
-  aula: (data: ModuloType) => void
-  formulario: (data: ModuloType) => void
+  aula: (data: SubModuloType) => void
+  editar: (data: SubModuloType) => void
+  deletar: (data: SubModuloType) => void
 }
 
 export const getColumns = ({
   editar,
-  visualizar,
   aula,
-  formulario,
-}: Acoes): ColumnDef<ModuloType>[] => {
+  deletar,
+}: Acoes): ColumnDef<SubModuloType>[] => {
   return [
     {
       accessorFn: (row) => row.titulo,
@@ -23,9 +21,9 @@ export const getColumns = ({
       header: () => <span>Titulo</span>,
     },
     {
-      accessorFn: (row) => row.descricao,
-      accessorKey: 'descricao',
-      header: () => <span>Descrição</span>,
+      accessorFn: (row) => row.mensagem,
+      accessorKey: 'mensagem',
+      header: () => <span>Mensagem</span>,
       maxSize: 300,
     },
 
@@ -40,13 +38,12 @@ export const getColumns = ({
 
     {
       accessorFn: (row) => row.id,
-      ...ColumnAction<ModuloType>({
+      ...ColumnAction<SubModuloType>({
         actions: [
           {
-            label: 'Visualizar',
-            icon: <Icone.visualizar />,
-            onClick: (row) => visualizar(row),
-            omit: () => true,
+            label: 'Aulas',
+            icon: <Icone.aulas />,
+            onClick: (row) => aula(row),
           },
           {
             label: 'Editar',
@@ -54,14 +51,9 @@ export const getColumns = ({
             onClick: (row) => editar(row),
           },
           {
-            label: 'Grade',
-            icon: <Icone.aulas />,
-            onClick: (row) => aula(row),
-          },
-          {
-            label: 'Formulario',
-            icon: <Icone.formulario />,
-            onClick: (row) => formulario(row),
+            label: 'Deletar',
+            icon: <Icone.deletar />,
+            onClick: (row) => deletar(row),
           },
         ],
       }),
