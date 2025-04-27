@@ -57,7 +57,7 @@ export const useFormSubModulo = ({
     }
     criar({
       variables: {
-        arquivo: imagem,
+        arquivo: undefined,
         input: data,
       },
 
