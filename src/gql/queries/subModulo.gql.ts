@@ -5,7 +5,7 @@ gql`
 query SubModulo($id: Int!) {
   subModulo(id: $id) {
  
-      arquivoId
+     # arquivoId
       
       id
       mensagem
@@ -21,7 +21,7 @@ query SubModulo($id: Int!) {
       ordem
       titulo
       updatedAt
-      url
+     # url
   
     
   }
@@ -38,7 +38,7 @@ query SubModulos(
   subModulos(filter: $filter, paging: $paging, sorting: $sorting) {
     edges {
       node {
-        arquivoId
+      #  arquivoId
       
       id
       mensagem

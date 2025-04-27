@@ -141,6 +141,8 @@ export type AlunoTypeFilterProgressoTypeFilter = {
   inicio?: InputMaybe<DateFieldComparison>;
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<AlunoTypeFilterProgressoTypeFilter>>;
+  subMmoduloId?: InputMaybe<NumberFieldComparison>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -486,6 +488,8 @@ export type AulaTypeFilterProgressoTypeFilter = {
   inicio?: InputMaybe<DateFieldComparison>;
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<AulaTypeFilterProgressoTypeFilter>>;
+  subMmoduloId?: InputMaybe<NumberFieldComparison>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -723,6 +727,8 @@ export type CreateProgressoInput = {
   aulaId: Scalars['Float']['input'];
   cursoId: Scalars['Float']['input'];
   moduloId: Scalars['Float']['input'];
+  subModuloId: Scalars['Float']['input'];
+  turmaId: Scalars['Float']['input'];
 };
 
 export type CreateRespostaInput = {
@@ -937,6 +943,8 @@ export type CursoTypeFilterProgressoTypeFilter = {
   inicio?: InputMaybe<DateFieldComparison>;
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<CursoTypeFilterProgressoTypeFilter>>;
+  subMmoduloId?: InputMaybe<NumberFieldComparison>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -1636,6 +1644,8 @@ export type ModuloTypeFilterProgressoTypeFilter = {
   inicio?: InputMaybe<DateFieldComparison>;
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<ModuloTypeFilterProgressoTypeFilter>>;
+  subMmoduloId?: InputMaybe<NumberFieldComparison>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -2163,8 +2173,21 @@ export type PerguntasSumAggregate = {
 };
 
 export type ProgressoCursoInput = {
+  /** id do aluno */
+  alunoId: Scalars['Float']['input'];
   /** id do curso */
   cursoId: Scalars['Float']['input'];
+  /** id da turma */
+  turmaId: Scalars['Float']['input'];
+};
+
+export type ProgressoSubModuloInput = {
+  /** id do aluno */
+  alunoId: Scalars['Float']['input'];
+  /** id do curso */
+  cursoId: Scalars['Float']['input'];
+  /** id do sub modulo */
+  subModuloId: Scalars['Float']['input'];
   /** id da turma */
   turmaId: Scalars['Float']['input'];
 };
@@ -2194,8 +2217,12 @@ export type ProgressoType = {
   modulo?: Maybe<ModuloType>;
   /** Id do modulo */
   moduloId?: Maybe<Scalars['Float']['output']>;
+  /** Id do sub modulo */
+  subMmoduloId?: Maybe<Scalars['Float']['output']>;
   subModulo?: Maybe<SubModuloType>;
   turma?: Maybe<TurmaType>;
+  /** Id da turma */
+  turmaId?: Maybe<Scalars['Float']['output']>;
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -2212,6 +2239,8 @@ export type ProgressoTypeAggregateGroupBy = {
   id?: Maybe<Scalars['Int']['output']>;
   inicio?: Maybe<Scalars['DateTime']['output']>;
   moduloId?: Maybe<Scalars['Float']['output']>;
+  subMmoduloId?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -2222,6 +2251,8 @@ export type ProgressoTypeAvgAggregate = {
   cursoId?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
   moduloId?: Maybe<Scalars['Float']['output']>;
+  subMmoduloId?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
 };
 
 export type ProgressoTypeConnection = {
@@ -2244,6 +2275,8 @@ export type ProgressoTypeCountAggregate = {
   id?: Maybe<Scalars['Int']['output']>;
   inicio?: Maybe<Scalars['Int']['output']>;
   moduloId?: Maybe<Scalars['Int']['output']>;
+  subMmoduloId?: Maybe<Scalars['Int']['output']>;
+  turmaId?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -2272,8 +2305,10 @@ export type ProgressoTypeFilter = {
   modulo?: InputMaybe<ProgressoTypeFilterModuloTypeFilter>;
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<ProgressoTypeFilter>>;
+  subMmoduloId?: InputMaybe<NumberFieldComparison>;
   subModulo?: InputMaybe<ProgressoTypeFilterSubModuloTypeFilter>;
   turma?: InputMaybe<ProgressoTypeFilterTurmaTypeFilter>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -2376,6 +2411,8 @@ export type ProgressoTypeMaxAggregate = {
   id?: Maybe<Scalars['Int']['output']>;
   inicio?: Maybe<Scalars['DateTime']['output']>;
   moduloId?: Maybe<Scalars['Float']['output']>;
+  subMmoduloId?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -2390,6 +2427,8 @@ export type ProgressoTypeMinAggregate = {
   id?: Maybe<Scalars['Int']['output']>;
   inicio?: Maybe<Scalars['DateTime']['output']>;
   moduloId?: Maybe<Scalars['Float']['output']>;
+  subMmoduloId?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -2410,6 +2449,8 @@ export enum ProgressoTypeSortFields {
   Id = 'id',
   Inicio = 'inicio',
   ModuloId = 'moduloId',
+  SubMmoduloId = 'subMmoduloId',
+  TurmaId = 'turmaId',
   UpdatedAt = 'updatedAt'
 }
 
@@ -2420,6 +2461,8 @@ export type ProgressoTypeSumAggregate = {
   cursoId?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
   moduloId?: Maybe<Scalars['Float']['output']>;
+  subMmoduloId?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
 };
 
 export type Query = {
@@ -2431,7 +2474,8 @@ export type Query = {
   aula?: Maybe<AulaType>;
   aulas: AulaTypeConnection;
   calculaProgressoCurso?: Maybe<Scalars['Float']['output']>;
-  calculaProgressoModulo?: Maybe<Scalars['Float']['output']>;
+  calculaProgressoPorModulo?: Maybe<Scalars['String']['output']>;
+  calculaProgressoSubModulo?: Maybe<Scalars['Float']['output']>;
   curso?: Maybe<CursoType>;
   cursos: CursoTypeConnection;
   formulario?: Maybe<Formularios>;
@@ -2498,8 +2542,13 @@ export type QueryCalculaProgressoCursoArgs = {
 };
 
 
-export type QueryCalculaProgressoModuloArgs = {
+export type QueryCalculaProgressoPorModuloArgs = {
   input: ProgressoCursoInput;
+};
+
+
+export type QueryCalculaProgressoSubModuloArgs = {
+  input: ProgressoSubModuloInput;
 };
 
 
@@ -2967,12 +3016,13 @@ export type StringFieldComparison = {
 export type SubModuloType = {
   __typename?: 'SubModuloType';
   /** id do arquivo */
-  arquivoId: Scalars['Float']['output'];
+  arquivoId?: Maybe<Scalars['Float']['output']>;
   aulas?: Maybe<Array<AulaType>>;
   /** data criação do registro */
   createdAt: Scalars['DateTime']['output'];
   /** data da exclusão do registro */
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  formulario?: Maybe<Formularios>;
   id: Scalars['Int']['output'];
   /** mensagem do modulo */
   mensagem: Scalars['String']['output'];
@@ -3085,6 +3135,7 @@ export type SubModuloTypeFilter = {
   aulas?: InputMaybe<SubModuloTypeFilterAulaTypeFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  formulario?: InputMaybe<SubModuloTypeFilterFormulariosFilter>;
   id?: InputMaybe<IntFieldComparison>;
   mensagem?: InputMaybe<StringFieldComparison>;
   modulo?: InputMaybe<SubModuloTypeFilterModuloTypeFilter>;
@@ -3111,6 +3162,17 @@ export type SubModuloTypeFilterAulaTypeFilter = {
   titulo?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   videoUrl?: InputMaybe<StringFieldComparison>;
+};
+
+export type SubModuloTypeFilterFormulariosFilter = {
+  and?: InputMaybe<Array<SubModuloTypeFilterFormulariosFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<SubModuloTypeFilterFormulariosFilter>>;
+  subModuloId?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type SubModuloTypeFilterModuloTypeFilter = {
@@ -3140,6 +3202,8 @@ export type SubModuloTypeFilterProgressoTypeFilter = {
   inicio?: InputMaybe<DateFieldComparison>;
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<SubModuloTypeFilterProgressoTypeFilter>>;
+  subMmoduloId?: InputMaybe<NumberFieldComparison>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -3530,6 +3594,8 @@ export type UpdateProgressoInput = {
   cursoId?: InputMaybe<Scalars['Float']['input']>;
   id: Scalars['Float']['input'];
   moduloId?: InputMaybe<Scalars['Float']['input']>;
+  subModuloId?: InputMaybe<Scalars['Float']['input']>;
+  turmaId?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type UpdateRespostaInput = {
@@ -4000,7 +4066,7 @@ export type ModuloQueryVariables = Exact<{
 }>;
 
 
-export type ModuloQuery = { __typename?: 'Query', modulo?: { __typename?: 'ModuloType', ordem: number, cursoId: number, descricao: string, id: number, titulo: string, biblioteca: boolean, curso?: { __typename?: 'CursoType', nome: string, id: number } | null, subModulos?: Array<{ __typename?: 'SubModuloType', arquivoId: number, id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, url: string, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null }> | null } | null };
+export type ModuloQuery = { __typename?: 'Query', modulo?: { __typename?: 'ModuloType', ordem: number, cursoId: number, descricao: string, id: number, titulo: string, biblioteca: boolean, curso?: { __typename?: 'CursoType', nome: string, id: number } | null, subModulos?: Array<{ __typename?: 'SubModuloType', id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null }> | null } | null };
 
 export type ModulosQueryVariables = Exact<{
   filter?: InputMaybe<ModuloTypeFilter>;
@@ -4041,7 +4107,7 @@ export type SubModuloQueryVariables = Exact<{
 }>;
 
 
-export type SubModuloQuery = { __typename?: 'Query', subModulo?: { __typename?: 'SubModuloType', arquivoId: number, id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, url: string, modulo?: { __typename?: 'ModuloType', id: number, titulo: string, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } | null };
+export type SubModuloQuery = { __typename?: 'Query', subModulo?: { __typename?: 'SubModuloType', id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, modulo?: { __typename?: 'ModuloType', id: number, titulo: string, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } | null };
 
 export type SubModulosQueryVariables = Exact<{
   filter: SubModuloTypeFilter;
@@ -4050,7 +4116,7 @@ export type SubModulosQueryVariables = Exact<{
 }>;
 
 
-export type SubModulosQuery = { __typename?: 'Query', subModulos: { __typename?: 'SubModuloTypeConnection', edges: Array<{ __typename?: 'SubModuloTypeEdge', node: { __typename?: 'SubModuloType', arquivoId: number, id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, url: string, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type SubModulosQuery = { __typename?: 'Query', subModulos: { __typename?: 'SubModuloTypeConnection', edges: Array<{ __typename?: 'SubModuloTypeEdge', node: { __typename?: 'SubModuloType', id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, url: string, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type TurmaQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -5686,7 +5752,6 @@ export const ModuloDocument = gql`
       id
     }
     subModulos(sorting: {field: ordem, direction: ASC}) {
-      arquivoId
       id
       mensagem
       modulo {
@@ -5697,7 +5762,6 @@ export const ModuloDocument = gql`
       ordem
       titulo
       updatedAt
-      url
     }
     biblioteca
   }
@@ -5983,7 +6047,6 @@ export type PerguntasQueryResult = Apollo.QueryResult<PerguntasQuery, PerguntasQ
 export const SubModuloDocument = gql`
     query SubModulo($id: Int!) {
   subModulo(id: $id) {
-    arquivoId
     id
     mensagem
     modulo {
@@ -5998,7 +6061,6 @@ export const SubModuloDocument = gql`
     ordem
     titulo
     updatedAt
-    url
   }
 }
     `;
@@ -6040,7 +6102,6 @@ export const SubModulosDocument = gql`
   subModulos(filter: $filter, paging: $paging, sorting: $sorting) {
     edges {
       node {
-        arquivoId
         id
         mensagem
         modulo {

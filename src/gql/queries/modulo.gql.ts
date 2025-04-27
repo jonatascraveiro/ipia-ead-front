@@ -14,7 +14,7 @@ query Modulo($id: Int!) {
       id
     }
     subModulos (sorting:{field:ordem,direction:ASC}){
-      arquivoId
+      #arquivoId
       
       id
       mensagem
@@ -26,7 +26,7 @@ query Modulo($id: Int!) {
       ordem
       titulo
       updatedAt
-      url
+      #url
     }
     biblioteca
     
