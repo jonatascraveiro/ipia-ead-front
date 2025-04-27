@@ -31,7 +31,7 @@ export const getColumns = ({
       header: () => <span>Mensagem</span>,
       maxSize: 300,
       cell: ({ row }) => {
-        return <div>{row.original?.titulo || '-'}</div>
+        return <div>{row.original?.mensagem || '-'}</div>
       },
     },
 
