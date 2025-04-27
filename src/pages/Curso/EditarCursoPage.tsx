@@ -16,7 +16,7 @@ export function EditarCursoPage() {
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo>Editar Curso</Page.Titulo>
+        <Page.Titulo url={ROTAS.CURSO}>Editar Curso</Page.Titulo>
       </Page.Header>
       {loading && <SkeletonForm />}
       {!loading && data?.curso && (

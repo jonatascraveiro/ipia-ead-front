@@ -23,10 +23,10 @@ const ROTAS = {
   CURSO_VISUALIZAR: '/curso/:id',
   CURSO_EDITAR: '/curso/:id/editar',
 
-  FORMULARIO: '/modulo/:moduloId/formulario',
-  FORMULARIO_CRIAR: '/modulo/:moduloId/formulario/criar',
-  FORMULARIO_VISUALIZAR: '/modulo/:moduloId/formulario/:id',
-  FORMULARIO_EDITAR: '/modulo/:moduloId/formulario/:id/editar',
+  FORMULARIO: '/sub-modulo/:subModuloId/formulario',
+  FORMULARIO_CRIAR: '/sub-modulo/:subModuloId/formulario/criar',
+  FORMULARIO_VISUALIZAR: '/sub-modulo/:subModuloId/formulario/:id',
+  FORMULARIO_EDITAR: '/sub-modulo/:subModuloId/formulario/:id/editar',
 
   PERGUNTA: '/pergunta',
   PERGUNTA_CRIAR: '/pergunta/criar',

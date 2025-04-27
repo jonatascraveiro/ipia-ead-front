@@ -13,10 +13,9 @@ query SubModulo($id: Int!) {
         id
         titulo
         curso{
-
             id 
             nome
-                    }
+        }
       }
       moduloId
       ordem

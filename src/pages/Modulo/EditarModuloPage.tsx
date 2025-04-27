@@ -1,4 +1,5 @@
 import { Page } from '@/components/Page'
+import { CardForm } from '@/components/common/CardForm'
 import { useCursoQuery, useModuloQuery } from '@/gql/generated/graphql'
 import { ROTAS } from '@/routes/rotas'
 import { generatePath, useParams } from 'react-router'
@@ -26,10 +27,14 @@ export function EditarModuloPage({
     skip: !id,
   })
 
+  const urlVoltar = generatePath(biblioteca ? ROTAS.BIBLIOTECA : ROTAS.MODULO, {
+    cursoId,
+  })
+
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo>
+        <Page.Titulo url={urlVoltar}>
           Editar {biblioteca ? 'Biblioteca' : 'Modulo'} do curso{' '}
           {curso?.curso?.nome}
         </Page.Titulo>
@@ -37,31 +42,23 @@ export function EditarModuloPage({
       {loading && <SkeletonForm />}
       {!loading && data?.modulo && (
         <>
-          <div className="p-5 mb-6 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
+          <CardForm>
             <FormModulo
               modulo={data.modulo}
-              urlVoltar={generatePath(
-                biblioteca ? ROTAS.BIBLIOTECA : ROTAS.MODULO,
-                {
-                  cursoId,
-                },
-              )}
+              urlVoltar={urlVoltar}
               biblioteca={biblioteca}
             />
-          </div>
-          <div className="p-5 mb-6 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
-            <h2 className="text-2xl">Sub Módulos do Módulo</h2>
-            <FormSubModulo
-              subModulos={data.modulo.subModulos || []}
-              urlVoltar={generatePath(
-                biblioteca ? ROTAS.BIBLIOTECA : ROTAS.MODULO,
-                {
-                  cursoId,
-                },
-              )}
-              moduloId={+id}
-            />
-          </div>
+          </CardForm>
+          {!biblioteca && (
+            <CardForm>
+              <CardForm.Titulo>Sub Módulos </CardForm.Titulo>
+
+              <FormSubModulo
+                subModulos={data.modulo.subModulos || []}
+                moduloId={+id}
+              />
+            </CardForm>
+          )}
         </>
       )}
     </Page>

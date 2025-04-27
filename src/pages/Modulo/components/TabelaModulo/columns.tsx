@@ -8,6 +8,7 @@ type Acoes = {
   editar: (data: ModuloType) => void
   aula: (data: ModuloType) => void
   formulario: (data: ModuloType) => void
+  biblioteca: boolean
 }
 
 export const getColumns = ({
@@ -15,6 +16,7 @@ export const getColumns = ({
   visualizar,
   aula,
   formulario,
+  biblioteca,
 }: Acoes): ColumnDef<ModuloType>[] => {
   return [
     {
@@ -54,14 +56,16 @@ export const getColumns = ({
             onClick: (row) => editar(row),
           },
           {
-            label: 'Grade',
+            label: 'Conteúdo',
             icon: <Icone.aulas />,
             onClick: (row) => aula(row),
+            omit: () => !biblioteca,
           },
           {
             label: 'Formulario',
             icon: <Icone.formulario />,
             onClick: (row) => formulario(row),
+            omit: () => biblioteca,
           },
         ],
       }),

@@ -5,6 +5,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 
 type Acoes = {
   aula: (data: SubModuloType) => void
+  formulario: (data: SubModuloType) => void
   editar: (data: SubModuloType) => void
   deletar: (data: SubModuloType) => void
 }
@@ -12,6 +13,7 @@ type Acoes = {
 export const getColumns = ({
   editar,
   aula,
+  formulario,
   deletar,
 }: Acoes): ColumnDef<SubModuloType>[] => {
   return [
@@ -46,6 +48,11 @@ export const getColumns = ({
             onClick: (row) => aula(row),
           },
           {
+            label: 'Formularios',
+            icon: <Icone.aulas />,
+            onClick: (row) => formulario(row),
+          },
+          {
             label: 'Editar',
             icon: <Icone.editar />,
             onClick: (row) => editar(row),
@@ -54,6 +61,7 @@ export const getColumns = ({
             label: 'Deletar',
             icon: <Icone.deletar />,
             onClick: (row) => deletar(row),
+            omit: () => true,
           },
         ],
       }),

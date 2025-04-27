@@ -13,7 +13,7 @@ query Modulo($id: Int!) {
       nome
       id
     }
-    subModulos {
+    subModulos (sorting:{field:ordem,direction:ASC}){
       arquivoId
       
       id

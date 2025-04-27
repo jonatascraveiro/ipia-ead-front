@@ -6,7 +6,7 @@ export function CriarCursoPage() {
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo>Criar Curso</Page.Titulo>
+        <Page.Titulo url={ROTAS.CURSO}>Criar Curso</Page.Titulo>
       </Page.Header>
 
       <FormCurso urlVoltar={ROTAS.CURSO} />

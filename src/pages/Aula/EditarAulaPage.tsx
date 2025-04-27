@@ -1,5 +1,5 @@
 import { Page } from '@/components/Page'
-import { useAulaQuery } from '@/gql/generated/graphql'
+import { useAulaQuery, useSubModuloQuery } from '@/gql/generated/graphql'
 import { ROTAS } from '@/routes/rotas'
 import { generatePath, useParams } from 'react-router'
 import { FormAula } from './components/FormAula'
@@ -17,12 +17,19 @@ export function EditarAulaPage({
     skip: !id,
   })
 
+  const { data: subModulo } = useSubModuloQuery({
+    variables: {
+      id: +subModuloId,
+    },
+    skip: !subModuloId,
+  })
+
   return (
     <Page>
       <Page.Header>
         <Page.Titulo>
           {' '}
-          {biblioteca ? 'Editar Aula Complementar' : 'Editar Aula'}
+          {`Editar Aula ${subModulo?.subModulo?.titulo}`}
         </Page.Titulo>
       </Page.Header>
       {loading && <SkeletonForm />}

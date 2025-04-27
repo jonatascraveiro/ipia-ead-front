@@ -60,10 +60,7 @@ export default function AppRoutes() {
             path={ROTAS.FORMULARIO_CRIAR}
             element={<CriarFormularioPage />}
           />
-          {/* <Route
-            path={ROTAS.FORMULARIO_VISUALIZAR}
-            element={<VisualizarFormu />}
-          /> */}
+
           <Route
             path={ROTAS.FORMULARIO_EDITAR}
             element={<EditarFormularioPage />}

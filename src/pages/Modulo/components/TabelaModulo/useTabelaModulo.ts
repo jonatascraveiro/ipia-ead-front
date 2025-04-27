@@ -49,7 +49,13 @@ export const useTabelaModulo = ({
 
   const handleAula = useCallback(
     (data: ModuloType) => {
-      console.log(data)
+      navigate(generatePath(ROTAS.MATERIAL_COMPLEMENTAR, { moduloId: data.id }))
+    },
+    [navigate],
+  )
+
+  const handleFormulario = useCallback(
+    (data: ModuloType) => {
       navigate(generatePath(ROTAS.FORMULARIO, { moduloId: data.id }))
     },
     [navigate],
@@ -87,9 +93,10 @@ export const useTabelaModulo = ({
         visualizar: handleVisualizar,
         editar: handleEditar,
         aula: handleAula,
-        formulario: handleAula,
+        formulario: handleFormulario,
+        biblioteca,
       }),
-    [handleVisualizar, handleEditar, handleAula],
+    [handleVisualizar, handleEditar, handleAula, handleFormulario, biblioteca],
   )
 
   return {

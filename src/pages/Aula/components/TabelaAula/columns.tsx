@@ -23,11 +23,7 @@ export const getColumns = ({
       accessorKey: 'ordem',
       header: () => <span>Ordem</span>,
     },
-    {
-      accessorFn: (row) => row.modulo?.titulo,
-      accessorKey: 'moduloId',
-      header: () => <span>Módulo</span>,
-    },
+
     {
       accessorFn: (row) => row.duracao,
       accessorKey: 'duracao',

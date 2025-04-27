@@ -74,10 +74,16 @@ export const useTabelaAula = ({
         subModuloId: { eq: +subModuloId },
       },
       paging,
-      sorting: {
-        field: AulaTypeSortFields.Titulo,
-        direction: SortDirection.Asc,
-      },
+      sorting: [
+        {
+          field: AulaTypeSortFields.Ordem,
+          direction: SortDirection.Asc,
+        },
+        {
+          field: AulaTypeSortFields.Titulo,
+          direction: SortDirection.Asc,
+        },
+      ],
     },
   })
 

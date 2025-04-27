@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button'
 
 import { Form } from '@/components/ui/form'
 
-import { SelectField } from '@/components/form/SelectField'
 import type { FormularioQuery } from '@/gql/generated/graphql'
 import { Link } from 'react-router'
 import { useFormFormulario } from './useForm'
@@ -12,13 +11,17 @@ function FormFormulario({
   formulario,
   disabled = false,
   urlVoltar,
+  subModuloId,
 }: {
   formulario?: FormularioQuery['formulario']
   disabled?: boolean
   urlVoltar: string
+  subModuloId: number
 }) {
-  const { form, onSubmit, cursoOptions, moduloOptions } = useFormFormulario({
+  const { form, onSubmit } = useFormFormulario({
     formulario,
+    urlVoltar,
+    subModuloId,
   })
 
   return (
@@ -36,24 +39,6 @@ function FormFormulario({
           />
         </div>
 
-        <div className="col-span-6 md:col-span-3  ">
-          <SelectField
-            disabled={disabled}
-            label="Curso"
-            description="Selecione o curso "
-            options={cursoOptions}
-            name="cursoId"
-          />
-        </div>
-        <div className="col-span-3  ">
-          <SelectField
-            disabled={disabled}
-            label="Módulo"
-            description="Modulo da aula"
-            options={moduloOptions}
-            name="moduloId"
-          />
-        </div>
         <div className=" col-span-12  flex  items-end gap-3">
           {!disabled && <Button type="submit">Salvar</Button>}
           <Link to={urlVoltar}>

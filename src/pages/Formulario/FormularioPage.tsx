@@ -3,30 +3,42 @@ import { Page } from '@/components/Page'
 import { InputField } from '@/components/form/InputField'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
-import { useModuloQuery } from '@/gql/generated/graphql'
+import { useSubModuloQuery } from '@/gql/generated/graphql'
 import { ROTAS } from '@/routes/rotas'
 import { Search, Trash2Icon } from 'lucide-react'
 import { Link, generatePath, useParams } from 'react-router'
 import { useTabelaFormulario } from './components/Tabela/useTabela'
 
 export function FormularioPage() {
-  const moduloId = useParams().moduloId as string
-  const { data: modulo } = useModuloQuery({
+  const subModuloId = useParams().subModuloId || 0
+  const { data: subModulo } = useSubModuloQuery({
     variables: {
-      id: +moduloId,
+      id: +subModuloId,
     },
-    skip: !moduloId,
+    skip: !subModuloId,
+  })
+  const urlVoltar = generatePath(ROTAS.MODULO_EDITAR, {
+    id: subModulo?.subModulo?.modulo?.id || 0,
+    cursoId: subModulo?.subModulo?.modulo?.curso?.id || 0,
   })
 
-  const { tabela, form, handleFilter, limparFiltro } = useTabelaFormulario()
+  // url={generatePath(ROTAS.MODULO_EDITAR, {
+  //   id: subModulo?.subModulo?.modulo?.id || 0,
+  //   cursoId: subModulo?.subModulo?.modulo?.curso?.id || 0,
+  // })}
+  const { tabela, form, handleFilter, limparFiltro } = useTabelaFormulario({
+    subModuloId: +subModuloId,
+  })
 
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo>Formulários do {modulo?.modulo?.titulo}</Page.Titulo>
+        <Page.Titulo url={urlVoltar}>
+          Formulários do {subModulo?.subModulo?.titulo}
+        </Page.Titulo>
         <Link
-          to={generatePath(ROTAS.MODULO, {
-            cursoId: modulo?.modulo?.curso?.id,
+          to={generatePath(ROTAS.FORMULARIO_CRIAR, {
+            subModuloId,
           })}
         >
           <Button>Novo Formulário</Button>
@@ -43,13 +55,6 @@ export function FormularioPage() {
               label="Titulo"
               placeholder="Titulo do Formulário"
               name="nome"
-            />
-          </div>
-          <div className=" xl:col-span-3 col-span-12 md:col-span-6 ">
-            <InputField
-              label="Módulo"
-              placeholder="Nome do módulo"
-              name="modulo"
             />
           </div>
 

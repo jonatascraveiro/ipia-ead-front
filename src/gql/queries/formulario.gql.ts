@@ -6,12 +6,21 @@ query Formulario($id: Int!) {
   formulario(id: $id) {
     id
         nome  
-        modulo{
+        perguntas(sorting:{
+      field:descricao,direction:ASC
+    }) {
+          id
+        descricao  
+        multiEscolha
+        tipo
+        formularioId
+        }
+        subModulo{
           titulo
           id
-          curso{
+          modulo{
             id 
-            nome
+            titulo
           }
         }
     
@@ -32,12 +41,15 @@ query Formularios(
         
          id
         nome  
-        modulo{
+        perguntas {
+      id
+    }
+    subModulo{
           titulo
           id
-          curso{
+          modulo{
             id 
-            nome
+            titulo
           }
         }
        

@@ -63,10 +63,16 @@ export const useTabelaAula = ({ biblioteca }: { biblioteca: boolean }) => {
         },
       },
       paging,
-      sorting: {
-        field: AulaTypeSortFields.Titulo,
-        direction: SortDirection.Asc,
-      },
+      sorting: [
+        {
+          field: AulaTypeSortFields.Ordem,
+          direction: SortDirection.Asc,
+        },
+        {
+          field: AulaTypeSortFields.Titulo,
+          direction: SortDirection.Asc,
+        },
+      ],
     },
   })
 

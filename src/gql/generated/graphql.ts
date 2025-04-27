@@ -627,10 +627,10 @@ export type CreateCursoInput = {
 };
 
 export type CreateFormularioInput = {
-  /** id do modulo */
-  moduloId: Scalars['Float']['input'];
   /** nome da formulário */
   nome: Scalars['String']['input'];
+  /** id do sub modulo */
+  subModuloId: Scalars['Float']['input'];
 };
 
 export type CreateInscricaoInput = {
@@ -1104,12 +1104,12 @@ export type Formularios = {
   /** data da exclusão do registro */
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id: Scalars['Int']['output'];
-  modulo?: Maybe<ModuloType>;
-  /** id do modulo */
-  moduloId: Scalars['Float']['output'];
   /** nome do formulário */
   nome: Scalars['String']['output'];
   perguntas?: Maybe<Array<Perguntas>>;
+  subModulo?: Maybe<SubModuloType>;
+  /** id do submodulo */
+  subModuloId: Scalars['Float']['output'];
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -1125,15 +1125,15 @@ export type FormulariosAggregateGroupBy = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
-  moduloId?: Maybe<Scalars['Float']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
+  subModuloId?: Maybe<Scalars['Float']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type FormulariosAvgAggregate = {
   __typename?: 'FormulariosAvgAggregate';
   id?: Maybe<Scalars['Float']['output']>;
-  moduloId?: Maybe<Scalars['Float']['output']>;
+  subModuloId?: Maybe<Scalars['Float']['output']>;
 };
 
 export type FormulariosConnection = {
@@ -1151,8 +1151,8 @@ export type FormulariosCountAggregate = {
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
-  moduloId?: Maybe<Scalars['Int']['output']>;
   nome?: Maybe<Scalars['Int']['output']>;
+  subModuloId?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -1163,10 +1163,10 @@ export type FormulariosDeleteResponse = {
   /** data da exclusão do registro */
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
-  /** id do modulo */
-  moduloId?: Maybe<Scalars['Float']['output']>;
   /** nome do formulário */
   nome?: Maybe<Scalars['String']['output']>;
+  /** id do submodulo */
+  subModuloId?: Maybe<Scalars['Float']['output']>;
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -1184,25 +1184,11 @@ export type FormulariosFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
-  modulo?: InputMaybe<FormulariosFilterModuloTypeFilter>;
-  moduloId?: InputMaybe<NumberFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<FormulariosFilter>>;
   perguntas?: InputMaybe<FormulariosFilterPerguntasFilter>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type FormulariosFilterModuloTypeFilter = {
-  and?: InputMaybe<Array<FormulariosFilterModuloTypeFilter>>;
-  biblioteca?: InputMaybe<BooleanFieldComparison>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  cursoId?: InputMaybe<NumberFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  descricao?: InputMaybe<StringFieldComparison>;
-  id?: InputMaybe<IntFieldComparison>;
-  or?: InputMaybe<Array<FormulariosFilterModuloTypeFilter>>;
-  ordem?: InputMaybe<NumberFieldComparison>;
-  titulo?: InputMaybe<StringFieldComparison>;
+  subModulo?: InputMaybe<FormulariosFilterSubModuloTypeFilter>;
+  subModuloId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -1219,13 +1205,28 @@ export type FormulariosFilterPerguntasFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
+export type FormulariosFilterSubModuloTypeFilter = {
+  and?: InputMaybe<Array<FormulariosFilterSubModuloTypeFilter>>;
+  arquivoId?: InputMaybe<NumberFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  mensagem?: InputMaybe<StringFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<FormulariosFilterSubModuloTypeFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  url?: InputMaybe<StringFieldComparison>;
+};
+
 export type FormulariosMaxAggregate = {
   __typename?: 'FormulariosMaxAggregate';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
-  moduloId?: Maybe<Scalars['Float']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
+  subModuloId?: Maybe<Scalars['Float']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -1234,8 +1235,8 @@ export type FormulariosMinAggregate = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
-  moduloId?: Maybe<Scalars['Float']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
+  subModuloId?: Maybe<Scalars['Float']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -1249,15 +1250,15 @@ export enum FormulariosSortFields {
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
   Id = 'id',
-  ModuloId = 'moduloId',
   Nome = 'nome',
+  SubModuloId = 'subModuloId',
   UpdatedAt = 'updatedAt'
 }
 
 export type FormulariosSumAggregate = {
   __typename?: 'FormulariosSumAggregate';
   id?: Maybe<Scalars['Float']['output']>;
-  moduloId?: Maybe<Scalars['Float']['output']>;
+  subModuloId?: Maybe<Scalars['Float']['output']>;
 };
 
 export type InscricaoType = {
@@ -2098,9 +2099,9 @@ export type PerguntasFilterFormulariosFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
-  moduloId?: InputMaybe<NumberFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<PerguntasFilterFormulariosFilter>>;
+  subModuloId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -3424,10 +3425,10 @@ export type UpdateCursoInput = {
 };
 
 export type UpdateFormularioInput = {
-  /** id do modulo */
-  moduloId?: InputMaybe<Scalars['Float']['input']>;
   /** nome da formulário */
   nome?: InputMaybe<Scalars['String']['input']>;
+  /** id do sub modulo */
+  subModuloId?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type UpdateInscricaoInput = {
@@ -3958,7 +3959,7 @@ export type FormularioQueryVariables = Exact<{
 }>;
 
 
-export type FormularioQuery = { __typename?: 'Query', formulario?: { __typename?: 'Formularios', id: number, nome: string, modulo?: { __typename?: 'ModuloType', titulo: string, id: number, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } | null };
+export type FormularioQuery = { __typename?: 'Query', formulario?: { __typename?: 'Formularios', id: number, nome: string, perguntas?: Array<{ __typename?: 'Perguntas', id: number, descricao: string, multiEscolha: boolean, tipo?: string | null, formularioId: number }> | null, subModulo?: { __typename?: 'SubModuloType', titulo: string, id: number, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null } | null } | null };
 
 export type FormulariosQueryVariables = Exact<{
   filter?: InputMaybe<FormulariosFilter>;
@@ -3967,7 +3968,7 @@ export type FormulariosQueryVariables = Exact<{
 }>;
 
 
-export type FormulariosQuery = { __typename?: 'Query', formularios: { __typename?: 'FormulariosConnection', edges: Array<{ __typename?: 'FormulariosEdge', node: { __typename?: 'Formularios', id: number, nome: string, modulo?: { __typename?: 'ModuloType', titulo: string, id: number, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type FormulariosQuery = { __typename?: 'Query', formularios: { __typename?: 'FormulariosConnection', edges: Array<{ __typename?: 'FormulariosEdge', node: { __typename?: 'Formularios', id: number, nome: string, perguntas?: Array<{ __typename?: 'Perguntas', id: number }> | null, subModulo?: { __typename?: 'SubModuloType', titulo: string, id: number, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type FormulariosSelectQueryVariables = Exact<{
   filter?: InputMaybe<FormulariosFilter>;
@@ -4024,7 +4025,7 @@ export type PerguntaQueryVariables = Exact<{
 }>;
 
 
-export type PerguntaQuery = { __typename?: 'Query', pergunta?: { __typename?: 'Perguntas', id: number, descricao: string, multiEscolha: boolean, tipo?: string | null, formularioId: number, formulario?: { __typename?: 'Formularios', nome: string, id: number, modulo?: { __typename?: 'ModuloType', titulo: string, id: number, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } | null, respostas?: Array<{ __typename?: 'Respostas', descricao: string, id: number, perguntaId: number, correta: boolean }> | null } | null };
+export type PerguntaQuery = { __typename?: 'Query', pergunta?: { __typename?: 'Perguntas', id: number, descricao: string, multiEscolha: boolean, tipo?: string | null, formularioId: number, formulario?: { __typename?: 'Formularios', nome: string, id: number, subModulo?: { __typename?: 'SubModuloType', titulo: string, id: number, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null } | null } | null, respostas?: Array<{ __typename?: 'Respostas', descricao: string, id: number, perguntaId: number, correta: boolean }> | null } | null };
 
 export type PerguntasQueryVariables = Exact<{
   filter?: InputMaybe<PerguntasFilter>;
@@ -4033,7 +4034,7 @@ export type PerguntasQueryVariables = Exact<{
 }>;
 
 
-export type PerguntasQuery = { __typename?: 'Query', perguntas: { __typename?: 'PerguntasConnection', edges: Array<{ __typename?: 'PerguntasEdge', node: { __typename?: 'Perguntas', id: number, descricao: string, multiEscolha: boolean, tipo?: string | null, formularioId: number, formulario?: { __typename?: 'Formularios', nome: string, id: number, modulo?: { __typename?: 'ModuloType', titulo: string, id: number, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } | null, respostas?: Array<{ __typename?: 'Respostas', descricao: string, id: number, perguntaId: number, correta: boolean }> | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type PerguntasQuery = { __typename?: 'Query', perguntas: { __typename?: 'PerguntasConnection', edges: Array<{ __typename?: 'PerguntasEdge', node: { __typename?: 'Perguntas', id: number, descricao: string, multiEscolha: boolean, tipo?: string | null, formularioId: number, formulario?: { __typename?: 'Formularios', nome: string, id: number, subModulo?: { __typename?: 'SubModuloType', titulo: string, id: number, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null } | null } | null, respostas?: Array<{ __typename?: 'Respostas', descricao: string, id: number, perguntaId: number, correta: boolean }> | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type SubModuloQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -5396,12 +5397,19 @@ export const FormularioDocument = gql`
   formulario(id: $id) {
     id
     nome
-    modulo {
+    perguntas(sorting: {field: descricao, direction: ASC}) {
+      id
+      descricao
+      multiEscolha
+      tipo
+      formularioId
+    }
+    subModulo {
       titulo
       id
-      curso {
+      modulo {
         id
-        nome
+        titulo
       }
     }
   }
@@ -5447,12 +5455,15 @@ export const FormulariosDocument = gql`
       node {
         id
         nome
-        modulo {
+        perguntas {
+          id
+        }
+        subModulo {
           titulo
           id
-          curso {
+          modulo {
             id
-            nome
+            titulo
           }
         }
       }
@@ -5674,7 +5685,7 @@ export const ModuloDocument = gql`
       nome
       id
     }
-    subModulos {
+    subModulos(sorting: {field: ordem, direction: ASC}) {
       arquivoId
       id
       mensagem
@@ -5844,12 +5855,12 @@ export const PerguntaDocument = gql`
     formulario {
       nome
       id
-      modulo {
+      subModulo {
         titulo
         id
-        curso {
+        modulo {
           id
-          nome
+          titulo
         }
       }
     }
@@ -5908,12 +5919,12 @@ export const PerguntasDocument = gql`
         formulario {
           nome
           id
-          modulo {
+          subModulo {
             titulo
             id
-            curso {
+            modulo {
               id
-              nome
+              titulo
             }
           }
         }
