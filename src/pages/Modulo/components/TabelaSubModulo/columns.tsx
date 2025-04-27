@@ -21,12 +21,18 @@ export const getColumns = ({
       accessorFn: (row) => row.titulo,
       accessorKey: 'Titulo',
       header: () => <span>Titulo</span>,
+      cell: ({ row }) => {
+        return <div>{row.original?.titulo || '-'}</div>
+      },
     },
     {
       accessorFn: (row) => row.mensagem,
       accessorKey: 'mensagem',
       header: () => <span>Mensagem</span>,
       maxSize: 300,
+      cell: ({ row }) => {
+        return <div>{row.original?.titulo || '-'}</div>
+      },
     },
 
     {

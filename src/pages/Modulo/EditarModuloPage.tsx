@@ -5,7 +5,6 @@ import { ROTAS } from '@/routes/rotas'
 import { generatePath, useParams } from 'react-router'
 import { FormModulo } from './components/FormModulo'
 import { SkeletonForm } from './components/FormModulo/skeletonForm'
-import { FormSubModulo } from './components/FormSubModulo'
 
 export function EditarModuloPage({
   biblioteca = false,
@@ -49,7 +48,7 @@ export function EditarModuloPage({
               biblioteca={biblioteca}
             />
           </CardForm>
-          {!biblioteca && (
+          {/* {!biblioteca && (
             <CardForm>
               <CardForm.Titulo>Submódulos </CardForm.Titulo>
 
@@ -58,7 +57,7 @@ export function EditarModuloPage({
                 moduloId={+id}
               />
             </CardForm>
-          )}
+          )} */}
         </>
       )}
     </Page>

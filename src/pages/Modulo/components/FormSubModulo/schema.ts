@@ -5,9 +5,7 @@ export const schema = z
     id: z.number().optional(),
     titulo: z.string({ required_error: 'Título é obrigatório' }),
     url: z.string().optional(),
-    mensagem: z
-      .string({ required_error: 'Mensagem é obrigatório' })
-      .min(1, 'Mensagem é obrigatório'),
+    mensagem: z.string({ required_error: 'Mensagem é obrigatório' }),
     moduloId: z
       .number({ required_error: 'Curso é obrigatório' })
       .min(1, 'Curso é obrigatório'),

@@ -37,6 +37,7 @@ const ROTAS = {
   MODULO_CRIAR: '/curso/:cursoId/modulo/criar',
   MODULO_VISUALIZAR: '/curso/:cursoId/modulo/:id',
   MODULO_EDITAR: '/curso/:cursoId/modulo/:id/editar',
+  MODULO_SUBMODULO_EDITAR: '/curso/:cursoId/modulo/:id/subdmodulo',
 
   BIBLIOTECA: '/curso/:cursoId/biblioteca',
   BIBLIOTECA_CRIAR: '/curso/:cursoId/biblioteca/criar',

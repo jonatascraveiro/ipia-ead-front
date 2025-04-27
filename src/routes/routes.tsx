@@ -24,6 +24,7 @@ import { EditarMaterialComplementarPage } from '@/pages/MaterialComplementar/Edi
 import { MaterialComplementarPage } from '@/pages/MaterialComplementar/MaterialComplementarPage'
 import { CriarModuloPage } from '@/pages/Modulo/CriarModuloPage'
 import { EditarModuloPage } from '@/pages/Modulo/EditarModuloPage'
+import { EditarSubModuloPage } from '@/pages/Modulo/EditarSubModuloPage'
 import { ModuloPage } from '@/pages/Modulo/ModuloPage'
 import { CriarPerguntaPage } from '@/pages/Pergunta/CriarPerguntaPage'
 import { EditarPerguntaPage } from '@/pages/Pergunta/EditarPerguntaPage'
@@ -111,6 +112,10 @@ export default function AppRoutes() {
           <Route path={ROTAS.MODULO_CRIAR} element={<CriarModuloPage />} />
 
           <Route path={ROTAS.MODULO_EDITAR} element={<EditarModuloPage />} />
+          <Route
+            path={ROTAS.MODULO_SUBMODULO_EDITAR}
+            element={<EditarSubModuloPage />}
+          />
 
           <Route path={ROTAS.BIBLIOTECA} element={<ModuloPage biblioteca />} />
           <Route

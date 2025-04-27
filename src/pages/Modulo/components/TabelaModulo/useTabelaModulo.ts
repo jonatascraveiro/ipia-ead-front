@@ -47,6 +47,18 @@ export const useTabelaModulo = ({
     [biblioteca, cursoId, navigate],
   )
 
+  const handleEditarSubmodulo = useCallback(
+    (data: ModuloType) => {
+      navigate(
+        generatePath(
+          biblioteca ? ROTAS.BIBLIOTECA_EDITAR : ROTAS.MODULO_SUBMODULO_EDITAR,
+          { id: data.id, cursoId },
+        ),
+      )
+    },
+    [biblioteca, cursoId, navigate],
+  )
+
   const handleAula = useCallback(
     (data: ModuloType) => {
       navigate(generatePath(ROTAS.MATERIAL_COMPLEMENTAR, { moduloId: data.id }))
@@ -80,10 +92,16 @@ export const useTabelaModulo = ({
         biblioteca: { is: biblioteca },
       },
       paging,
-      sorting: {
-        field: ModuloTypeSortFields.Titulo,
-        direction: SortDirection.Asc,
-      },
+      sorting: [
+        {
+          field: ModuloTypeSortFields.Ordem,
+          direction: SortDirection.Asc,
+        },
+        {
+          field: ModuloTypeSortFields.Titulo,
+          direction: SortDirection.Asc,
+        },
+      ],
     },
   })
 
@@ -94,6 +112,7 @@ export const useTabelaModulo = ({
         editar: handleEditar,
         aula: handleAula,
         formulario: handleFormulario,
+        editarSubmodulo: handleEditarSubmodulo,
         biblioteca,
       }),
     [handleVisualizar, handleEditar, handleAula, handleFormulario, biblioteca],
