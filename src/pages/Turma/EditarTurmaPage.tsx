@@ -21,10 +21,17 @@ export function EditarTurmaPage() {
       id: Number(id),
     },
   })
+
+  const urlVoltar = generatePath(ROTAS.TURMA, {
+    cursoId,
+  })
+
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo>Editar Turma do curso {curso?.curso?.nome}</Page.Titulo>
+        <Page.Titulo url={urlVoltar}>
+          Editar Turma {curso?.curso?.nome}
+        </Page.Titulo>
       </Page.Header>
       {loading && <SkeletonForm />}
       {!loading && data?.turma && (

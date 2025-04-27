@@ -22,10 +22,14 @@ export function VisualizarTurmaPage() {
     },
   })
 
+  const urlVoltar = generatePath(ROTAS.TURMA, {
+    cursoId,
+  })
+
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo>
+        <Page.Titulo url={urlVoltar}>
           Visualizar Turma do curso {curso?.curso?.nome}
         </Page.Titulo>
       </Page.Header>

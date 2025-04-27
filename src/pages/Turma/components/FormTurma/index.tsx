@@ -43,7 +43,7 @@ function FormTurma({
             name="descricao"
           />
         </div>
-        <div className="col-span-2  ">
+        <div className="col-span-12  md:col-span-3 ">
           <InputField
             disabled={disabled}
             label="Duração"

@@ -25,9 +25,7 @@ export function TurmaPage() {
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo url={ROTAS.CURSO}>
-          Turmas do curso {curso?.curso?.nome}
-        </Page.Titulo>
+        <Page.Titulo url={ROTAS.CURSO}>Turmas {curso?.curso?.nome}</Page.Titulo>
         <Link to={generatePath(ROTAS.TURMA_CRIAR, { cursoId })}>
           <Button>Nova Turma</Button>
         </Link>

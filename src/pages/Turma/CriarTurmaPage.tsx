@@ -12,11 +12,16 @@ export function CriarTurmaPage() {
     },
     skip: !cursoId,
   })
+  const urlVoltar = generatePath(ROTAS.TURMA, {
+    cursoId,
+  })
 
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo>Criar Turma do curso {curso?.curso?.nome}</Page.Titulo>
+        <Page.Titulo url={urlVoltar}>
+          Criar Turma {curso?.curso?.nome}
+        </Page.Titulo>
       </Page.Header>
 
       <FormTurma urlVoltar={generatePath(ROTAS.TURMA, { cursoId })} />
