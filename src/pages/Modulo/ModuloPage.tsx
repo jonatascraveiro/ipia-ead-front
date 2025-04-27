@@ -28,12 +28,12 @@ export function ModuloPage({ biblioteca = false }: { biblioteca?: boolean }) {
       <Page.Header>
         <Page.Titulo url={ROTAS.CURSO}>
           {' '}
-          {biblioteca ? 'Biblioteca' : 'Modulo'} do curso de{' '}
+          {biblioteca ? 'Biblioteca' : 'Módulo'} do curso de{' '}
           {curso?.curso?.nome}
         </Page.Titulo>
         {!biblioteca && (
           <Link to={generatePath(ROTAS.MODULO_CRIAR, { cursoId })}>
-            <Button>Novo Modulo</Button>
+            <Button>Novo Módulo</Button>
           </Link>
         )}
         {biblioteca && (

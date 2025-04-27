@@ -62,7 +62,7 @@ function FormPerguntas({
           <SelectField
             disabled={disabled}
             label="Módulo"
-            description="Modulo da aula"
+            description="Módulo da aula"
             options={moduloOptions}
             name="moduloId"
           />

@@ -19,7 +19,7 @@ export function CriarModuloPage({
     <Page>
       <Page.Header>
         <Page.Titulo>
-          Criar {biblioteca ? 'Biblioteca' : 'Modulo'} do curso{' '}
+          Criar {biblioteca ? 'Biblioteca' : 'Módulo'} do curso{' '}
           {curso?.curso?.nome}
         </Page.Titulo>
       </Page.Header>
