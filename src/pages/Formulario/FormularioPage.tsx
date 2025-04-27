@@ -22,10 +22,6 @@ export function FormularioPage() {
     cursoId: subModulo?.subModulo?.modulo?.curso?.id || 0,
   })
 
-  // url={generatePath(ROTAS.MODULO_EDITAR, {
-  //   id: subModulo?.subModulo?.modulo?.id || 0,
-  //   cursoId: subModulo?.subModulo?.modulo?.curso?.id || 0,
-  // })}
   const { tabela, form, handleFilter, limparFiltro } = useTabelaFormulario({
     subModuloId: +subModuloId,
   })

@@ -48,6 +48,7 @@ export const getColumns = ({
             label: 'Visualizar',
             icon: <Icone.visualizar />,
             onClick: (row) => visualizar(row),
+            omit: () => true,
           },
           {
             label: 'Editar',

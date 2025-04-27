@@ -64,6 +64,3 @@ export function EditarModuloPage({
     </Page>
   )
 }
-
-// titulo, mensagem , ordem, arquivo,moduloId
-//url -> arquivo

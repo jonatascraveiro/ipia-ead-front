@@ -61,7 +61,7 @@ function FormSubModulo({
     <>
       {!isOpen && (
         <Button onClick={toggleFormulario} className="my-2">
-          Adicionar SubModulo
+          Adicionar Submódulo
         </Button>
       )}
       {isOpen && (

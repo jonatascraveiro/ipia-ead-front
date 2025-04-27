@@ -43,19 +43,19 @@ export const getColumns = ({
       ...ColumnAction<SubModuloType>({
         actions: [
           {
+            label: 'Editar',
+            icon: <Icone.editar />,
+            onClick: (row) => editar(row),
+          },
+          {
             label: 'Aulas',
             icon: <Icone.aulas />,
             onClick: (row) => aula(row),
           },
           {
             label: 'Formularios',
-            icon: <Icone.aulas />,
+            icon: <Icone.formulario />,
             onClick: (row) => formulario(row),
-          },
-          {
-            label: 'Editar',
-            icon: <Icone.editar />,
-            onClick: (row) => editar(row),
           },
           {
             label: 'Deletar',
