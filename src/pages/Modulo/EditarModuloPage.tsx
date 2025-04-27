@@ -35,7 +35,7 @@ export function EditarModuloPage({
     <Page>
       <Page.Header>
         <Page.Titulo url={urlVoltar}>
-          Editar {biblioteca ? 'Biblioteca' : 'Modulo'} do curso{' '}
+          Editar {biblioteca ? 'Biblioteca' : 'Módulo'} do curso{' '}
           {curso?.curso?.nome}
         </Page.Titulo>
       </Page.Header>
@@ -51,7 +51,7 @@ export function EditarModuloPage({
           </CardForm>
           {!biblioteca && (
             <CardForm>
-              <CardForm.Titulo>Sub Módulos </CardForm.Titulo>
+              <CardForm.Titulo>Submódulos </CardForm.Titulo>
 
               <FormSubModulo
                 subModulos={data.modulo.subModulos || []}

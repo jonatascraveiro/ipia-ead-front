@@ -48,7 +48,7 @@ export function ColumnAction<TData>({
                 <DropdownMenuItem
                   key={index}
                   onClick={() => action.onClick(data)}
-                  className="size-8"
+                  className="size-8 w-44"
                 >
                   {action.icon && <span className="mr-2">{action.icon}</span>}
                   {action.label}

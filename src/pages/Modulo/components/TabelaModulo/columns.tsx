@@ -56,6 +56,12 @@ export const getColumns = ({
             onClick: (row) => editar(row),
           },
           {
+            label: 'Submódulos',
+            icon: <Icone.modulo />,
+            onClick: (row) => editar(row),
+            omit: () => biblioteca,
+          },
+          {
             label: 'Conteúdo',
             icon: <Icone.aulas />,
             onClick: (row) => aula(row),
@@ -65,7 +71,7 @@ export const getColumns = ({
             label: 'Formulario',
             icon: <Icone.formulario />,
             onClick: (row) => formulario(row),
-            omit: () => biblioteca,
+            omit: () => true,
           },
         ],
       }),
