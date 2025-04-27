@@ -29,7 +29,7 @@ export function EditarAulaPage({
       <Page.Header>
         <Page.Titulo>
           {' '}
-          {`Editar Aula ${subModulo?.subModulo?.titulo}`}
+          {`Editar Aula ${subModulo?.subModulo?.titulo || ''}`}
         </Page.Titulo>
       </Page.Header>
       {loading && <SkeletonForm />}
