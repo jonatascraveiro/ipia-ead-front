@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 
 import { DatePickerField } from '@/components/form/DatePickerField'
-import { SelectField } from '@/components/form/SelectField'
 import { TextareaField } from '@/components/form/TextareaField'
 import type { TurmaQuery } from '@/gql/generated/graphql'
 import { Link } from 'react-router'
@@ -13,8 +12,13 @@ import { useFormTurma } from './useFormTurma'
 function FormTurma({
   turma,
   disabled = false,
-}: { turma?: TurmaQuery['turma']; disabled?: boolean }) {
-  const { form, onSubmit, cursoOptions } = useFormTurma({ turma })
+  urlVoltar,
+}: {
+  turma?: TurmaQuery['turma']
+  disabled?: boolean
+  urlVoltar: string
+}) {
+  const { form, onSubmit } = useFormTurma({ turma, urlVoltar })
 
   return (
     <Form {...form}>
@@ -65,19 +69,10 @@ function FormTurma({
             name="fim"
           />
         </div>
-        <div className="col-span-3  ">
-          <SelectField
-            disabled={disabled}
-            label="Curso"
-            placeholder="Selecione o curso "
-            options={cursoOptions}
-            name="cursoId"
-          />
-        </div>
 
         <div className=" col-span-12  flex  items-end gap-3">
           {!disabled && <Button type="submit">Salvar</Button>}
-          <Link to="/turma">
+          <Link to={urlVoltar}>
             <Button variant={'outline'} type="reset">
               Voltar
             </Button>

@@ -1,16 +1,22 @@
 import { ColumnAction } from '@/components/DataTable/ColumnAction'
+import { Icone } from '@/components/common/Icons'
 import type { ModuloType } from '@/types/modulo'
 import type { ColumnDef } from '@tanstack/react-table'
-import { Eye, Pencil } from 'lucide-react'
 
 type Acoes = {
   visualizar: (data: ModuloType) => void
   editar: (data: ModuloType) => void
+  aula: (data: ModuloType) => void
+  formulario: (data: ModuloType) => void
+  biblioteca: boolean
 }
 
 export const getColumns = ({
   editar,
   visualizar,
+  aula,
+  formulario,
+  biblioteca,
 }: Acoes): ColumnDef<ModuloType>[] => {
   return [
     {
@@ -24,28 +30,13 @@ export const getColumns = ({
       header: () => <span>Descrição</span>,
       maxSize: 300,
     },
-    {
-      accessorFn: (row) => row.cursoId,
-      accessorKey: 'cursoId',
-      header: () => <span>Curso</span>,
-      cell: ({ row }) => {
-        return <div>{row.original?.curso.nome}</div>
-      },
-    },
+
     {
       accessorFn: (row) => row.ordem,
       accessorKey: 'ordem',
       header: () => <span>Ordem</span>,
       cell: ({ row }) => {
         return <div>{row.original?.ordem}</div>
-      },
-    },
-    {
-      accessorFn: (row) => row.biblioteca,
-      accessorKey: 'Material complementar',
-      header: () => <span>Material complementar</span>,
-      cell: ({ row }) => {
-        return <div>{row.original?.biblioteca ? 'Sim' : 'Não'}</div>
       },
     },
 
@@ -55,14 +46,26 @@ export const getColumns = ({
         actions: [
           {
             label: 'Visualizar',
-            icon: <Eye className="h-6 w-6" />,
+            icon: <Icone.visualizar />,
             onClick: (row) => visualizar(row),
             omit: () => true,
           },
           {
             label: 'Editar',
-            icon: <Pencil className="h-6 w-6" />,
+            icon: <Icone.editar />,
             onClick: (row) => editar(row),
+          },
+          {
+            label: 'Conteúdo',
+            icon: <Icone.aulas />,
+            onClick: (row) => aula(row),
+            omit: () => !biblioteca,
+          },
+          {
+            label: 'Formulario',
+            icon: <Icone.formulario />,
+            onClick: (row) => formulario(row),
+            omit: () => biblioteca,
           },
         ],
       }),

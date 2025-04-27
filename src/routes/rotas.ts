@@ -5,40 +5,48 @@ const ROTAS = {
 
   INSCRICOES: '/inscricoes',
 
-  AULA: '/aula',
-  AULA_CRIAR: '/aula/criar',
-  AULA_VISUALIZAR: '/aula/:id',
-  AULA_EDITAR: '/aula/:id/editar',
+  AULA: '/sub-modulo/:subModuloId/aula',
+  AULA_CRIAR: '/sub-modulo/:subModuloId/aula/criar',
+  AULA_VISUALIZAR: '/sub-modulo/:subModuloId/aula/:id',
+  AULA_EDITAR: '/sub-modulo/:subModuloId/aula/:id/editar',
 
-  AULA_COMPLEMENTAR: '/material-complementar',
-  AULA_COMPLEMENTAR_CRIAR: '/material-complementar/criar',
-  AULA_COMPLEMENTAR_VISUALIZAR: '/material-complementar/:id',
-  AULA_COMPLEMENTAR_EDITAR: '/material-complementar/:id/editar',
+  MATERIAL_COMPLEMENTAR: '/biblioteca/:moduloId/material-complementar',
+  MATERIAL_COMPLEMENTAR_CRIAR:
+    '/biblioteca/:moduloId/material-complementar/criar',
+  MATERIAL_COMPLEMENTAR_VISUALIZAR:
+    '/biblioteca/:moduloId/material-complementar/:id',
+  MATERIAL_COMPLEMENTAR_EDITAR:
+    '/biblioteca/:moduloId/material-complementar/:id/editar',
 
   CURSO: '/curso',
   CURSO_CRIAR: '/curso/criar',
   CURSO_VISUALIZAR: '/curso/:id',
   CURSO_EDITAR: '/curso/:id/editar',
 
-  FORMULARIO: '/formulario',
-  FORMULARIO_CRIAR: '/formulario/criar',
-  FORMULARIO_VISUALIZAR: '/formulario/:id',
-  FORMULARIO_EDITAR: '/formulario/:id/editar',
+  FORMULARIO: '/sub-modulo/:subModuloId/formulario',
+  FORMULARIO_CRIAR: '/sub-modulo/:subModuloId/formulario/criar',
+  FORMULARIO_VISUALIZAR: '/sub-modulo/:subModuloId/formulario/:id',
+  FORMULARIO_EDITAR: '/sub-modulo/:subModuloId/formulario/:id/editar',
 
   PERGUNTA: '/pergunta',
   PERGUNTA_CRIAR: '/pergunta/criar',
   PERGUNTA_VISUALIZAR: '/pergunta/:id',
   PERGUNTA_EDITAR: '/pergunta/:id/editar',
 
-  MODULO: '/modulo',
-  MODULO_CRIAR: '/modulo/criar',
-  MODULO_VISUALIZAR: '/modulo/:id',
-  MODULO_EDITAR: '/modulo/:id/editar',
+  MODULO: '/curso/:cursoId/modulo',
+  MODULO_CRIAR: '/curso/:cursoId/modulo/criar',
+  MODULO_VISUALIZAR: '/curso/:cursoId/modulo/:id',
+  MODULO_EDITAR: '/curso/:cursoId/modulo/:id/editar',
 
-  TURMA: '/turma',
-  TURMA_CRIAR: '/turma/criar',
-  TURMA_VISUALIZAR: '/turma/:id',
-  TURMA_EDITAR: '/turma/:id/editar',
+  BIBLIOTECA: '/curso/:cursoId/biblioteca',
+  BIBLIOTECA_CRIAR: '/curso/:cursoId/biblioteca/criar',
+  BIBLIOTECA_VISUALIZAR: '/curso/:cursoId/biblioteca/:id',
+  BIBLIOTECA_EDITAR: '/curso/:cursoId/biblioteca/:id/editar',
+
+  TURMA: '/curso/:cursoId/turma',
+  TURMA_CRIAR: '/curso/:cursoId/turma/criar',
+  TURMA_VISUALIZAR: '/curso/:cursoId/turma/:id',
+  TURMA_EDITAR: '/curso/:cursoId/turma/:id/editar',
 
   USUARIO: '/usuario',
   USUARIO_EDITAR: '/usuario/:id',

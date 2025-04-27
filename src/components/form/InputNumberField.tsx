@@ -37,6 +37,7 @@ export const InputNumberField = ({
           <FormControl>
             <Input
               {...field}
+              min={0}
               onChange={(event) =>
                 field.onChange?.(Number.parseInt(event.target.value, 10))
               }

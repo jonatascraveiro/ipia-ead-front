@@ -6,7 +6,6 @@ import { Form } from '@/components/ui/form'
 import { EditorFormularioHtml } from '@/components/ui/editor'
 
 import { InputNumberField } from '@/components/form/InputNumberField'
-import { SelectField } from '@/components/form/SelectField'
 import { Label } from '@/components/ui/label'
 import type { AulaQuery } from '@/gql/generated/graphql'
 import { Link } from 'react-router'
@@ -16,10 +15,20 @@ function FormAula({
   aula,
   disabled = false,
   biblioteca = false,
-}: { aula?: AulaQuery['aula']; disabled?: boolean; biblioteca: boolean }) {
-  const { form, onSubmit, moduloOptions, cursoOptions } = useFormAula({
+  subModuloId,
+  urlVoltar,
+}: {
+  aula?: AulaQuery['aula']
+  disabled?: boolean
+  biblioteca: boolean
+  subModuloId: string
+  urlVoltar: string
+}) {
+  const { form, onSubmit } = useFormAula({
     aula,
     biblioteca,
+    subModuloId,
+    urlVoltar,
   })
 
   return (
@@ -39,7 +48,7 @@ function FormAula({
         <div className="col-span-12  ">
           <Label className="mb-2"> Conteúdo da aula</Label>
           <EditorFormularioHtml
-            data={form.getValues('descricao')}
+            data={form.getValues('descricao') || ''}
             setData={(val) => {
               form.setValue('descricao', val)
             }}
@@ -62,7 +71,7 @@ function FormAula({
           />
         </div>
 
-        <div className="col-span-3  ">
+        {/* <div className="col-span-3  ">
           <SelectField
             disabled={disabled}
             label="Curso"
@@ -83,7 +92,7 @@ function FormAula({
             options={moduloOptions}
             name="moduloId"
           />
-        </div>
+        </div> */}
 
         <div className="col-span-12  ">
           <InputField
@@ -96,7 +105,7 @@ function FormAula({
 
         <div className=" col-span-12  flex  items-end gap-3">
           {!disabled && <Button type="submit">Salvar</Button>}
-          <Link to="/aula">
+          <Link to={urlVoltar}>
             <Button variant={'outline'} type="reset">
               Voltar
             </Button>

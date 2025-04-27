@@ -4,13 +4,16 @@ import {
   useFormulariosQuery,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
+import { ROTAS } from '@/routes/rotas'
 import type { FormularioType } from '@/types/formulario'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router'
+import { generatePath, useNavigate } from 'react-router'
 import { getColumns } from './columns'
 
-export const useTabelaFormulario = () => {
+export const useTabelaFormulario = ({
+  subModuloId,
+}: { subModuloId: number }) => {
   const form = useForm<{ nome: string; modulo: string }>({
     defaultValues: {
       nome: '',
@@ -34,23 +37,23 @@ export const useTabelaFormulario = () => {
   const navigate = useNavigate()
   const handleEditar = useCallback(
     (data: FormularioType) => {
-      navigate(`/formulario/${data.id}/editar`)
+      navigate(
+        generatePath(ROTAS.FORMULARIO_EDITAR, {
+          id: data.id,
+          subModuloId: subModuloId,
+        }),
+      )
     },
-    [navigate],
-  )
-  const handleVisualizar = useCallback(
-    (data: FormularioType) => {
-      navigate(`/formulario/${data.id}`)
-    },
-    [navigate],
+    [navigate, subModuloId],
   )
 
   const { data, loading } = useFormulariosQuery({
     variables: {
       filter: {
         nome: { iLike: `%${nome || ''}%` },
-        modulo: {
+        subModulo: {
           titulo: { iLike: `%${modulo || ''}%` },
+          id: { eq: +subModuloId },
         },
       },
       paging,
@@ -64,10 +67,9 @@ export const useTabelaFormulario = () => {
   const columns = useMemo(
     () =>
       getColumns({
-        visualizar: handleVisualizar,
         editar: handleEditar,
       }),
-    [handleVisualizar, handleEditar],
+    [handleEditar],
   )
 
   return {

@@ -1,24 +1,25 @@
 import {
   type AulaQuery,
-  ModuloTypeSortFields,
-  SortDirection,
   useCreateOneAulaMutation,
-  useCursosModuloSelectQuery,
-  useModulosSelectQuery,
   useUpdateOneAulaMutation,
 } from '@/gql/generated/graphql'
-import { ROTAS } from '@/routes/rotas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
-import { CursoTypeSortFields } from './../../../../gql/generated/graphql'
 import { type AulaSchemaInput, type AulaSchemaOutput, schema } from './schema'
 
 export const useFormAula = ({
   aula,
-  biblioteca,
-}: { aula?: AulaQuery['aula']; biblioteca?: boolean }) => {
+
+  urlVoltar,
+  subModuloId,
+}: {
+  aula?: AulaQuery['aula']
+  biblioteca?: boolean
+  subModuloId: string
+  urlVoltar: string
+}) => {
   const navigate = useNavigate()
 
   const form = useForm<AulaSchemaInput>({
@@ -29,58 +30,58 @@ export const useFormAula = ({
       descricao: aula?.descricao || '',
       ordem: aula?.ordem || 1,
       duracao: aula?.duracao || 30,
-      moduloId: aula?.modulo?.id || undefined,
-      cursoId: aula?.modulo?.curso?.id || undefined,
+      subModuloId: +subModuloId || undefined,
 
-      videoUrl: aula?.videoUrl,
+      videoUrl: aula?.videoUrl || '',
     },
   })
+  console.log('aula', form.getValues(), form.formState.errors)
 
   const [criar] = useCreateOneAulaMutation()
   const [editar] = useUpdateOneAulaMutation()
 
-  const { data: cursos } = useCursosModuloSelectQuery({
-    variables: {
-      paging: {
-        first: 99,
-      },
-      sorting: {
-        field: CursoTypeSortFields.Nome,
-        direction: SortDirection.Asc,
-      },
-    },
-  })
+  // const { data: cursos } = useCursosModuloSelectQuery({
+  //   variables: {
+  //     paging: {
+  //       first: 99,
+  //     },
+  //     sorting: {
+  //       field: CursoTypeSortFields.Nome,
+  //       direction: SortDirection.Asc,
+  //     },
+  //   },
+  // })
 
-  const cursoOptions =
-    cursos?.cursos.edges.map(({ node }) => ({
-      value: node.id,
-      label: node.nome,
-    })) || []
+  // const cursoOptions =
+  //   cursos?.cursos.edges.map(({ node }) => ({
+  //     value: node.id,
+  //     label: node.nome,
+  //   })) || []
 
-  const { data: modulos } = useModulosSelectQuery({
-    variables: {
-      paging: {
-        first: 99,
-      },
-      filter: {
-        cursoId: { eq: Number(form.watch('cursoId')) },
-        biblioteca: { is: biblioteca },
-      },
-      sorting: {
-        field: ModuloTypeSortFields.Titulo,
-        direction: SortDirection.Asc,
-      },
-    },
-    skip: !form.watch('cursoId'),
-  })
-  const moduloOptions =
-    modulos?.modulos.edges.map(({ node }) => ({
-      value: node.id,
-      label: node.titulo,
-    })) || []
+  // const { data: modulos } = useModulosSelectQuery({
+  //   variables: {
+  //     paging: {
+  //       first: 99,
+  //     },
+  //     filter: {
+  //       cursoId: { eq: Number(form.watch('cursoId')) },
+  //       biblioteca: { is: biblioteca },
+  //     },
+  //     sorting: {
+  //       field: ModuloTypeSortFields.Titulo,
+  //       direction: SortDirection.Asc,
+  //     },
+  //   },
+  //   skip: !form.watch('cursoId'),
+  // })
+  // const moduloOptions =
+  //   modulos?.modulos.edges.map(({ node }) => ({
+  //     value: node.id,
+  //     label: node.titulo,
+  //   })) || []
 
   const handleVoltar = () => {
-    navigate(biblioteca ? ROTAS.AULA_COMPLEMENTAR : ROTAS.AULA)
+    navigate(urlVoltar)
   }
 
   const onSubmit = (data: AulaSchemaOutput) => {
@@ -92,7 +93,7 @@ export const useFormAula = ({
             update: {
               titulo: data.titulo,
               ordem: data.ordem,
-              moduloId: +data.moduloId,
+              subModuloId: +data.subModuloId,
               descricao: data.descricao,
               duracao: data.duracao,
               videoUrl: data.videoUrl,
@@ -113,7 +114,7 @@ export const useFormAula = ({
           aulaType: {
             titulo: data.titulo,
             ordem: data.ordem,
-            moduloId: +data.moduloId,
+            subModuloId: +data.subModuloId,
             descricao: data.descricao,
             duracao: +data.duracao,
             videoUrl: data.videoUrl || '',
@@ -128,5 +129,5 @@ export const useFormAula = ({
     })
   }
 
-  return { form, onSubmit, moduloOptions, cursoOptions }
+  return { form, onSubmit }
 }

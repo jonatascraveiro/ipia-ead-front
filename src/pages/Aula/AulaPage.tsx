@@ -3,30 +3,49 @@ import { Page } from '@/components/Page'
 import { InputField } from '@/components/form/InputField'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
+import { useSubModuloQuery } from '@/gql/generated/graphql'
 import { ROTAS } from '@/routes/rotas'
 import { Search, Trash2Icon } from 'lucide-react'
-import { Link } from 'react-router'
+import { Link, generatePath, useParams } from 'react-router'
 import { useTabelaAula } from './components/TabelaAula/useTabelaAula'
 
 export function AulaPage({ biblioteca = false }: { biblioteca?: boolean }) {
+  const subModuloId = useParams().subModuloId as string
+  const { data: subModulo } = useSubModuloQuery({
+    variables: {
+      id: +subModuloId,
+    },
+    skip: !subModuloId,
+  })
+
   const { tabela, form, handleFilter, limparFiltro } = useTabelaAula({
     biblioteca,
+    subModuloId,
   })
 
   return (
     <Page>
-      {biblioteca && (
+      {/* {biblioteca && (
         <Page.Header>
-          <Page.Titulo>Aula Complementar</Page.Titulo>
-          <Link to={ROTAS.AULA_COMPLEMENTAR_CRIAR}>
-            <Button>Nova Aula Complementar</Button>
+          <Page.Titulo>
+            Material complementar {subModulo?.subModulo?.titulo}
+          </Page.Titulo>
+          <Link to={ROTAS.MATERIAL_COMPLEMENTAR_CRIAR}>
+            <Button>Nova Aula </Button>
           </Link>
         </Page.Header>
-      )}
+      )} */}
       {!biblioteca && (
         <Page.Header>
-          <Page.Titulo>Aulas</Page.Titulo>
-          <Link to={ROTAS.AULA_CRIAR}>
+          <Page.Titulo
+            url={generatePath(ROTAS.MODULO_EDITAR, {
+              id: subModulo?.subModulo?.modulo?.id || 0,
+              cursoId: subModulo?.subModulo?.modulo?.curso?.id || 0,
+            })}
+          >
+            Aulas {subModulo?.subModulo?.titulo}
+          </Page.Titulo>
+          <Link to={generatePath(ROTAS.AULA_CRIAR, { subModuloId })}>
             <Button>Nova Aula</Button>
           </Link>
         </Page.Header>

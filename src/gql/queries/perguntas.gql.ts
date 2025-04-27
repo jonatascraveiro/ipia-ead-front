@@ -12,12 +12,12 @@ query Pergunta($id: Int!) {
         formulario{
           nome
           id
-          modulo{
+          subModulo{
           titulo
           id
-          curso{
-            id
-            nome
+          modulo{
+            id 
+            titulo
           }
         }
         }
@@ -51,12 +51,12 @@ query Perguntas(
         formulario{
           nome
           id
-          modulo{
+          subModulo{
           titulo
           id
-          curso{
-            id
-            nome
+          modulo{
+            id 
+            titulo
           }
         }
         }

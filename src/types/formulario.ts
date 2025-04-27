@@ -1,9 +1,8 @@
-import type { ModuloType } from './modulo'
+import type { SubModuloType } from '@/gql/generated/graphql'
 
 export type FormularioType = {
   id: number
-  moduloId: number
-
+  subModuloId: number
   nome: string
-  modulo: ModuloType
+  subModulo: SubModuloType
 }

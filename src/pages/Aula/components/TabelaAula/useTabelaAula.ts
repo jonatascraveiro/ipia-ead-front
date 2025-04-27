@@ -2,16 +2,20 @@ import {
   AulaTypeSortFields,
   SortDirection,
   useAulasQuery,
+  useDeleteOneAulaMutation,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
 import { ROTAS } from '@/routes/rotas'
 import type { AulaType } from '@/types/aula'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router'
+import { generatePath, useNavigate } from 'react-router'
 import { getColumns } from './columns'
 
-export const useTabelaAula = ({ biblioteca }: { biblioteca: boolean }) => {
+export const useTabelaAula = ({
+  biblioteca,
+  subModuloId,
+}: { biblioteca: boolean; subModuloId: string }) => {
   const form = useForm<{ nome: string }>({
     defaultValues: {
       nome: '',
@@ -32,44 +36,64 @@ export const useTabelaAula = ({ biblioteca }: { biblioteca: boolean }) => {
 
   const navigate = useNavigate()
 
-  const rotaUrl = biblioteca ? ROTAS.AULA_COMPLEMENTAR : ROTAS.AULA
+  const rotaUrl = biblioteca ? ROTAS.MATERIAL_COMPLEMENTAR : ROTAS.AULA
 
   const handleEditar = useCallback(
     (data: AulaType) => {
-      navigate(`${rotaUrl}/${data.id}/editar`)
+      navigate(
+        generatePath(ROTAS.AULA_EDITAR, {
+          subModuloId: subModuloId,
+          id: data.id,
+        }),
+      )
     },
-    [navigate, rotaUrl],
+    [navigate, subModuloId],
   )
-  const handleVisualizar = useCallback(
+
+  const [mutateDelete] = useDeleteOneAulaMutation()
+  const handleDeletar = useCallback(
     (data: AulaType) => {
-      navigate(`${rotaUrl}/${data.id}`)
+      mutateDelete({
+        variables: {
+          input: {
+            id: data.id,
+          },
+        },
+        onCompleted() {
+          navigate(rotaUrl)
+        },
+      })
     },
-    [navigate, rotaUrl],
+    [mutateDelete, navigate, rotaUrl],
   )
 
   const { data, loading } = useAulasQuery({
     variables: {
       filter: {
         titulo: { iLike: `%${nome || ''}%` },
-        modulo: {
-          biblioteca: { is: biblioteca },
-        },
+        subModuloId: { eq: +subModuloId },
       },
       paging,
-      sorting: {
-        field: AulaTypeSortFields.Titulo,
-        direction: SortDirection.Asc,
-      },
+      sorting: [
+        {
+          field: AulaTypeSortFields.Ordem,
+          direction: SortDirection.Asc,
+        },
+        {
+          field: AulaTypeSortFields.Titulo,
+          direction: SortDirection.Asc,
+        },
+      ],
     },
   })
 
   const columns = useMemo(
     () =>
       getColumns({
-        visualizar: handleVisualizar,
+        deletar: handleDeletar,
         editar: handleEditar,
       }),
-    [handleVisualizar, handleEditar],
+    [handleDeletar, handleEditar],
   )
 
   return {

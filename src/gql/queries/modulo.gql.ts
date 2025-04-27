@@ -11,6 +11,22 @@ query Modulo($id: Int!) {
     titulo
     curso {
       nome
+      id
+    }
+    subModulos (sorting:{field:ordem,direction:ASC}){
+      arquivoId
+      
+      id
+      mensagem
+      modulo{
+        id
+        titulo
+      }
+      moduloId
+      ordem
+      titulo
+      updatedAt
+      url
     }
     biblioteca
     
@@ -30,9 +46,10 @@ query Modulos(
       node {
         ordem
         cursoId       
-        curso{
-          nome
-        }
+        curso {
+      nome
+      id
+    }
         descricao
         id
         titulo

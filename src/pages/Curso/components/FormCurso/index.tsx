@@ -11,7 +11,8 @@ import { useFormCurso } from './useFormCurso'
 function FormCurso({
   curso,
   disabled = false,
-}: { curso?: CursoQuery['curso']; disabled?: boolean }) {
+  urlVoltar,
+}: { curso?: CursoQuery['curso']; disabled?: boolean; urlVoltar: string }) {
   const { form, onSubmit } = useFormCurso({ curso })
 
   return (
@@ -65,7 +66,7 @@ function FormCurso({
 
         <div className=" col-span-12  flex  items-end gap-3">
           {!disabled && <Button type="submit">Salvar</Button>}
-          <Link to="/curso">
+          <Link to={urlVoltar}>
             <Button variant={'outline'} type="reset">
               Voltar
             </Button>

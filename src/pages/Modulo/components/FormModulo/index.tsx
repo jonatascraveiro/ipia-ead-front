@@ -3,9 +3,7 @@ import { Button } from '@/components/ui/button'
 
 import { Form } from '@/components/ui/form'
 
-import { CheckboxField } from '@/components/form/CheckboxField'
 import { InputNumberField } from '@/components/form/InputNumberField'
-import { SelectField } from '@/components/form/SelectField'
 import type { ModuloQuery } from '@/gql/generated/graphql'
 import { Link } from 'react-router'
 import { useFormModulo } from './useFormModulo'
@@ -13,8 +11,15 @@ import { useFormModulo } from './useFormModulo'
 function FormModulo({
   modulo,
   disabled = false,
-}: { modulo?: ModuloQuery['modulo']; disabled?: boolean }) {
-  const { form, onSubmit, cursoOptions } = useFormModulo({ modulo })
+  urlVoltar,
+  biblioteca = false,
+}: {
+  modulo?: ModuloQuery['modulo']
+  disabled?: boolean
+  urlVoltar: string
+  biblioteca?: boolean
+}) {
+  const { form, onSubmit } = useFormModulo({ modulo, biblioteca, urlVoltar })
 
   return (
     <Form {...form}>
@@ -26,7 +31,7 @@ function FormModulo({
           <InputField
             disabled={disabled}
             label="Titulo"
-            placeholder="Titulo do modulo"
+            placeholder="Titulo"
             name="titulo"
           />
         </div>
@@ -34,7 +39,7 @@ function FormModulo({
           <InputField
             disabled={disabled}
             label="Descrição"
-            placeholder="Descrição do modulo"
+            placeholder="Descrição"
             name="descricao"
           />
         </div>
@@ -43,11 +48,11 @@ function FormModulo({
           <InputNumberField
             disabled={disabled}
             label="Ordem"
-            description="Ordem do modulo"
+            description="Ordem"
             name="ordem"
           />
         </div>
-
+        {/* 
         <div className="col-span-6 md:col-span-3  ">
           <SelectField
             disabled={disabled}
@@ -56,20 +61,20 @@ function FormModulo({
             options={cursoOptions}
             name="cursoId"
           />
-        </div>
+        </div> */}
 
-        <div className="col-span-12 md:col-span-6  ">
+        {/* <div className="col-span-12 md:col-span-6  ">
           <CheckboxField
             disabled={disabled}
             label="Aula complementar"
             description="Se for verdadeiro o modulo terá aula complementar (BIBLIOTECA)"
             name="biblioteca"
           />
-        </div>
+        </div> */}
 
         <div className=" col-span-12  flex  items-end gap-3">
           {!disabled && <Button type="submit">Salvar</Button>}
-          <Link to="/modulo">
+          <Link to={urlVoltar}>
             <Button variant={'outline'} type="reset">
               Voltar
             </Button>

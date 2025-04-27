@@ -11,9 +11,11 @@ import { useFormPerguntas } from './useForm'
 function FormPerguntas({
   pergunta,
   disabled = false,
+  urlVoltar,
 }: {
   pergunta?: PerguntasQuery['perguntas']['edges'][0]['node']
   disabled?: boolean
+  urlVoltar: string
 }) {
   const { form, onSubmit, cursoOptions, moduloOptions, formularioOptions } =
     useFormPerguntas({
@@ -77,7 +79,7 @@ function FormPerguntas({
 
         <div className=" col-span-12  flex  items-end gap-3">
           {!disabled && <Button type="submit">Salvar</Button>}
-          <Link to="/pergunta">
+          <Link to={urlVoltar}>
             <Button variant={'outline'} type="reset">
               Voltar
             </Button>

@@ -1,19 +1,35 @@
 import { Page } from '@/components/Page'
-import { Button } from '@/components/ui/button'
-import { Link } from 'react-router'
+import { useCursoQuery } from '@/gql/generated/graphql'
+import { ROTAS } from '@/routes/rotas'
+import { generatePath, useParams } from 'react-router'
 import { FormModulo } from './components/FormModulo'
 
-export function CriarModuloPage() {
+export function CriarModuloPage({
+  biblioteca = false,
+}: { biblioteca?: boolean }) {
+  const cursoId = useParams().cursoId as string
+  const { data: curso } = useCursoQuery({
+    variables: {
+      id: +cursoId,
+    },
+    skip: !cursoId,
+  })
+
   return (
     <Page>
       <Page.Header>
-        <Page.Titulo>Criar Modulo</Page.Titulo>
-        <Link to="/modulo/criar">
-          <Button>Novo Modulo</Button>
-        </Link>
+        <Page.Titulo>
+          Criar {biblioteca ? 'Biblioteca' : 'Modulo'} do curso{' '}
+          {curso?.curso?.nome}
+        </Page.Titulo>
       </Page.Header>
 
-      <FormModulo />
+      <FormModulo
+        urlVoltar={generatePath(biblioteca ? ROTAS.BIBLIOTECA : ROTAS.MODULO, {
+          cursoId,
+        })}
+        biblioteca={biblioteca}
+      />
     </Page>
   )
 }
