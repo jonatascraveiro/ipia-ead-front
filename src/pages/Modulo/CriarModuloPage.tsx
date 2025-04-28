@@ -29,6 +29,7 @@ export function CriarModuloPage({
           cursoId,
         })}
         biblioteca={biblioteca}
+        cursoId={cursoId}
       />
     </Page>
   )

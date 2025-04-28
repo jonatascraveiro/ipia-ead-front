@@ -13,13 +13,21 @@ function FormModulo({
   disabled = false,
   urlVoltar,
   biblioteca = false,
+  cursoId,
 }: {
   modulo?: ModuloQuery['modulo']
   disabled?: boolean
   urlVoltar: string
   biblioteca?: boolean
+  cursoId: string
 }) {
-  const { form, onSubmit } = useFormModulo({ modulo, biblioteca, urlVoltar })
+  console.log(modulo)
+  const { form, onSubmit } = useFormModulo({
+    modulo,
+    biblioteca,
+    urlVoltar,
+    cursoId,
+  })
 
   return (
     <Form {...form}>

@@ -13,10 +13,12 @@ export const useFormModulo = ({
   modulo,
   biblioteca,
   urlVoltar,
+  cursoId,
 }: {
   modulo?: ModuloQuery['modulo']
   biblioteca: boolean
   urlVoltar: string
+  cursoId: string
 }) => {
   const navigate = useNavigate()
 
@@ -27,7 +29,7 @@ export const useFormModulo = ({
       titulo: modulo?.titulo || '',
       descricao: modulo?.descricao || '',
       ordem: modulo?.ordem || 1,
-      cursoId: modulo?.cursoId || 1,
+      cursoId: +cursoId,
       biblioteca: biblioteca,
     },
   })

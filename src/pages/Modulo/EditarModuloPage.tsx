@@ -46,6 +46,7 @@ export function EditarModuloPage({
               modulo={data.modulo}
               urlVoltar={urlVoltar}
               biblioteca={biblioteca}
+              cursoId={cursoId}
             />
           </CardForm>
           {/* {!biblioteca && (
