@@ -81,8 +81,9 @@ function FormSubModulo({
               <InputField
                 disabled={disabled}
                 label="Mensagem"
-                placeholder="Mensagem"
+                placeholder="Ex: Parabéns, por mais uma etapa finalizada."
                 name="mensagem"
+                description="Mensagem que aparece ao finalizar o quiz"
               />
             </div>
 

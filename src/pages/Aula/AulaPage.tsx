@@ -38,7 +38,7 @@ export function AulaPage({ biblioteca = false }: { biblioteca?: boolean }) {
       {!biblioteca && (
         <Page.Header>
           <Page.Titulo
-            url={generatePath(ROTAS.MODULO_EDITAR, {
+            url={generatePath(ROTAS.MODULO_SUBMODULO_EDITAR, {
               id: subModulo?.subModulo?.modulo?.id || 0,
               cursoId: subModulo?.subModulo?.modulo?.curso?.id || 0,
             })}
