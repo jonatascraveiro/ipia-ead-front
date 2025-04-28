@@ -1,3 +1,4 @@
+import { CellTextarea } from '@/components/DataTable/CellTextarea'
 import { ColumnAction } from '@/components/DataTable/ColumnAction'
 import { Icone } from '@/components/common/Icons'
 import type { ModuloType } from '@/types/modulo'
@@ -30,16 +31,18 @@ export const getColumns = ({
       accessorFn: (row) => row.descricao,
       accessorKey: 'descricao',
       header: () => <span>Descrição</span>,
-      maxSize: 300,
+      cell: ({ row }) => <CellTextarea>{row.original.descricao}</CellTextarea>,
+      // maxSize: 300,
     },
 
     {
       accessorFn: (row) => row.ordem,
       accessorKey: 'ordem',
-      header: () => <span>Ordem</span>,
+      header: () => <div className="text-center">Ordem</div>,
       cell: ({ row }) => {
-        return <div>{row.original?.ordem}</div>
+        return <div className="text-center">{row.original?.ordem}</div>
       },
+      maxSize: 20,
     },
 
     {

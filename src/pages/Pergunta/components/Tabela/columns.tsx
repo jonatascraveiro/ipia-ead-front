@@ -1,3 +1,4 @@
+import { CellTextarea } from '@/components/DataTable/CellTextarea'
 import { ColumnAction } from '@/components/DataTable/ColumnAction'
 import type { PerguntaType } from '@/types/pergunta'
 import type { ColumnDef } from '@tanstack/react-table'
@@ -17,6 +18,7 @@ export const getColumns = ({
       accessorFn: (row) => row.descricao,
       accessorKey: 'descricao',
       header: () => <span>Pergunta</span>,
+      cell: ({ row }) => <CellTextarea>{row.original.descricao}</CellTextarea>,
     },
 
     {

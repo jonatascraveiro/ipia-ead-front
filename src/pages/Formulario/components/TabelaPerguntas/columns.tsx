@@ -1,3 +1,4 @@
+import { CellTextarea } from '@/components/DataTable/CellTextarea'
 import { ColumnAction } from '@/components/DataTable/ColumnAction'
 import { Icone } from '@/components/common/Icons'
 import type { PerguntaType } from '@/types/pergunta'
@@ -18,6 +19,7 @@ export const getColumns = ({
       accessorFn: (row) => row.descricao,
       accessorKey: 'descricao',
       header: () => <span>Pergunta</span>,
+      cell: ({ row }) => <CellTextarea>{row.original.descricao}</CellTextarea>,
     },
 
     {
