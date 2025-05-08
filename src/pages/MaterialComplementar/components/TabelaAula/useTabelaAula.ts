@@ -60,6 +60,7 @@ export const useTabelaAula = ({ biblioteca }: { biblioteca: boolean }) => {
         titulo: { iLike: `%${nome || ''}%` },
         modulo: {
           biblioteca: { is: biblioteca },
+          id: { eq: +moduloId },
         },
       },
       paging,

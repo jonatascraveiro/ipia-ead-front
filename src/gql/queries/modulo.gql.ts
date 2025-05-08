@@ -13,6 +13,7 @@ query Modulo($id: Int!) {
       nome
       id
     }
+   
     subModulos (sorting:{field:ordem,direction:ASC}){
       #arquivoId
       

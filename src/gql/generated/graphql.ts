@@ -3998,6 +3998,14 @@ export type AulasQueryVariables = Exact<{
 
 export type AulasQuery = { __typename?: 'Query', aulas: { __typename?: 'AulaTypeConnection', edges: Array<{ __typename?: 'AulaTypeEdge', node: { __typename?: 'AulaType', ordem: number, moduloId?: number | null, descricao?: string | null, id: number, titulo: string, videoUrl?: string | null, duracao: number, modulo?: { __typename?: 'ModuloType', titulo: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
+export type AulasTotalQueryVariables = Exact<{
+  filter?: InputMaybe<AulaTypeFilter>;
+  paging: CursorPaging;
+}>;
+
+
+export type AulasTotalQuery = { __typename?: 'Query', aulas: { __typename?: 'AulaTypeConnection', totalCount: number } };
+
 export type CursoQueryVariables = Exact<{
   id: Scalars['Int']['input'];
   bilbioteca?: InputMaybe<Scalars['Boolean']['input']>;
@@ -5237,6 +5245,47 @@ export type AulasQueryHookResult = ReturnType<typeof useAulasQuery>;
 export type AulasLazyQueryHookResult = ReturnType<typeof useAulasLazyQuery>;
 export type AulasSuspenseQueryHookResult = ReturnType<typeof useAulasSuspenseQuery>;
 export type AulasQueryResult = Apollo.QueryResult<AulasQuery, AulasQueryVariables>;
+export const AulasTotalDocument = gql`
+    query AulasTotal($filter: AulaTypeFilter, $paging: CursorPaging!) {
+  aulas(filter: $filter, paging: $paging) {
+    totalCount
+  }
+}
+    `;
+
+/**
+ * __useAulasTotalQuery__
+ *
+ * To run a query within a React component, call `useAulasTotalQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAulasTotalQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAulasTotalQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      paging: // value for 'paging'
+ *   },
+ * });
+ */
+export function useAulasTotalQuery(baseOptions: Apollo.QueryHookOptions<AulasTotalQuery, AulasTotalQueryVariables> & ({ variables: AulasTotalQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AulasTotalQuery, AulasTotalQueryVariables>(AulasTotalDocument, options);
+      }
+export function useAulasTotalLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AulasTotalQuery, AulasTotalQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AulasTotalQuery, AulasTotalQueryVariables>(AulasTotalDocument, options);
+        }
+export function useAulasTotalSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<AulasTotalQuery, AulasTotalQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<AulasTotalQuery, AulasTotalQueryVariables>(AulasTotalDocument, options);
+        }
+export type AulasTotalQueryHookResult = ReturnType<typeof useAulasTotalQuery>;
+export type AulasTotalLazyQueryHookResult = ReturnType<typeof useAulasTotalLazyQuery>;
+export type AulasTotalSuspenseQueryHookResult = ReturnType<typeof useAulasTotalSuspenseQuery>;
+export type AulasTotalQueryResult = Apollo.QueryResult<AulasTotalQuery, AulasTotalQueryVariables>;
 export const CursoDocument = gql`
     query Curso($id: Int!, $bilbioteca: Boolean) {
   curso(id: $id) {

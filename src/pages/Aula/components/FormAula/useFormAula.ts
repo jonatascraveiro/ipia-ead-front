@@ -14,11 +14,13 @@ export const useFormAula = ({
 
   urlVoltar,
   subModuloId,
+  qtdAulas,
 }: {
   aula?: AulaQuery['aula']
   biblioteca?: boolean
   subModuloId: string
   urlVoltar: string
+  qtdAulas: number
 }) => {
   const navigate = useNavigate()
 
@@ -28,7 +30,7 @@ export const useFormAula = ({
       id: aula?.id || undefined,
       titulo: aula?.titulo || '',
       descricao: aula?.descricao || '',
-      ordem: aula?.ordem || 1,
+      ordem: aula?.ordem || qtdAulas,
       duracao: aula?.duracao || 30,
       subModuloId: +subModuloId || undefined,
 

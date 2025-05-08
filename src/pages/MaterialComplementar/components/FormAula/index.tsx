@@ -14,17 +14,19 @@ import { useFormAula } from './useFormAula'
 function FormAula({
   aula,
   disabled = false,
-
+  qtdAulas = 1,
   urlVoltar,
 }: {
   aula?: AulaQuery['aula']
   disabled?: boolean
   biblioteca: boolean
   urlVoltar: string
+  qtdAulas?: number
 }) {
   const { form, onSubmit } = useFormAula({
     aula,
     urlVoltar,
+    qtdAulas,
   })
 
   return (

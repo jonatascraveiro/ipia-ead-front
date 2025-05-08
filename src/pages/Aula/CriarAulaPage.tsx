@@ -1,5 +1,5 @@
 import { Page } from '@/components/Page'
-import { useSubModuloQuery } from '@/gql/generated/graphql'
+import { useAulasTotalQuery, useSubModuloQuery } from '@/gql/generated/graphql'
 import { ROTAS } from '@/routes/rotas'
 import { generatePath, useParams } from 'react-router'
 import { FormAula } from './components/FormAula'
@@ -15,6 +15,19 @@ export function CriarAulaPage({
     skip: !subModuloId,
   })
 
+  const { data: aulasSubmodulo } = useAulasTotalQuery({
+    variables: {
+      filter: {
+        subModuloId: {
+          eq: +subModuloId,
+        },
+      },
+      paging: {
+        first: 50,
+      },
+    },
+  })
+  const qtdAulas = (aulasSubmodulo?.aulas.totalCount || 0) + 1
   return (
     <Page>
       <Page.Header>
@@ -23,11 +36,14 @@ export function CriarAulaPage({
         </Page.Titulo>
       </Page.Header>
 
-      <FormAula
-        biblioteca={biblioteca}
-        urlVoltar={generatePath(ROTAS.AULA, { subModuloId })}
-        subModuloId={subModuloId}
-      />
+      {aulasBiblioteca && (
+        <FormAula
+          biblioteca={biblioteca}
+          urlVoltar={generatePath(ROTAS.AULA, { subModuloId })}
+          subModuloId={subModuloId}
+          qtdAulas={qtdAulas}
+        />
+      )}
     </Page>
   )
 }

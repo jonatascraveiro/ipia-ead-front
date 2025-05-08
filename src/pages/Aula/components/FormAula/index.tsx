@@ -17,18 +17,21 @@ function FormAula({
   biblioteca = false,
   subModuloId,
   urlVoltar,
+  qtdAulas = 1,
 }: {
   aula?: AulaQuery['aula']
   disabled?: boolean
   biblioteca: boolean
   subModuloId: string
   urlVoltar: string
+  qtdAulas?: number
 }) {
   const { form, onSubmit } = useFormAula({
     aula,
     biblioteca,
     subModuloId,
     urlVoltar,
+    qtdAulas,
   })
 
   return (

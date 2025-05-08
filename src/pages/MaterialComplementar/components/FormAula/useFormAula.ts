@@ -12,7 +12,8 @@ import { type AulaSchemaInput, type AulaSchemaOutput, schema } from './schema'
 export const useFormAula = ({
   aula,
   urlVoltar,
-}: { aula?: AulaQuery['aula']; urlVoltar: string }) => {
+  qtdAulas,
+}: { aula?: AulaQuery['aula']; urlVoltar: string; qtdAulas: number }) => {
   const navigate = useNavigate()
   const moduloId = useParams().moduloId as string
   const form = useForm<AulaSchemaInput>({
@@ -21,7 +22,7 @@ export const useFormAula = ({
       id: aula?.id || undefined,
       titulo: aula?.titulo || '',
       descricao: aula?.descricao || '',
-      ordem: aula?.ordem || 1,
+      ordem: aula?.ordem || qtdAulas,
       duracao: aula?.duracao || 30,
       moduloId: +moduloId,
 

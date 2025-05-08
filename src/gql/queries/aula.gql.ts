@@ -54,6 +54,14 @@ query Aulas(
     }
   }
 }
+  
+`
 
-
+gql`
+query AulasTotal($filter: AulaTypeFilter, $paging: CursorPaging!, ) {
+  aulas(filter: $filter, paging: $paging) {
+      totalCount
+  }
+}
+  
 `

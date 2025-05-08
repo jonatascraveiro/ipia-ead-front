@@ -1,5 +1,5 @@
 import { Page } from '@/components/Page'
-import { useModuloQuery } from '@/gql/generated/graphql'
+import { useAulasTotalQuery, useModuloQuery } from '@/gql/generated/graphql'
 import { ROTAS } from '@/routes/rotas'
 import { generatePath, useParams } from 'react-router'
 import { FormAula } from './components/FormAula'
@@ -14,6 +14,26 @@ export function CriarMaterialComplementarPage({
     },
     skip: !moduloId,
   })
+
+  const { data: aulasBiblioteca } = useAulasTotalQuery({
+    variables: {
+      filter: {
+        modulo: {
+          biblioteca: {
+            is: true,
+          },
+          id: {
+            eq: +moduloId,
+          },
+        },
+      },
+      paging: {
+        first: 50,
+      },
+    },
+  })
+
+  const qtdAulas = (aulasBiblioteca?.aulas.totalCount || 0) + 1
   const urlVoltar = generatePath(ROTAS.MATERIAL_COMPLEMENTAR, { moduloId })
   return (
     <Page>
@@ -23,7 +43,13 @@ export function CriarMaterialComplementarPage({
         </Page.Titulo>
       </Page.Header>
 
-      <FormAula biblioteca={biblioteca} urlVoltar={urlVoltar} />
+      {aulasBiblioteca && (
+        <FormAula
+          qtdAulas={qtdAulas}
+          biblioteca={biblioteca}
+          urlVoltar={urlVoltar}
+        />
+      )}
     </Page>
   )
 }
