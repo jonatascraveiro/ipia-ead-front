@@ -36,7 +36,7 @@ export function CriarAulaPage({
         </Page.Titulo>
       </Page.Header>
 
-      {aulasBiblioteca && (
+      {aulasSubmodulo && (
         <FormAula
           biblioteca={biblioteca}
           urlVoltar={generatePath(ROTAS.AULA, { subModuloId })}
