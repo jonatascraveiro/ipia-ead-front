@@ -2,7 +2,7 @@
 import { gql } from '@apollo/client'
 
 gql`
-query Curso($id: Int!) {
+query Curso($id: Int!,$bilbioteca: Boolean) {
   curso(id: $id) {
     ativo
     createdAt
@@ -13,6 +13,9 @@ query Curso($id: Int!) {
     icone 
     url
     updatedAt
+    modulos(filter:{biblioteca: {is:$bilbioteca}}){
+      id
+    }
   }
 }
 

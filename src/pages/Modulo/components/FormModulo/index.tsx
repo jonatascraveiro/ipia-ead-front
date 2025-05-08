@@ -14,12 +14,14 @@ function FormModulo({
   urlVoltar,
   biblioteca = false,
   cursoId,
+  quantidadeModulos,
 }: {
   modulo?: ModuloQuery['modulo']
   disabled?: boolean
   urlVoltar: string
   biblioteca?: boolean
   cursoId: string
+  quantidadeModulos?: number
 }) {
   console.log(modulo)
   const { form, onSubmit } = useFormModulo({
@@ -27,6 +29,7 @@ function FormModulo({
     biblioteca,
     urlVoltar,
     cursoId,
+    quantidadeModulos,
   })
 
   return (

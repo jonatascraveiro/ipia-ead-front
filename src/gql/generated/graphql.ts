@@ -773,6 +773,14 @@ export type CreateTurmaInput = {
   nome: Scalars['String']['input'];
 };
 
+export type CursoProgressoType = {
+  __typename?: 'CursoProgressoType';
+  /** status de conclusão do módulo */
+  concluido: Scalars['Boolean']['output'];
+  /** id do modulo */
+  moduloId: Scalars['Float']['output'];
+};
+
 export type CursoType = {
   __typename?: 'CursoType';
   arquivo?: Maybe<Arquivo>;
@@ -2474,7 +2482,7 @@ export type Query = {
   aula?: Maybe<AulaType>;
   aulas: AulaTypeConnection;
   calculaProgressoCurso?: Maybe<Scalars['Float']['output']>;
-  calculaProgressoPorModulo?: Maybe<Scalars['String']['output']>;
+  calculaProgressoPorModulo?: Maybe<Array<CursoProgressoType>>;
   calculaProgressoSubModulo?: Maybe<Scalars['Float']['output']>;
   curso?: Maybe<CursoType>;
   cursos: CursoTypeConnection;
@@ -3037,7 +3045,7 @@ export type SubModuloType = {
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   /** url do modulo */
-  url: Scalars['String']['output'];
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -3992,10 +4000,11 @@ export type AulasQuery = { __typename?: 'Query', aulas: { __typename?: 'AulaType
 
 export type CursoQueryVariables = Exact<{
   id: Scalars['Int']['input'];
+  bilbioteca?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
-export type CursoQuery = { __typename?: 'Query', curso?: { __typename?: 'CursoType', ativo: boolean, createdAt: any, deletedAt?: any | null, descricao: string, id: number, nome: string, icone?: string | null, url?: string | null, updatedAt?: any | null } | null };
+export type CursoQuery = { __typename?: 'Query', curso?: { __typename?: 'CursoType', ativo: boolean, createdAt: any, deletedAt?: any | null, descricao: string, id: number, nome: string, icone?: string | null, url?: string | null, updatedAt?: any | null, modulos?: Array<{ __typename?: 'ModuloType', id: number }> | null } | null };
 
 export type CursosQueryVariables = Exact<{
   filter?: InputMaybe<CursoTypeFilter>;
@@ -4116,7 +4125,7 @@ export type SubModulosQueryVariables = Exact<{
 }>;
 
 
-export type SubModulosQuery = { __typename?: 'Query', subModulos: { __typename?: 'SubModuloTypeConnection', edges: Array<{ __typename?: 'SubModuloTypeEdge', node: { __typename?: 'SubModuloType', id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, url: string, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type SubModulosQuery = { __typename?: 'Query', subModulos: { __typename?: 'SubModuloTypeConnection', edges: Array<{ __typename?: 'SubModuloTypeEdge', node: { __typename?: 'SubModuloType', id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, url?: string | null, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type TurmaQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -5229,7 +5238,7 @@ export type AulasLazyQueryHookResult = ReturnType<typeof useAulasLazyQuery>;
 export type AulasSuspenseQueryHookResult = ReturnType<typeof useAulasSuspenseQuery>;
 export type AulasQueryResult = Apollo.QueryResult<AulasQuery, AulasQueryVariables>;
 export const CursoDocument = gql`
-    query Curso($id: Int!) {
+    query Curso($id: Int!, $bilbioteca: Boolean) {
   curso(id: $id) {
     ativo
     createdAt
@@ -5240,6 +5249,9 @@ export const CursoDocument = gql`
     icone
     url
     updatedAt
+    modulos(filter: {biblioteca: {is: $bilbioteca}}) {
+      id
+    }
   }
 }
     `;
@@ -5257,6 +5269,7 @@ export const CursoDocument = gql`
  * const { data, loading, error } = useCursoQuery({
  *   variables: {
  *      id: // value for 'id'
+ *      bilbioteca: // value for 'bilbioteca'
  *   },
  * });
  */

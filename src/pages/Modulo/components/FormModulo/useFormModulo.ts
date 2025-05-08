@@ -14,21 +14,23 @@ export const useFormModulo = ({
   biblioteca,
   urlVoltar,
   cursoId,
+  quantidadeModulos = 1,
 }: {
   modulo?: ModuloQuery['modulo']
   biblioteca: boolean
   urlVoltar: string
   cursoId: string
+  quantidadeModulos?: number
 }) => {
   const navigate = useNavigate()
-
+  console.log(quantidadeModulos)
   const form = useForm<ModuloSchema>({
     resolver: zodResolver(schema),
     defaultValues: {
       id: modulo?.id || undefined,
       titulo: modulo?.titulo || '',
       descricao: modulo?.descricao || '',
-      ordem: modulo?.ordem || 1,
+      ordem: modulo?.ordem || quantidadeModulos,
       cursoId: +cursoId,
       biblioteca: biblioteca,
     },
