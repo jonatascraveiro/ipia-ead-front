@@ -23,14 +23,15 @@ export const getColumns = ({
       accessorKey: 'Titulo',
       header: () => <span>Titulo</span>,
       cell: ({ row }) => {
-        return <div>{row.original?.titulo || '-'}</div>
+        return <CellTextarea>{row.original?.titulo || '-'}</CellTextarea>
       },
+      maxSize: 100,
     },
     {
       accessorFn: (row) => row.mensagem,
       accessorKey: 'mensagem',
       header: () => <span>Mensagem</span>,
-      maxSize: 300,
+
       cell: ({ row }) => {
         return <CellTextarea>{row.original?.mensagem || '-'}</CellTextarea>
       },
@@ -41,8 +42,9 @@ export const getColumns = ({
       accessorKey: 'ordem',
       header: () => <span>Ordem</span>,
       cell: ({ row }) => {
-        return <div>{row.original?.ordem}</div>
+        return <span>{row.original?.ordem}</span>
       },
+      size: 50,
     },
 
     {

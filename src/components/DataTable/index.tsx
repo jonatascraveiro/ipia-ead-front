@@ -86,7 +86,7 @@ export default function DataTable<T>({
                   >
                     {header.isPlaceholder ? null : (
                       <>
-                        <div
+                        <span
                           {...{
                             className: header.column.getCanSort()
                               ? 'cursor-pointer select-none'
@@ -98,7 +98,7 @@ export default function DataTable<T>({
                             header.column.columnDef.header,
                             header.getContext(),
                           )}
-                        </div>
+                        </span>
                       </>
                     )}
                   </TableHead>
