@@ -32,7 +32,7 @@ export function CriarAulaPage({
     <Page>
       <Page.Header>
         <Page.Titulo>
-          {`Criar Aula ${subModulo?.subModulo?.titulo}`}
+          {`Criar Aula ${subModulo?.subModulo?.titulo || ''}`}
         </Page.Titulo>
       </Page.Header>
 
