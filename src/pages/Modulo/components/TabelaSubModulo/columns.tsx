@@ -1,3 +1,4 @@
+import { CellTextarea } from '@/components/DataTable/CellTextarea'
 import { ColumnAction } from '@/components/DataTable/ColumnAction'
 import { Icone } from '@/components/common/Icons'
 import type { SubModuloType } from '@/gql/generated/graphql'
@@ -31,7 +32,7 @@ export const getColumns = ({
       header: () => <span>Mensagem</span>,
       maxSize: 300,
       cell: ({ row }) => {
-        return <div>{row.original?.mensagem || '-'}</div>
+        return <CellTextarea>{row.original?.mensagem || '-'}</CellTextarea>
       },
     },
 
