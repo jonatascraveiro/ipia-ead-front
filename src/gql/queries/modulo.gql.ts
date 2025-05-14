@@ -27,7 +27,7 @@ query Modulo($id: Int!) {
       ordem
       titulo
       updatedAt
-      #url
+      url
     }
     biblioteca
     

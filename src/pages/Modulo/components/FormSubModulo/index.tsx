@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 
 import DataTable from '@/components/DataTable'
+import { InputFileField } from '@/components/form/InputFileField'
 import { InputNumberField } from '@/components/form/InputNumberField'
 import type { SubModuloType } from '@/gql/generated/graphql'
 import { useModal } from '@/hooks/useModal'
@@ -36,8 +37,8 @@ function FormSubModulo({
         titulo: data.titulo,
         ordem: data.ordem,
         moduloId: data.moduloId,
-        // imagem: undefined,
-        // url: data.url,
+        imagem: undefined,
+        url: data.url,
       })
       openModal()
     },
@@ -51,11 +52,11 @@ function FormSubModulo({
       moduloId: moduloId,
       ordem: subModulos?.length ? subModulos.length + 1 : 1,
       imagem: undefined,
-      // url: '',
+      url: '',
     })
     toggleModal()
   }
-
+  console.log(form.formState.errors)
   return (
     <>
       {!isOpen && (
@@ -96,7 +97,7 @@ function FormSubModulo({
               />
             </div>
 
-            {/* <div className="col-span-6  ">
+            <div className="col-span-6  ">
               <InputFileField
                 disabled={disabled}
                 label="Imagem de fundo do card  (TAMANHO 1280x720px)"
@@ -104,7 +105,7 @@ function FormSubModulo({
                 name="imagem"
                 urlPreview={form.watch('url') || ''}
               />
-            </div> */}
+            </div>
 
             <div className=" col-span-12  flex  items-end gap-3">
               {!disabled && <Button type="submit">Salvar</Button>}

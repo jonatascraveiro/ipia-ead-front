@@ -13,7 +13,7 @@ export const useTabelaSubModulo = ({
   subModulos = [],
   handleEditarForm,
 }: {
-  subModulos?: Partial<SubModuloType>[] | SubModuloType[] | null
+  subModulos?: Partial<SubModuloType>[] | SubModuloType[]
   handleEditarForm: (data: SubModuloType) => void
 }) => {
   const [deletar] = useDeleteOneSubModuloMutation()
