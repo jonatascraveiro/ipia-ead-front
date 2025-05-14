@@ -4083,7 +4083,7 @@ export type ModuloQueryVariables = Exact<{
 }>;
 
 
-export type ModuloQuery = { __typename?: 'Query', modulo?: { __typename?: 'ModuloType', ordem: number, cursoId: number, descricao: string, id: number, titulo: string, biblioteca: boolean, curso?: { __typename?: 'CursoType', nome: string, id: number } | null, subModulos?: Array<{ __typename?: 'SubModuloType', id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null }> | null } | null };
+export type ModuloQuery = { __typename?: 'Query', modulo?: { __typename?: 'ModuloType', ordem: number, cursoId: number, descricao: string, id: number, titulo: string, biblioteca: boolean, curso?: { __typename?: 'CursoType', nome: string, id: number } | null, subModulos?: Array<{ __typename?: 'SubModuloType', id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, url?: string | null, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null }> | null } | null };
 
 export type ModulosQueryVariables = Exact<{
   filter?: InputMaybe<ModuloTypeFilter>;
@@ -5824,6 +5824,7 @@ export const ModuloDocument = gql`
       ordem
       titulo
       updatedAt
+      url
     }
     biblioteca
   }

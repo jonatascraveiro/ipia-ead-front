@@ -25,6 +25,7 @@ export const useFormSubModulo = ({
       mensagem: subModulo?.mensagem || '',
       ordem: subModulo?.ordem || 1,
       imagem: undefined,
+      url: subModulo?.url || '',
       moduloId: subModulo?.moduloId || 1,
     },
   })
@@ -57,7 +58,7 @@ export const useFormSubModulo = ({
     }
     criar({
       variables: {
-        arquivo: undefined,
+        arquivo: imagem,
         input: data,
       },
 

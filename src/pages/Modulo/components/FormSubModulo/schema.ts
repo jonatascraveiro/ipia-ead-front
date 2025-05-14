@@ -4,7 +4,7 @@ export const schema = z
   .object({
     id: z.number().optional(),
     titulo: z.string({ required_error: 'Título é obrigatório' }),
-    url: z.string().optional(),
+    url: z.string().nullish(),
     mensagem: z.string({ required_error: 'Mensagem é obrigatório' }),
     moduloId: z
       .number({ required_error: 'Curso é obrigatório' })
