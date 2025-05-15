@@ -35,15 +35,14 @@ export const getColumns = ({
       ...ColumnAction<AulaType>({
         actions: [
           {
-            label: 'Deletar',
-            icon: <Icone.deletar />,
-            onClick: (row) => deletar(row),
-            omit: () => true,
-          },
-          {
             label: 'Editar',
             icon: <Icone.editar />,
             onClick: (row) => editar(row),
+          },
+          {
+            label: 'Deletar',
+            icon: <Icone.deletar />,
+            onClick: (row) => deletar(row),
           },
         ],
       }),

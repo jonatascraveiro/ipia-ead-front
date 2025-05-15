@@ -2,13 +2,16 @@ import {
   CursoTypeSortFields,
   SortDirection,
   useCursosQuery,
+  useDeleteCursoMutation,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
 
+import { apolloClient } from '@/services/Apollo/client'
 import type { CursoType } from '@/types/curso'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 import { getColumns } from './columns'
 
 export const useTabelaCurso = () => {
@@ -20,6 +23,8 @@ export const useTabelaCurso = () => {
   })
 
   const { limparPaginacao, paging } = useCursorPaginacao()
+
+  const [deleteCurso] = useDeleteCursoMutation()
 
   const [nome, status] = form.getValues(['nome', 'status'])
 
@@ -66,8 +71,24 @@ export const useTabelaCurso = () => {
     [navigate],
   )
 
+  const handleDeletar = useCallback(
+    (data: CursoType) => {
+      deleteCurso({
+        variables: {
+          input: {
+            id: data.id,
+          },
+        },
+        onCompleted() {
+          toast.success('Módulo deletado com sucesso')
+          apolloClient.cache.evict({ fieldName: 'curso' })
+        },
+      })
+    },
+    [deleteCurso],
+  )
+
   const isActive = status === '' ? undefined : status === 1
-  console.log(isActive, status)
 
   const { data, loading } = useCursosQuery({
     variables: {
@@ -88,6 +109,7 @@ export const useTabelaCurso = () => {
       getColumns({
         visualizar: handleVisualizar,
         editar: handleEditar,
+        deletar: handleDeletar,
         modulo: handleModulo,
         biblioteca: handleBiblioteca,
         turma: handleTurma,
@@ -98,6 +120,7 @@ export const useTabelaCurso = () => {
       handleModulo,
       handleBiblioteca,
       handleTurma,
+      handleDeletar,
     ],
   )
 

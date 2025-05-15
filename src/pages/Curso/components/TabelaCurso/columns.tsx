@@ -7,6 +7,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 type Acoes = {
   visualizar: (data: CursoType) => void
   editar: (data: CursoType) => void
+  deletar: (data: CursoType) => void
   modulo: (data: CursoType) => void
   biblioteca: (data: CursoType) => void
   turma: (data: CursoType) => void
@@ -15,6 +16,7 @@ type Acoes = {
 export const getColumns = ({
   visualizar,
   editar,
+  deletar,
   modulo,
   biblioteca,
   turma,
@@ -69,6 +71,11 @@ export const getColumns = ({
             label: 'Turma',
             icon: <Icone.turmas />,
             onClick: (row) => turma(row),
+          },
+          {
+            label: 'Deletar',
+            icon: <Icone.deletar />,
+            onClick: (row) => deletar(row),
           },
         ],
       }),

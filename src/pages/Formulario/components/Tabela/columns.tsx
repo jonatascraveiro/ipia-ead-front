@@ -4,16 +4,18 @@ import type { Formularios } from '@/gql/generated/graphql'
 // import { FormularioType } from '@/types/formulario'
 // import type { FormularioType } from '@/types/formulario'
 import type { ColumnDef } from '@tanstack/react-table'
-import { Eye, Pencil } from 'lucide-react'
+import { Pencil } from 'lucide-react'
 
 type Acoes = {
-  visualizar: (data: Formularios) => void
+  // visualizar: (data: Formularios) => void
   editar: (data: Formularios) => void
+  deletar: (data: Formularios) => void
 }
 
 export const getColumns = ({
   editar,
-  visualizar,
+  // visualizar,
+  deletar,
 }: Acoes): ColumnDef<Formularios>[] => {
   return [
     {
@@ -35,12 +37,12 @@ export const getColumns = ({
       accessorFn: (row) => row.id,
       ...ColumnAction<Formularios>({
         actions: [
-          {
-            label: 'Visualizar',
-            icon: <Eye className="h-6 w-6" />,
-            onClick: (row) => visualizar(row),
-            omit: () => true,
-          },
+          // {
+          //   label: 'Visualizar',
+          //   icon: <Eye className="h-6 w-6" />,
+          //   onClick: (row) => visualizar(row),
+          //   omit: () => true,
+          // },
           {
             label: 'Editar ',
             icon: <Pencil className="h-6 w-6" />,
@@ -50,6 +52,11 @@ export const getColumns = ({
             label: 'Perguntas',
             icon: <Icone.perguntas className="h-6 w-6" />,
             onClick: (row) => editar(row),
+          },
+          {
+            label: 'Deletar',
+            icon: <Icone.deletar />,
+            onClick: (row) => deletar(row),
           },
         ],
       }),

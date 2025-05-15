@@ -3,16 +3,17 @@ import { ColumnAction } from '@/components/DataTable/ColumnAction'
 import { Icone } from '@/components/common/Icons'
 import type { PerguntaType } from '@/types/pergunta'
 import type { ColumnDef } from '@tanstack/react-table'
-import { Pencil } from 'lucide-react'
 
 type Acoes = {
   resposta: (data: PerguntaType) => void
   editar: (data: PerguntaType) => void
+  deletar: (data: PerguntaType) => void
 }
 
 export const getColumns = ({
   editar,
   resposta,
+  deletar,
 }: Acoes): ColumnDef<PerguntaType>[] => {
   return [
     {
@@ -33,8 +34,13 @@ export const getColumns = ({
           },
           {
             label: 'Editar',
-            icon: <Pencil className="h-6 w-6" />,
+            icon: <Icone.editar />,
             onClick: (row) => editar(row),
+          },
+          {
+            label: 'Deletar',
+            icon: <Icone.deletar />,
+            onClick: (row) => deletar(row),
           },
         ],
       }),
