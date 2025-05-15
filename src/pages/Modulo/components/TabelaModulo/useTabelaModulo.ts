@@ -1,14 +1,17 @@
 import {
   ModuloTypeSortFields,
   SortDirection,
+  useDeleteOneModuloMutation,
   useModulosQuery,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
 import { ROTAS } from '@/routes/rotas'
+import { apolloClient } from '@/services/Apollo/client'
 import type { ModuloType } from '@/types/modulo'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { generatePath, useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 import { getColumns } from './columns'
 
 export const useTabelaModulo = ({
@@ -22,6 +25,8 @@ export const useTabelaModulo = ({
   })
 
   const { limparPaginacao, paging } = useCursorPaginacao()
+
+  const [deleteModulo] = useDeleteOneModuloMutation()
 
   const nome = form.getValues('nome')
 
@@ -64,6 +69,27 @@ export const useTabelaModulo = ({
       navigate(generatePath(ROTAS.MATERIAL_COMPLEMENTAR, { moduloId: data.id }))
     },
     [navigate],
+  )
+
+  const handleDeletar = useCallback(
+    (data: ModuloType) => {
+      deleteModulo({
+        variables: {
+          input: {
+            id: data.id,
+          },
+        },
+        onCompleted() {
+          const mensagem = biblioteca
+            ? 'Biblioteca deletada com sucesso'
+            : 'Módulo deletado com sucesso'
+          toast.success(mensagem)
+
+          apolloClient.cache.evict({ fieldName: 'modulos' })
+        },
+      })
+    },
+    [biblioteca, deleteModulo],
   )
 
   const handleFormulario = useCallback(
@@ -113,9 +139,18 @@ export const useTabelaModulo = ({
         aula: handleAula,
         formulario: handleFormulario,
         editarSubmodulo: handleEditarSubmodulo,
+        deletar: handleDeletar,
         biblioteca,
       }),
-    [handleVisualizar, handleEditar, handleAula, handleFormulario, biblioteca],
+    [
+      handleVisualizar,
+      handleEditar,
+      handleAula,
+      handleFormulario,
+      handleEditarSubmodulo,
+      handleDeletar,
+      biblioteca,
+    ],
   )
 
   return {

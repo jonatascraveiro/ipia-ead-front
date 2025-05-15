@@ -17,12 +17,12 @@ mutation updateOneCurso($arquivo: Upload, $update: UpdateCursoInput!, $id: Float
 }
 `
 
-// gql`
-//  mutation deleteCurso($input: DeleteOneCursoTypeInput!) {
-//   deleteCurso(input: $input) {
-//     id
-//   }
-// }
-// `
+gql`
+ mutation deleteCurso($input: DeleteOneCursoTypeInput!) {
+  deleteCurso(input: $input) {
+    id
+  }
+}
+`
 
 // updateOneCurso ( arquivo Upload , id Float! , update UpdateCursoInput! ) CursoType

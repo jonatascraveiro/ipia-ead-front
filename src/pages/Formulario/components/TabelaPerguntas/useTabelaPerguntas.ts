@@ -1,7 +1,10 @@
+import { useDeleteOnePerguntaMutation } from '@/gql/generated/graphql'
 import { ROTAS } from '@/routes/rotas'
+import { apolloClient } from '@/services/Apollo/client'
 import type { PerguntaType } from '@/types/pergunta'
 import { useCallback, useMemo } from 'react'
 import { generatePath, useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 import { getColumns } from './columns'
 
 export const useTabelaPerguntas = ({
@@ -26,13 +29,33 @@ export const useTabelaPerguntas = ({
     [navigate],
   )
 
+  const [mutateDelete] = useDeleteOnePerguntaMutation()
+  const handleDeletar = useCallback(
+    (data: PerguntaType) => {
+      mutateDelete({
+        variables: {
+          input: {
+            id: data.id,
+          },
+        },
+        onCompleted() {
+          toast.success('Pergunta deletada com sucesso')
+          apolloClient.cache.evict({ fieldName: 'perguntas' })
+          apolloClient.cache.evict({ fieldName: 'formulario' })
+        },
+      })
+    },
+    [mutateDelete],
+  )
+
   const columns = useMemo(
     () =>
       getColumns({
         resposta: handleResposta,
         editar: handleEditar,
+        deletar: handleDeletar,
       }),
-    [handleResposta, handleEditar],
+    [handleResposta, handleEditar, handleDeletar],
   )
 
   return {

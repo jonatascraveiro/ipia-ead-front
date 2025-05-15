@@ -70,7 +70,6 @@ export const getColumns = ({
             label: 'Deletar',
             icon: <Icone.deletar />,
             onClick: (row) => deletar(row),
-            omit: () => true,
           },
         ],
       }),
