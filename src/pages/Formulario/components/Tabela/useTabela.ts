@@ -6,6 +6,7 @@ import {
   useFormulariosQuery,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
+import { useDialog } from '@/hooks/useDialog'
 import { ROTAS } from '@/routes/rotas'
 import { apolloClient } from '@/services/Apollo/client'
 import { useCallback, useMemo } from 'react'
@@ -50,21 +51,30 @@ export const useTabelaFormulario = ({
     [navigate, subModuloId],
   )
 
+  const { showDialog, closeDialog } = useDialog()
   const handleDeletar = useCallback(
     (data: Formularios) => {
-      mutateDelete({
-        variables: {
-          input: {
-            id: data.id,
-          },
-        },
-        onCompleted() {
-          toast.success('Formulário deletado com sucesso')
-          apolloClient.cache.evict({ fieldName: 'formularios' })
+      showDialog({
+        title: 'Deletar item?',
+        description: `Você tem certeza que deseja deletar ${data.nome}?`,
+        content: undefined,
+        onConfirm: () => {
+          mutateDelete({
+            variables: {
+              input: {
+                id: data.id,
+              },
+            },
+            onCompleted() {
+              toast.success('Formulário deletado com sucesso')
+              closeDialog()
+              apolloClient.cache.evict({ fieldName: 'formularios' })
+            },
+          })
         },
       })
     },
-    [mutateDelete],
+    [closeDialog, mutateDelete, showDialog],
   )
 
   const { data, loading } = useFormulariosQuery({

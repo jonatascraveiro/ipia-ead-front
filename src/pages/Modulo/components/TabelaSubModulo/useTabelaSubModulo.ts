@@ -2,6 +2,7 @@ import {
   type SubModuloType,
   useDeleteOneSubModuloMutation,
 } from '@/gql/generated/graphql'
+import { useDialog } from '@/hooks/useDialog'
 import { ROTAS } from '@/routes/rotas'
 import { apolloClient } from '@/services/Apollo/client'
 import { useCallback, useMemo } from 'react'
@@ -16,23 +17,32 @@ export const useTabelaSubModulo = ({
   subModulos?: Partial<SubModuloType>[] | SubModuloType[]
   handleEditarForm: (data: SubModuloType) => void
 }) => {
-  const [deletar] = useDeleteOneSubModuloMutation()
+  const [mutateDelete] = useDeleteOneSubModuloMutation()
 
+  const { showDialog, closeDialog } = useDialog()
   const handleDeletar = useCallback(
     (data: SubModuloType) => {
-      deletar({
-        variables: {
-          input: {
-            id: data.id,
-          },
-        },
-        onCompleted() {
-          toast.success('SubMódulo deletado com sucesso')
-          apolloClient.cache.evict({ fieldName: 'modulo' })
+      showDialog({
+        title: 'Deletar item?',
+        description: `Você tem certeza que deseja deletar ${data.titulo}?`,
+        content: undefined,
+        onConfirm: () => {
+          mutateDelete({
+            variables: {
+              input: {
+                id: data.id,
+              },
+            },
+            onCompleted() {
+              toast.success('SubMódulo deletado com sucesso')
+              closeDialog()
+              apolloClient.cache.evict({ fieldName: 'modulo' })
+            },
+          })
         },
       })
     },
-    [deletar],
+    [closeDialog, mutateDelete, showDialog],
   )
 
   const navigate = useNavigate()

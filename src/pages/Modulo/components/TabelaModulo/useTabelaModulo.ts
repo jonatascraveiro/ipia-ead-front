@@ -5,6 +5,7 @@ import {
   useModulosQuery,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
+import { useDialog } from '@/hooks/useDialog'
 import { ROTAS } from '@/routes/rotas'
 import { apolloClient } from '@/services/Apollo/client'
 import type { ModuloType } from '@/types/modulo'
@@ -26,7 +27,7 @@ export const useTabelaModulo = ({
 
   const { limparPaginacao, paging } = useCursorPaginacao()
 
-  const [deleteModulo] = useDeleteOneModuloMutation()
+  const [mutateDelete] = useDeleteOneModuloMutation()
 
   const nome = form.getValues('nome')
 
@@ -71,25 +72,33 @@ export const useTabelaModulo = ({
     [navigate],
   )
 
+  const { showDialog, closeDialog } = useDialog()
   const handleDeletar = useCallback(
     (data: ModuloType) => {
-      deleteModulo({
-        variables: {
-          input: {
-            id: data.id,
-          },
-        },
-        onCompleted() {
-          const mensagem = biblioteca
-            ? 'Biblioteca deletada com sucesso'
-            : 'Módulo deletado com sucesso'
-          toast.success(mensagem)
-
-          apolloClient.cache.evict({ fieldName: 'modulos' })
+      showDialog({
+        title: 'Deletar item?',
+        description: `Você tem certeza que deseja deletar ${data.titulo}?`,
+        content: undefined,
+        onConfirm: () => {
+          mutateDelete({
+            variables: {
+              input: {
+                id: data.id,
+              },
+            },
+            onCompleted() {
+              const mensagem = biblioteca
+                ? 'Biblioteca deletada com sucesso'
+                : 'Módulo deletado com sucesso'
+              toast.success(mensagem)
+              closeDialog()
+              apolloClient.cache.evict({ fieldName: 'modulos' })
+            },
+          })
         },
       })
     },
-    [biblioteca, deleteModulo],
+    [biblioteca, closeDialog, mutateDelete, showDialog],
   )
 
   const handleFormulario = useCallback(

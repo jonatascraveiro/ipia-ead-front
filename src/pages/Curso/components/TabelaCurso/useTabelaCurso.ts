@@ -6,6 +6,7 @@ import {
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
 
+import { useDialog } from '@/hooks/useDialog'
 import { apolloClient } from '@/services/Apollo/client'
 import type { CursoType } from '@/types/curso'
 import { useCallback, useMemo } from 'react'
@@ -24,7 +25,7 @@ export const useTabelaCurso = () => {
 
   const { limparPaginacao, paging } = useCursorPaginacao()
 
-  const [deleteCurso] = useDeleteCursoMutation()
+  const [mutateDelete] = useDeleteCursoMutation()
 
   const [nome, status] = form.getValues(['nome', 'status'])
 
@@ -70,22 +71,30 @@ export const useTabelaCurso = () => {
     },
     [navigate],
   )
-
+  const { showDialog, closeDialog } = useDialog()
   const handleDeletar = useCallback(
     (data: CursoType) => {
-      deleteCurso({
-        variables: {
-          input: {
-            id: data.id,
-          },
-        },
-        onCompleted() {
-          toast.success('Módulo deletado com sucesso')
-          apolloClient.cache.evict({ fieldName: 'curso' })
+      showDialog({
+        title: 'Deletar item?',
+        description: `Você tem certeza que deseja deletar ${data.nome}?`,
+        content: undefined,
+        onConfirm: () => {
+          mutateDelete({
+            variables: {
+              input: {
+                id: data.id,
+              },
+            },
+            onCompleted() {
+              toast.success('Curso deletado com sucesso')
+              closeDialog()
+              apolloClient.cache.evict({ fieldName: 'curso' })
+            },
+          })
         },
       })
     },
-    [deleteCurso],
+    [closeDialog, mutateDelete, showDialog],
   )
 
   const isActive = status === '' ? undefined : status === 1

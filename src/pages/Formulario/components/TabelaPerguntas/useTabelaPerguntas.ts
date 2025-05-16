@@ -1,4 +1,5 @@
 import { useDeleteOnePerguntaMutation } from '@/gql/generated/graphql'
+import { useDialog } from '@/hooks/useDialog'
 import { ROTAS } from '@/routes/rotas'
 import { apolloClient } from '@/services/Apollo/client'
 import type { PerguntaType } from '@/types/pergunta'
@@ -30,22 +31,32 @@ export const useTabelaPerguntas = ({
   )
 
   const [mutateDelete] = useDeleteOnePerguntaMutation()
+
+  const { showDialog, closeDialog } = useDialog()
   const handleDeletar = useCallback(
     (data: PerguntaType) => {
-      mutateDelete({
-        variables: {
-          input: {
-            id: data.id,
-          },
-        },
-        onCompleted() {
-          toast.success('Pergunta deletada com sucesso')
-          apolloClient.cache.evict({ fieldName: 'perguntas' })
-          apolloClient.cache.evict({ fieldName: 'formulario' })
+      showDialog({
+        title: 'Deletar item?',
+        description: `Você tem certeza que deseja deletar a pergunta ?`,
+        content: undefined,
+        onConfirm: () => {
+          mutateDelete({
+            variables: {
+              input: {
+                id: data.id,
+              },
+            },
+            onCompleted() {
+              toast.success('Pergunta deletada com sucesso')
+              closeDialog()
+              apolloClient.cache.evict({ fieldName: 'perguntas' })
+              apolloClient.cache.evict({ fieldName: 'formulario' })
+            },
+          })
         },
       })
     },
-    [mutateDelete],
+    [closeDialog, mutateDelete, showDialog],
   )
 
   const columns = useMemo(
