@@ -1,5 +1,6 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import {
+  Alignment,
   Autoformat,
   Base64UploadAdapter,
   BlockQuote,
@@ -80,6 +81,7 @@ function EditorFormularioHtml({ data, setData, minHeight = '300px' }: Props) {
           FontBackgroundColor,
           FontSize,
           Underline,
+          Alignment,
         ],
         toolbar: [
           'undo',
@@ -94,6 +96,7 @@ function EditorFormularioHtml({ data, setData, minHeight = '300px' }: Props) {
           'fontColor',
           'fontBackgroundColor',
           'fontSize',
+          'alignment',
           '|',
           'link',
           'uploadImage',
