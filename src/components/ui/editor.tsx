@@ -1,8 +1,8 @@
+import { UploadAdapterPlugin } from '@/plugins/UploadAdapterPlugin'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import {
   Alignment,
   Autoformat,
-  Base64UploadAdapter,
   BlockQuote,
   Bold,
   ClassicEditor,
@@ -52,6 +52,7 @@ function EditorFormularioHtml({ data, setData, minHeight = '300px' }: Props) {
       config={{
         licenseKey: 'GPL',
         plugins: [
+          // UploadAdapterPlugin,
           Autoformat,
           BlockQuote,
           Bold,
@@ -65,7 +66,7 @@ function EditorFormularioHtml({ data, setData, minHeight = '300px' }: Props) {
           ImageStyle,
           ImageToolbar,
           ImageUpload,
-          Base64UploadAdapter,
+          // Base64UploadAdapter,
           Indent,
           IndentBlock,
           ImageInsert,
@@ -108,6 +109,7 @@ function EditorFormularioHtml({ data, setData, minHeight = '300px' }: Props) {
           '|',
 
           'uploadImage',
+          'imageCaption',
           'ckbox',
           'insertTable',
           'blockQuote',
@@ -154,6 +156,14 @@ function EditorFormularioHtml({ data, setData, minHeight = '300px' }: Props) {
               class: 'ck-heading_heading4',
             },
           ],
+        },
+        extraPlugins: [UploadAdapterPlugin],
+        simpleUpload: {
+          uploadUrl: 'http://localhost:3000/graphql', // pode ser um REST ou GraphQL multipart
+          withCredentials: false,
+          headers: {
+            // Authorization: `Bearer ${token}`, // ou qualquer header que você precise
+          },
         },
         image: {
           resizeOptions: [
