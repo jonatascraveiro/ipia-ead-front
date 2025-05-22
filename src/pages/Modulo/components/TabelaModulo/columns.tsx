@@ -10,6 +10,7 @@ type Acoes = {
   editarSubmodulo: (data: ModuloType) => void
   aula: (data: ModuloType) => void
   formulario: (data: ModuloType) => void
+  deletar: (data: ModuloType) => void
   biblioteca: boolean
 }
 
@@ -19,6 +20,7 @@ export const getColumns = ({
   visualizar,
   aula,
   formulario,
+  deletar,
   biblioteca,
 }: Acoes): ColumnDef<ModuloType>[] => {
   return [
@@ -77,6 +79,11 @@ export const getColumns = ({
             icon: <Icone.formulario />,
             onClick: (row) => formulario(row),
             omit: () => true,
+          },
+          {
+            label: 'Deletar',
+            icon: <Icone.deletar />,
+            onClick: (row) => deletar(row),
           },
         ],
       }),

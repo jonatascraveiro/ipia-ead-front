@@ -2,13 +2,16 @@ import {
   AulaTypeSortFields,
   SortDirection,
   useAulasQuery,
+  useDeleteOneAulaMutation,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
 import { ROTAS } from '@/routes/rotas'
+import { apolloClient } from '@/services/Apollo/client'
 import type { AulaType } from '@/types/aula'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { generatePath, useNavigate, useParams } from 'react-router'
+import { toast } from 'react-toastify'
 import { getColumns } from './columns'
 
 export const useTabelaAula = ({ biblioteca }: { biblioteca: boolean }) => {
@@ -33,6 +36,7 @@ export const useTabelaAula = ({ biblioteca }: { biblioteca: boolean }) => {
   }
 
   const navigate = useNavigate()
+  const [mutateDelete] = useDeleteOneAulaMutation()
 
   const rotaUrl = biblioteca ? ROTAS.MATERIAL_COMPLEMENTAR : ROTAS.AULA
 
@@ -52,6 +56,24 @@ export const useTabelaAula = ({ biblioteca }: { biblioteca: boolean }) => {
       navigate(`${rotaUrl}/${data.id}`)
     },
     [navigate, rotaUrl],
+  )
+  const handleDeletar = useCallback(
+    (data: AulaType) => {
+      mutateDelete({
+        variables: {
+          input: {
+            id: data.id,
+          },
+        },
+        onCompleted() {
+          const mensagem = 'Aula deletada com sucesso'
+          toast.success(mensagem)
+          apolloClient.cache.evict({ fieldName: 'aulas' })
+          apolloClient.cache.evict({ fieldName: 'modulos' })
+        },
+      })
+    },
+    [mutateDelete],
   )
 
   const { data, loading } = useAulasQuery({
@@ -82,8 +104,9 @@ export const useTabelaAula = ({ biblioteca }: { biblioteca: boolean }) => {
       getColumns({
         visualizar: handleVisualizar,
         editar: handleEditar,
+        deletar: handleDeletar,
       }),
-    [handleVisualizar, handleEditar],
+    [handleVisualizar, handleEditar, handleDeletar],
   )
 
   return {

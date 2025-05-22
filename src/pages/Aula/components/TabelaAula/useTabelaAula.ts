@@ -6,16 +6,17 @@ import {
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
 import { ROTAS } from '@/routes/rotas'
+import { apolloClient } from '@/services/Apollo/client'
 import type { AulaType } from '@/types/aula'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { generatePath, useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 import { getColumns } from './columns'
 
 export const useTabelaAula = ({
-  biblioteca,
   subModuloId,
-}: { biblioteca: boolean; subModuloId: string }) => {
+}: { biblioteca?: boolean; subModuloId: string }) => {
   const form = useForm<{ nome: string }>({
     defaultValues: {
       nome: '',
@@ -35,8 +36,6 @@ export const useTabelaAula = ({
   }
 
   const navigate = useNavigate()
-
-  const rotaUrl = biblioteca ? ROTAS.MATERIAL_COMPLEMENTAR : ROTAS.AULA
 
   const handleEditar = useCallback(
     (data: AulaType) => {
@@ -60,11 +59,12 @@ export const useTabelaAula = ({
           },
         },
         onCompleted() {
-          navigate(rotaUrl)
+          toast.success('Aula deletada com sucesso')
+          apolloClient.cache.evict({ fieldName: 'aulas' })
         },
       })
     },
-    [mutateDelete, navigate, rotaUrl],
+    [mutateDelete],
   )
 
   const { data, loading } = useAulasQuery({
