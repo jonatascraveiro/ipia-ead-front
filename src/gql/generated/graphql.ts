@@ -23,22 +23,48 @@ export type Scalars = {
 export type AlunoType = {
   __typename?: 'AlunoType';
   alunosProgressos?: Maybe<Array<ProgressoType>>;
+  /** ano_serie do aluno */
+  anoSerie?: Maybe<Scalars['String']['output']>;
   /** cpf do aluno */
-  cpf: Scalars['String']['output'];
+  cpf?: Maybe<Scalars['String']['output']>;
   /** data criação do registro */
   createdAt: Scalars['DateTime']['output'];
+  /** data_nascimento do aluno */
+  dataNascimento?: Maybe<Scalars['String']['output']>;
   /** data da exclusão do registro */
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   /** email do aluno */
   email: Scalars['String']['output'];
+  /** escola do aluno */
+  escola?: Maybe<Scalars['String']['output']>;
+  /** estado do aluno */
+  estado?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   inscricoes?: Maybe<Array<InscricaoType>>;
+  /** matricula do aluno */
+  matricula?: Maybe<Scalars['String']['output']>;
+  /** municipio do aluno */
+  municipio?: Maybe<Scalars['String']['output']>;
   /** nome do aluno */
   nome: Scalars['String']['output'];
+  /** qualificacao_escolhida do aluno */
+  qualificacaoEscolhida?: Maybe<Scalars['String']['output']>;
+  /** responsavel 1 do aluno */
+  responsavel1?: Maybe<Scalars['String']['output']>;
+  /** responsavel 2 do aluno */
+  responsavel2?: Maybe<Scalars['String']['output']>;
   /** senha do aluno */
   senha: Scalars['String']['output'];
+  /** turma do aluno */
+  turma?: Maybe<Scalars['String']['output']>;
+  /** turno do aluno */
+  turno?: Maybe<Scalars['String']['output']>;
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** whats app do aluno */
+  whatsAppAluno?: Maybe<Scalars['String']['output']>;
+  /** whats app do responsavel */
+  whatsAppResponsavel1?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -55,14 +81,27 @@ export type AlunoTypeInscricoesArgs = {
 
 export type AlunoTypeAggregateGroupBy = {
   __typename?: 'AlunoTypeAggregateGroupBy';
+  anoSerie?: Maybe<Scalars['String']['output']>;
   cpf?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  dataNascimento?: Maybe<Scalars['String']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  escola?: Maybe<Scalars['String']['output']>;
+  estado?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  matricula?: Maybe<Scalars['String']['output']>;
+  municipio?: Maybe<Scalars['String']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
+  qualificacaoEscolhida?: Maybe<Scalars['String']['output']>;
+  responsavel1?: Maybe<Scalars['String']['output']>;
+  responsavel2?: Maybe<Scalars['String']['output']>;
   senha?: Maybe<Scalars['String']['output']>;
+  turma?: Maybe<Scalars['String']['output']>;
+  turno?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  whatsAppAluno?: Maybe<Scalars['String']['output']>;
+  whatsAppResponsavel1?: Maybe<Scalars['String']['output']>;
 };
 
 export type AlunoTypeAvgAggregate = {
@@ -82,14 +121,27 @@ export type AlunoTypeConnection = {
 
 export type AlunoTypeCountAggregate = {
   __typename?: 'AlunoTypeCountAggregate';
+  anoSerie?: Maybe<Scalars['Int']['output']>;
   cpf?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['Int']['output']>;
+  dataNascimento?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
   email?: Maybe<Scalars['Int']['output']>;
+  escola?: Maybe<Scalars['Int']['output']>;
+  estado?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  matricula?: Maybe<Scalars['Int']['output']>;
+  municipio?: Maybe<Scalars['Int']['output']>;
   nome?: Maybe<Scalars['Int']['output']>;
+  qualificacaoEscolhida?: Maybe<Scalars['Int']['output']>;
+  responsavel1?: Maybe<Scalars['Int']['output']>;
+  responsavel2?: Maybe<Scalars['Int']['output']>;
   senha?: Maybe<Scalars['Int']['output']>;
+  turma?: Maybe<Scalars['Int']['output']>;
+  turno?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
+  whatsAppAluno?: Maybe<Scalars['Int']['output']>;
+  whatsAppResponsavel1?: Maybe<Scalars['Int']['output']>;
 };
 
 export type AlunoTypeEdge = {
@@ -103,16 +155,29 @@ export type AlunoTypeEdge = {
 export type AlunoTypeFilter = {
   alunosProgressos?: InputMaybe<AlunoTypeFilterProgressoTypeFilter>;
   and?: InputMaybe<Array<AlunoTypeFilter>>;
+  anoSerie?: InputMaybe<StringFieldComparison>;
   cpf?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
+  dataNascimento?: InputMaybe<StringFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
+  escola?: InputMaybe<StringFieldComparison>;
+  estado?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   inscricoes?: InputMaybe<AlunoTypeFilterInscricaoTypeFilter>;
+  matricula?: InputMaybe<StringFieldComparison>;
+  municipio?: InputMaybe<StringFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AlunoTypeFilter>>;
+  qualificacaoEscolhida?: InputMaybe<StringFieldComparison>;
+  responsavel1?: InputMaybe<StringFieldComparison>;
+  responsavel2?: InputMaybe<StringFieldComparison>;
   senha?: InputMaybe<StringFieldComparison>;
+  turma?: InputMaybe<StringFieldComparison>;
+  turno?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
+  whatsAppAluno?: InputMaybe<StringFieldComparison>;
+  whatsAppResponsavel1?: InputMaybe<StringFieldComparison>;
 };
 
 export type AlunoTypeFilterInscricaoTypeFilter = {
@@ -148,26 +213,52 @@ export type AlunoTypeFilterProgressoTypeFilter = {
 
 export type AlunoTypeMaxAggregate = {
   __typename?: 'AlunoTypeMaxAggregate';
+  anoSerie?: Maybe<Scalars['String']['output']>;
   cpf?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  dataNascimento?: Maybe<Scalars['String']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  escola?: Maybe<Scalars['String']['output']>;
+  estado?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  matricula?: Maybe<Scalars['String']['output']>;
+  municipio?: Maybe<Scalars['String']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
+  qualificacaoEscolhida?: Maybe<Scalars['String']['output']>;
+  responsavel1?: Maybe<Scalars['String']['output']>;
+  responsavel2?: Maybe<Scalars['String']['output']>;
   senha?: Maybe<Scalars['String']['output']>;
+  turma?: Maybe<Scalars['String']['output']>;
+  turno?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  whatsAppAluno?: Maybe<Scalars['String']['output']>;
+  whatsAppResponsavel1?: Maybe<Scalars['String']['output']>;
 };
 
 export type AlunoTypeMinAggregate = {
   __typename?: 'AlunoTypeMinAggregate';
+  anoSerie?: Maybe<Scalars['String']['output']>;
   cpf?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  dataNascimento?: Maybe<Scalars['String']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  escola?: Maybe<Scalars['String']['output']>;
+  estado?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  matricula?: Maybe<Scalars['String']['output']>;
+  municipio?: Maybe<Scalars['String']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
+  qualificacaoEscolhida?: Maybe<Scalars['String']['output']>;
+  responsavel1?: Maybe<Scalars['String']['output']>;
+  responsavel2?: Maybe<Scalars['String']['output']>;
   senha?: Maybe<Scalars['String']['output']>;
+  turma?: Maybe<Scalars['String']['output']>;
+  turno?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  whatsAppAluno?: Maybe<Scalars['String']['output']>;
+  whatsAppResponsavel1?: Maybe<Scalars['String']['output']>;
 };
 
 export type AlunoTypeSort = {
@@ -177,14 +268,27 @@ export type AlunoTypeSort = {
 };
 
 export enum AlunoTypeSortFields {
+  AnoSerie = 'anoSerie',
   Cpf = 'cpf',
   CreatedAt = 'createdAt',
+  DataNascimento = 'dataNascimento',
   DeletedAt = 'deletedAt',
   Email = 'email',
+  Escola = 'escola',
+  Estado = 'estado',
   Id = 'id',
+  Matricula = 'matricula',
+  Municipio = 'municipio',
   Nome = 'nome',
+  QualificacaoEscolhida = 'qualificacaoEscolhida',
+  Responsavel1 = 'responsavel1',
+  Responsavel2 = 'responsavel2',
   Senha = 'senha',
-  UpdatedAt = 'updatedAt'
+  Turma = 'turma',
+  Turno = 'turno',
+  UpdatedAt = 'updatedAt',
+  WhatsAppAluno = 'whatsAppAluno',
+  WhatsAppResponsavel1 = 'whatsAppResponsavel1'
 }
 
 export type AlunoTypeSumAggregate = {
@@ -1383,15 +1487,28 @@ export type InscricaoTypeFilter = {
 
 export type InscricaoTypeFilterAlunoTypeFilter = {
   and?: InputMaybe<Array<InscricaoTypeFilterAlunoTypeFilter>>;
+  anoSerie?: InputMaybe<StringFieldComparison>;
   cpf?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
+  dataNascimento?: InputMaybe<StringFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
+  escola?: InputMaybe<StringFieldComparison>;
+  estado?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
+  matricula?: InputMaybe<StringFieldComparison>;
+  municipio?: InputMaybe<StringFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<InscricaoTypeFilterAlunoTypeFilter>>;
+  qualificacaoEscolhida?: InputMaybe<StringFieldComparison>;
+  responsavel1?: InputMaybe<StringFieldComparison>;
+  responsavel2?: InputMaybe<StringFieldComparison>;
   senha?: InputMaybe<StringFieldComparison>;
+  turma?: InputMaybe<StringFieldComparison>;
+  turno?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
+  whatsAppAluno?: InputMaybe<StringFieldComparison>;
+  whatsAppResponsavel1?: InputMaybe<StringFieldComparison>;
 };
 
 export type InscricaoTypeFilterTurmaTypeFilter = {
@@ -1753,6 +1870,7 @@ export type Mutation = {
   deleteOneSubModulo: SubModuloTypeDeleteResponse;
   deleteTurma: TurmaTypeDeleteResponse;
   deleteUsuario: UsuarioDtoDeleteResponse;
+  importAluno?: Maybe<Array<AlunoType>>;
   login: AuthType;
   loginAluno: AuthType;
   updateArquivo: Arquivo;
@@ -1915,6 +2033,11 @@ export type MutationDeleteTurmaArgs = {
 
 export type MutationDeleteUsuarioArgs = {
   input: DeleteOneUsuarioDtoInput;
+};
+
+
+export type MutationImportAlunoArgs = {
+  file: Scalars['Upload']['input'];
 };
 
 
@@ -2322,15 +2445,28 @@ export type ProgressoTypeFilter = {
 
 export type ProgressoTypeFilterAlunoTypeFilter = {
   and?: InputMaybe<Array<ProgressoTypeFilterAlunoTypeFilter>>;
+  anoSerie?: InputMaybe<StringFieldComparison>;
   cpf?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
+  dataNascimento?: InputMaybe<StringFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
+  escola?: InputMaybe<StringFieldComparison>;
+  estado?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
+  matricula?: InputMaybe<StringFieldComparison>;
+  municipio?: InputMaybe<StringFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProgressoTypeFilterAlunoTypeFilter>>;
+  qualificacaoEscolhida?: InputMaybe<StringFieldComparison>;
+  responsavel1?: InputMaybe<StringFieldComparison>;
+  responsavel2?: InputMaybe<StringFieldComparison>;
   senha?: InputMaybe<StringFieldComparison>;
+  turma?: InputMaybe<StringFieldComparison>;
+  turno?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
+  whatsAppAluno?: InputMaybe<StringFieldComparison>;
+  whatsAppResponsavel1?: InputMaybe<StringFieldComparison>;
 };
 
 export type ProgressoTypeFilterAulaTypeFilter = {
@@ -3778,6 +3914,13 @@ export type UsuarioDtoSumAggregate = {
   id?: Maybe<Scalars['Float']['output']>;
 };
 
+export type CreateArquivoMutationVariables = Exact<{
+  arquivo: Scalars['Upload']['input'];
+}>;
+
+
+export type CreateArquivoMutation = { __typename?: 'Mutation', createArquivo?: { __typename?: 'Arquivo', createdAt: any, deletedAt?: any | null, extensao: string, id: number, mimetype: string, nome: string, pathBucket?: string | null, tamanho: number, updatedAt?: any | null, url: string } | null };
+
 export type CreateOneAulaMutationVariables = Exact<{
   input: CreateOneAulaTypeInput;
 }>;
@@ -3987,7 +4130,7 @@ export type AlunosQueryVariables = Exact<{
 }>;
 
 
-export type AlunosQuery = { __typename?: 'Query', alunos: { __typename?: 'AlunoTypeConnection', edges: Array<{ __typename?: 'AlunoTypeEdge', node: { __typename?: 'AlunoType', id: number, nome: string, cpf: string, email: string, inscricoes?: Array<{ __typename?: 'InscricaoType', id: number, status: boolean, turma?: { __typename?: 'TurmaType', nome: string, id: number } | null }> | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type AlunosQuery = { __typename?: 'Query', alunos: { __typename?: 'AlunoTypeConnection', edges: Array<{ __typename?: 'AlunoTypeEdge', node: { __typename?: 'AlunoType', id: number, nome: string, cpf?: string | null, email: string, inscricoes?: Array<{ __typename?: 'InscricaoType', id: number, status: boolean, turma?: { __typename?: 'TurmaType', nome: string, id: number } | null }> | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type AulaQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -4074,7 +4217,7 @@ export type InscricaoQueryVariables = Exact<{
 }>;
 
 
-export type InscricaoQuery = { __typename?: 'Query', inscricao?: { __typename?: 'InscricaoType', id: number, dataInscricao: any, aluno?: { __typename?: 'AlunoType', id: number, cpf: string, nome: string } | null, turma?: { __typename?: 'TurmaType', id: number, descricao: string } | null } | null };
+export type InscricaoQuery = { __typename?: 'Query', inscricao?: { __typename?: 'InscricaoType', id: number, dataInscricao: any, aluno?: { __typename?: 'AlunoType', id: number, cpf?: string | null, nome: string } | null, turma?: { __typename?: 'TurmaType', id: number, descricao: string } | null } | null };
 
 export type InscricoesQueryVariables = Exact<{
   filter?: InputMaybe<InscricaoTypeFilter>;
@@ -4083,7 +4226,7 @@ export type InscricoesQueryVariables = Exact<{
 }>;
 
 
-export type InscricoesQuery = { __typename?: 'Query', inscricoes: { __typename?: 'InscricaoTypeConnection', edges: Array<{ __typename?: 'InscricaoTypeEdge', cursor: any, node: { __typename?: 'InscricaoType', id: number, status: boolean, dataInscricao: any, aluno?: { __typename?: 'AlunoType', id: number, cpf: string, nome: string } | null, turma?: { __typename?: 'TurmaType', id: number, nome: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type InscricoesQuery = { __typename?: 'Query', inscricoes: { __typename?: 'InscricaoTypeConnection', edges: Array<{ __typename?: 'InscricaoTypeEdge', cursor: any, node: { __typename?: 'InscricaoType', id: number, status: boolean, dataInscricao: any, aluno?: { __typename?: 'AlunoType', id: number, cpf?: string | null, nome: string } | null, turma?: { __typename?: 'TurmaType', id: number, nome: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type ModuloQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -4177,6 +4320,48 @@ export type UsuariosQueryVariables = Exact<{
 export type UsuariosQuery = { __typename?: 'Query', usuarios: { __typename?: 'UsuarioDtoConnection', edges: Array<{ __typename?: 'UsuarioDtoEdge', node: { __typename?: 'UsuarioDto', ativo: boolean, nome: string, email: string, id: number } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 
+export const CreateArquivoDocument = gql`
+    mutation createArquivo($arquivo: Upload!) {
+  createArquivo(arquivo: $arquivo) {
+    createdAt
+    deletedAt
+    extensao
+    id
+    mimetype
+    nome
+    pathBucket
+    tamanho
+    updatedAt
+    url
+  }
+}
+    `;
+export type CreateArquivoMutationFn = Apollo.MutationFunction<CreateArquivoMutation, CreateArquivoMutationVariables>;
+
+/**
+ * __useCreateArquivoMutation__
+ *
+ * To run a mutation, you first call `useCreateArquivoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateArquivoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createArquivoMutation, { data, loading, error }] = useCreateArquivoMutation({
+ *   variables: {
+ *      arquivo: // value for 'arquivo'
+ *   },
+ * });
+ */
+export function useCreateArquivoMutation(baseOptions?: Apollo.MutationHookOptions<CreateArquivoMutation, CreateArquivoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateArquivoMutation, CreateArquivoMutationVariables>(CreateArquivoDocument, options);
+      }
+export type CreateArquivoMutationHookResult = ReturnType<typeof useCreateArquivoMutation>;
+export type CreateArquivoMutationResult = Apollo.MutationResult<CreateArquivoMutation>;
+export type CreateArquivoMutationOptions = Apollo.BaseMutationOptions<CreateArquivoMutation, CreateArquivoMutationVariables>;
 export const CreateOneAulaDocument = gql`
     mutation createOneAula($input: CreateOneAulaTypeInput!) {
   CreateOneAula(input: $input) {
