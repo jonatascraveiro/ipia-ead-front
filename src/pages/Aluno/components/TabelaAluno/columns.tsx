@@ -38,10 +38,9 @@ export const getColumns = (): ColumnDef<AlunoType>[] => {
       cell: ({ row }) => {
         return (
           <span>
-            {row.original.cpf.replace(
-              /(\d{3})(\d{3})(\d{3})(\d{2})/,
-              '$1.$2.$3-$4',
-            )}
+            {row?.original?.cpf && row?.original?.cpf?.length === 11
+              ? `${row.original.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')}`
+              : `${row?.original?.cpf || '-'}`}
           </span>
         )
       },
