@@ -5,6 +5,7 @@ import {
   useDeleteOneAulaMutation,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
+import { useDialog } from '@/hooks/useDialog'
 import { ROTAS } from '@/routes/rotas'
 import { apolloClient } from '@/services/Apollo/client'
 import type { AulaType } from '@/types/aula'
@@ -50,21 +51,31 @@ export const useTabelaAula = ({
   )
 
   const [mutateDelete] = useDeleteOneAulaMutation()
+
+  const { showDialog, closeDialog } = useDialog()
   const handleDeletar = useCallback(
     (data: AulaType) => {
-      mutateDelete({
-        variables: {
-          input: {
-            id: data.id,
-          },
-        },
-        onCompleted() {
-          toast.success('Aula deletada com sucesso')
-          apolloClient.cache.evict({ fieldName: 'aulas' })
+      showDialog({
+        title: 'Deletar item?',
+        description: `Você tem certeza que deseja deletar ${data.titulo}?`,
+        content: undefined,
+        onConfirm: () => {
+          mutateDelete({
+            variables: {
+              input: {
+                id: data.id,
+              },
+            },
+            onCompleted() {
+              toast.success('Aula deletada com sucesso')
+              closeDialog()
+              apolloClient.cache.evict({ fieldName: 'aulas' })
+            },
+          })
         },
       })
     },
-    [mutateDelete],
+    [closeDialog, mutateDelete, showDialog],
   )
 
   const { data, loading } = useAulasQuery({

@@ -1,18 +1,21 @@
+import { UploadAdapterPlugin } from '@/plugins/UploadAdapterPlugin'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import {
+  Alignment,
   Autoformat,
-  Base64UploadAdapter,
   BlockQuote,
   Bold,
   ClassicEditor,
   CloudServices,
   Essentials,
+  FileRepository,
   FontBackgroundColor,
   FontColor,
   FontSize,
   Heading,
   Image,
   ImageCaption,
+  ImageInsert,
   ImageResize,
   ImageStyle,
   ImageToolbar,
@@ -49,6 +52,7 @@ function EditorFormularioHtml({ data, setData, minHeight = '300px' }: Props) {
       config={{
         licenseKey: 'GPL',
         plugins: [
+          // UploadAdapterPlugin,
           Autoformat,
           BlockQuote,
           Bold,
@@ -56,14 +60,16 @@ function EditorFormularioHtml({ data, setData, minHeight = '300px' }: Props) {
           Essentials,
           Heading,
           Image,
+          FileRepository,
           ImageCaption,
           ImageResize,
           ImageStyle,
           ImageToolbar,
           ImageUpload,
-          Base64UploadAdapter,
+          // Base64UploadAdapter,
           Indent,
           IndentBlock,
+          ImageInsert,
           Italic,
           Link,
           List,
@@ -80,6 +86,7 @@ function EditorFormularioHtml({ data, setData, minHeight = '300px' }: Props) {
           FontBackgroundColor,
           FontSize,
           Underline,
+          Alignment,
         ],
         toolbar: [
           'undo',
@@ -94,9 +101,15 @@ function EditorFormularioHtml({ data, setData, minHeight = '300px' }: Props) {
           'fontColor',
           'fontBackgroundColor',
           'fontSize',
+          'alignment',
           '|',
           'link',
+
+          'insertImageViaUrl',
+          '|',
+
           'uploadImage',
+          'imageCaption',
           'ckbox',
           'insertTable',
           'blockQuote',
@@ -144,6 +157,14 @@ function EditorFormularioHtml({ data, setData, minHeight = '300px' }: Props) {
             },
           ],
         },
+        extraPlugins: [UploadAdapterPlugin],
+        simpleUpload: {
+          uploadUrl: 'http://localhost:3000/graphql', // pode ser um REST ou GraphQL multipart
+          withCredentials: false,
+          headers: {
+            // Authorization: `Bearer ${token}`, // ou qualquer header que você precise
+          },
+        },
         image: {
           resizeOptions: [
             {
@@ -162,6 +183,7 @@ function EditorFormularioHtml({ data, setData, minHeight = '300px' }: Props) {
               value: '75',
             },
           ],
+
           toolbar: [
             'imageTextAlternative',
             'toggleImageCaption',
