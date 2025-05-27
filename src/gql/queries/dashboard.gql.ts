@@ -20,9 +20,14 @@ query Dashboard {
     totalCount
     __typename
   }
-  aulas(filter: { modulo: { biblioteca: { is: true } } }) {
+ aulasBiblioteca: aulas(filter: { moduloId: { isNot: null } }) {
     totalCount
-    __typename
+  }
+   aulas(filter: { moduloId: { is: null } }) {
+    totalCount
+  }
+  todasAulas:aulas{
+    totalCount
   }
   turmas {
     totalCount

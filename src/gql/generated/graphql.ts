@@ -846,15 +846,15 @@ export type CreateRespostaInput = {
 
 export type CreateRespostaPerguntaInput = {
   /** Id do aluno */
-  aluno_id?: InputMaybe<Scalars['Float']['input']>;
+  alunoId?: InputMaybe<Scalars['Float']['input']>;
   /** Id do curso */
-  curso_id?: InputMaybe<Scalars['Float']['input']>;
+  cursoId?: InputMaybe<Scalars['Float']['input']>;
   /** Id do módulo */
-  modulo_id?: InputMaybe<Scalars['Float']['input']>;
+  moduloId?: InputMaybe<Scalars['Float']['input']>;
   /** Id da pergunta */
-  pergunta_id?: InputMaybe<Scalars['Float']['input']>;
+  perguntaId?: InputMaybe<Scalars['Float']['input']>;
   /** Id da resposta */
-  resposta_id?: InputMaybe<Scalars['Float']['input']>;
+  respostaId?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type CreateSubModuloInput = {
@@ -2956,7 +2956,8 @@ export type RespostasMinAggregate = {
 
 export type RespostasPerguntas = {
   __typename?: 'RespostasPerguntas';
-  alunoId: Scalars['Float']['output'];
+  /** Id do aluno */
+  alunoId?: Maybe<Scalars['Float']['output']>;
   /** data criação do registro */
   createdAt: Scalars['DateTime']['output'];
   cursoId: Scalars['Float']['output'];
@@ -3016,6 +3017,7 @@ export type RespostasPerguntasCountAggregate = {
 
 export type RespostasPerguntasDeleteResponse = {
   __typename?: 'RespostasPerguntasDeleteResponse';
+  /** Id do aluno */
   alunoId?: Maybe<Scalars['Float']['output']>;
   /** data criação do registro */
   createdAt?: Maybe<Scalars['DateTime']['output']>;
@@ -3753,15 +3755,15 @@ export type UpdateRespostaInput = {
 
 export type UpdateRespostaPerguntaInput = {
   /** Id do aluno */
-  aluno_id?: InputMaybe<Scalars['Float']['input']>;
+  alunoId?: InputMaybe<Scalars['Float']['input']>;
   /** Id do curso */
-  curso_id?: InputMaybe<Scalars['Float']['input']>;
+  cursoId?: InputMaybe<Scalars['Float']['input']>;
   /** Id do módulo */
-  modulo_id?: InputMaybe<Scalars['Float']['input']>;
+  moduloId?: InputMaybe<Scalars['Float']['input']>;
   /** Id da pergunta */
-  pergunta_id?: InputMaybe<Scalars['Float']['input']>;
+  perguntaId?: InputMaybe<Scalars['Float']['input']>;
   /** Id da resposta */
-  resposta_id?: InputMaybe<Scalars['Float']['input']>;
+  respostaId?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type UpdateSubModuloInput = {
@@ -4185,7 +4187,7 @@ export type CursosModuloSelectQuery = { __typename?: 'Query', cursos: { __typena
 export type DashboardQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type DashboardQuery = { __typename?: 'Query', respostas: { __typename: 'RespostasConnection', totalCount: number }, perguntas: { __typename: 'PerguntasConnection', totalCount: number }, formularios: { __typename: 'FormulariosConnection', totalCount: number }, modulos: { __typename: 'ModuloTypeConnection', totalCount: number }, aulas: { __typename: 'AulaTypeConnection', totalCount: number }, turmas: { __typename: 'TurmaTypeConnection', totalCount: number }, inscricoes: { __typename: 'InscricaoTypeConnection', totalCount: number }, alunos: { __typename: 'AlunoTypeConnection', totalCount: number }, cursos: { __typename: 'CursoTypeConnection', totalCount: number } };
+export type DashboardQuery = { __typename?: 'Query', respostas: { __typename: 'RespostasConnection', totalCount: number }, perguntas: { __typename: 'PerguntasConnection', totalCount: number }, formularios: { __typename: 'FormulariosConnection', totalCount: number }, modulos: { __typename: 'ModuloTypeConnection', totalCount: number }, aulasBiblioteca: { __typename?: 'AulaTypeConnection', totalCount: number }, aulas: { __typename?: 'AulaTypeConnection', totalCount: number }, todasAulas: { __typename?: 'AulaTypeConnection', totalCount: number }, turmas: { __typename: 'TurmaTypeConnection', totalCount: number }, inscricoes: { __typename: 'InscricaoTypeConnection', totalCount: number }, alunos: { __typename: 'AlunoTypeConnection', totalCount: number }, cursos: { __typename: 'CursoTypeConnection', totalCount: number } };
 
 export type FormularioQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -5691,9 +5693,14 @@ export const DashboardDocument = gql`
     totalCount
     __typename
   }
-  aulas(filter: {modulo: {biblioteca: {is: true}}}) {
+  aulasBiblioteca: aulas(filter: {moduloId: {isNot: null}}) {
     totalCount
-    __typename
+  }
+  aulas(filter: {moduloId: {is: null}}) {
+    totalCount
+  }
+  todasAulas: aulas {
+    totalCount
   }
   turmas {
     totalCount
