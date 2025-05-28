@@ -12,6 +12,13 @@ export const getColumns = (): ColumnDef<AlunoType>[] => {
       header: () => <span>Email</span>,
     },
     {
+      accessorKey: 'matricula',
+      header: () => <span>Matrícula</span>,
+      cell: ({ row }) => {
+        return <span>{row?.original?.matricula || '-'}</span>
+      },
+    },
+    {
       accessorKey: 'turmasMatriculadas',
       header: () => <span>Turmas matriculadas</span>,
       cell: ({ row }) => {

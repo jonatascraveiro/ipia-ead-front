@@ -15,6 +15,7 @@ query Alunos(
         nome      
         cpf
         email
+        matricula
         inscricoes{
           id
           status

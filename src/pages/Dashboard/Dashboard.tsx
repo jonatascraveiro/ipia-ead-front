@@ -13,7 +13,7 @@ import {
 
 function Dashboard() {
   const { data, loading } = useDashboardQuery()
-  console.log(data, loading)
+
   const dashboard = {
     alunos: {
       quantidade: data?.alunos.totalCount || 0,
