@@ -48,10 +48,12 @@ export const getColumns = ({
       cell: ({ row }) => {
         return (
           <span>
-            {row.original.aluno?.cpf.replace(
-              /(\d{3})(\d{3})(\d{3})(\d{2})/,
-              '$1.$2.$3-$4',
-            )}
+            {row.original.aluno?.cpf?.length === 11
+              ? row.original.aluno?.cpf?.replace(
+                  /(\d{3})(\d{3})(\d{3})(\d{2})/,
+                  '$1.$2.$3-$4',
+                )
+              : row.original.aluno?.cpf || '-'}
           </span>
         )
       },
