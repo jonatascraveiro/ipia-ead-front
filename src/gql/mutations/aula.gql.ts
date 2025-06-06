@@ -19,7 +19,7 @@ gql`
 
 gql`
  mutation deleteOneAula($input: DeleteOneAulaTypeInput!) {
-  deleteAula(input: $input) {
+  deleteOneAula(input: $input) {
     titulo
   }
 }

@@ -48,7 +48,7 @@ export type AlunoType = {
   /** nome do aluno */
   nome: Scalars['String']['output'];
   /** qualificacao_escolhida do aluno */
-  qualificacaoEscolhida?: Maybe<Scalars['String']['output']>;
+  qualificacaoId?: Maybe<Scalars['String']['output']>;
   /** responsavel 1 do aluno */
   responsavel1?: Maybe<Scalars['String']['output']>;
   /** responsavel 2 do aluno */
@@ -93,7 +93,7 @@ export type AlunoTypeAggregateGroupBy = {
   matricula?: Maybe<Scalars['String']['output']>;
   municipio?: Maybe<Scalars['String']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
-  qualificacaoEscolhida?: Maybe<Scalars['String']['output']>;
+  qualificacaoId?: Maybe<Scalars['String']['output']>;
   responsavel1?: Maybe<Scalars['String']['output']>;
   responsavel2?: Maybe<Scalars['String']['output']>;
   senha?: Maybe<Scalars['String']['output']>;
@@ -133,7 +133,7 @@ export type AlunoTypeCountAggregate = {
   matricula?: Maybe<Scalars['Int']['output']>;
   municipio?: Maybe<Scalars['Int']['output']>;
   nome?: Maybe<Scalars['Int']['output']>;
-  qualificacaoEscolhida?: Maybe<Scalars['Int']['output']>;
+  qualificacaoId?: Maybe<Scalars['Int']['output']>;
   responsavel1?: Maybe<Scalars['Int']['output']>;
   responsavel2?: Maybe<Scalars['Int']['output']>;
   senha?: Maybe<Scalars['Int']['output']>;
@@ -169,7 +169,7 @@ export type AlunoTypeFilter = {
   municipio?: InputMaybe<StringFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AlunoTypeFilter>>;
-  qualificacaoEscolhida?: InputMaybe<StringFieldComparison>;
+  qualificacaoId?: InputMaybe<StringFieldComparison>;
   responsavel1?: InputMaybe<StringFieldComparison>;
   responsavel2?: InputMaybe<StringFieldComparison>;
   senha?: InputMaybe<StringFieldComparison>;
@@ -225,7 +225,7 @@ export type AlunoTypeMaxAggregate = {
   matricula?: Maybe<Scalars['String']['output']>;
   municipio?: Maybe<Scalars['String']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
-  qualificacaoEscolhida?: Maybe<Scalars['String']['output']>;
+  qualificacaoId?: Maybe<Scalars['String']['output']>;
   responsavel1?: Maybe<Scalars['String']['output']>;
   responsavel2?: Maybe<Scalars['String']['output']>;
   senha?: Maybe<Scalars['String']['output']>;
@@ -250,7 +250,7 @@ export type AlunoTypeMinAggregate = {
   matricula?: Maybe<Scalars['String']['output']>;
   municipio?: Maybe<Scalars['String']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
-  qualificacaoEscolhida?: Maybe<Scalars['String']['output']>;
+  qualificacaoId?: Maybe<Scalars['String']['output']>;
   responsavel1?: Maybe<Scalars['String']['output']>;
   responsavel2?: Maybe<Scalars['String']['output']>;
   senha?: Maybe<Scalars['String']['output']>;
@@ -280,7 +280,7 @@ export enum AlunoTypeSortFields {
   Matricula = 'matricula',
   Municipio = 'municipio',
   Nome = 'nome',
-  QualificacaoEscolhida = 'qualificacaoEscolhida',
+  QualificacaoId = 'qualificacaoId',
   Responsavel1 = 'responsavel1',
   Responsavel2 = 'responsavel2',
   Senha = 'senha',
@@ -511,6 +511,22 @@ export type AulaTypeCountAggregate = {
   titulo?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
   videoUrl?: Maybe<Scalars['Int']['output']>;
+};
+
+export type AulaTypeDeleteFilter = {
+  and?: InputMaybe<Array<AulaTypeDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  duracao?: InputMaybe<NumberFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<AulaTypeDeleteFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  subModuloId?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  videoUrl?: InputMaybe<StringFieldComparison>;
 };
 
 export type AulaTypeDeleteResponse = {
@@ -968,6 +984,21 @@ export type CursoTypeCountAggregate = {
   url?: Maybe<Scalars['Int']['output']>;
 };
 
+export type CursoTypeDeleteFilter = {
+  and?: InputMaybe<Array<CursoTypeDeleteFilter>>;
+  arquivoId?: InputMaybe<NumberFieldComparison>;
+  ativo?: InputMaybe<BooleanFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  icone?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<CursoTypeDeleteFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  url?: InputMaybe<StringFieldComparison>;
+};
+
 export type CursoTypeDeleteResponse = {
   __typename?: 'CursoTypeDeleteResponse';
   /** id do arquivo */
@@ -1155,6 +1186,37 @@ export type DateFieldComparison = {
 export type DateFieldComparisonBetween = {
   lower: Scalars['DateTime']['input'];
   upper: Scalars['DateTime']['input'];
+};
+
+export type DeleteManyAulaTypesInput = {
+  /** Filter to find records to delete */
+  filter: AulaTypeDeleteFilter;
+};
+
+export type DeleteManyCursoTypesInput = {
+  /** Filter to find records to delete */
+  filter: CursoTypeDeleteFilter;
+};
+
+export type DeleteManyModuloTypesInput = {
+  /** Filter to find records to delete */
+  filter: ModuloTypeDeleteFilter;
+};
+
+export type DeleteManyResponse = {
+  __typename?: 'DeleteManyResponse';
+  /** The number of records deleted. */
+  deletedCount: Scalars['Int']['output'];
+};
+
+export type DeleteManySubModuloTypesInput = {
+  /** Filter to find records to delete */
+  filter: SubModuloTypeDeleteFilter;
+};
+
+export type DeleteManyTurmaTypesInput = {
+  /** Filter to find records to delete */
+  filter: TurmaTypeDeleteFilter;
 };
 
 export type DeleteOneArquivoInput = {
@@ -1500,7 +1562,7 @@ export type InscricaoTypeFilterAlunoTypeFilter = {
   municipio?: InputMaybe<StringFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<InscricaoTypeFilterAlunoTypeFilter>>;
-  qualificacaoEscolhida?: InputMaybe<StringFieldComparison>;
+  qualificacaoId?: InputMaybe<StringFieldComparison>;
   responsavel1?: InputMaybe<StringFieldComparison>;
   responsavel2?: InputMaybe<StringFieldComparison>;
   senha?: InputMaybe<StringFieldComparison>;
@@ -1678,6 +1740,20 @@ export type ModuloTypeCountAggregate = {
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
 
+export type ModuloTypeDeleteFilter = {
+  and?: InputMaybe<Array<ModuloTypeDeleteFilter>>;
+  biblioteca?: InputMaybe<BooleanFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  or?: InputMaybe<Array<ModuloTypeDeleteFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
 export type ModuloTypeDeleteResponse = {
   __typename?: 'ModuloTypeDeleteResponse';
   /** modulo biblioteca */
@@ -1850,6 +1926,7 @@ export type Mutation = {
   UpdateOneInscricao: InscricaoType;
   UpdateOneModulo: ModuloType;
   UpdateOneTurma: TurmaType;
+  aluno: AlunoType;
   createArquivo?: Maybe<Arquivo>;
   createManyArquivos: Array<Arquivo>;
   createOneArquivo: Arquivo;
@@ -1860,15 +1937,20 @@ export type Mutation = {
   createOneRespostaPergunta: RespostasPerguntas;
   createOneSubModulo?: Maybe<SubModuloType>;
   deleteArquivo: ArquivoDeleteResponse;
-  deleteAula: AulaTypeDeleteResponse;
-  deleteCurso: CursoTypeDeleteResponse;
+  deleteManyAula: DeleteManyResponse;
+  deleteManyCursos: DeleteManyResponse;
+  deleteManyModulos: DeleteManyResponse;
+  deleteManySubModulos: DeleteManyResponse;
+  deleteManyTurma: DeleteManyResponse;
   deleteModulo: ModuloTypeDeleteResponse;
+  deleteOneAula: AulaTypeDeleteResponse;
+  deleteOneCurso: CursoTypeDeleteResponse;
   deleteOneFormulario: FormulariosDeleteResponse;
   deleteOnePergunta: PerguntasDeleteResponse;
   deleteOneResposta: RespostasDeleteResponse;
   deleteOneRespostaPergunta: RespostasPerguntasDeleteResponse;
   deleteOneSubModulo: SubModuloTypeDeleteResponse;
-  deleteTurma: TurmaTypeDeleteResponse;
+  deleteOneTurma: TurmaTypeDeleteResponse;
   deleteUsuario: UsuarioDtoDeleteResponse;
   importAluno?: Maybe<Array<AlunoType>>;
   login: AuthType;
@@ -1934,6 +2016,11 @@ export type MutationUpdateOneTurmaArgs = {
 };
 
 
+export type MutationAlunoArgs = {
+  input: UpdateOneAlunoTypeInput;
+};
+
+
 export type MutationCreateArquivoArgs = {
   arquivo: Scalars['Upload']['input'];
 };
@@ -1986,18 +2073,43 @@ export type MutationDeleteArquivoArgs = {
 };
 
 
-export type MutationDeleteAulaArgs = {
-  input: DeleteOneAulaTypeInput;
+export type MutationDeleteManyAulaArgs = {
+  input: DeleteManyAulaTypesInput;
 };
 
 
-export type MutationDeleteCursoArgs = {
-  input: DeleteOneCursoTypeInput;
+export type MutationDeleteManyCursosArgs = {
+  input: DeleteManyCursoTypesInput;
+};
+
+
+export type MutationDeleteManyModulosArgs = {
+  input: DeleteManyModuloTypesInput;
+};
+
+
+export type MutationDeleteManySubModulosArgs = {
+  input: DeleteManySubModuloTypesInput;
+};
+
+
+export type MutationDeleteManyTurmaArgs = {
+  input: DeleteManyTurmaTypesInput;
 };
 
 
 export type MutationDeleteModuloArgs = {
   input: DeleteOneModuloTypeInput;
+};
+
+
+export type MutationDeleteOneAulaArgs = {
+  input: DeleteOneAulaTypeInput;
+};
+
+
+export type MutationDeleteOneCursoArgs = {
+  input: DeleteOneCursoTypeInput;
 };
 
 
@@ -2026,7 +2138,7 @@ export type MutationDeleteOneSubModuloArgs = {
 };
 
 
-export type MutationDeleteTurmaArgs = {
+export type MutationDeleteOneTurmaArgs = {
   input: DeleteOneTurmaTypeInput;
 };
 
@@ -2458,7 +2570,7 @@ export type ProgressoTypeFilterAlunoTypeFilter = {
   municipio?: InputMaybe<StringFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProgressoTypeFilterAlunoTypeFilter>>;
-  qualificacaoEscolhida?: InputMaybe<StringFieldComparison>;
+  qualificacaoId?: InputMaybe<StringFieldComparison>;
   responsavel1?: InputMaybe<StringFieldComparison>;
   responsavel2?: InputMaybe<StringFieldComparison>;
   senha?: InputMaybe<StringFieldComparison>;
@@ -2611,6 +2723,7 @@ export type ProgressoTypeSumAggregate = {
 
 export type Query = {
   __typename?: 'Query';
+  alteraSenhaAluno?: Maybe<Array<AlunoType>>;
   aluno?: Maybe<AlunoType>;
   alunos: AlunoTypeConnection;
   arquivo?: Maybe<Arquivo>;
@@ -3244,6 +3357,21 @@ export type SubModuloTypeCountAggregate = {
   url?: Maybe<Scalars['Int']['output']>;
 };
 
+export type SubModuloTypeDeleteFilter = {
+  and?: InputMaybe<Array<SubModuloTypeDeleteFilter>>;
+  arquivoId?: InputMaybe<NumberFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  mensagem?: InputMaybe<StringFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<SubModuloTypeDeleteFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  url?: InputMaybe<StringFieldComparison>;
+};
+
 export type SubModuloTypeDeleteResponse = {
   __typename?: 'SubModuloTypeDeleteResponse';
   /** id do arquivo */
@@ -3476,6 +3604,21 @@ export type TurmaTypeCountAggregate = {
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
 
+export type TurmaTypeDeleteFilter = {
+  and?: InputMaybe<Array<TurmaTypeDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  duracao?: InputMaybe<StringFieldComparison>;
+  fim?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  inicio?: InputMaybe<DateFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<TurmaTypeDeleteFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
 export type TurmaTypeDeleteResponse = {
   __typename?: 'TurmaTypeDeleteResponse';
   /** data criação do registro */
@@ -3591,6 +3734,13 @@ export type TurmaTypeSumAggregate = {
   id?: Maybe<Scalars['Float']['output']>;
 };
 
+export type UpdateAlunoInput = {
+  cpf?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  nome?: InputMaybe<Scalars['String']['input']>;
+  senha?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type UpdateArquivo = {
   /** data criação do registro */
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -3658,6 +3808,13 @@ export type UpdateModuloInput = {
   descricao?: InputMaybe<Scalars['String']['input']>;
   ordem?: InputMaybe<Scalars['Float']['input']>;
   titulo?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UpdateOneAlunoTypeInput = {
+  /** The id of the record to update */
+  id: Scalars['Int']['input'];
+  /** The update to apply. */
+  update: UpdateAlunoInput;
 };
 
 export type UpdateOneArquivoInput = {
@@ -3942,7 +4099,7 @@ export type DeleteOneAulaMutationVariables = Exact<{
 }>;
 
 
-export type DeleteOneAulaMutation = { __typename?: 'Mutation', deleteAula: { __typename?: 'AulaTypeDeleteResponse', titulo?: string | null } };
+export type DeleteOneAulaMutation = { __typename?: 'Mutation', deleteOneAula: { __typename?: 'AulaTypeDeleteResponse', titulo?: string | null } };
 
 export type LoginMutationVariables = Exact<{
   input: AuthInput;
@@ -3968,12 +4125,12 @@ export type UpdateOneCursoMutationVariables = Exact<{
 
 export type UpdateOneCursoMutation = { __typename?: 'Mutation', updateOneCurso?: { __typename?: 'CursoType', id: number } | null };
 
-export type DeleteCursoMutationVariables = Exact<{
+export type DeleteOneCursoMutationVariables = Exact<{
   input: DeleteOneCursoTypeInput;
 }>;
 
 
-export type DeleteCursoMutation = { __typename?: 'Mutation', deleteCurso: { __typename?: 'CursoTypeDeleteResponse', id?: number | null } };
+export type DeleteOneCursoMutation = { __typename?: 'Mutation', deleteOneCurso: { __typename?: 'CursoTypeDeleteResponse', id?: number | null } };
 
 export type CreateOneFormularioMutationVariables = Exact<{
   input: CreateOneFormulariosInput;
@@ -4123,7 +4280,7 @@ export type DeleteOneTurmaMutationVariables = Exact<{
 }>;
 
 
-export type DeleteOneTurmaMutation = { __typename?: 'Mutation', deleteTurma: { __typename?: 'TurmaTypeDeleteResponse', id?: number | null } };
+export type DeleteOneTurmaMutation = { __typename?: 'Mutation', deleteOneTurma: { __typename?: 'TurmaTypeDeleteResponse', id?: number | null } };
 
 export type AlunosQueryVariables = Exact<{
   filter?: InputMaybe<AlunoTypeFilter>;
@@ -4432,7 +4589,7 @@ export type UpdateOneAulaMutationResult = Apollo.MutationResult<UpdateOneAulaMut
 export type UpdateOneAulaMutationOptions = Apollo.BaseMutationOptions<UpdateOneAulaMutation, UpdateOneAulaMutationVariables>;
 export const DeleteOneAulaDocument = gql`
     mutation deleteOneAula($input: DeleteOneAulaTypeInput!) {
-  deleteAula(input: $input) {
+  deleteOneAula(input: $input) {
     titulo
   }
 }
@@ -4565,39 +4722,39 @@ export function useUpdateOneCursoMutation(baseOptions?: Apollo.MutationHookOptio
 export type UpdateOneCursoMutationHookResult = ReturnType<typeof useUpdateOneCursoMutation>;
 export type UpdateOneCursoMutationResult = Apollo.MutationResult<UpdateOneCursoMutation>;
 export type UpdateOneCursoMutationOptions = Apollo.BaseMutationOptions<UpdateOneCursoMutation, UpdateOneCursoMutationVariables>;
-export const DeleteCursoDocument = gql`
-    mutation deleteCurso($input: DeleteOneCursoTypeInput!) {
-  deleteCurso(input: $input) {
+export const DeleteOneCursoDocument = gql`
+    mutation deleteOneCurso($input: DeleteOneCursoTypeInput!) {
+  deleteOneCurso(input: $input) {
     id
   }
 }
     `;
-export type DeleteCursoMutationFn = Apollo.MutationFunction<DeleteCursoMutation, DeleteCursoMutationVariables>;
+export type DeleteOneCursoMutationFn = Apollo.MutationFunction<DeleteOneCursoMutation, DeleteOneCursoMutationVariables>;
 
 /**
- * __useDeleteCursoMutation__
+ * __useDeleteOneCursoMutation__
  *
- * To run a mutation, you first call `useDeleteCursoMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteCursoMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useDeleteOneCursoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneCursoMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [deleteCursoMutation, { data, loading, error }] = useDeleteCursoMutation({
+ * const [deleteOneCursoMutation, { data, loading, error }] = useDeleteOneCursoMutation({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useDeleteCursoMutation(baseOptions?: Apollo.MutationHookOptions<DeleteCursoMutation, DeleteCursoMutationVariables>) {
+export function useDeleteOneCursoMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneCursoMutation, DeleteOneCursoMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteCursoMutation, DeleteCursoMutationVariables>(DeleteCursoDocument, options);
+        return Apollo.useMutation<DeleteOneCursoMutation, DeleteOneCursoMutationVariables>(DeleteOneCursoDocument, options);
       }
-export type DeleteCursoMutationHookResult = ReturnType<typeof useDeleteCursoMutation>;
-export type DeleteCursoMutationResult = Apollo.MutationResult<DeleteCursoMutation>;
-export type DeleteCursoMutationOptions = Apollo.BaseMutationOptions<DeleteCursoMutation, DeleteCursoMutationVariables>;
+export type DeleteOneCursoMutationHookResult = ReturnType<typeof useDeleteOneCursoMutation>;
+export type DeleteOneCursoMutationResult = Apollo.MutationResult<DeleteOneCursoMutation>;
+export type DeleteOneCursoMutationOptions = Apollo.BaseMutationOptions<DeleteOneCursoMutation, DeleteOneCursoMutationVariables>;
 export const CreateOneFormularioDocument = gql`
     mutation createOneFormulario($input: CreateOneFormulariosInput!) {
   createOneFormulario(input: $input) {
@@ -5263,7 +5420,7 @@ export type UpdateOneTurmaMutationResult = Apollo.MutationResult<UpdateOneTurmaM
 export type UpdateOneTurmaMutationOptions = Apollo.BaseMutationOptions<UpdateOneTurmaMutation, UpdateOneTurmaMutationVariables>;
 export const DeleteOneTurmaDocument = gql`
     mutation deleteOneTurma($input: DeleteOneTurmaTypeInput!) {
-  deleteTurma(input: $input) {
+  deleteOneTurma(input: $input) {
     id
   }
 }
