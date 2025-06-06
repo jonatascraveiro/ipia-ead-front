@@ -12,7 +12,7 @@ export const errorLog = onError(({ graphQLErrors }) => {
         [ERROR_LOGIN].includes(message as string),
       )
     ) {
-      toast.error('Usúario ou senha incorretos')
+      toast.error('Usuário ou senha incorretos')
     }
 
     if (
@@ -21,7 +21,7 @@ export const errorLog = onError(({ graphQLErrors }) => {
       ) &&
       graphQLErrors.some(({ path }) => path?.includes('login'))
     ) {
-      toast.error('Usúario ou senha incorretos')
+      toast.error('Usuário ou senha incorretos')
     }
 
     if (
@@ -30,7 +30,16 @@ export const errorLog = onError(({ graphQLErrors }) => {
       )
     ) {
       const message = graphQLErrors[0].message
-      toast.error('Falha ao executar a operação')
+      toast.error(message)
+    }
+
+    if (
+      graphQLErrors.some(
+        ({ extensions }) => extensions?.code === 'DATABASE_ERROR',
+      )
+    ) {
+      const message = graphQLErrors[0].message
+      toast.error(message)
     }
   }
 })

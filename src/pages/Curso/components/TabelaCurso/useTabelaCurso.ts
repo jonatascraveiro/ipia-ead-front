@@ -2,7 +2,7 @@ import {
   CursoTypeSortFields,
   SortDirection,
   useCursosQuery,
-  useDeleteCursoMutation,
+  useDeleteOneCursoMutation,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
 
@@ -25,7 +25,7 @@ export const useTabelaCurso = () => {
 
   const { limparPaginacao, paging } = useCursorPaginacao()
 
-  const [mutateDelete] = useDeleteCursoMutation()
+  const [mutateDelete] = useDeleteOneCursoMutation()
 
   const [nome, status] = form.getValues(['nome', 'status'])
 
