@@ -42,6 +42,7 @@ export const useFormPerguntas = ({
             update: {
               descricao: data.descricao,
               perguntaId: data.perguntaId,
+              correta: data.correta === 'true',
             },
           },
         },

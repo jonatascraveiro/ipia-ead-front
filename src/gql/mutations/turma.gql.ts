@@ -19,7 +19,7 @@ gql`
 
 gql`
  mutation deleteOneTurma($input: DeleteOneTurmaTypeInput!) {
-  deleteTurma(input: $input) {
+  deleteOneTurma(input: $input) {
     id
   }
 }
