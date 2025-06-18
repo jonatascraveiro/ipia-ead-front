@@ -11,8 +11,8 @@ const useLogin = () => {
   const form = useForm<FormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      password: 'password@2023',
-      email: 'administrador@admin.com',
+      password: '',
+      email: '',
     },
   })
 
@@ -37,14 +37,6 @@ const useLogin = () => {
         )
       },
     })
-
-    // mutateLogin.mutate(values, {
-    //   onSuccess(data) {
-    //     login(data, () => {
-    //       window.location.href = '/'
-    //     })
-    //   },
-    // })
   }
 
   return {
