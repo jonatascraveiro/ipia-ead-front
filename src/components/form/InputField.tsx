@@ -16,6 +16,7 @@ type InputFieldProps = {
   placeholder?: string
   description?: string
   disabled?: boolean
+  autoFocus?: boolean
   type?: 'text' | 'email' | 'password' | 'number' | 'file'
 }
 
@@ -25,6 +26,7 @@ export const InputField = ({
   placeholder,
   description,
   disabled = false,
+  autoFocus = false,
   type = 'text',
 }: InputFieldProps) => {
   const { control } = useFormContext()
@@ -42,6 +44,7 @@ export const InputField = ({
               disabled={disabled}
               type={type}
               placeholder={placeholder}
+              autoFocus={autoFocus}
             />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}

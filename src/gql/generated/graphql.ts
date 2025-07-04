@@ -20,11 +20,23 @@ export type Scalars = {
   Upload: { input: any; output: any; }
 };
 
+export type AddCidadesToEstadoInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The ids of the relations. */
+  relationIds: Array<Scalars['ID']['input']>;
+};
+
 export type AlunoType = {
   __typename?: 'AlunoType';
   alunosProgressos?: Maybe<Array<ProgressoType>>;
   /** ano_serie do aluno */
   anoSerie?: Maybe<Scalars['String']['output']>;
+  arquivo?: Maybe<Arquivo>;
+  /** dados do aluno atualizado */
+  atualizado?: Maybe<Scalars['Boolean']['output']>;
+  /** bairro do aluno */
+  bairro?: Maybe<Scalars['String']['output']>;
   /** cpf do aluno */
   cpf?: Maybe<Scalars['String']['output']>;
   /** data criação do registro */
@@ -35,20 +47,30 @@ export type AlunoType = {
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   /** email do aluno */
   email: Scalars['String']['output'];
+  /** E-mail do responsável */
+  emailResponsavel?: Maybe<Scalars['String']['output']>;
   /** escola do aluno */
   escola?: Maybe<Scalars['String']['output']>;
   /** estado do aluno */
   estado?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   inscricoes?: Maybe<Array<InscricaoType>>;
+  /** logradouro do aluno */
+  logradouro?: Maybe<Scalars['String']['output']>;
   /** matricula do aluno */
   matricula?: Maybe<Scalars['String']['output']>;
   /** municipio do aluno */
   municipio?: Maybe<Scalars['String']['output']>;
+  /** municipio escola */
+  municipioEscola?: Maybe<Scalars['String']['output']>;
   /** nome do aluno */
   nome: Scalars['String']['output'];
+  /** numero do endereco do aluno */
+  numero?: Maybe<Scalars['String']['output']>;
   /** qualificacao_escolhida do aluno */
   qualificacaoId?: Maybe<Scalars['String']['output']>;
+  /** regia de importacao do aluno */
+  regiaoPlanilha?: Maybe<Scalars['String']['output']>;
   /** responsavel 1 do aluno */
   responsavel1?: Maybe<Scalars['String']['output']>;
   /** responsavel 2 do aluno */
@@ -82,18 +104,25 @@ export type AlunoTypeInscricoesArgs = {
 export type AlunoTypeAggregateGroupBy = {
   __typename?: 'AlunoTypeAggregateGroupBy';
   anoSerie?: Maybe<Scalars['String']['output']>;
+  atualizado?: Maybe<Scalars['Boolean']['output']>;
+  bairro?: Maybe<Scalars['String']['output']>;
   cpf?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   dataNascimento?: Maybe<Scalars['String']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  emailResponsavel?: Maybe<Scalars['String']['output']>;
   escola?: Maybe<Scalars['String']['output']>;
   estado?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  logradouro?: Maybe<Scalars['String']['output']>;
   matricula?: Maybe<Scalars['String']['output']>;
   municipio?: Maybe<Scalars['String']['output']>;
+  municipioEscola?: Maybe<Scalars['String']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
+  numero?: Maybe<Scalars['String']['output']>;
   qualificacaoId?: Maybe<Scalars['String']['output']>;
+  regiaoPlanilha?: Maybe<Scalars['String']['output']>;
   responsavel1?: Maybe<Scalars['String']['output']>;
   responsavel2?: Maybe<Scalars['String']['output']>;
   senha?: Maybe<Scalars['String']['output']>;
@@ -122,18 +151,25 @@ export type AlunoTypeConnection = {
 export type AlunoTypeCountAggregate = {
   __typename?: 'AlunoTypeCountAggregate';
   anoSerie?: Maybe<Scalars['Int']['output']>;
+  atualizado?: Maybe<Scalars['Int']['output']>;
+  bairro?: Maybe<Scalars['Int']['output']>;
   cpf?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['Int']['output']>;
   dataNascimento?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
   email?: Maybe<Scalars['Int']['output']>;
+  emailResponsavel?: Maybe<Scalars['Int']['output']>;
   escola?: Maybe<Scalars['Int']['output']>;
   estado?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  logradouro?: Maybe<Scalars['Int']['output']>;
   matricula?: Maybe<Scalars['Int']['output']>;
   municipio?: Maybe<Scalars['Int']['output']>;
+  municipioEscola?: Maybe<Scalars['Int']['output']>;
   nome?: Maybe<Scalars['Int']['output']>;
+  numero?: Maybe<Scalars['Int']['output']>;
   qualificacaoId?: Maybe<Scalars['Int']['output']>;
+  regiaoPlanilha?: Maybe<Scalars['Int']['output']>;
   responsavel1?: Maybe<Scalars['Int']['output']>;
   responsavel2?: Maybe<Scalars['Int']['output']>;
   senha?: Maybe<Scalars['Int']['output']>;
@@ -156,20 +192,28 @@ export type AlunoTypeFilter = {
   alunosProgressos?: InputMaybe<AlunoTypeFilterProgressoTypeFilter>;
   and?: InputMaybe<Array<AlunoTypeFilter>>;
   anoSerie?: InputMaybe<StringFieldComparison>;
+  arquivo?: InputMaybe<AlunoTypeFilterArquivoFilter>;
+  atualizado?: InputMaybe<BooleanFieldComparison>;
+  bairro?: InputMaybe<StringFieldComparison>;
   cpf?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   dataNascimento?: InputMaybe<StringFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
+  emailResponsavel?: InputMaybe<StringFieldComparison>;
   escola?: InputMaybe<StringFieldComparison>;
   estado?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   inscricoes?: InputMaybe<AlunoTypeFilterInscricaoTypeFilter>;
+  logradouro?: InputMaybe<StringFieldComparison>;
   matricula?: InputMaybe<StringFieldComparison>;
   municipio?: InputMaybe<StringFieldComparison>;
+  municipioEscola?: InputMaybe<StringFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
+  numero?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AlunoTypeFilter>>;
   qualificacaoId?: InputMaybe<StringFieldComparison>;
+  regiaoPlanilha?: InputMaybe<StringFieldComparison>;
   responsavel1?: InputMaybe<StringFieldComparison>;
   responsavel2?: InputMaybe<StringFieldComparison>;
   senha?: InputMaybe<StringFieldComparison>;
@@ -178,6 +222,16 @@ export type AlunoTypeFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
   whatsAppAluno?: InputMaybe<StringFieldComparison>;
   whatsAppResponsavel1?: InputMaybe<StringFieldComparison>;
+};
+
+export type AlunoTypeFilterArquivoFilter = {
+  and?: InputMaybe<Array<AlunoTypeFilterArquivoFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<AlunoTypeFilterArquivoFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type AlunoTypeFilterInscricaoTypeFilter = {
@@ -214,18 +268,24 @@ export type AlunoTypeFilterProgressoTypeFilter = {
 export type AlunoTypeMaxAggregate = {
   __typename?: 'AlunoTypeMaxAggregate';
   anoSerie?: Maybe<Scalars['String']['output']>;
+  bairro?: Maybe<Scalars['String']['output']>;
   cpf?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   dataNascimento?: Maybe<Scalars['String']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  emailResponsavel?: Maybe<Scalars['String']['output']>;
   escola?: Maybe<Scalars['String']['output']>;
   estado?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  logradouro?: Maybe<Scalars['String']['output']>;
   matricula?: Maybe<Scalars['String']['output']>;
   municipio?: Maybe<Scalars['String']['output']>;
+  municipioEscola?: Maybe<Scalars['String']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
+  numero?: Maybe<Scalars['String']['output']>;
   qualificacaoId?: Maybe<Scalars['String']['output']>;
+  regiaoPlanilha?: Maybe<Scalars['String']['output']>;
   responsavel1?: Maybe<Scalars['String']['output']>;
   responsavel2?: Maybe<Scalars['String']['output']>;
   senha?: Maybe<Scalars['String']['output']>;
@@ -239,18 +299,24 @@ export type AlunoTypeMaxAggregate = {
 export type AlunoTypeMinAggregate = {
   __typename?: 'AlunoTypeMinAggregate';
   anoSerie?: Maybe<Scalars['String']['output']>;
+  bairro?: Maybe<Scalars['String']['output']>;
   cpf?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   dataNascimento?: Maybe<Scalars['String']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  emailResponsavel?: Maybe<Scalars['String']['output']>;
   escola?: Maybe<Scalars['String']['output']>;
   estado?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  logradouro?: Maybe<Scalars['String']['output']>;
   matricula?: Maybe<Scalars['String']['output']>;
   municipio?: Maybe<Scalars['String']['output']>;
+  municipioEscola?: Maybe<Scalars['String']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
+  numero?: Maybe<Scalars['String']['output']>;
   qualificacaoId?: Maybe<Scalars['String']['output']>;
+  regiaoPlanilha?: Maybe<Scalars['String']['output']>;
   responsavel1?: Maybe<Scalars['String']['output']>;
   responsavel2?: Maybe<Scalars['String']['output']>;
   senha?: Maybe<Scalars['String']['output']>;
@@ -269,18 +335,25 @@ export type AlunoTypeSort = {
 
 export enum AlunoTypeSortFields {
   AnoSerie = 'anoSerie',
+  Atualizado = 'atualizado',
+  Bairro = 'bairro',
   Cpf = 'cpf',
   CreatedAt = 'createdAt',
   DataNascimento = 'dataNascimento',
   DeletedAt = 'deletedAt',
   Email = 'email',
+  EmailResponsavel = 'emailResponsavel',
   Escola = 'escola',
   Estado = 'estado',
   Id = 'id',
+  Logradouro = 'logradouro',
   Matricula = 'matricula',
   Municipio = 'municipio',
+  MunicipioEscola = 'municipioEscola',
   Nome = 'nome',
+  Numero = 'numero',
   QualificacaoId = 'qualificacaoId',
+  RegiaoPlanilha = 'regiaoPlanilha',
   Responsavel1 = 'responsavel1',
   Responsavel2 = 'responsavel2',
   Senha = 'senha',
@@ -707,6 +780,101 @@ export type BooleanFieldComparison = {
   isNot?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+export type Cidade = {
+  __typename?: 'Cidade';
+  /** código IBGE */
+  codigoIbge: Scalars['String']['output'];
+  /** data em que a cidade foi cadastrada */
+  createdAt: Scalars['DateTime']['output'];
+  /** data em que a cidade foi removida */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** nome da cidade */
+  descricao: Scalars['String']['output'];
+  estado: Estado;
+  /** id do estado */
+  estadoId: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  /** data em que a cidade foi atualizada */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type CidadeAggregateGroupBy = {
+  __typename?: 'CidadeAggregateGroupBy';
+  codigoIbge?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  estadoId?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type CidadeCountAggregate = {
+  __typename?: 'CidadeCountAggregate';
+  codigoIbge?: Maybe<Scalars['Int']['output']>;
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  descricao?: Maybe<Scalars['Int']['output']>;
+  estadoId?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type CidadeFilter = {
+  and?: InputMaybe<Array<CidadeFilter>>;
+  codigoIbge?: InputMaybe<StringFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  estado?: InputMaybe<CidadeFilterEstadoFilter>;
+  estadoId?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<CidadeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type CidadeFilterEstadoFilter = {
+  and?: InputMaybe<Array<CidadeFilterEstadoFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<CidadeFilterEstadoFilter>>;
+  sigla?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type CidadeMaxAggregate = {
+  __typename?: 'CidadeMaxAggregate';
+  codigoIbge?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  estadoId?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type CidadeMinAggregate = {
+  __typename?: 'CidadeMinAggregate';
+  codigoIbge?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  estadoId?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type CidadeSort = {
+  direction: SortDirection;
+  field: CidadeSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum CidadeSortFields {
+  CodigoIbge = 'codigoIbge',
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Descricao = 'descricao',
+  EstadoId = 'estadoId',
+  UpdatedAt = 'updatedAt'
+}
+
 export type CreateArquivo = {
   /** data criação do registro */
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -750,6 +918,21 @@ export type CreateCursoInput = {
   nome: Scalars['String']['input'];
 };
 
+export type CreateEnderecoInput = {
+  /** bairro */
+  bairro: Scalars['String']['input'];
+  /** cep */
+  cep: Scalars['String']['input'];
+  /** id da cidade */
+  cidadeId: Scalars['Float']['input'];
+  /** complemento */
+  complemento?: InputMaybe<Scalars['String']['input']>;
+  /** logradouro */
+  logradouro: Scalars['String']['input'];
+  /** número do endereço */
+  numero?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type CreateFormularioInput = {
   /** nome da formulário */
   nome: Scalars['String']['input'];
@@ -789,6 +972,11 @@ export type CreateOneArquivoInput = {
 export type CreateOneAulaTypeInput = {
   /** The record to create */
   aulaType: CreateAulaInput;
+};
+
+export type CreateOneEnderecoInput = {
+  /** The record to create */
+  endereco: CreateEnderecoInput;
 };
 
 export type CreateOneFormulariosInput = {
@@ -1279,6 +1467,265 @@ export type DeleteOneUsuarioDtoInput = {
   id: Scalars['Int']['input'];
 };
 
+export type Endereco = {
+  __typename?: 'Endereco';
+  /** bairro */
+  bairro: Scalars['String']['output'];
+  /** cep */
+  cep: Scalars['String']['output'];
+  cidade?: Maybe<Cidade>;
+  /** id da cidade */
+  cidadeId: Scalars['Float']['output'];
+  /** complemento */
+  complemento?: Maybe<Scalars['String']['output']>;
+  /** data criação do registro */
+  createdAt: Scalars['DateTime']['output'];
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['Int']['output'];
+  /** logradouro */
+  logradouro: Scalars['String']['output'];
+  /** número do endereço */
+  numero?: Maybe<Scalars['String']['output']>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type EnderecoAggregateGroupBy = {
+  __typename?: 'EnderecoAggregateGroupBy';
+  bairro?: Maybe<Scalars['String']['output']>;
+  cep?: Maybe<Scalars['String']['output']>;
+  cidadeId?: Maybe<Scalars['Float']['output']>;
+  complemento?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  logradouro?: Maybe<Scalars['String']['output']>;
+  numero?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type EnderecoAvgAggregate = {
+  __typename?: 'EnderecoAvgAggregate';
+  cidadeId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type EnderecoConnection = {
+  __typename?: 'EnderecoConnection';
+  /** Array of nodes. */
+  nodes: Array<Endereco>;
+  /** Paging information */
+  pageInfo: OffsetPageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type EnderecoCountAggregate = {
+  __typename?: 'EnderecoCountAggregate';
+  bairro?: Maybe<Scalars['Int']['output']>;
+  cep?: Maybe<Scalars['Int']['output']>;
+  cidadeId?: Maybe<Scalars['Int']['output']>;
+  complemento?: Maybe<Scalars['Int']['output']>;
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  logradouro?: Maybe<Scalars['Int']['output']>;
+  numero?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type EnderecoFilter = {
+  and?: InputMaybe<Array<EnderecoFilter>>;
+  bairro?: InputMaybe<StringFieldComparison>;
+  cep?: InputMaybe<StringFieldComparison>;
+  cidade?: InputMaybe<EnderecoFilterCidadeFilter>;
+  cidadeId?: InputMaybe<NumberFieldComparison>;
+  complemento?: InputMaybe<StringFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  logradouro?: InputMaybe<StringFieldComparison>;
+  numero?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<EnderecoFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type EnderecoFilterCidadeFilter = {
+  and?: InputMaybe<Array<EnderecoFilterCidadeFilter>>;
+  codigoIbge?: InputMaybe<StringFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  estadoId?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<EnderecoFilterCidadeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type EnderecoMaxAggregate = {
+  __typename?: 'EnderecoMaxAggregate';
+  bairro?: Maybe<Scalars['String']['output']>;
+  cep?: Maybe<Scalars['String']['output']>;
+  cidadeId?: Maybe<Scalars['Float']['output']>;
+  complemento?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  logradouro?: Maybe<Scalars['String']['output']>;
+  numero?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type EnderecoMinAggregate = {
+  __typename?: 'EnderecoMinAggregate';
+  bairro?: Maybe<Scalars['String']['output']>;
+  cep?: Maybe<Scalars['String']['output']>;
+  cidadeId?: Maybe<Scalars['Float']['output']>;
+  complemento?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  logradouro?: Maybe<Scalars['String']['output']>;
+  numero?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type EnderecoSort = {
+  direction: SortDirection;
+  field: EnderecoSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum EnderecoSortFields {
+  Bairro = 'bairro',
+  Cep = 'cep',
+  CidadeId = 'cidadeId',
+  Complemento = 'complemento',
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  Logradouro = 'logradouro',
+  Numero = 'numero',
+  UpdatedAt = 'updatedAt'
+}
+
+export type EnderecoSumAggregate = {
+  __typename?: 'EnderecoSumAggregate';
+  cidadeId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Estado = {
+  __typename?: 'Estado';
+  cidades?: Maybe<EstadoCidadesConnection>;
+  /** data em que o estado foi cadastrado */
+  createdAt: Scalars['DateTime']['output'];
+  /** data em que o estado foi removido */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** nome do estado */
+  descricao: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  /** sigla do estado */
+  sigla: Scalars['String']['output'];
+  /** data em que o estado foi atualizado */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type EstadoCidadesArgs = {
+  filter?: CidadeFilter;
+  paging?: OffsetPaging;
+  sorting?: Array<CidadeSort>;
+};
+
+export type EstadoAggregateGroupBy = {
+  __typename?: 'EstadoAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  sigla?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type EstadoCidadesConnection = {
+  __typename?: 'EstadoCidadesConnection';
+  /** Array of nodes. */
+  nodes: Array<Cidade>;
+  /** Paging information */
+  pageInfo: OffsetPageInfo;
+};
+
+export type EstadoConnection = {
+  __typename?: 'EstadoConnection';
+  /** Array of nodes. */
+  nodes: Array<Estado>;
+  /** Paging information */
+  pageInfo: OffsetPageInfo;
+};
+
+export type EstadoCountAggregate = {
+  __typename?: 'EstadoCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  descricao?: Maybe<Scalars['Int']['output']>;
+  sigla?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type EstadoFilter = {
+  and?: InputMaybe<Array<EstadoFilter>>;
+  cidades?: InputMaybe<EstadoFilterCidadeFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<EstadoFilter>>;
+  sigla?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type EstadoFilterCidadeFilter = {
+  and?: InputMaybe<Array<EstadoFilterCidadeFilter>>;
+  codigoIbge?: InputMaybe<StringFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  estadoId?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<EstadoFilterCidadeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type EstadoMaxAggregate = {
+  __typename?: 'EstadoMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  sigla?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type EstadoMinAggregate = {
+  __typename?: 'EstadoMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricao?: Maybe<Scalars['String']['output']>;
+  sigla?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type EstadoSort = {
+  direction: SortDirection;
+  field: EstadoSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum EstadoSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Descricao = 'descricao',
+  Sigla = 'sigla',
+  UpdatedAt = 'updatedAt'
+}
+
 export type Formularios = {
   __typename?: 'Formularios';
   /** data criação do registro */
@@ -1550,19 +1997,26 @@ export type InscricaoTypeFilter = {
 export type InscricaoTypeFilterAlunoTypeFilter = {
   and?: InputMaybe<Array<InscricaoTypeFilterAlunoTypeFilter>>;
   anoSerie?: InputMaybe<StringFieldComparison>;
+  atualizado?: InputMaybe<BooleanFieldComparison>;
+  bairro?: InputMaybe<StringFieldComparison>;
   cpf?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   dataNascimento?: InputMaybe<StringFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
+  emailResponsavel?: InputMaybe<StringFieldComparison>;
   escola?: InputMaybe<StringFieldComparison>;
   estado?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
+  logradouro?: InputMaybe<StringFieldComparison>;
   matricula?: InputMaybe<StringFieldComparison>;
   municipio?: InputMaybe<StringFieldComparison>;
+  municipioEscola?: InputMaybe<StringFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
+  numero?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<InscricaoTypeFilterAlunoTypeFilter>>;
   qualificacaoId?: InputMaybe<StringFieldComparison>;
+  regiaoPlanilha?: InputMaybe<StringFieldComparison>;
   responsavel1?: InputMaybe<StringFieldComparison>;
   responsavel2?: InputMaybe<StringFieldComparison>;
   senha?: InputMaybe<StringFieldComparison>;
@@ -1926,11 +2380,12 @@ export type Mutation = {
   UpdateOneInscricao: InscricaoType;
   UpdateOneModulo: ModuloType;
   UpdateOneTurma: TurmaType;
-  aluno: AlunoType;
+  addCidadesToEstado: Estado;
   createArquivo?: Maybe<Arquivo>;
   createManyArquivos: Array<Arquivo>;
   createOneArquivo: Arquivo;
   createOneCurso?: Maybe<CursoType>;
+  createOneEndereco: Endereco;
   createOneFormulario: Formularios;
   createOnePergunta: Perguntas;
   createOneResposta: Respostas;
@@ -1955,8 +2410,14 @@ export type Mutation = {
   importAluno?: Maybe<Array<AlunoType>>;
   login: AuthType;
   loginAluno: AuthType;
+  removeCidadesFromEstado: Estado;
+  removeEstadoFromCidade: Cidade;
+  setCidadesOnEstado: Estado;
+  setEstadoOnCidade: Cidade;
   updateArquivo: Arquivo;
+  updateOneAluno?: Maybe<AlunoType>;
   updateOneCurso?: Maybe<CursoType>;
+  updateOneEndereco: Endereco;
   updateOneFormulario: Formularios;
   updateOnePergunta: Perguntas;
   updateOneResposta: Respostas;
@@ -2016,8 +2477,8 @@ export type MutationUpdateOneTurmaArgs = {
 };
 
 
-export type MutationAlunoArgs = {
-  input: UpdateOneAlunoTypeInput;
+export type MutationAddCidadesToEstadoArgs = {
+  input: AddCidadesToEstadoInput;
 };
 
 
@@ -2039,6 +2500,11 @@ export type MutationCreateOneArquivoArgs = {
 export type MutationCreateOneCursoArgs = {
   arquivo?: InputMaybe<Scalars['Upload']['input']>;
   input: CreateCursoInput;
+};
+
+
+export type MutationCreateOneEnderecoArgs = {
+  input: CreateOneEnderecoInput;
 };
 
 
@@ -2150,6 +2616,7 @@ export type MutationDeleteUsuarioArgs = {
 
 export type MutationImportAlunoArgs = {
   file: Scalars['Upload']['input'];
+  separador?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -2163,8 +2630,33 @@ export type MutationLoginAlunoArgs = {
 };
 
 
+export type MutationRemoveCidadesFromEstadoArgs = {
+  input: RemoveCidadesFromEstadoInput;
+};
+
+
+export type MutationRemoveEstadoFromCidadeArgs = {
+  input: RemoveEstadoFromCidadeInput;
+};
+
+
+export type MutationSetCidadesOnEstadoArgs = {
+  input: SetCidadesOnEstadoInput;
+};
+
+
+export type MutationSetEstadoOnCidadeArgs = {
+  input: SetEstadoOnCidadeInput;
+};
+
+
 export type MutationUpdateArquivoArgs = {
   input: UpdateOneArquivoInput;
+};
+
+
+export type MutationUpdateOneAlunoArgs = {
+  updateAlunoInput: UpdateAlunoInput;
 };
 
 
@@ -2172,6 +2664,11 @@ export type MutationUpdateOneCursoArgs = {
   arquivo?: InputMaybe<Scalars['Upload']['input']>;
   id: Scalars['Float']['input'];
   update: UpdateCursoInput;
+};
+
+
+export type MutationUpdateOneEnderecoArgs = {
+  input: UpdateOneEnderecoInput;
 };
 
 
@@ -2224,6 +2721,21 @@ export type NumberFieldComparison = {
 export type NumberFieldComparisonBetween = {
   lower: Scalars['Float']['input'];
   upper: Scalars['Float']['input'];
+};
+
+export type OffsetPageInfo = {
+  __typename?: 'OffsetPageInfo';
+  /** true if paging forward and there are more records. */
+  hasNextPage?: Maybe<Scalars['Boolean']['output']>;
+  /** true if paging backwards and there are more records. */
+  hasPreviousPage?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type OffsetPaging = {
+  /** Limit the number of records returned */
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  /** Offset to start returning records from */
+  offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type PageInfo = {
@@ -2558,19 +3070,26 @@ export type ProgressoTypeFilter = {
 export type ProgressoTypeFilterAlunoTypeFilter = {
   and?: InputMaybe<Array<ProgressoTypeFilterAlunoTypeFilter>>;
   anoSerie?: InputMaybe<StringFieldComparison>;
+  atualizado?: InputMaybe<BooleanFieldComparison>;
+  bairro?: InputMaybe<StringFieldComparison>;
   cpf?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   dataNascimento?: InputMaybe<StringFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
+  emailResponsavel?: InputMaybe<StringFieldComparison>;
   escola?: InputMaybe<StringFieldComparison>;
   estado?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
+  logradouro?: InputMaybe<StringFieldComparison>;
   matricula?: InputMaybe<StringFieldComparison>;
   municipio?: InputMaybe<StringFieldComparison>;
+  municipioEscola?: InputMaybe<StringFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
+  numero?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProgressoTypeFilterAlunoTypeFilter>>;
   qualificacaoId?: InputMaybe<StringFieldComparison>;
+  regiaoPlanilha?: InputMaybe<StringFieldComparison>;
   responsavel1?: InputMaybe<StringFieldComparison>;
   responsavel2?: InputMaybe<StringFieldComparison>;
   senha?: InputMaybe<StringFieldComparison>;
@@ -2733,8 +3252,14 @@ export type Query = {
   calculaProgressoCurso?: Maybe<Scalars['Float']['output']>;
   calculaProgressoPorModulo?: Maybe<Array<CursoProgressoType>>;
   calculaProgressoSubModulo?: Maybe<Scalars['Float']['output']>;
+  cidade?: Maybe<Cidade>;
+  cidades: Array<Cidade>;
   curso?: Maybe<CursoType>;
   cursos: CursoTypeConnection;
+  endereco?: Maybe<Endereco>;
+  enderecos: EnderecoConnection;
+  estado?: Maybe<Estado>;
+  estados: EstadoConnection;
   formulario?: Maybe<Formularios>;
   formularios: FormulariosConnection;
   inscricao?: Maybe<InscricaoType>;
@@ -2809,6 +3334,17 @@ export type QueryCalculaProgressoSubModuloArgs = {
 };
 
 
+export type QueryCidadeArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryCidadesArgs = {
+  filter?: CidadeFilter;
+  sorting?: Array<CidadeSort>;
+};
+
+
 export type QueryCursoArgs = {
   id: Scalars['Int']['input'];
 };
@@ -2818,6 +3354,30 @@ export type QueryCursosArgs = {
   filter?: CursoTypeFilter;
   paging?: CursorPaging;
   sorting?: Array<CursoTypeSort>;
+};
+
+
+export type QueryEnderecoArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type QueryEnderecosArgs = {
+  filter?: EnderecoFilter;
+  paging?: OffsetPaging;
+  sorting?: Array<EnderecoSort>;
+};
+
+
+export type QueryEstadoArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryEstadosArgs = {
+  filter?: EstadoFilter;
+  paging?: OffsetPaging;
+  sorting?: Array<EstadoSort>;
 };
 
 
@@ -2938,6 +3498,20 @@ export type QueryUsuariosArgs = {
   filter?: UsuarioDtoFilter;
   paging?: CursorPaging;
   sorting?: Array<UsuarioDtoSort>;
+};
+
+export type RemoveCidadesFromEstadoInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The ids of the relations. */
+  relationIds: Array<Scalars['ID']['input']>;
+};
+
+export type RemoveEstadoFromCidadeInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The id of relation. */
+  relationId: Scalars['ID']['input'];
 };
 
 export type Respostas = {
@@ -3241,6 +3815,20 @@ export type RespostasSumAggregate = {
   __typename?: 'RespostasSumAggregate';
   id?: Maybe<Scalars['Float']['output']>;
   perguntaId?: Maybe<Scalars['Float']['output']>;
+};
+
+export type SetCidadesOnEstadoInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The ids of the relations. */
+  relationIds: Array<Scalars['ID']['input']>;
+};
+
+export type SetEstadoOnCidadeInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The id of relation. */
+  relationId: Scalars['ID']['input'];
 };
 
 /** Sort Directions */
@@ -3735,10 +4323,55 @@ export type TurmaTypeSumAggregate = {
 };
 
 export type UpdateAlunoInput = {
+  /** ano_serie do aluno */
+  anoSerie?: InputMaybe<Scalars['String']['input']>;
+  /** arquivo de foto do aluno */
+  arquivoId?: InputMaybe<Scalars['Float']['input']>;
+  /** dados do aluno atualizado */
+  atualizado?: InputMaybe<Scalars['Boolean']['input']>;
+  /** bairro do aluno */
+  bairro?: InputMaybe<Scalars['String']['input']>;
+  /** cpf do aluno */
   cpf?: InputMaybe<Scalars['String']['input']>;
+  /** data_nascimento do aluno */
+  dataNascimento?: InputMaybe<Scalars['String']['input']>;
+  /** email do aluno */
   email?: InputMaybe<Scalars['String']['input']>;
+  /** E-mail do responsável */
+  emailResponsavel?: InputMaybe<Scalars['String']['input']>;
+  /** escola do aluno */
+  escola?: InputMaybe<Scalars['String']['input']>;
+  /** estado do aluno */
+  estado?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['Float']['input'];
+  /** logradouro do aluno */
+  logradouro?: InputMaybe<Scalars['String']['input']>;
+  /** matricula do aluno */
+  matricula?: InputMaybe<Scalars['String']['input']>;
+  /** municipio do aluno */
+  municipio?: InputMaybe<Scalars['String']['input']>;
+  /** municipio escola */
+  municipioEscola?: InputMaybe<Scalars['String']['input']>;
+  /** nome do aluno */
   nome?: InputMaybe<Scalars['String']['input']>;
+  /** numero do endereco do aluno */
+  numero?: InputMaybe<Scalars['String']['input']>;
+  /** qualificacao_escolhida do aluno */
+  qualificacaoId?: InputMaybe<Scalars['String']['input']>;
+  /** responsavel 1 do aluno */
+  responsavel1?: InputMaybe<Scalars['String']['input']>;
+  /** responsavel 2 do aluno */
+  responsavel2?: InputMaybe<Scalars['String']['input']>;
+  /** senha do aluno */
   senha?: InputMaybe<Scalars['String']['input']>;
+  /** turma do aluno */
+  turma?: InputMaybe<Scalars['String']['input']>;
+  /** turno do aluno */
+  turno?: InputMaybe<Scalars['String']['input']>;
+  /** whats app do aluno */
+  whatsAppAluno?: InputMaybe<Scalars['String']['input']>;
+  /** whats app do responsavel */
+  whatsAppResponsavel1?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateArquivo = {
@@ -3784,6 +4417,21 @@ export type UpdateCursoInput = {
   nome?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type UpdateEnderecoInput = {
+  /** bairro */
+  bairro?: InputMaybe<Scalars['String']['input']>;
+  /** cep */
+  cep?: InputMaybe<Scalars['String']['input']>;
+  /** id da cidade */
+  cidadeId?: InputMaybe<Scalars['Float']['input']>;
+  /** complemento */
+  complemento?: InputMaybe<Scalars['String']['input']>;
+  /** logradouro */
+  logradouro?: InputMaybe<Scalars['String']['input']>;
+  /** número do endereço */
+  numero?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type UpdateFormularioInput = {
   /** nome da formulário */
   nome?: InputMaybe<Scalars['String']['input']>;
@@ -3810,13 +4458,6 @@ export type UpdateModuloInput = {
   titulo?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type UpdateOneAlunoTypeInput = {
-  /** The id of the record to update */
-  id: Scalars['Int']['input'];
-  /** The update to apply. */
-  update: UpdateAlunoInput;
-};
-
 export type UpdateOneArquivoInput = {
   /** The id of the record to update */
   id: Scalars['Int']['input'];
@@ -3829,6 +4470,13 @@ export type UpdateOneAulaTypeInput = {
   id: Scalars['Int']['input'];
   /** The update to apply. */
   update: UpdateAulaInput;
+};
+
+export type UpdateOneEnderecoInput = {
+  /** The id of the record to update */
+  id: Scalars['Int']['input'];
+  /** The update to apply. */
+  update: UpdateEnderecoInput;
 };
 
 export type UpdateOneFormulariosInput = {
@@ -4072,6 +4720,13 @@ export type UsuarioDtoSumAggregate = {
   __typename?: 'UsuarioDtoSumAggregate';
   id?: Maybe<Scalars['Float']['output']>;
 };
+
+export type UpdateOneAlunoMutationVariables = Exact<{
+  input: UpdateAlunoInput;
+}>;
+
+
+export type UpdateOneAlunoMutation = { __typename?: 'Mutation', updateOneAluno?: { __typename?: 'AlunoType', id: number } | null };
 
 export type CreateArquivoMutationVariables = Exact<{
   arquivo: Scalars['Upload']['input'];
@@ -4479,6 +5134,39 @@ export type UsuariosQueryVariables = Exact<{
 export type UsuariosQuery = { __typename?: 'Query', usuarios: { __typename?: 'UsuarioDtoConnection', edges: Array<{ __typename?: 'UsuarioDtoEdge', node: { __typename?: 'UsuarioDto', ativo: boolean, nome: string, email: string, id: number } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 
+export const UpdateOneAlunoDocument = gql`
+    mutation updateOneAluno($input: UpdateAlunoInput!) {
+  updateOneAluno(updateAlunoInput: $input) {
+    id
+  }
+}
+    `;
+export type UpdateOneAlunoMutationFn = Apollo.MutationFunction<UpdateOneAlunoMutation, UpdateOneAlunoMutationVariables>;
+
+/**
+ * __useUpdateOneAlunoMutation__
+ *
+ * To run a mutation, you first call `useUpdateOneAlunoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneAlunoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOneAlunoMutation, { data, loading, error }] = useUpdateOneAlunoMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateOneAlunoMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneAlunoMutation, UpdateOneAlunoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOneAlunoMutation, UpdateOneAlunoMutationVariables>(UpdateOneAlunoDocument, options);
+      }
+export type UpdateOneAlunoMutationHookResult = ReturnType<typeof useUpdateOneAlunoMutation>;
+export type UpdateOneAlunoMutationResult = Apollo.MutationResult<UpdateOneAlunoMutation>;
+export type UpdateOneAlunoMutationOptions = Apollo.BaseMutationOptions<UpdateOneAlunoMutation, UpdateOneAlunoMutationVariables>;
 export const CreateArquivoDocument = gql`
     mutation createArquivo($arquivo: Upload!) {
   createArquivo(arquivo: $arquivo) {
