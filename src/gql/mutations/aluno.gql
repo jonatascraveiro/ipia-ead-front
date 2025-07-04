@@ -1,0 +1,5 @@
+mutation updateOneAluno($input: UpdateAlunoInput!) {
+  updateOneAluno(updateAlunoInput: $input) {
+    id
+  }
+}

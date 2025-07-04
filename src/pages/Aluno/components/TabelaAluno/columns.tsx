@@ -1,7 +1,12 @@
+import { Icone } from '@/components/common/Icons'
 import type { AlunoType } from '@/gql/generated/graphql'
 import type { ColumnDef } from '@tanstack/react-table'
 
-export const getColumns = (): ColumnDef<AlunoType>[] => {
+type Acoes = {
+  editar: (data: AlunoType) => void
+}
+
+export const getColumns = ({ editar }: Acoes): ColumnDef<AlunoType>[] => {
   return [
     {
       accessorKey: 'nome',
@@ -52,5 +57,35 @@ export const getColumns = (): ColumnDef<AlunoType>[] => {
         )
       },
     },
+
+    {
+      accessorKey: 'acoes',
+      header: () => <span>Ações</span>,
+      cell: ({ row }) => {
+        return (
+          <button type="button" onClick={() => editar(row.original)}>
+            <Icone.editar />
+          </button>
+        )
+      },
+    },
+    // {
+    //   accessorFn: (row) => row.id,
+    //   ...ColumnAction<AlunoType>({
+    //     actions: [
+    //       {
+    //         label: 'Alterar senha',
+    //         icon: <KeyRound className="h-6 w-6 " />,
+    //         onClick: (row) => alterarSenha(row),
+    //       },
+    //       {
+    //         label: 'Editar',
+    //         icon: <Icone.editar />,
+    //         onClick: (row) => editar(row),
+    //         omit: () => true,
+    //       },
+    //     ],
+    //   }),
+    // },
   ]
 }
