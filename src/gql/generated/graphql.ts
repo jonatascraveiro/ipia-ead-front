@@ -5040,7 +5040,7 @@ export type InscricoesQueryVariables = Exact<{
 }>;
 
 
-export type InscricoesQuery = { __typename?: 'Query', inscricoes: { __typename?: 'InscricaoTypeConnection', edges: Array<{ __typename?: 'InscricaoTypeEdge', cursor: any, node: { __typename?: 'InscricaoType', id: number, status: boolean, dataInscricao: any, aluno?: { __typename?: 'AlunoType', id: number, cpf?: string | null, nome: string } | null, turma?: { __typename?: 'TurmaType', id: number, nome: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type InscricoesQuery = { __typename?: 'Query', inscricoes: { __typename?: 'InscricaoTypeConnection', edges: Array<{ __typename?: 'InscricaoTypeEdge', cursor: any, node: { __typename?: 'InscricaoType', id: number, status: boolean, dataInscricao: any, aluno?: { __typename?: 'AlunoType', id: number, cpf?: string | null, nome: string } | null, turma?: { __typename?: 'TurmaType', id: number, nome: string, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type ModuloQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -6832,6 +6832,10 @@ export const InscricoesDocument = gql`
         turma {
           id
           nome
+          curso {
+            id
+            nome
+          }
         }
       }
     }

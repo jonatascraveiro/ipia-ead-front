@@ -18,6 +18,7 @@ type InputFileFieldProps = {
   description?: string
   disabled?: boolean
   urlPreview?: string
+  isPreview?: boolean
 }
 
 export const InputFileField = ({
@@ -26,6 +27,7 @@ export const InputFileField = ({
   placeholder,
   description,
   disabled = false,
+  isPreview = true,
   urlPreview,
 }: InputFileFieldProps) => {
   const { control } = useFormContext()
@@ -51,7 +53,8 @@ export const InputFileField = ({
                     if (files && files.length > 0) {
                       field.onChange(files[0])
                       const fileUrl = URL.createObjectURL(files[0])
-                      setPreview(fileUrl)
+                      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                      isPreview && setPreview(fileUrl)
                     }
                   }}
                   disabled={disabled}
@@ -67,7 +70,7 @@ export const InputFileField = ({
           </FormItem>
         )}
       />
-      {preview && (
+      {preview && isPreview && (
         <img
           src={preview}
           alt="Pré-visualização"

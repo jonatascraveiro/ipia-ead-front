@@ -42,6 +42,10 @@ query Inscricoes(
         turma {
           id
           nome
+          curso{
+            id
+            nome
+          }
         }
       }
     }

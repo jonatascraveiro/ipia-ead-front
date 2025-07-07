@@ -3,8 +3,6 @@ const ROTAS = {
 
   ALUNOS: '/alunos',
 
-  INSCRICOES: '/inscricoes',
-
   AULA: '/sub-modulo/:subModuloId/aula',
   AULA_CRIAR: '/sub-modulo/:subModuloId/aula/criar',
   AULA_VISUALIZAR: '/sub-modulo/:subModuloId/aula/:id',
@@ -27,6 +25,12 @@ const ROTAS = {
   FORMULARIO_CRIAR: '/sub-modulo/:subModuloId/formulario/criar',
   FORMULARIO_VISUALIZAR: '/sub-modulo/:subModuloId/formulario/:id',
   FORMULARIO_EDITAR: '/sub-modulo/:subModuloId/formulario/:id/editar',
+
+  INSCRICOES: '/inscricoes',
+
+  IMPORTACOES: '/importacoes',
+
+  INSRICAO_IMPORTACAO: '/inscricao-importacao/:id',
 
   PERGUNTA: '/pergunta',
   PERGUNTA_CRIAR: '/pergunta/criar',
