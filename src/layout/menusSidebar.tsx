@@ -1,5 +1,11 @@
 import { ROTAS } from '@/routes/rotas'
-import { DiamondPlus, Home, NotebookText, Users2 } from 'lucide-react'
+import {
+  DiamondPlus,
+  Home,
+  NotebookText,
+  UploadIcon,
+  Users2,
+} from 'lucide-react'
 import type React from 'react'
 
 export type NavItem = {
@@ -65,6 +71,11 @@ const menuOpcoes: NavItem[] = [
     name: 'Inscrições',
     icon: <NotebookText />,
     path: ROTAS.INSCRICOES,
+  },
+  {
+    name: 'Importações',
+    icon: <UploadIcon />,
+    path: ROTAS.IMPORTACOES,
   },
 ]
 

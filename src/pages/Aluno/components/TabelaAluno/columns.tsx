@@ -11,6 +11,7 @@ export const getColumns = ({ editar }: Acoes): ColumnDef<AlunoType>[] => {
     {
       accessorKey: 'nome',
       header: () => <span>Nome</span>,
+      
     },
     {
       accessorKey: 'email',

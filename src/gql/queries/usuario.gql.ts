@@ -2,11 +2,10 @@
 import { gql } from '@apollo/client'
 
 gql`
-
 query Usuarios(
-  $filter: UsuarioDtoFilter
+  $filter: UsuarioTypeFilter
   $paging: CursorPaging!
-  $sorting: [UsuarioDtoSort!]!
+  $sorting: [UsuarioTypeSort!]!
 ) {
   usuarios(filter: $filter, paging: $paging, sorting: $sorting) {
     edges {

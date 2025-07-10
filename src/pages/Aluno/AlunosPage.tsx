@@ -114,21 +114,6 @@ export function AlunosPage() {
               </div>
             </form>
           </Form>
-
-          {/*          
-            <DialogClose asChild>
-              <Button variant="outline" onClick={onCancel}>
-                Cancelar
-              </Button>
-            </DialogClose>
-            <Button
-              onClick={() => {
-                onConfirm?.()
-              }}
-            >
-              Confirmar
-            </Button>
-          </DialogFooter> */}
         </DialogContent>
       </Dialog>
     </Page>

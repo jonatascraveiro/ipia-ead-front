@@ -36,13 +36,52 @@ query Inscricoes(
           id
           cpf
           nome
+          matricula
         }
         status
         dataInscricao
         turma {
           id
           nome
+          curso{
+            id
+            nome
+          }
         }
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+
+
+`
+
+gql`
+query InscricoesImportacao(
+  $filter: InscricaoTypeFilter
+  $paging: CursorPaging!
+  $sorting: [InscricaoTypeSort!]!
+) {
+  inscricoes(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      cursor
+      node {
+        id
+        aluno {
+          id
+          matricula
+          nome
+        }
+        descricaoStatus
+        status
+        dataInscricao
+     
       }
     }
     pageInfo {

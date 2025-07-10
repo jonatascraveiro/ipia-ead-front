@@ -58,7 +58,7 @@ export const SelectField = ({
               }}
               value={String(field.value || '')}
             >
-              <FormControl className="w-full">
+              <FormControl className="w-full overflow-hidden">
                 <SelectTrigger>
                   <SelectValue placeholder={placeholder} />
                 </SelectTrigger>

@@ -1,6 +1,6 @@
 import {
   SortDirection,
-  UsuarioDtoSortFields,
+  UsuarioTypeSortFields,
   useUsuariosQuery,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
@@ -31,7 +31,7 @@ export const useTabelaUsuario = () => {
       },
       paging,
       sorting: {
-        field: UsuarioDtoSortFields.Nome,
+        field: UsuarioTypeSortFields.Nome,
         direction: SortDirection.Asc,
       },
     },
