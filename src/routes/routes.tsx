@@ -18,7 +18,9 @@ import { VisualizarCursoPage } from '@/pages/Curso/VisualizarCursoPage'
 import { CriarFormularioPage } from '@/pages/Formulario/CriarFormularioPage'
 import { EditarFormularioPage } from '@/pages/Formulario/EditarFormularioPage'
 import { FormularioPage } from '@/pages/Formulario/FormularioPage'
+import { ImportacaoPage } from '@/pages/Importacao/ImportacaoPage'
 import { InscricaoPage } from '@/pages/Inscricao/IncricaoPage'
+import { InscricaoImportacaoPage } from '@/pages/InscricaoImportacao/InscricaoImportacaoPage'
 import { CriarMaterialComplementarPage } from '@/pages/MaterialComplementar/CriarMaterialComplementarPage'
 import { EditarMaterialComplementarPage } from '@/pages/MaterialComplementar/EditarMaterialComplementarPage'
 import { MaterialComplementarPage } from '@/pages/MaterialComplementar/MaterialComplementarPage'
@@ -53,8 +55,6 @@ export default function AppRoutes() {
           <Route path={ROTAS.DASHBOARD} index element={<Dashboard />} />
 
           <Route path={ROTAS.ALUNOS} element={<AlunosPage />} />
-
-          <Route path={ROTAS.INSCRICOES} element={<InscricaoPage />} />
 
           <Route path={ROTAS.FORMULARIO} element={<FormularioPage />} />
           <Route
@@ -99,6 +99,13 @@ export default function AppRoutes() {
             element={<VisualizarCursoPage />}
           />
           <Route path={ROTAS.CURSO_EDITAR} element={<EditarCursoPage />} />
+
+          <Route path={ROTAS.INSCRICOES} element={<InscricaoPage />} />
+          <Route path={ROTAS.IMPORTACOES} element={<ImportacaoPage />} />
+          <Route
+            path={ROTAS.INSRICAO_IMPORTACAO}
+            element={<InscricaoImportacaoPage />}
+          />
 
           <Route path={ROTAS.PERGUNTA} element={<PerguntaPage />} />
           <Route path={ROTAS.PERGUNTA_CRIAR} element={<CriarPerguntaPage />} />

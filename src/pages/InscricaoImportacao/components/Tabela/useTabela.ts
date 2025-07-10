@@ -1,18 +1,18 @@
 import {
-  type InscricaoType,
   InscricaoTypeSortFields,
   SortDirection,
-  useInscricoesQuery,
-  useUpdateOneInscricaoMutation,
+  useImportacaoHistoricoQuery,
+  useInscricoesImportacaoQuery,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
-import { apolloClient } from '@/services/Apollo/client'
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
+import { useParams } from 'react-router'
 import { getColumns } from './columns'
 
 export const useTabelaInscricao = () => {
+  const id = useParams().id as string
+
   const form = useForm<{
     nome: string
     turma: string
@@ -20,11 +20,15 @@ export const useTabelaInscricao = () => {
     matricula: string
   }>({
     defaultValues: {
-      nome: '',
       matricula: '',
+      nome: '',
       turma: '',
       status: '0',
     },
+  })
+
+  const { data: importacao } = useImportacaoHistoricoQuery({
+    variables: { id: +id },
   })
 
   const { limparPaginacao, paging } = useCursorPaginacao()
@@ -46,47 +50,31 @@ export const useTabelaInscricao = () => {
 
   const StatusFilter = status === '0' ? undefined : status === 'true'
 
-  const { data, loading } = useInscricoesQuery({
+  const { data, loading } = useInscricoesImportacaoQuery({
     variables: {
       filter: {
         aluno: {
           nome: { iLike: `%${nome || ''}%` },
           matricula: { iLike: `%${matricula || ''}%` },
         },
+        importacaoHistorico: { id: { eq: +id } },
 
         turma: { nome: { iLike: `%${turma || ''}%` } },
         status: { is: StatusFilter },
       },
+
       paging,
       sorting: {
-        field: InscricaoTypeSortFields.CreatedAt,
+        field: InscricaoTypeSortFields.AlunoId,
         direction: SortDirection.Desc,
       },
     },
+    skip: !id,
   })
 
-  const [updateInscricaoMutate] = useUpdateOneInscricaoMutation()
+  // const [updateInscricaoMutate] = useUpdateOneInscricaoMutation()
 
-  const matricular = useCallback(
-    (data: InscricaoType) => {
-      updateInscricaoMutate({
-        variables: {
-          input: {
-            id: data.id,
-            update: {
-              status: true,
-            },
-          },
-        },
-        onCompleted: () => {
-          apolloClient.cache.evict({ fieldName: 'inscricoes' })
-          toast.success('Inscrição confirmada com sucesso')
-        },
-      })
-    },
-    [updateInscricaoMutate],
-  )
-  const columns = useMemo(() => getColumns({ matricular }), [matricular])
+  const columns = useMemo(() => getColumns(), [])
 
   return {
     tabela: {
@@ -98,5 +86,6 @@ export const useTabelaInscricao = () => {
     form,
     handleFilter,
     limparFiltro,
+    importacao: importacao?.importacaoHistoricoType,
   }
 }
