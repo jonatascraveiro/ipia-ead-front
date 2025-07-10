@@ -1,30 +1,33 @@
 import {
   CursoTypeSortFields,
-  type InscricaoType,
-  InscricaoTypeSortFields,
+  type ImportacaoHistoricoType,
+  ImportacaoHistoricoTypeSortFields,
   SortDirection,
   TurmaTypeSortFields,
   useCursosModuloSelectQuery,
-  useInscricoesQuery,
+  useImportacoesHistoricoQuery,
+  useImportarHistoricoMutation,
   useTurmasQuery,
-  useUpdateOneInscricaoMutation,
 } from '@/gql/generated/graphql'
 import { useCursorPaginacao } from '@/hooks/parametros.paginacao'
 import { useModal } from '@/hooks/useModal'
-import { apolloClient } from '@/services/Apollo/client'
+import { ROTAS } from '@/routes/rotas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
+import { generatePath, useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 import { getColumns } from './columns'
 import { type ImportacaoSchema, schema } from './schema'
 
 export const useTabelaInscricao = () => {
-  const form = useForm<{ nome: string; turma: string; status: string }>({
+  const [importar] = useImportarHistoricoMutation()
+
+  const form = useForm<{ planilha: string; turma: string; status: string }>({
     defaultValues: {
-      nome: '',
+      planilha: '',
       turma: '',
-      status: '',
+      status: '0',
     },
   })
 
@@ -36,9 +39,7 @@ export const useTabelaInscricao = () => {
     },
     resolver: zodResolver(schema),
   })
-
-  console.log(formImportacao.formState.errors)
-
+  const [planilha, turma] = form.getValues(['planilha', 'turma'])
   const { limparPaginacao, paging } = useCursorPaginacao()
 
   const handleFilter = () => {
@@ -46,57 +47,51 @@ export const useTabelaInscricao = () => {
   }
 
   const handleSubmitImportacao = (data: ImportacaoSchema) => {
-    // alert('importar alunos')
-    console.log(data)
+    importar({
+      variables: {
+        input: {
+          turmaId: data.turmaId,
+        },
+        file: data.arquivo,
+      },
+      onCompleted: () => {},
+    })
+    toast.success('Planila enviada para ser processada com sucesso')
+    modal.closeModal()
   }
 
-  const [nome, turma, status] = form.getValues(['nome', 'turma', 'status'])
   const limparFiltro = () => {
     form.reset()
     limparPaginacao()
   }
 
-  const StatusFilter = status === '' ? undefined : status === 'true'
-
-  const { data, loading } = useInscricoesQuery({
+  const { data, loading } = useImportacoesHistoricoQuery({
     variables: {
       filter: {
-        aluno: { nome: { iLike: `%${nome || ''}%` } },
-
-        turma: { nome: { iLike: `%${turma || ''}%` } },
-        status: { is: StatusFilter },
+        nomePlanilha: { iLike: `%${planilha}%` },
+        turma: { nome: { iLike: `%${turma}%` } },
       },
       paging,
       sorting: {
-        field: InscricaoTypeSortFields.CreatedAt,
+        field: ImportacaoHistoricoTypeSortFields.CreatedAt,
         direction: SortDirection.Desc,
       },
     },
   })
-
+  const navigate = useNavigate()
   const modal = useModal()
-  const [updateInscricaoMutate] = useUpdateOneInscricaoMutation()
 
-  const matricular = useCallback(
-    (data: InscricaoType) => {
-      updateInscricaoMutate({
-        variables: {
-          input: {
-            id: data.id,
-            update: {
-              status: true,
-            },
-          },
-        },
-        onCompleted: () => {
-          apolloClient.cache.evict({ fieldName: 'inscricoes' })
-          toast.success('Inscrição confirmada com sucesso')
-        },
+  const visualizar = useCallback(
+    (data: ImportacaoHistoricoType) => {
+      const url = generatePath(ROTAS.INSRICAO_IMPORTACAO, {
+        id: String(data.id) || '',
       })
+
+      navigate(url)
     },
-    [updateInscricaoMutate],
+    [navigate],
   )
-  const columns = useMemo(() => getColumns({ matricular }), [matricular])
+  const columns = useMemo(() => getColumns({ visualizar }), [visualizar])
 
   const { data: cursos } = useCursosModuloSelectQuery({
     variables: {
@@ -144,10 +139,10 @@ export const useTabelaInscricao = () => {
   console.log(turmaOptions)
   return {
     tabela: {
-      data: data?.inscricoes.edges.map((edge) => edge.node) || [],
+      data: data?.importacaoHistoricoTypes.edges.map((edge) => edge.node) || [],
       loading,
       columns,
-      pagination: data?.inscricoes.pageInfo,
+      pagination: data?.importacaoHistoricoTypes.pageInfo,
     },
     form,
     handleFilter,

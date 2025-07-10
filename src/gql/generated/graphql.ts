@@ -16,6 +16,7 @@ export type Scalars = {
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
   ConnectionCursor: { input: any; output: any; }
+  Date: { input: any; output: any; }
   DateTime: { input: any; output: any; }
   Upload: { input: any; output: any; }
 };
@@ -240,7 +241,9 @@ export type AlunoTypeFilterInscricaoTypeFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   dataInscricao?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  descricaoStatus?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
+  importacaoHistoricoId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<AlunoTypeFilterInscricaoTypeFilter>>;
   status?: InputMaybe<BooleanFieldComparison>;
   turmaId?: InputMaybe<NumberFieldComparison>;
@@ -940,6 +943,10 @@ export type CreateFormularioInput = {
   subModuloId: Scalars['Float']['input'];
 };
 
+export type CreateImportacaoHistoricoInput = {
+  turmaId: Scalars['Float']['input'];
+};
+
 export type CreateInscricaoInput = {
   /** ID do aluno */
   alunoId: Scalars['Float']['input'];
@@ -962,6 +969,15 @@ export type CreateModuloInput = {
   descricao: Scalars['String']['input'];
   ordem: Scalars['Float']['input'];
   titulo: Scalars['String']['input'];
+};
+
+export type CreateModuloLiberacaoTravaInput = {
+  /** data de liberaçãao */
+  dataLiberacao: Scalars['DateTime']['input'];
+  /** id do modulo */
+  moduloId: Scalars['Float']['input'];
+  /** id do turma */
+  turmaId: Scalars['Float']['input'];
 };
 
 export type CreateOneArquivoInput = {
@@ -987,6 +1003,11 @@ export type CreateOneFormulariosInput = {
 export type CreateOneInscricaoTypeInput = {
   /** The record to create */
   inscricaoType: CreateInscricaoInput;
+};
+
+export type CreateOneModuloLiberacaoTravaTypeInput = {
+  /** The record to create */
+  moduloLiberacaoTravaType: CreateModuloLiberacaoTravaInput;
 };
 
 export type CreateOneModuloTypeInput = {
@@ -1376,6 +1397,23 @@ export type DateFieldComparisonBetween = {
   upper: Scalars['DateTime']['input'];
 };
 
+export type DateScalarFilterComparison = {
+  eq?: InputMaybe<Scalars['Date']['input']>;
+  gt?: InputMaybe<Scalars['Date']['input']>;
+  gte?: InputMaybe<Scalars['Date']['input']>;
+  iLike?: InputMaybe<Scalars['Date']['input']>;
+  in?: InputMaybe<Array<Scalars['Date']['input']>>;
+  is?: InputMaybe<Scalars['Boolean']['input']>;
+  isNot?: InputMaybe<Scalars['Boolean']['input']>;
+  like?: InputMaybe<Scalars['Date']['input']>;
+  lt?: InputMaybe<Scalars['Date']['input']>;
+  lte?: InputMaybe<Scalars['Date']['input']>;
+  neq?: InputMaybe<Scalars['Date']['input']>;
+  notILike?: InputMaybe<Scalars['Date']['input']>;
+  notIn?: InputMaybe<Array<Scalars['Date']['input']>>;
+  notLike?: InputMaybe<Scalars['Date']['input']>;
+};
+
 export type DeleteManyAulaTypesInput = {
   /** Filter to find records to delete */
   filter: AulaTypeDeleteFilter;
@@ -1384,6 +1422,11 @@ export type DeleteManyAulaTypesInput = {
 export type DeleteManyCursoTypesInput = {
   /** Filter to find records to delete */
   filter: CursoTypeDeleteFilter;
+};
+
+export type DeleteManyModuloLiberacaoTravaTypesInput = {
+  /** Filter to find records to delete */
+  filter: ModuloLiberacaoTravaTypeDeleteFilter;
 };
 
 export type DeleteManyModuloTypesInput = {
@@ -1432,6 +1475,11 @@ export type DeleteOneInscricaoTypeInput = {
   id: Scalars['Int']['input'];
 };
 
+export type DeleteOneModuloLiberacaoTravaTypeInput = {
+  /** The id of the record to delete. */
+  id: Scalars['Int']['input'];
+};
+
 export type DeleteOneModuloTypeInput = {
   /** The id of the record to delete. */
   id: Scalars['Int']['input'];
@@ -1462,7 +1510,7 @@ export type DeleteOneTurmaTypeInput = {
   id: Scalars['Int']['input'];
 };
 
-export type DeleteOneUsuarioDtoInput = {
+export type DeleteOneUsuarioTypeInput = {
   /** The id of the record to delete. */
   id: Scalars['Int']['input'];
 };
@@ -1890,6 +1938,209 @@ export type FormulariosSumAggregate = {
   subModuloId?: Maybe<Scalars['Float']['output']>;
 };
 
+export type ImportacaoHistoricoType = {
+  __typename?: 'ImportacaoHistoricoType';
+  /** data criação do registro */
+  createdAt: Scalars['DateTime']['output'];
+  curso?: Maybe<CursoType>;
+  /** ID do curso */
+  cursoId: Scalars['Float']['output'];
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Erros durante a importação */
+  errosImport?: Maybe<Scalars['String']['output']>;
+  id: Scalars['Int']['output'];
+  /** Nome da planilha */
+  nomePlanilha: Scalars['String']['output'];
+  /** Quantidade de registros importados */
+  quantidadeImportada: Scalars['Float']['output'];
+  /** Status da importa o */
+  status: Scalars['String']['output'];
+  turma?: Maybe<TurmaType>;
+  /** ID da turma */
+  turmaId: Scalars['Float']['output'];
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  usuario?: Maybe<UsuarioType>;
+  /** ID do usu rio */
+  usuarioId: Scalars['Float']['output'];
+};
+
+export type ImportacaoHistoricoTypeAggregateGroupBy = {
+  __typename?: 'ImportacaoHistoricoTypeAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  errosImport?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  nomePlanilha?: Maybe<Scalars['String']['output']>;
+  quantidadeImportada?: Maybe<Scalars['Float']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  usuarioId?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ImportacaoHistoricoTypeAvgAggregate = {
+  __typename?: 'ImportacaoHistoricoTypeAvgAggregate';
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+  quantidadeImportada?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+  usuarioId?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ImportacaoHistoricoTypeConnection = {
+  __typename?: 'ImportacaoHistoricoTypeConnection';
+  /** Array of edges. */
+  edges: Array<ImportacaoHistoricoTypeEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+};
+
+export type ImportacaoHistoricoTypeCountAggregate = {
+  __typename?: 'ImportacaoHistoricoTypeCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  cursoId?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  errosImport?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  nomePlanilha?: Maybe<Scalars['Int']['output']>;
+  quantidadeImportada?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  turmaId?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+  usuarioId?: Maybe<Scalars['Int']['output']>;
+};
+
+export type ImportacaoHistoricoTypeEdge = {
+  __typename?: 'ImportacaoHistoricoTypeEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the ImportacaoHistoricoType */
+  node: ImportacaoHistoricoType;
+};
+
+export type ImportacaoHistoricoTypeFilter = {
+  and?: InputMaybe<Array<ImportacaoHistoricoTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  curso?: InputMaybe<ImportacaoHistoricoTypeFilterCursoTypeFilter>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  errosImport?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nomePlanilha?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ImportacaoHistoricoTypeFilter>>;
+  quantidadeImportada?: InputMaybe<NumberFieldComparison>;
+  status?: InputMaybe<StringFieldComparison>;
+  turma?: InputMaybe<ImportacaoHistoricoTypeFilterTurmaTypeFilter>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  usuario?: InputMaybe<ImportacaoHistoricoTypeFilterUsuarioTypeFilter>;
+  usuarioId?: InputMaybe<NumberFieldComparison>;
+};
+
+export type ImportacaoHistoricoTypeFilterCursoTypeFilter = {
+  and?: InputMaybe<Array<ImportacaoHistoricoTypeFilterCursoTypeFilter>>;
+  arquivoId?: InputMaybe<NumberFieldComparison>;
+  ativo?: InputMaybe<BooleanFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  icone?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ImportacaoHistoricoTypeFilterCursoTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  url?: InputMaybe<StringFieldComparison>;
+};
+
+export type ImportacaoHistoricoTypeFilterTurmaTypeFilter = {
+  and?: InputMaybe<Array<ImportacaoHistoricoTypeFilterTurmaTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  duracao?: InputMaybe<StringFieldComparison>;
+  fim?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  inicio?: InputMaybe<DateFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ImportacaoHistoricoTypeFilterTurmaTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ImportacaoHistoricoTypeFilterUsuarioTypeFilter = {
+  and?: InputMaybe<Array<ImportacaoHistoricoTypeFilterUsuarioTypeFilter>>;
+  ativo?: InputMaybe<BooleanFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  email?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ImportacaoHistoricoTypeFilterUsuarioTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ImportacaoHistoricoTypeMaxAggregate = {
+  __typename?: 'ImportacaoHistoricoTypeMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  errosImport?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  nomePlanilha?: Maybe<Scalars['String']['output']>;
+  quantidadeImportada?: Maybe<Scalars['Float']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  usuarioId?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ImportacaoHistoricoTypeMinAggregate = {
+  __typename?: 'ImportacaoHistoricoTypeMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  errosImport?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  nomePlanilha?: Maybe<Scalars['String']['output']>;
+  quantidadeImportada?: Maybe<Scalars['Float']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  usuarioId?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ImportacaoHistoricoTypeSort = {
+  direction: SortDirection;
+  field: ImportacaoHistoricoTypeSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum ImportacaoHistoricoTypeSortFields {
+  CreatedAt = 'createdAt',
+  CursoId = 'cursoId',
+  DeletedAt = 'deletedAt',
+  ErrosImport = 'errosImport',
+  Id = 'id',
+  NomePlanilha = 'nomePlanilha',
+  QuantidadeImportada = 'quantidadeImportada',
+  Status = 'status',
+  TurmaId = 'turmaId',
+  UpdatedAt = 'updatedAt',
+  UsuarioId = 'usuarioId'
+}
+
+export type ImportacaoHistoricoTypeSumAggregate = {
+  __typename?: 'ImportacaoHistoricoTypeSumAggregate';
+  cursoId?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+  quantidadeImportada?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+  usuarioId?: Maybe<Scalars['Float']['output']>;
+};
+
 export type InscricaoType = {
   __typename?: 'InscricaoType';
   aluno?: Maybe<AlunoType>;
@@ -1901,7 +2152,12 @@ export type InscricaoType = {
   dataInscricao: Scalars['DateTime']['output'];
   /** data da exclusão do registro */
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Descricao status da inscrição */
+  descricaoStatus?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
+  importacaoHistorico?: Maybe<ImportacaoHistoricoType>;
+  /** Id da importacao */
+  importacaoHistoricoId?: Maybe<Scalars['Float']['output']>;
   /** Status da inscrição */
   status: Scalars['Boolean']['output'];
   turma?: Maybe<TurmaType>;
@@ -1917,7 +2173,9 @@ export type InscricaoTypeAggregateGroupBy = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   dataInscricao?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricaoStatus?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  importacaoHistoricoId?: Maybe<Scalars['Float']['output']>;
   status?: Maybe<Scalars['Boolean']['output']>;
   turmaId?: Maybe<Scalars['Float']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1927,6 +2185,7 @@ export type InscricaoTypeAvgAggregate = {
   __typename?: 'InscricaoTypeAvgAggregate';
   alunoId?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
+  importacaoHistoricoId?: Maybe<Scalars['Float']['output']>;
   turmaId?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -1946,7 +2205,9 @@ export type InscricaoTypeCountAggregate = {
   createdAt?: Maybe<Scalars['Int']['output']>;
   dataInscricao?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
+  descricaoStatus?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  importacaoHistoricoId?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['Int']['output']>;
   turmaId?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
@@ -1962,7 +2223,11 @@ export type InscricaoTypeDeleteResponse = {
   dataInscricao?: Maybe<Scalars['DateTime']['output']>;
   /** data da exclusão do registro */
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Descricao status da inscrição */
+  descricaoStatus?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  /** Id da importacao */
+  importacaoHistoricoId?: Maybe<Scalars['Float']['output']>;
   /** Status da inscrição */
   status?: Maybe<Scalars['Boolean']['output']>;
   /** Id da turma */
@@ -1986,7 +2251,10 @@ export type InscricaoTypeFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   dataInscricao?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  descricaoStatus?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
+  importacaoHistorico?: InputMaybe<InscricaoTypeFilterImportacaoHistoricoTypeFilter>;
+  importacaoHistoricoId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<InscricaoTypeFilter>>;
   status?: InputMaybe<BooleanFieldComparison>;
   turma?: InputMaybe<InscricaoTypeFilterTurmaTypeFilter>;
@@ -2027,6 +2295,22 @@ export type InscricaoTypeFilterAlunoTypeFilter = {
   whatsAppResponsavel1?: InputMaybe<StringFieldComparison>;
 };
 
+export type InscricaoTypeFilterImportacaoHistoricoTypeFilter = {
+  and?: InputMaybe<Array<InscricaoTypeFilterImportacaoHistoricoTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  errosImport?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nomePlanilha?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<InscricaoTypeFilterImportacaoHistoricoTypeFilter>>;
+  quantidadeImportada?: InputMaybe<NumberFieldComparison>;
+  status?: InputMaybe<StringFieldComparison>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  usuarioId?: InputMaybe<NumberFieldComparison>;
+};
+
 export type InscricaoTypeFilterTurmaTypeFilter = {
   and?: InputMaybe<Array<InscricaoTypeFilterTurmaTypeFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
@@ -2048,7 +2332,9 @@ export type InscricaoTypeMaxAggregate = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   dataInscricao?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricaoStatus?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  importacaoHistoricoId?: Maybe<Scalars['Float']['output']>;
   turmaId?: Maybe<Scalars['Float']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -2059,7 +2345,9 @@ export type InscricaoTypeMinAggregate = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   dataInscricao?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  descricaoStatus?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  importacaoHistoricoId?: Maybe<Scalars['Float']['output']>;
   turmaId?: Maybe<Scalars['Float']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -2075,7 +2363,9 @@ export enum InscricaoTypeSortFields {
   CreatedAt = 'createdAt',
   DataInscricao = 'dataInscricao',
   DeletedAt = 'deletedAt',
+  DescricaoStatus = 'descricaoStatus',
   Id = 'id',
+  ImportacaoHistoricoId = 'importacaoHistoricoId',
   Status = 'status',
   TurmaId = 'turmaId',
   UpdatedAt = 'updatedAt'
@@ -2085,6 +2375,7 @@ export type InscricaoTypeSumAggregate = {
   __typename?: 'InscricaoTypeSumAggregate';
   alunoId?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
+  importacaoHistoricoId?: Maybe<Scalars['Float']['output']>;
   turmaId?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -2108,6 +2399,187 @@ export type IntFieldComparisonBetween = {
   upper: Scalars['Int']['input'];
 };
 
+export type ModuloLiberacaoTravaType = {
+  __typename?: 'ModuloLiberacaoTravaType';
+  /** data criação do registro */
+  createdAt: Scalars['DateTime']['output'];
+  /** data de liberaçãao */
+  dataLiberacao?: Maybe<Scalars['Date']['output']>;
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['Int']['output'];
+  modulo?: Maybe<ModuloType>;
+  /** id do modulo */
+  moduloId: Scalars['Float']['output'];
+  turma?: Maybe<TurmaType>;
+  /** id do turma */
+  turmaId: Scalars['Float']['output'];
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ModuloLiberacaoTravaTypeAggregateGroupBy = {
+  __typename?: 'ModuloLiberacaoTravaTypeAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  dataLiberacao?: Maybe<Scalars['Date']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ModuloLiberacaoTravaTypeAvgAggregate = {
+  __typename?: 'ModuloLiberacaoTravaTypeAvgAggregate';
+  id?: Maybe<Scalars['Float']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ModuloLiberacaoTravaTypeConnection = {
+  __typename?: 'ModuloLiberacaoTravaTypeConnection';
+  /** Array of edges. */
+  edges: Array<ModuloLiberacaoTravaTypeEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+};
+
+export type ModuloLiberacaoTravaTypeCountAggregate = {
+  __typename?: 'ModuloLiberacaoTravaTypeCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  dataLiberacao?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Int']['output']>;
+  turmaId?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type ModuloLiberacaoTravaTypeDeleteFilter = {
+  and?: InputMaybe<Array<ModuloLiberacaoTravaTypeDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  dataLiberacao?: InputMaybe<DateScalarFilterComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<ModuloLiberacaoTravaTypeDeleteFilter>>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ModuloLiberacaoTravaTypeDeleteResponse = {
+  __typename?: 'ModuloLiberacaoTravaTypeDeleteResponse';
+  /** data criação do registro */
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  /** data de liberaçãao */
+  dataLiberacao?: Maybe<Scalars['Date']['output']>;
+  /** data da exclusão do registro */
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  /** id do modulo */
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  /** id do turma */
+  turmaId?: Maybe<Scalars['Float']['output']>;
+  /** data atualização do registro */
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ModuloLiberacaoTravaTypeEdge = {
+  __typename?: 'ModuloLiberacaoTravaTypeEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the ModuloLiberacaoTravaType */
+  node: ModuloLiberacaoTravaType;
+};
+
+export type ModuloLiberacaoTravaTypeFilter = {
+  and?: InputMaybe<Array<ModuloLiberacaoTravaTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  dataLiberacao?: InputMaybe<DateScalarFilterComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  modulo?: InputMaybe<ModuloLiberacaoTravaTypeFilterModuloTypeFilter>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<ModuloLiberacaoTravaTypeFilter>>;
+  turma?: InputMaybe<ModuloLiberacaoTravaTypeFilterTurmaTypeFilter>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ModuloLiberacaoTravaTypeFilterModuloTypeFilter = {
+  and?: InputMaybe<Array<ModuloLiberacaoTravaTypeFilterModuloTypeFilter>>;
+  biblioteca?: InputMaybe<BooleanFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  or?: InputMaybe<Array<ModuloLiberacaoTravaTypeFilterModuloTypeFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ModuloLiberacaoTravaTypeFilterTurmaTypeFilter = {
+  and?: InputMaybe<Array<ModuloLiberacaoTravaTypeFilterTurmaTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  cursoId?: InputMaybe<NumberFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  duracao?: InputMaybe<StringFieldComparison>;
+  fim?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  inicio?: InputMaybe<DateFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ModuloLiberacaoTravaTypeFilterTurmaTypeFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ModuloLiberacaoTravaTypeMaxAggregate = {
+  __typename?: 'ModuloLiberacaoTravaTypeMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  dataLiberacao?: Maybe<Scalars['Date']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ModuloLiberacaoTravaTypeMinAggregate = {
+  __typename?: 'ModuloLiberacaoTravaTypeMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  dataLiberacao?: Maybe<Scalars['Date']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ModuloLiberacaoTravaTypeSort = {
+  direction: SortDirection;
+  field: ModuloLiberacaoTravaTypeSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum ModuloLiberacaoTravaTypeSortFields {
+  CreatedAt = 'createdAt',
+  DataLiberacao = 'dataLiberacao',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  ModuloId = 'moduloId',
+  TurmaId = 'turmaId',
+  UpdatedAt = 'updatedAt'
+}
+
+export type ModuloLiberacaoTravaTypeSumAggregate = {
+  __typename?: 'ModuloLiberacaoTravaTypeSumAggregate';
+  id?: Maybe<Scalars['Float']['output']>;
+  moduloId?: Maybe<Scalars['Float']['output']>;
+  turmaId?: Maybe<Scalars['Float']['output']>;
+};
+
 export type ModuloType = {
   __typename?: 'ModuloType';
   aulas?: Maybe<Array<AulaType>>;
@@ -2123,6 +2595,7 @@ export type ModuloType = {
   /** descricao do modulo */
   descricao: Scalars['String']['output'];
   id: Scalars['Int']['output'];
+  moduloLiberacaoTrava?: Maybe<ModuloLiberacaoTravaType>;
   modulosProgressos?: Maybe<Array<ProgressoType>>;
   /** ordem do modulo */
   ordem: Scalars['Float']['output'];
@@ -2247,6 +2720,7 @@ export type ModuloTypeFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   descricao?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
+  moduloLiberacaoTrava?: InputMaybe<ModuloTypeFilterModuloLiberacaoTravaTypeFilter>;
   modulosProgressos?: InputMaybe<ModuloTypeFilterProgressoTypeFilter>;
   or?: InputMaybe<Array<ModuloTypeFilter>>;
   ordem?: InputMaybe<NumberFieldComparison>;
@@ -2284,6 +2758,18 @@ export type ModuloTypeFilterCursoTypeFilter = {
   or?: InputMaybe<Array<ModuloTypeFilterCursoTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   url?: InputMaybe<StringFieldComparison>;
+};
+
+export type ModuloTypeFilterModuloLiberacaoTravaTypeFilter = {
+  and?: InputMaybe<Array<ModuloTypeFilterModuloLiberacaoTravaTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  dataLiberacao?: InputMaybe<DateScalarFilterComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<ModuloTypeFilterModuloLiberacaoTravaTypeFilter>>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type ModuloTypeFilterProgressoTypeFilter = {
@@ -2373,12 +2859,14 @@ export type Mutation = {
   CreateOneAula: AulaType;
   CreateOneInscricao: InscricaoType;
   CreateOneModulo: ModuloType;
+  CreateOneModuloLiberacaoTrava: ModuloLiberacaoTravaType;
   CreateOneProgresso: ProgressoType;
   CreateOneTurma: TurmaType;
   DeleteOneInscricao: InscricaoTypeDeleteResponse;
   UpdateOneAula: AulaType;
   UpdateOneInscricao: InscricaoType;
   UpdateOneModulo: ModuloType;
+  UpdateOneModuloLiberacaoTrava: ModuloLiberacaoTravaType;
   UpdateOneTurma: TurmaType;
   addCidadesToEstado: Estado;
   createArquivo?: Maybe<Arquivo>;
@@ -2394,10 +2882,12 @@ export type Mutation = {
   deleteArquivo: ArquivoDeleteResponse;
   deleteManyAula: DeleteManyResponse;
   deleteManyCursos: DeleteManyResponse;
+  deleteManyModuloLiberacaoTravas: DeleteManyResponse;
   deleteManyModulos: DeleteManyResponse;
   deleteManySubModulos: DeleteManyResponse;
   deleteManyTurma: DeleteManyResponse;
   deleteModulo: ModuloTypeDeleteResponse;
+  deleteModuloLiberacaoTrava: ModuloLiberacaoTravaTypeDeleteResponse;
   deleteOneAula: AulaTypeDeleteResponse;
   deleteOneCurso: CursoTypeDeleteResponse;
   deleteOneFormulario: FormulariosDeleteResponse;
@@ -2406,8 +2896,9 @@ export type Mutation = {
   deleteOneRespostaPergunta: RespostasPerguntasDeleteResponse;
   deleteOneSubModulo: SubModuloTypeDeleteResponse;
   deleteOneTurma: TurmaTypeDeleteResponse;
-  deleteUsuario: UsuarioDtoDeleteResponse;
+  deleteUsuario: UsuarioTypeDeleteResponse;
   importAluno?: Maybe<Array<AlunoType>>;
+  importarHistorico: ImportacaoHistoricoType;
   login: AuthType;
   loginAluno: AuthType;
   removeCidadesFromEstado: Estado;
@@ -2442,6 +2933,11 @@ export type MutationCreateOneModuloArgs = {
 };
 
 
+export type MutationCreateOneModuloLiberacaoTravaArgs = {
+  input: CreateOneModuloLiberacaoTravaTypeInput;
+};
+
+
 export type MutationCreateOneProgressoArgs = {
   input: CreateOneProgressoTypeInput;
 };
@@ -2469,6 +2965,11 @@ export type MutationUpdateOneInscricaoArgs = {
 
 export type MutationUpdateOneModuloArgs = {
   input: UpdateOneModuloTypeInput;
+};
+
+
+export type MutationUpdateOneModuloLiberacaoTravaArgs = {
+  input: UpdateOneModuloLiberacaoTravaTypeInput;
 };
 
 
@@ -2549,6 +3050,11 @@ export type MutationDeleteManyCursosArgs = {
 };
 
 
+export type MutationDeleteManyModuloLiberacaoTravasArgs = {
+  input: DeleteManyModuloLiberacaoTravaTypesInput;
+};
+
+
 export type MutationDeleteManyModulosArgs = {
   input: DeleteManyModuloTypesInput;
 };
@@ -2566,6 +3072,11 @@ export type MutationDeleteManyTurmaArgs = {
 
 export type MutationDeleteModuloArgs = {
   input: DeleteOneModuloTypeInput;
+};
+
+
+export type MutationDeleteModuloLiberacaoTravaArgs = {
+  input: DeleteOneModuloLiberacaoTravaTypeInput;
 };
 
 
@@ -2610,13 +3121,19 @@ export type MutationDeleteOneTurmaArgs = {
 
 
 export type MutationDeleteUsuarioArgs = {
-  input: DeleteOneUsuarioDtoInput;
+  input: DeleteOneUsuarioTypeInput;
 };
 
 
 export type MutationImportAlunoArgs = {
   file: Scalars['Upload']['input'];
   separador?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type MutationImportarHistoricoArgs = {
+  file: Scalars['Upload']['input'];
+  input: CreateImportacaoHistoricoInput;
 };
 
 
@@ -3262,9 +3779,13 @@ export type Query = {
   estados: EstadoConnection;
   formulario?: Maybe<Formularios>;
   formularios: FormulariosConnection;
+  importacaoHistoricoType?: Maybe<ImportacaoHistoricoType>;
+  importacaoHistoricoTypes: ImportacaoHistoricoTypeConnection;
   inscricao?: Maybe<InscricaoType>;
   inscricoes: InscricaoTypeConnection;
   modulo?: Maybe<ModuloType>;
+  moduloLiberacaoTrava?: Maybe<ModuloLiberacaoTravaType>;
+  moduloLiberacaoTravas: ModuloLiberacaoTravaTypeConnection;
   modulos: ModuloTypeConnection;
   pergunta?: Maybe<Perguntas>;
   perguntas: PerguntasConnection;
@@ -3278,8 +3799,8 @@ export type Query = {
   subModulos: SubModuloTypeConnection;
   turma?: Maybe<TurmaType>;
   turmas: TurmaTypeConnection;
-  usuario?: Maybe<UsuarioDto>;
-  usuarios: UsuarioDtoConnection;
+  usuario?: Maybe<UsuarioType>;
+  usuarios: UsuarioTypeConnection;
 };
 
 
@@ -3393,6 +3914,18 @@ export type QueryFormulariosArgs = {
 };
 
 
+export type QueryImportacaoHistoricoTypeArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type QueryImportacaoHistoricoTypesArgs = {
+  filter?: ImportacaoHistoricoTypeFilter;
+  paging?: CursorPaging;
+  sorting?: Array<ImportacaoHistoricoTypeSort>;
+};
+
+
 export type QueryInscricaoArgs = {
   id: Scalars['Int']['input'];
 };
@@ -3407,6 +3940,18 @@ export type QueryInscricoesArgs = {
 
 export type QueryModuloArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type QueryModuloLiberacaoTravaArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type QueryModuloLiberacaoTravasArgs = {
+  filter?: ModuloLiberacaoTravaTypeFilter;
+  paging?: CursorPaging;
+  sorting?: Array<ModuloLiberacaoTravaTypeSort>;
 };
 
 
@@ -3495,9 +4040,9 @@ export type QueryUsuarioArgs = {
 
 
 export type QueryUsuariosArgs = {
-  filter?: UsuarioDtoFilter;
+  filter?: UsuarioTypeFilter;
   paging?: CursorPaging;
-  sorting?: Array<UsuarioDtoSort>;
+  sorting?: Array<UsuarioTypeSort>;
 };
 
 export type RemoveCidadesFromEstadoInput = {
@@ -4142,6 +4687,7 @@ export type TurmaType = {
   id: Scalars['Int']['output'];
   /** inicio da turma */
   inicio: Scalars['DateTime']['output'];
+  moduloLiberacaoTrava?: Maybe<ModuloLiberacaoTravaType>;
   /** nome da turma */
   nome: Scalars['String']['output'];
   /** data atualização do registro */
@@ -4249,6 +4795,7 @@ export type TurmaTypeFilter = {
   fim?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   inicio?: InputMaybe<DateFieldComparison>;
+  moduloLiberacaoTrava?: InputMaybe<TurmaTypeFilterModuloLiberacaoTravaTypeFilter>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<TurmaTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
@@ -4267,6 +4814,18 @@ export type TurmaTypeFilterCursoTypeFilter = {
   or?: InputMaybe<Array<TurmaTypeFilterCursoTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   url?: InputMaybe<StringFieldComparison>;
+};
+
+export type TurmaTypeFilterModuloLiberacaoTravaTypeFilter = {
+  and?: InputMaybe<Array<TurmaTypeFilterModuloLiberacaoTravaTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  dataLiberacao?: InputMaybe<DateScalarFilterComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<TurmaTypeFilterModuloLiberacaoTravaTypeFilter>>;
+  turmaId?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type TurmaTypeMaxAggregate = {
@@ -4458,6 +5017,15 @@ export type UpdateModuloInput = {
   titulo?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type UpdateModuloLiberacaoTravaInput = {
+  /** data de liberaçãao */
+  dataLiberacao?: InputMaybe<Scalars['DateTime']['input']>;
+  /** id do modulo */
+  moduloId?: InputMaybe<Scalars['Float']['input']>;
+  /** id do turma */
+  turmaId?: InputMaybe<Scalars['Float']['input']>;
+};
+
 export type UpdateOneArquivoInput = {
   /** The id of the record to update */
   id: Scalars['Int']['input'];
@@ -4491,6 +5059,13 @@ export type UpdateOneInscricaoTypeInput = {
   id: Scalars['Int']['input'];
   /** The update to apply. */
   update: UpdateInscricaoInput;
+};
+
+export type UpdateOneModuloLiberacaoTravaTypeInput = {
+  /** The id of the record to update */
+  id: Scalars['Int']['input'];
+  /** The update to apply. */
+  update: UpdateModuloLiberacaoTravaInput;
 };
 
 export type UpdateOneModuloTypeInput = {
@@ -4591,8 +5166,8 @@ export type UpdateTurmaInput = {
   nome?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type UsuarioDto = {
-  __typename?: 'UsuarioDto';
+export type UsuarioType = {
+  __typename?: 'UsuarioType';
   /** informa se o usuario esta ativo. */
   ativo: Scalars['Boolean']['output'];
   /** data criação do registro */
@@ -4608,8 +5183,8 @@ export type UsuarioDto = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
-export type UsuarioDtoAggregateGroupBy = {
-  __typename?: 'UsuarioDtoAggregateGroupBy';
+export type UsuarioTypeAggregateGroupBy = {
+  __typename?: 'UsuarioTypeAggregateGroupBy';
   ativo?: Maybe<Scalars['Boolean']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -4619,21 +5194,21 @@ export type UsuarioDtoAggregateGroupBy = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
-export type UsuarioDtoAvgAggregate = {
-  __typename?: 'UsuarioDtoAvgAggregate';
+export type UsuarioTypeAvgAggregate = {
+  __typename?: 'UsuarioTypeAvgAggregate';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
-export type UsuarioDtoConnection = {
-  __typename?: 'UsuarioDtoConnection';
+export type UsuarioTypeConnection = {
+  __typename?: 'UsuarioTypeConnection';
   /** Array of edges. */
-  edges: Array<UsuarioDtoEdge>;
+  edges: Array<UsuarioTypeEdge>;
   /** Paging information */
   pageInfo: PageInfo;
 };
 
-export type UsuarioDtoCountAggregate = {
-  __typename?: 'UsuarioDtoCountAggregate';
+export type UsuarioTypeCountAggregate = {
+  __typename?: 'UsuarioTypeCountAggregate';
   ativo?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
@@ -4643,8 +5218,8 @@ export type UsuarioDtoCountAggregate = {
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
 
-export type UsuarioDtoDeleteResponse = {
-  __typename?: 'UsuarioDtoDeleteResponse';
+export type UsuarioTypeDeleteResponse = {
+  __typename?: 'UsuarioTypeDeleteResponse';
   /** informa se o usuario esta ativo. */
   ativo?: Maybe<Scalars['Boolean']['output']>;
   /** data criação do registro */
@@ -4660,28 +5235,28 @@ export type UsuarioDtoDeleteResponse = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
-export type UsuarioDtoEdge = {
-  __typename?: 'UsuarioDtoEdge';
+export type UsuarioTypeEdge = {
+  __typename?: 'UsuarioTypeEdge';
   /** Cursor for this node. */
   cursor: Scalars['ConnectionCursor']['output'];
-  /** The node containing the UsuarioDto */
-  node: UsuarioDto;
+  /** The node containing the UsuarioType */
+  node: UsuarioType;
 };
 
-export type UsuarioDtoFilter = {
-  and?: InputMaybe<Array<UsuarioDtoFilter>>;
+export type UsuarioTypeFilter = {
+  and?: InputMaybe<Array<UsuarioTypeFilter>>;
   ativo?: InputMaybe<BooleanFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<UsuarioDtoFilter>>;
+  or?: InputMaybe<Array<UsuarioTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type UsuarioDtoMaxAggregate = {
-  __typename?: 'UsuarioDtoMaxAggregate';
+export type UsuarioTypeMaxAggregate = {
+  __typename?: 'UsuarioTypeMaxAggregate';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -4690,8 +5265,8 @@ export type UsuarioDtoMaxAggregate = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
-export type UsuarioDtoMinAggregate = {
-  __typename?: 'UsuarioDtoMinAggregate';
+export type UsuarioTypeMinAggregate = {
+  __typename?: 'UsuarioTypeMinAggregate';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -4700,13 +5275,13 @@ export type UsuarioDtoMinAggregate = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
-export type UsuarioDtoSort = {
+export type UsuarioTypeSort = {
   direction: SortDirection;
-  field: UsuarioDtoSortFields;
+  field: UsuarioTypeSortFields;
   nulls?: InputMaybe<SortNulls>;
 };
 
-export enum UsuarioDtoSortFields {
+export enum UsuarioTypeSortFields {
   Ativo = 'ativo',
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
@@ -4716,8 +5291,8 @@ export enum UsuarioDtoSortFields {
   UpdatedAt = 'updatedAt'
 }
 
-export type UsuarioDtoSumAggregate = {
-  __typename?: 'UsuarioDtoSumAggregate';
+export type UsuarioTypeSumAggregate = {
+  __typename?: 'UsuarioTypeSumAggregate';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -4807,6 +5382,14 @@ export type DeleteOneFormularioMutationVariables = Exact<{
 
 
 export type DeleteOneFormularioMutation = { __typename?: 'Mutation', deleteOneFormulario: { __typename?: 'FormulariosDeleteResponse', id?: number | null } };
+
+export type ImportarHistoricoMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+  input: CreateImportacaoHistoricoInput;
+}>;
+
+
+export type ImportarHistoricoMutation = { __typename?: 'Mutation', importarHistorico: { __typename?: 'ImportacaoHistoricoType', id: number } };
 
 export type CreateOneInscricaoMutationVariables = Exact<{
   input: CreateOneInscricaoTypeInput;
@@ -5026,6 +5609,22 @@ export type FormulariosSelectQueryVariables = Exact<{
 
 export type FormulariosSelectQuery = { __typename?: 'Query', formularios: { __typename?: 'FormulariosConnection', edges: Array<{ __typename?: 'FormulariosEdge', node: { __typename?: 'Formularios', id: number, nome: string } }> } };
 
+export type ImportacoesHistoricoQueryVariables = Exact<{
+  filter?: InputMaybe<ImportacaoHistoricoTypeFilter>;
+  paging: CursorPaging;
+  sorting: Array<ImportacaoHistoricoTypeSort> | ImportacaoHistoricoTypeSort;
+}>;
+
+
+export type ImportacoesHistoricoQuery = { __typename?: 'Query', importacaoHistoricoTypes: { __typename?: 'ImportacaoHistoricoTypeConnection', edges: Array<{ __typename?: 'ImportacaoHistoricoTypeEdge', cursor: any, node: { __typename?: 'ImportacaoHistoricoType', createdAt: any, id: number, nomePlanilha: string, quantidadeImportada: number, turmaId: number, status: string, errosImport?: string | null, turma?: { __typename?: 'TurmaType', nome: string, id: number, curso?: { __typename?: 'CursoType', nome: string, id: number } | null } | null, usuario?: { __typename?: 'UsuarioType', nome: string, id: number } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+
+export type ImportacaoHistoricoQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type ImportacaoHistoricoQuery = { __typename?: 'Query', importacaoHistoricoType?: { __typename?: 'ImportacaoHistoricoType', createdAt: any, id: number, nomePlanilha: string, quantidadeImportada: number, turmaId: number, status: string, usuario?: { __typename?: 'UsuarioType', nome: string, id: number } | null, turma?: { __typename?: 'TurmaType', nome: string, id: number, curso?: { __typename?: 'CursoType', nome: string, id: number } | null } | null } | null };
+
 export type InscricaoQueryVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
@@ -5040,7 +5639,16 @@ export type InscricoesQueryVariables = Exact<{
 }>;
 
 
-export type InscricoesQuery = { __typename?: 'Query', inscricoes: { __typename?: 'InscricaoTypeConnection', edges: Array<{ __typename?: 'InscricaoTypeEdge', cursor: any, node: { __typename?: 'InscricaoType', id: number, status: boolean, dataInscricao: any, aluno?: { __typename?: 'AlunoType', id: number, cpf?: string | null, nome: string } | null, turma?: { __typename?: 'TurmaType', id: number, nome: string, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type InscricoesQuery = { __typename?: 'Query', inscricoes: { __typename?: 'InscricaoTypeConnection', edges: Array<{ __typename?: 'InscricaoTypeEdge', cursor: any, node: { __typename?: 'InscricaoType', id: number, status: boolean, dataInscricao: any, aluno?: { __typename?: 'AlunoType', id: number, cpf?: string | null, nome: string, matricula?: string | null } | null, turma?: { __typename?: 'TurmaType', id: number, nome: string, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+
+export type InscricoesImportacaoQueryVariables = Exact<{
+  filter?: InputMaybe<InscricaoTypeFilter>;
+  paging: CursorPaging;
+  sorting: Array<InscricaoTypeSort> | InscricaoTypeSort;
+}>;
+
+
+export type InscricoesImportacaoQuery = { __typename?: 'Query', inscricoes: { __typename?: 'InscricaoTypeConnection', edges: Array<{ __typename?: 'InscricaoTypeEdge', cursor: any, node: { __typename?: 'InscricaoType', id: number, descricaoStatus?: string | null, status: boolean, dataInscricao: any, aluno?: { __typename?: 'AlunoType', id: number, matricula?: string | null, nome: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type ModuloQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -5125,13 +5733,13 @@ export type TurmasSelectQueryVariables = Exact<{
 export type TurmasSelectQuery = { __typename?: 'Query', turmas: { __typename?: 'TurmaTypeConnection', edges: Array<{ __typename?: 'TurmaTypeEdge', node: { __typename?: 'TurmaType', id: number, nome: string } }> } };
 
 export type UsuariosQueryVariables = Exact<{
-  filter?: InputMaybe<UsuarioDtoFilter>;
+  filter?: InputMaybe<UsuarioTypeFilter>;
   paging: CursorPaging;
-  sorting: Array<UsuarioDtoSort> | UsuarioDtoSort;
+  sorting: Array<UsuarioTypeSort> | UsuarioTypeSort;
 }>;
 
 
-export type UsuariosQuery = { __typename?: 'Query', usuarios: { __typename?: 'UsuarioDtoConnection', edges: Array<{ __typename?: 'UsuarioDtoEdge', node: { __typename?: 'UsuarioDto', ativo: boolean, nome: string, email: string, id: number } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type UsuariosQuery = { __typename?: 'Query', usuarios: { __typename?: 'UsuarioTypeConnection', edges: Array<{ __typename?: 'UsuarioTypeEdge', node: { __typename?: 'UsuarioType', ativo: boolean, nome: string, email: string, id: number } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 
 export const UpdateOneAlunoDocument = gql`
@@ -5542,6 +6150,40 @@ export function useDeleteOneFormularioMutation(baseOptions?: Apollo.MutationHook
 export type DeleteOneFormularioMutationHookResult = ReturnType<typeof useDeleteOneFormularioMutation>;
 export type DeleteOneFormularioMutationResult = Apollo.MutationResult<DeleteOneFormularioMutation>;
 export type DeleteOneFormularioMutationOptions = Apollo.BaseMutationOptions<DeleteOneFormularioMutation, DeleteOneFormularioMutationVariables>;
+export const ImportarHistoricoDocument = gql`
+    mutation ImportarHistorico($file: Upload!, $input: CreateImportacaoHistoricoInput!) {
+  importarHistorico(file: $file, input: $input) {
+    id
+  }
+}
+    `;
+export type ImportarHistoricoMutationFn = Apollo.MutationFunction<ImportarHistoricoMutation, ImportarHistoricoMutationVariables>;
+
+/**
+ * __useImportarHistoricoMutation__
+ *
+ * To run a mutation, you first call `useImportarHistoricoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useImportarHistoricoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [importarHistoricoMutation, { data, loading, error }] = useImportarHistoricoMutation({
+ *   variables: {
+ *      file: // value for 'file'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useImportarHistoricoMutation(baseOptions?: Apollo.MutationHookOptions<ImportarHistoricoMutation, ImportarHistoricoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ImportarHistoricoMutation, ImportarHistoricoMutationVariables>(ImportarHistoricoDocument, options);
+      }
+export type ImportarHistoricoMutationHookResult = ReturnType<typeof useImportarHistoricoMutation>;
+export type ImportarHistoricoMutationResult = Apollo.MutationResult<ImportarHistoricoMutation>;
+export type ImportarHistoricoMutationOptions = Apollo.BaseMutationOptions<ImportarHistoricoMutation, ImportarHistoricoMutationVariables>;
 export const CreateOneInscricaoDocument = gql`
     mutation CreateOneInscricao($input: CreateOneInscricaoTypeInput!) {
   CreateOneInscricao(input: $input) {
@@ -6765,6 +7407,134 @@ export type FormulariosSelectQueryHookResult = ReturnType<typeof useFormulariosS
 export type FormulariosSelectLazyQueryHookResult = ReturnType<typeof useFormulariosSelectLazyQuery>;
 export type FormulariosSelectSuspenseQueryHookResult = ReturnType<typeof useFormulariosSelectSuspenseQuery>;
 export type FormulariosSelectQueryResult = Apollo.QueryResult<FormulariosSelectQuery, FormulariosSelectQueryVariables>;
+export const ImportacoesHistoricoDocument = gql`
+    query ImportacoesHistorico($filter: ImportacaoHistoricoTypeFilter, $paging: CursorPaging!, $sorting: [ImportacaoHistoricoTypeSort!]!) {
+  importacaoHistoricoTypes(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      cursor
+      node {
+        createdAt
+        id
+        nomePlanilha
+        quantidadeImportada
+        turmaId
+        status
+        errosImport
+        turma {
+          nome
+          id
+          curso {
+            nome
+            id
+          }
+        }
+        usuario {
+          nome
+          id
+        }
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __useImportacoesHistoricoQuery__
+ *
+ * To run a query within a React component, call `useImportacoesHistoricoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useImportacoesHistoricoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useImportacoesHistoricoQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      paging: // value for 'paging'
+ *      sorting: // value for 'sorting'
+ *   },
+ * });
+ */
+export function useImportacoesHistoricoQuery(baseOptions: Apollo.QueryHookOptions<ImportacoesHistoricoQuery, ImportacoesHistoricoQueryVariables> & ({ variables: ImportacoesHistoricoQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ImportacoesHistoricoQuery, ImportacoesHistoricoQueryVariables>(ImportacoesHistoricoDocument, options);
+      }
+export function useImportacoesHistoricoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ImportacoesHistoricoQuery, ImportacoesHistoricoQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ImportacoesHistoricoQuery, ImportacoesHistoricoQueryVariables>(ImportacoesHistoricoDocument, options);
+        }
+export function useImportacoesHistoricoSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<ImportacoesHistoricoQuery, ImportacoesHistoricoQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ImportacoesHistoricoQuery, ImportacoesHistoricoQueryVariables>(ImportacoesHistoricoDocument, options);
+        }
+export type ImportacoesHistoricoQueryHookResult = ReturnType<typeof useImportacoesHistoricoQuery>;
+export type ImportacoesHistoricoLazyQueryHookResult = ReturnType<typeof useImportacoesHistoricoLazyQuery>;
+export type ImportacoesHistoricoSuspenseQueryHookResult = ReturnType<typeof useImportacoesHistoricoSuspenseQuery>;
+export type ImportacoesHistoricoQueryResult = Apollo.QueryResult<ImportacoesHistoricoQuery, ImportacoesHistoricoQueryVariables>;
+export const ImportacaoHistoricoDocument = gql`
+    query ImportacaoHistorico($id: Int!) {
+  importacaoHistoricoType(id: $id) {
+    createdAt
+    id
+    nomePlanilha
+    quantidadeImportada
+    turmaId
+    status
+    usuario {
+      nome
+      id
+    }
+    turma {
+      nome
+      id
+      curso {
+        nome
+        id
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useImportacaoHistoricoQuery__
+ *
+ * To run a query within a React component, call `useImportacaoHistoricoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useImportacaoHistoricoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useImportacaoHistoricoQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useImportacaoHistoricoQuery(baseOptions: Apollo.QueryHookOptions<ImportacaoHistoricoQuery, ImportacaoHistoricoQueryVariables> & ({ variables: ImportacaoHistoricoQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ImportacaoHistoricoQuery, ImportacaoHistoricoQueryVariables>(ImportacaoHistoricoDocument, options);
+      }
+export function useImportacaoHistoricoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ImportacaoHistoricoQuery, ImportacaoHistoricoQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ImportacaoHistoricoQuery, ImportacaoHistoricoQueryVariables>(ImportacaoHistoricoDocument, options);
+        }
+export function useImportacaoHistoricoSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<ImportacaoHistoricoQuery, ImportacaoHistoricoQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ImportacaoHistoricoQuery, ImportacaoHistoricoQueryVariables>(ImportacaoHistoricoDocument, options);
+        }
+export type ImportacaoHistoricoQueryHookResult = ReturnType<typeof useImportacaoHistoricoQuery>;
+export type ImportacaoHistoricoLazyQueryHookResult = ReturnType<typeof useImportacaoHistoricoLazyQuery>;
+export type ImportacaoHistoricoSuspenseQueryHookResult = ReturnType<typeof useImportacaoHistoricoSuspenseQuery>;
+export type ImportacaoHistoricoQueryResult = Apollo.QueryResult<ImportacaoHistoricoQuery, ImportacaoHistoricoQueryVariables>;
 export const InscricaoDocument = gql`
     query Inscricao($id: Int!) {
   inscricao(id: $id) {
@@ -6826,6 +7596,7 @@ export const InscricoesDocument = gql`
           id
           cpf
           nome
+          matricula
         }
         status
         dataInscricao
@@ -6883,6 +7654,67 @@ export type InscricoesQueryHookResult = ReturnType<typeof useInscricoesQuery>;
 export type InscricoesLazyQueryHookResult = ReturnType<typeof useInscricoesLazyQuery>;
 export type InscricoesSuspenseQueryHookResult = ReturnType<typeof useInscricoesSuspenseQuery>;
 export type InscricoesQueryResult = Apollo.QueryResult<InscricoesQuery, InscricoesQueryVariables>;
+export const InscricoesImportacaoDocument = gql`
+    query InscricoesImportacao($filter: InscricaoTypeFilter, $paging: CursorPaging!, $sorting: [InscricaoTypeSort!]!) {
+  inscricoes(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      cursor
+      node {
+        id
+        aluno {
+          id
+          matricula
+          nome
+        }
+        descricaoStatus
+        status
+        dataInscricao
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __useInscricoesImportacaoQuery__
+ *
+ * To run a query within a React component, call `useInscricoesImportacaoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useInscricoesImportacaoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useInscricoesImportacaoQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      paging: // value for 'paging'
+ *      sorting: // value for 'sorting'
+ *   },
+ * });
+ */
+export function useInscricoesImportacaoQuery(baseOptions: Apollo.QueryHookOptions<InscricoesImportacaoQuery, InscricoesImportacaoQueryVariables> & ({ variables: InscricoesImportacaoQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<InscricoesImportacaoQuery, InscricoesImportacaoQueryVariables>(InscricoesImportacaoDocument, options);
+      }
+export function useInscricoesImportacaoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<InscricoesImportacaoQuery, InscricoesImportacaoQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<InscricoesImportacaoQuery, InscricoesImportacaoQueryVariables>(InscricoesImportacaoDocument, options);
+        }
+export function useInscricoesImportacaoSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<InscricoesImportacaoQuery, InscricoesImportacaoQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<InscricoesImportacaoQuery, InscricoesImportacaoQueryVariables>(InscricoesImportacaoDocument, options);
+        }
+export type InscricoesImportacaoQueryHookResult = ReturnType<typeof useInscricoesImportacaoQuery>;
+export type InscricoesImportacaoLazyQueryHookResult = ReturnType<typeof useInscricoesImportacaoLazyQuery>;
+export type InscricoesImportacaoSuspenseQueryHookResult = ReturnType<typeof useInscricoesImportacaoSuspenseQuery>;
+export type InscricoesImportacaoQueryResult = Apollo.QueryResult<InscricoesImportacaoQuery, InscricoesImportacaoQueryVariables>;
 export const ModuloDocument = gql`
     query Modulo($id: Int!) {
   modulo(id: $id) {
@@ -7464,7 +8296,7 @@ export type TurmasSelectLazyQueryHookResult = ReturnType<typeof useTurmasSelectL
 export type TurmasSelectSuspenseQueryHookResult = ReturnType<typeof useTurmasSelectSuspenseQuery>;
 export type TurmasSelectQueryResult = Apollo.QueryResult<TurmasSelectQuery, TurmasSelectQueryVariables>;
 export const UsuariosDocument = gql`
-    query Usuarios($filter: UsuarioDtoFilter, $paging: CursorPaging!, $sorting: [UsuarioDtoSort!]!) {
+    query Usuarios($filter: UsuarioTypeFilter, $paging: CursorPaging!, $sorting: [UsuarioTypeSort!]!) {
   usuarios(filter: $filter, paging: $paging, sorting: $sorting) {
     edges {
       node {

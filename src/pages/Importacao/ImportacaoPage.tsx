@@ -55,9 +55,9 @@ export function ImportacaoPage() {
 
           <div className=" xl:col-span-3 col-span-12 md:col-span-6 ">
             <InputField
-              label="Curso"
-              placeholder="Nome do curso"
-              name="curso"
+              label="Planilha"
+              placeholder="Nome da planilha"
+              name="planilha"
             />
           </div>
 
@@ -129,10 +129,10 @@ export function ImportacaoPage() {
               <div className=" col-span-12 ">
                 <a
                   className="mt-10"
-                  href="/arquivo/nome_escola_turma.csv"
+                  href="/arquivo/nome_turma_escola.csv"
                   download
                 >
-                  <Button>
+                  <Button variant={'outline'} type="button">
                     <DownloadIcon /> Baixar modelo de planilha
                   </Button>
                 </a>
@@ -143,6 +143,7 @@ export function ImportacaoPage() {
                 <FormMessage>
                   Importar apenas arquivo do formato .csv
                 </FormMessage>
+                <FormMessage>Separador dos campos deve ser ";"</FormMessage>
               </div>
 
               <div className="  col-span-12 flex gap-3">

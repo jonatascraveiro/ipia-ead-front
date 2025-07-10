@@ -1,15 +1,15 @@
 import { Icone } from '@/components/common/Icons'
-import type { InscricaoType } from '@/gql/generated/graphql'
+import type { ImportacaoHistoricoType } from '@/gql/generated/graphql'
 import type { ColumnDef } from '@tanstack/react-table'
 import { format } from 'date-fns'
 
 type Acoes = {
-  matricular: (data: InscricaoType) => void
+  visualizar: (data: ImportacaoHistoricoType) => void
 }
 
 export const getColumns = ({
-  matricular,
-}: Acoes): ColumnDef<InscricaoType>[] => {
+  visualizar,
+}: Acoes): ColumnDef<ImportacaoHistoricoType>[] => {
   return [
     {
       accessorKey: 'data',
@@ -17,42 +17,32 @@ export const getColumns = ({
       cell: ({ row }) => {
         return (
           <span>
-            {row.original.dataInscricao &&
-              format(row.original?.dataInscricao, 'dd/MM/yyyy')}{' '}
+            {row.original.createdAt &&
+              format(row.original?.createdAt, 'dd/MM/yyyy HH:mm')}{' '}
           </span>
         )
       },
     },
-
     {
-      accessorKey: 'aluno.nome',
-      header: () => <span>Curso</span>,
-      cell: ({ row }) => {
-        return <span>{row.original.aluno?.nome}</span>
-      },
-    },
-    {
-      accessorKey: 'aluno.nome',
+      accessorKey: 'turma.nome',
       header: () => <span>Turma</span>,
     },
+
     {
-      accessorKey: 'aluno.nome',
+      accessorKey: 'nomePlanilha',
       header: () => <span>Nome planilha</span>,
     },
     {
-      accessorKey: 'aluno.nome',
+      accessorKey: 'status',
       header: () => <span>Status</span>,
     },
     {
-      accessorKey: 'aluno.nome',
+      accessorKey: 'usuario.nome',
       header: () => <span>Usuário</span>,
     },
     {
-      accessorKey: 'turma.nome',
+      accessorKey: 'quantidadeImportada',
       header: () => <span>Qtd importada</span>,
-      cell: ({ row }) => {
-        return <span>{row.original.turma?.nome?.length}</span>
-      },
     },
 
     {
@@ -64,7 +54,7 @@ export const getColumns = ({
           <button
             type="button"
             className="flex gap-2"
-            onClick={() => alert('visualziar alunos importados')}
+            onClick={() => visualizar(row.original)}
           >
             <Icone.visualizar />
           </button>

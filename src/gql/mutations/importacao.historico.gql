@@ -1,0 +1,8 @@
+mutation ImportarHistorico(
+  $file: Upload!
+  $input: CreateImportacaoHistoricoInput!
+) {
+  importarHistorico(file: $file, input: $input) {
+    id
+  }
+}

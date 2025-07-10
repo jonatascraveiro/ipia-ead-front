@@ -30,11 +30,9 @@ export const getColumns = ({
     },
     {
       accessorKey: 'status',
-      header: () => <span>Status da Matrícula</span>,
+      header: () => <span>Status da Inscrição</span>,
       cell: ({ row }) => {
-        return (
-          <span>{row.original.status ? 'Matriculado' : 'Pré Matrícula'}</span>
-        )
+        return <span>{row.original.status ? 'Realizada' : 'Pendente'}</span>
       },
     },
     {
@@ -43,20 +41,8 @@ export const getColumns = ({
     },
 
     {
-      accessorKey: 'cpf',
-      header: () => <span>CPF</span>,
-      cell: ({ row }) => {
-        return (
-          <span>
-            {row.original.aluno?.cpf?.length === 11
-              ? row.original.aluno?.cpf?.replace(
-                  /(\d{3})(\d{3})(\d{3})(\d{2})/,
-                  '$1.$2.$3-$4',
-                )
-              : row.original.aluno?.cpf || '-'}
-          </span>
-        )
-      },
+      accessorKey: 'aluno.matricula',
+      header: () => <span>Matrícula</span>,
     },
     {
       accessorKey: 'acao',

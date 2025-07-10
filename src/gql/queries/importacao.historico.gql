@@ -1,0 +1,66 @@
+query ImportacoesHistorico(
+  $filter: ImportacaoHistoricoTypeFilter
+  $paging: CursorPaging!
+  $sorting: [ImportacaoHistoricoTypeSort!]!
+) {
+  importacaoHistoricoTypes(
+    filter: $filter
+    paging: $paging
+    sorting: $sorting
+  ) {
+    edges {
+      cursor
+      node {
+        createdAt
+        id
+        nomePlanilha
+        quantidadeImportada
+        turmaId
+        status
+        errosImport
+        turma {
+          nome
+          id
+          curso {
+            nome
+            id
+          }
+        }
+        usuario {
+          nome
+          id
+        }
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+
+query ImportacaoHistorico($id: Int!) {
+  importacaoHistoricoType(id: $id) {
+    createdAt
+    id
+    nomePlanilha
+    quantidadeImportada
+    turmaId
+    status
+    usuario {
+      nome
+      id
+    }
+
+    turma {
+      nome
+      id
+      curso {
+        nome
+        id
+      }
+    }
+  }
+}

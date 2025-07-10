@@ -13,11 +13,17 @@ import { toast } from 'react-toastify'
 import { getColumns } from './columns'
 
 export const useTabelaInscricao = () => {
-  const form = useForm<{ nome: string; turma: string; status: string }>({
+  const form = useForm<{
+    nome: string
+    turma: string
+    status: string
+    matricula: string
+  }>({
     defaultValues: {
       nome: '',
+      matricula: '',
       turma: '',
-      status: '',
+      status: '0',
     },
   })
 
@@ -27,18 +33,26 @@ export const useTabelaInscricao = () => {
     limparPaginacao()
   }
 
-  const [nome, turma, status] = form.getValues(['nome', 'turma', 'status'])
+  const [nome, turma, status, matricula] = form.getValues([
+    'nome',
+    'turma',
+    'status',
+    'matricula',
+  ])
   const limparFiltro = () => {
     form.reset()
     limparPaginacao()
   }
-  console.log(status)
-  const StatusFilter = status === '' ? undefined : status === 'true'
-  console.log(StatusFilter)
+
+  const StatusFilter = status === '0' ? undefined : status === 'true'
+
   const { data, loading } = useInscricoesQuery({
     variables: {
       filter: {
-        aluno: { nome: { iLike: `%${nome || ''}%` } },
+        aluno: {
+          nome: { iLike: `%${nome || ''}%` },
+          matricula: { iLike: `%${matricula || ''}%` },
+        },
 
         turma: { nome: { iLike: `%${turma || ''}%` } },
         status: { is: StatusFilter },

@@ -32,26 +32,37 @@ export function InscricaoPage() {
           <div className=" xl:col-span-3 col-span-12 md:col-span-6 ">
             <InputField label="Aluno" placeholder="Nome do aluno" name="nome" />
           </div>
+          <div className=" xl:col-span-2 col-span-12 md:col-span-5 ">
+            <InputField
+              label="Matrícula"
+              placeholder="Matrícula do aluno"
+              name="matricula"
+            />
+          </div>
 
-          <div className=" xl:col-span-3 col-span-12 md:col-span-6 ">
+          <div className=" xl:col-span-2 col-span-12 md:col-span-5 ">
             <SelectFieldString
-              label="Status Matricula"
+              label="Status Inscrição"
               placeholder="Selecione o status"
               name="status"
               options={[
                 {
-                  label: 'Matriculado',
+                  label: 'Todas',
+                  value: '0',
+                },
+                {
+                  label: 'Realizada',
                   value: 'true',
                 },
                 {
-                  label: 'Pré Matriculado',
+                  label: 'Pendente',
                   value: 'false',
                 },
               ]}
             />
           </div>
 
-          <div className=" xl:col-span-3 col-span-12 md:col-span-6 flex  items-end gap-3">
+          <div className=" xl:col-span-2 col-span-12 md:col-span-2 flex  items-end gap-3">
             <Button type="submit">
               <Search />
             </Button>

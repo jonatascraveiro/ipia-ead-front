@@ -7,8 +7,10 @@
     "dev": "vite --port 9090",
     "build": "vite build",
     "build_lint": "tsc -b && vite build",
+    "tsc": "tsc -b",
     "lint": "eslint .",
     "preview": "vite preview",
+
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
