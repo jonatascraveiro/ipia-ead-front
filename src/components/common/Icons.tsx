@@ -1,6 +1,8 @@
 import { cn } from '@/lib/utils'
 import {
   BookPlus,
+  CalendarPlus,
+  CalendarSync,
   ClockAlert,
   DiamondPlus,
   Eye,
@@ -57,6 +59,18 @@ export const Icone = {
   ),
   editar: ({ className, color }: { className?: string; color?: string }) => (
     <Pencil className={cn('size-6', className)} color={color} />
+  ),
+  calendario: ({
+    className,
+    color,
+  }: { className?: string; color?: string }) => (
+    <CalendarPlus className={cn('size-6', className)} color={color} />
+  ),
+  calendarioEditar: ({
+    className,
+    color,
+  }: { className?: string; color?: string }) => (
+    <CalendarSync className={cn('size-6', className)} color={color} />
   ),
   deletar: ({ className, color }: { className?: string; color?: string }) => (
     <Trash2 className={cn('size-6 ', className)} color={color || 'red'} />

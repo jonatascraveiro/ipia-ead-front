@@ -36,12 +36,12 @@ export const useTabelaTurma = ({ cursoId }: { cursoId?: string }) => {
     },
     [cursoId, navigate],
   )
-  // const handleVisualizar = useCallback(
-  //   (data: TurmaType) => {
-  //     navigate(`/turma/${data.id}`)
-  //   },
-  //   [navigate],
-  // )
+  const handleDataModulos = useCallback(
+    (data: TurmaType) => {
+      navigate(generatePath(ROTAS.TURMA_MODULO, { cursoId, turmaId: data.id }))
+    },
+    [cursoId, navigate],
+  )
 
   const { data, loading } = useTurmasQuery({
     variables: {
@@ -60,10 +60,10 @@ export const useTabelaTurma = ({ cursoId }: { cursoId?: string }) => {
   const columns = useMemo(
     () =>
       getColumns({
-        // visualizar: handleVisualizar,
         editar: handleEditar,
+        datasModulos: handleDataModulos,
       }),
-    [handleEditar],
+    [handleEditar, handleDataModulos],
   )
 
   return {

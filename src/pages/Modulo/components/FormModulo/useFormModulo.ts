@@ -23,7 +23,7 @@ export const useFormModulo = ({
   quantidadeModulos?: number
 }) => {
   const navigate = useNavigate()
-  console.log(quantidadeModulos)
+
   const form = useForm<ModuloSchema>({
     resolver: zodResolver(schema),
     defaultValues: {

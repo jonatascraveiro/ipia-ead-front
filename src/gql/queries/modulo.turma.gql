@@ -1,0 +1,27 @@
+query ModulosTurma(
+  $filter: ModuloTypeFilter
+  $paging: CursorPaging!
+  $sorting: [ModuloTypeSort!]!
+  $turmaId: Float
+) {
+  modulos(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        updatedAt
+        ordem
+        moduloLiberacaoTravas(filter: { turmaId: { eq: $turmaId } }) {
+          dataLiberacao
+          id
+        }
+        id
+        titulo
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}

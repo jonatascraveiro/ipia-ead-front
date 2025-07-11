@@ -24,7 +24,6 @@ export default class UploadAdapter {
         return res?.data?.createArquivo?.url
       })
       .catch((err) => {
-        console.log('err', err)
         return err
       })
 

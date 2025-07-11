@@ -23,7 +23,6 @@ function FormModulo({
   cursoId: string
   quantidadeModulos?: number
 }) {
-  console.log(modulo)
   const { form, onSubmit } = useFormModulo({
     modulo,
     biblioteca,

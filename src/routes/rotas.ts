@@ -53,6 +53,8 @@ const ROTAS = {
   TURMA_VISUALIZAR: '/curso/:cursoId/turma/:id',
   TURMA_EDITAR: '/curso/:cursoId/turma/:id/editar',
 
+  TURMA_MODULO: '/curso/:cursoId/turma-modulo/:turmaId',
+
   USUARIO: '/usuario',
   USUARIO_EDITAR: '/usuario/:id',
   USUARIO_CRIAR: '/usuario/criar',

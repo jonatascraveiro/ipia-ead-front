@@ -81,7 +81,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     if (!token) return
 
     const interval = setInterval(() => {
-      console.log('verificando token')
       if (!isTokenValid(token)) {
         logout()
       }
