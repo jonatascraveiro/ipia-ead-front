@@ -7,9 +7,11 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { cn } from '@/lib/utils'
+import { PopoverClose } from '@radix-ui/react-popover'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { CalendarIcon, XIcon } from 'lucide-react'
+import { useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { Button } from '../ui/button'
 import { Calendar } from '../ui/calendar'
@@ -22,6 +24,7 @@ type DatePickerProps = {
   description?: string
   isClearable?: boolean
   disabled?: boolean
+  closeOnSelect?: boolean
 }
 
 export const DatePickerField = ({
@@ -31,8 +34,10 @@ export const DatePickerField = ({
   description,
   isClearable = false,
   disabled = false,
+  closeOnSelect = false,
 }: DatePickerProps) => {
   const { control } = useFormContext()
+  const popOverRef = useRef<HTMLButtonElement | null>(null)
 
   return (
     <FormField
@@ -60,6 +65,7 @@ export const DatePickerField = ({
                     variant={'outline'}
                     className="w-full justify-start text-left font-normal  "
                     ref={field.ref}
+                    type="button"
                   >
                     <CalendarIcon />
                     {field.value ? (
@@ -73,12 +79,22 @@ export const DatePickerField = ({
                 </PopoverTrigger>
               </FormControl>
               <PopoverContent className="w-auto p-0">
+                <PopoverClose ref={popOverRef} />
                 <Calendar
                   mode="single"
                   defaultMonth={field.value}
                   selected={field.value}
                   onSelect={(selectedDate) => {
-                    field.onChange(selectedDate)
+                    if (!isClearable && selectedDate) {
+                      field.onChange(selectedDate)
+                    }
+                    if (isClearable) {
+                      field.onChange(selectedDate)
+                    }
+
+                    if (closeOnSelect) {
+                      popOverRef.current?.click()
+                    }
                   }}
                   locale={ptBR}
                   initialFocus
@@ -87,6 +103,7 @@ export const DatePickerField = ({
             </Popover>
             {isClearable && field.value && (
               <Button
+                type="button"
                 variant="ghost"
                 size="sm"
                 onClick={() => field.onChange(null)}

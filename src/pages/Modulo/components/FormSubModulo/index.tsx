@@ -56,7 +56,7 @@ function FormSubModulo({
     })
     toggleModal()
   }
-  console.log(form.formState.errors)
+
   return (
     <>
       {!isOpen && (

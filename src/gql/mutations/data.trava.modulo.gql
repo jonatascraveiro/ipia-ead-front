@@ -1,0 +1,15 @@
+mutation createOneModuloLiberacaTrava(
+  $input: CreateOneModuloLiberacaoTravaTypeInput!
+) {
+  CreateOneModuloLiberacaoTrava(input: $input) {
+    id
+  }
+}
+
+mutation updateOneModuloLiberacaTrava(
+  $input: UpdateOneModuloLiberacaoTravaTypeInput!
+) {
+  UpdateOneModuloLiberacaoTrava(input: $input) {
+    id
+  }
+}

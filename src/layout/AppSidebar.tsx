@@ -15,7 +15,7 @@ const AppSidebar: React.FC = () => {
   const location = useLocation()
 
   const { user } = useAuth()
-  console.log(user)
+
   const navItems = menuOpcoes
 
   const [openSubmenu, setOpenSubmenu] = useState<{

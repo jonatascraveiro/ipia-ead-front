@@ -37,7 +37,6 @@ export const useFormAula = ({
       videoUrl: aula?.videoUrl || '',
     },
   })
-  console.log('aula', form.getValues(), form.formState.errors)
 
   const [criar] = useCreateOneAulaMutation()
   const [editar] = useUpdateOneAulaMutation()
