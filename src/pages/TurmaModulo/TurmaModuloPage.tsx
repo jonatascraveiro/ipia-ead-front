@@ -85,7 +85,7 @@ export function TurmaModuloPage() {
         <DialogContent className="w-80 sm:w-full  sm:max-w-lg w-max">
           <Form {...formulario}>
             <DialogHeader>
-              <DialogTitle>Importar alunos</DialogTitle>
+              <DialogTitle>Data liberação do módulo</DialogTitle>
             </DialogHeader>
 
             <form
@@ -103,17 +103,6 @@ export function TurmaModuloPage() {
                   name="dataLiberacao"
                   closeOnSelect
                 />
-                {/* <FileUploader
-                  maxFiles={1}
-                  maxSize={1024 * 1024 * 5} // 5MB
-                  accept={['text/csv']}
-                  onFilesReady={(files) =>
-                    formImportacao.setValue('arquivo', files[0])
-                  }
-                  className="w-full max-w-lg"
-                  label="Planilha (.csv)"
-                  description="Selecione a planilha a ser  importada no formato .csv"
-                /> */}
               </div>
 
               <div className="  col-span-12 flex gap-3">
