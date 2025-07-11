@@ -51,17 +51,6 @@ export const useTabelaTurmaModulo = ({
   }
 
   const handleSubmitForm = (data: FormSchema) => {
-    // importar({
-    //   variables: {
-    //     input: {
-    //       turmaId: data.turmaId,
-    //     },
-    //     file: data.arquivo,
-    //   },
-    //   onCompleted: () => {},
-    // })
-    // toast.success('Planila enviada para ser processada com sucesso')
-
     if (data.id > 0) {
       return editar({
         variables: {
@@ -72,8 +61,8 @@ export const useTabelaTurmaModulo = ({
             },
           },
         },
-        onCompleted: (data) => {
-          toast.success('Data Módulo atualizado com sucesso')
+        onCompleted: () => {
+          toast.success('Data liberação módulo atualizado com sucesso')
 
           modal.closeModal()
         },
@@ -92,7 +81,7 @@ export const useTabelaTurmaModulo = ({
         },
       },
       onCompleted: () => {
-        toast.success('Data Módulo liberado com sucesso')
+        toast.success('Data liberação módulo criado com sucesso')
 
         modal.closeModal()
       },
