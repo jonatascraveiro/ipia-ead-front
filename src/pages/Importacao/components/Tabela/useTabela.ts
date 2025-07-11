@@ -135,8 +135,7 @@ export const useTabelaInscricao = () => {
       value: edge.node.id,
       label: edge.node.nome,
     })) || []
-  console.log(formImportacao.watch('cursoId'))
-  console.log(turmaOptions)
+
   return {
     tabela: {
       data: data?.importacaoHistoricoTypes.edges.map((edge) => edge.node) || [],

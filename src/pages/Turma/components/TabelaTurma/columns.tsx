@@ -1,4 +1,5 @@
 import { ColumnAction } from '@/components/DataTable/ColumnAction'
+import { Icone } from '@/components/common/Icons'
 import type { TurmaType } from '@/types/turma'
 import type { ColumnDef } from '@tanstack/react-table'
 import { format } from 'date-fns'
@@ -6,9 +7,13 @@ import { Pencil } from 'lucide-react'
 
 type Acoes = {
   editar: (data: TurmaType) => void
+  datasModulos: (data: TurmaType) => void
 }
 
-export const getColumns = ({ editar }: Acoes): ColumnDef<TurmaType>[] => {
+export const getColumns = ({
+  editar,
+  datasModulos,
+}: Acoes): ColumnDef<TurmaType>[] => {
   return [
     {
       accessorFn: (row) => row.nome,
@@ -32,11 +37,6 @@ export const getColumns = ({ editar }: Acoes): ColumnDef<TurmaType>[] => {
       accessorKey: 'duracao',
       header: () => <span>Duração</span>,
     },
-    {
-      accessorFn: (row) => row.curso.nome,
-      accessorKey: 'curso',
-      header: () => <span>Curso</span>,
-    },
 
     {
       accessorFn: (row) => row.id,
@@ -46,6 +46,11 @@ export const getColumns = ({ editar }: Acoes): ColumnDef<TurmaType>[] => {
             label: 'Editar',
             icon: <Pencil className="h-6 w-6" />,
             onClick: (row) => editar(row),
+          },
+          {
+            label: 'Datas Modulos',
+            icon: <Icone.calendario className="h-6 w-6" />,
+            onClick: (row) => datasModulos(row),
           },
         ],
       }),

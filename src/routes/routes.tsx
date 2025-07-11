@@ -35,6 +35,7 @@ import { CriarTurmaPage } from '@/pages/Turma/CriarTurmaPage'
 import { EditarTurmaPage } from '@/pages/Turma/EditarTurmaPage'
 import { TurmaPage } from '@/pages/Turma/TurmaPage'
 import { VisualizarTurmaPage } from '@/pages/Turma/VisualizarTurmaPage'
+import { TurmaModuloPage } from '@/pages/TurmaModulo/TurmaModuloPage'
 import { CriarUsuarioPage } from '@/pages/Usuario/CriarUsuarioPage'
 import { UsuariosPage } from '@/pages/Usuario/UsuarioPage'
 import { BrowserRouter, Route, Routes } from 'react-router'
@@ -142,6 +143,8 @@ export default function AppRoutes() {
             element={<VisualizarTurmaPage />}
           />
           <Route path={ROTAS.TURMA_EDITAR} element={<EditarTurmaPage />} />
+
+          <Route path={ROTAS.TURMA_MODULO} element={<TurmaModuloPage />} />
 
           <Route path={ROTAS.USUARIO} element={<UsuariosPage />} />
           <Route path={ROTAS.USUARIO_CRIAR} element={<CriarUsuarioPage />} />

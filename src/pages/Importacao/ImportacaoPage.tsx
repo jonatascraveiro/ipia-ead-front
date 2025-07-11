@@ -27,7 +27,7 @@ export function ImportacaoPage() {
     cursoOptions,
     turmaOptions,
   } = useTabelaInscricao()
-  console.log(cursoOptions)
+
   return (
     <Page>
       <Page.Header>

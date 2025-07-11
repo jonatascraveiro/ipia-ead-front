@@ -68,8 +68,6 @@ export type AlunoType = {
   nome: Scalars['String']['output'];
   /** numero do endereco do aluno */
   numero?: Maybe<Scalars['String']['output']>;
-  /** qualificacao_escolhida do aluno */
-  qualificacaoId?: Maybe<Scalars['String']['output']>;
   /** regia de importacao do aluno */
   regiaoPlanilha?: Maybe<Scalars['String']['output']>;
   /** responsavel 1 do aluno */
@@ -122,7 +120,6 @@ export type AlunoTypeAggregateGroupBy = {
   municipioEscola?: Maybe<Scalars['String']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
   numero?: Maybe<Scalars['String']['output']>;
-  qualificacaoId?: Maybe<Scalars['String']['output']>;
   regiaoPlanilha?: Maybe<Scalars['String']['output']>;
   responsavel1?: Maybe<Scalars['String']['output']>;
   responsavel2?: Maybe<Scalars['String']['output']>;
@@ -169,7 +166,6 @@ export type AlunoTypeCountAggregate = {
   municipioEscola?: Maybe<Scalars['Int']['output']>;
   nome?: Maybe<Scalars['Int']['output']>;
   numero?: Maybe<Scalars['Int']['output']>;
-  qualificacaoId?: Maybe<Scalars['Int']['output']>;
   regiaoPlanilha?: Maybe<Scalars['Int']['output']>;
   responsavel1?: Maybe<Scalars['Int']['output']>;
   responsavel2?: Maybe<Scalars['Int']['output']>;
@@ -213,7 +209,6 @@ export type AlunoTypeFilter = {
   nome?: InputMaybe<StringFieldComparison>;
   numero?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AlunoTypeFilter>>;
-  qualificacaoId?: InputMaybe<StringFieldComparison>;
   regiaoPlanilha?: InputMaybe<StringFieldComparison>;
   responsavel1?: InputMaybe<StringFieldComparison>;
   responsavel2?: InputMaybe<StringFieldComparison>;
@@ -287,7 +282,6 @@ export type AlunoTypeMaxAggregate = {
   municipioEscola?: Maybe<Scalars['String']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
   numero?: Maybe<Scalars['String']['output']>;
-  qualificacaoId?: Maybe<Scalars['String']['output']>;
   regiaoPlanilha?: Maybe<Scalars['String']['output']>;
   responsavel1?: Maybe<Scalars['String']['output']>;
   responsavel2?: Maybe<Scalars['String']['output']>;
@@ -318,7 +312,6 @@ export type AlunoTypeMinAggregate = {
   municipioEscola?: Maybe<Scalars['String']['output']>;
   nome?: Maybe<Scalars['String']['output']>;
   numero?: Maybe<Scalars['String']['output']>;
-  qualificacaoId?: Maybe<Scalars['String']['output']>;
   regiaoPlanilha?: Maybe<Scalars['String']['output']>;
   responsavel1?: Maybe<Scalars['String']['output']>;
   responsavel2?: Maybe<Scalars['String']['output']>;
@@ -355,7 +348,6 @@ export enum AlunoTypeSortFields {
   MunicipioEscola = 'municipioEscola',
   Nome = 'nome',
   Numero = 'numero',
-  QualificacaoId = 'qualificacaoId',
   RegiaoPlanilha = 'regiaoPlanilha',
   Responsavel1 = 'responsavel1',
   Responsavel2 = 'responsavel2',
@@ -2283,7 +2275,6 @@ export type InscricaoTypeFilterAlunoTypeFilter = {
   nome?: InputMaybe<StringFieldComparison>;
   numero?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<InscricaoTypeFilterAlunoTypeFilter>>;
-  qualificacaoId?: InputMaybe<StringFieldComparison>;
   regiaoPlanilha?: InputMaybe<StringFieldComparison>;
   responsavel1?: InputMaybe<StringFieldComparison>;
   responsavel2?: InputMaybe<StringFieldComparison>;
@@ -2411,11 +2402,17 @@ export type ModuloLiberacaoTravaType = {
   modulo?: Maybe<ModuloType>;
   /** id do modulo */
   moduloId: Scalars['Float']['output'];
-  turma?: Maybe<TurmaType>;
   /** id do turma */
   turmaId: Scalars['Float']['output'];
+  turmas?: Maybe<Array<TurmaType>>;
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type ModuloLiberacaoTravaTypeTurmasArgs = {
+  filter?: TurmaTypeFilter;
+  sorting?: Array<TurmaTypeSort>;
 };
 
 export type ModuloLiberacaoTravaTypeAggregateGroupBy = {
@@ -2595,7 +2592,7 @@ export type ModuloType = {
   /** descricao do modulo */
   descricao: Scalars['String']['output'];
   id: Scalars['Int']['output'];
-  moduloLiberacaoTrava?: Maybe<ModuloLiberacaoTravaType>;
+  moduloLiberacaoTravas?: Maybe<Array<ModuloLiberacaoTravaType>>;
   modulosProgressos?: Maybe<Array<ProgressoType>>;
   /** ordem do modulo */
   ordem: Scalars['Float']['output'];
@@ -2610,6 +2607,12 @@ export type ModuloType = {
 export type ModuloTypeAulasArgs = {
   filter?: AulaTypeFilter;
   sorting?: Array<AulaTypeSort>;
+};
+
+
+export type ModuloTypeModuloLiberacaoTravasArgs = {
+  filter?: ModuloLiberacaoTravaTypeFilter;
+  sorting?: Array<ModuloLiberacaoTravaTypeSort>;
 };
 
 
@@ -3605,7 +3608,6 @@ export type ProgressoTypeFilterAlunoTypeFilter = {
   nome?: InputMaybe<StringFieldComparison>;
   numero?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProgressoTypeFilterAlunoTypeFilter>>;
-  qualificacaoId?: InputMaybe<StringFieldComparison>;
   regiaoPlanilha?: InputMaybe<StringFieldComparison>;
   responsavel1?: InputMaybe<StringFieldComparison>;
   responsavel2?: InputMaybe<StringFieldComparison>;
@@ -4687,11 +4689,17 @@ export type TurmaType = {
   id: Scalars['Int']['output'];
   /** inicio da turma */
   inicio: Scalars['DateTime']['output'];
-  moduloLiberacaoTrava?: Maybe<ModuloLiberacaoTravaType>;
+  moduloLiberacaoTravas?: Maybe<Array<ModuloLiberacaoTravaType>>;
   /** nome da turma */
   nome: Scalars['String']['output'];
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type TurmaTypeModuloLiberacaoTravasArgs = {
+  filter?: ModuloLiberacaoTravaTypeFilter;
+  sorting?: Array<ModuloLiberacaoTravaTypeSort>;
 };
 
 export type TurmaTypeAggregateGroupBy = {
@@ -4795,7 +4803,7 @@ export type TurmaTypeFilter = {
   fim?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   inicio?: InputMaybe<DateFieldComparison>;
-  moduloLiberacaoTrava?: InputMaybe<TurmaTypeFilterModuloLiberacaoTravaTypeFilter>;
+  moduloLiberacaoTravas?: InputMaybe<TurmaTypeFilterModuloLiberacaoTravaTypeFilter>;
   nome?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<TurmaTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
@@ -5362,6 +5370,20 @@ export type DeleteOneCursoMutationVariables = Exact<{
 
 export type DeleteOneCursoMutation = { __typename?: 'Mutation', deleteOneCurso: { __typename?: 'CursoTypeDeleteResponse', id?: number | null } };
 
+export type CreateOneModuloLiberacaTravaMutationVariables = Exact<{
+  input: CreateOneModuloLiberacaoTravaTypeInput;
+}>;
+
+
+export type CreateOneModuloLiberacaTravaMutation = { __typename?: 'Mutation', CreateOneModuloLiberacaoTrava: { __typename?: 'ModuloLiberacaoTravaType', id: number } };
+
+export type UpdateOneModuloLiberacaTravaMutationVariables = Exact<{
+  input: UpdateOneModuloLiberacaoTravaTypeInput;
+}>;
+
+
+export type UpdateOneModuloLiberacaTravaMutation = { __typename?: 'Mutation', UpdateOneModuloLiberacaoTrava: { __typename?: 'ModuloLiberacaoTravaType', id: number } };
+
 export type CreateOneFormularioMutationVariables = Exact<{
   input: CreateOneFormulariosInput;
 }>;
@@ -5674,6 +5696,16 @@ export type ModulosSelectQueryVariables = Exact<{
 
 
 export type ModulosSelectQuery = { __typename?: 'Query', modulos: { __typename?: 'ModuloTypeConnection', edges: Array<{ __typename?: 'ModuloTypeEdge', node: { __typename?: 'ModuloType', id: number, titulo: string } }> } };
+
+export type ModulosTurmaQueryVariables = Exact<{
+  filter?: InputMaybe<ModuloTypeFilter>;
+  paging: CursorPaging;
+  sorting: Array<ModuloTypeSort> | ModuloTypeSort;
+  turmaId?: InputMaybe<Scalars['Float']['input']>;
+}>;
+
+
+export type ModulosTurmaQuery = { __typename?: 'Query', modulos: { __typename?: 'ModuloTypeConnection', edges: Array<{ __typename?: 'ModuloTypeEdge', node: { __typename?: 'ModuloType', updatedAt?: any | null, ordem: number, id: number, titulo: string, moduloLiberacaoTravas?: Array<{ __typename?: 'ModuloLiberacaoTravaType', dataLiberacao?: any | null, id: number }> | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type PerguntaQueryVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -6051,6 +6083,72 @@ export function useDeleteOneCursoMutation(baseOptions?: Apollo.MutationHookOptio
 export type DeleteOneCursoMutationHookResult = ReturnType<typeof useDeleteOneCursoMutation>;
 export type DeleteOneCursoMutationResult = Apollo.MutationResult<DeleteOneCursoMutation>;
 export type DeleteOneCursoMutationOptions = Apollo.BaseMutationOptions<DeleteOneCursoMutation, DeleteOneCursoMutationVariables>;
+export const CreateOneModuloLiberacaTravaDocument = gql`
+    mutation createOneModuloLiberacaTrava($input: CreateOneModuloLiberacaoTravaTypeInput!) {
+  CreateOneModuloLiberacaoTrava(input: $input) {
+    id
+  }
+}
+    `;
+export type CreateOneModuloLiberacaTravaMutationFn = Apollo.MutationFunction<CreateOneModuloLiberacaTravaMutation, CreateOneModuloLiberacaTravaMutationVariables>;
+
+/**
+ * __useCreateOneModuloLiberacaTravaMutation__
+ *
+ * To run a mutation, you first call `useCreateOneModuloLiberacaTravaMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneModuloLiberacaTravaMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneModuloLiberacaTravaMutation, { data, loading, error }] = useCreateOneModuloLiberacaTravaMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateOneModuloLiberacaTravaMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneModuloLiberacaTravaMutation, CreateOneModuloLiberacaTravaMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOneModuloLiberacaTravaMutation, CreateOneModuloLiberacaTravaMutationVariables>(CreateOneModuloLiberacaTravaDocument, options);
+      }
+export type CreateOneModuloLiberacaTravaMutationHookResult = ReturnType<typeof useCreateOneModuloLiberacaTravaMutation>;
+export type CreateOneModuloLiberacaTravaMutationResult = Apollo.MutationResult<CreateOneModuloLiberacaTravaMutation>;
+export type CreateOneModuloLiberacaTravaMutationOptions = Apollo.BaseMutationOptions<CreateOneModuloLiberacaTravaMutation, CreateOneModuloLiberacaTravaMutationVariables>;
+export const UpdateOneModuloLiberacaTravaDocument = gql`
+    mutation updateOneModuloLiberacaTrava($input: UpdateOneModuloLiberacaoTravaTypeInput!) {
+  UpdateOneModuloLiberacaoTrava(input: $input) {
+    id
+  }
+}
+    `;
+export type UpdateOneModuloLiberacaTravaMutationFn = Apollo.MutationFunction<UpdateOneModuloLiberacaTravaMutation, UpdateOneModuloLiberacaTravaMutationVariables>;
+
+/**
+ * __useUpdateOneModuloLiberacaTravaMutation__
+ *
+ * To run a mutation, you first call `useUpdateOneModuloLiberacaTravaMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneModuloLiberacaTravaMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOneModuloLiberacaTravaMutation, { data, loading, error }] = useUpdateOneModuloLiberacaTravaMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateOneModuloLiberacaTravaMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneModuloLiberacaTravaMutation, UpdateOneModuloLiberacaTravaMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOneModuloLiberacaTravaMutation, UpdateOneModuloLiberacaTravaMutationVariables>(UpdateOneModuloLiberacaTravaDocument, options);
+      }
+export type UpdateOneModuloLiberacaTravaMutationHookResult = ReturnType<typeof useUpdateOneModuloLiberacaTravaMutation>;
+export type UpdateOneModuloLiberacaTravaMutationResult = Apollo.MutationResult<UpdateOneModuloLiberacaTravaMutation>;
+export type UpdateOneModuloLiberacaTravaMutationOptions = Apollo.BaseMutationOptions<UpdateOneModuloLiberacaTravaMutation, UpdateOneModuloLiberacaTravaMutationVariables>;
 export const CreateOneFormularioDocument = gql`
     mutation createOneFormulario($input: CreateOneFormulariosInput!) {
   createOneFormulario(input: $input) {
@@ -7885,6 +7983,66 @@ export type ModulosSelectQueryHookResult = ReturnType<typeof useModulosSelectQue
 export type ModulosSelectLazyQueryHookResult = ReturnType<typeof useModulosSelectLazyQuery>;
 export type ModulosSelectSuspenseQueryHookResult = ReturnType<typeof useModulosSelectSuspenseQuery>;
 export type ModulosSelectQueryResult = Apollo.QueryResult<ModulosSelectQuery, ModulosSelectQueryVariables>;
+export const ModulosTurmaDocument = gql`
+    query ModulosTurma($filter: ModuloTypeFilter, $paging: CursorPaging!, $sorting: [ModuloTypeSort!]!, $turmaId: Float) {
+  modulos(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        updatedAt
+        ordem
+        moduloLiberacaoTravas(filter: {turmaId: {eq: $turmaId}}) {
+          dataLiberacao
+          id
+        }
+        id
+        titulo
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __useModulosTurmaQuery__
+ *
+ * To run a query within a React component, call `useModulosTurmaQuery` and pass it any options that fit your needs.
+ * When your component renders, `useModulosTurmaQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useModulosTurmaQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      paging: // value for 'paging'
+ *      sorting: // value for 'sorting'
+ *      turmaId: // value for 'turmaId'
+ *   },
+ * });
+ */
+export function useModulosTurmaQuery(baseOptions: Apollo.QueryHookOptions<ModulosTurmaQuery, ModulosTurmaQueryVariables> & ({ variables: ModulosTurmaQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ModulosTurmaQuery, ModulosTurmaQueryVariables>(ModulosTurmaDocument, options);
+      }
+export function useModulosTurmaLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ModulosTurmaQuery, ModulosTurmaQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ModulosTurmaQuery, ModulosTurmaQueryVariables>(ModulosTurmaDocument, options);
+        }
+export function useModulosTurmaSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<ModulosTurmaQuery, ModulosTurmaQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ModulosTurmaQuery, ModulosTurmaQueryVariables>(ModulosTurmaDocument, options);
+        }
+export type ModulosTurmaQueryHookResult = ReturnType<typeof useModulosTurmaQuery>;
+export type ModulosTurmaLazyQueryHookResult = ReturnType<typeof useModulosTurmaLazyQuery>;
+export type ModulosTurmaSuspenseQueryHookResult = ReturnType<typeof useModulosTurmaSuspenseQuery>;
+export type ModulosTurmaQueryResult = Apollo.QueryResult<ModulosTurmaQuery, ModulosTurmaQueryVariables>;
 export const PerguntaDocument = gql`
     query Pergunta($id: Int!) {
   pergunta(id: $id) {

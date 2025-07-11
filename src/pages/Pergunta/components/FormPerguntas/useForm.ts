@@ -92,12 +92,7 @@ export const useFormPerguntas = ({
     },
     skip: !form.watch('moduloId') || !form.watch('cursoId'),
   })
-  console.log(
-    formularios,
-    form.watch('moduloId'),
-    form.watch('cursoId'),
-    form.watch('formularioId'),
-  )
+
   const formularioOptions =
     formularios?.formularios.edges.map(({ node }) => ({
       value: node.id,
@@ -140,7 +135,7 @@ export const useFormPerguntas = ({
 
       onCompleted(data) {
         toast.success('Formulário criado com sucesso')
-        console.log(data)
+
         navigate(`/pergunta/${data.createOnePergunta.id}/editar`)
       },
     })
