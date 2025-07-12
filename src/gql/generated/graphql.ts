@@ -1185,44 +1185,6 @@ export type CursoTypeCountAggregate = {
   url?: Maybe<Scalars['Int']['output']>;
 };
 
-export type CursoTypeDeleteFilter = {
-  and?: InputMaybe<Array<CursoTypeDeleteFilter>>;
-  arquivoId?: InputMaybe<NumberFieldComparison>;
-  ativo?: InputMaybe<BooleanFieldComparison>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  descricao?: InputMaybe<StringFieldComparison>;
-  icone?: InputMaybe<StringFieldComparison>;
-  id?: InputMaybe<IntFieldComparison>;
-  nome?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<CursoTypeDeleteFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-  url?: InputMaybe<StringFieldComparison>;
-};
-
-export type CursoTypeDeleteResponse = {
-  __typename?: 'CursoTypeDeleteResponse';
-  /** id do arquivo */
-  arquivoId?: Maybe<Scalars['Float']['output']>;
-  /** curso está ativo */
-  ativo?: Maybe<Scalars['Boolean']['output']>;
-  /** data criação do registro */
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** data da exclusão do registro */
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** descricao do curso */
-  descricao?: Maybe<Scalars['String']['output']>;
-  /** icone do curso */
-  icone?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  /** nome do curso */
-  nome?: Maybe<Scalars['String']['output']>;
-  /** data atualização do registro */
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** url da imagem do curso */
-  url?: Maybe<Scalars['String']['output']>;
-};
-
 export type CursoTypeEdge = {
   __typename?: 'CursoTypeEdge';
   /** Cursor for this node. */
@@ -1411,30 +1373,15 @@ export type DeleteManyAulaTypesInput = {
   filter: AulaTypeDeleteFilter;
 };
 
-export type DeleteManyCursoTypesInput = {
-  /** Filter to find records to delete */
-  filter: CursoTypeDeleteFilter;
-};
-
 export type DeleteManyModuloLiberacaoTravaTypesInput = {
   /** Filter to find records to delete */
   filter: ModuloLiberacaoTravaTypeDeleteFilter;
-};
-
-export type DeleteManyModuloTypesInput = {
-  /** Filter to find records to delete */
-  filter: ModuloTypeDeleteFilter;
 };
 
 export type DeleteManyResponse = {
   __typename?: 'DeleteManyResponse';
   /** The number of records deleted. */
   deletedCount: Scalars['Int']['output'];
-};
-
-export type DeleteManySubModuloTypesInput = {
-  /** Filter to find records to delete */
-  filter: SubModuloTypeDeleteFilter;
 };
 
 export type DeleteManyTurmaTypesInput = {
@@ -1448,11 +1395,6 @@ export type DeleteOneArquivoInput = {
 };
 
 export type DeleteOneAulaTypeInput = {
-  /** The id of the record to delete. */
-  id: Scalars['Int']['input'];
-};
-
-export type DeleteOneCursoTypeInput = {
   /** The id of the record to delete. */
   id: Scalars['Int']['input'];
 };
@@ -1472,11 +1414,6 @@ export type DeleteOneModuloLiberacaoTravaTypeInput = {
   id: Scalars['Int']['input'];
 };
 
-export type DeleteOneModuloTypeInput = {
-  /** The id of the record to delete. */
-  id: Scalars['Int']['input'];
-};
-
 export type DeleteOnePerguntasInput = {
   /** The id of the record to delete. */
   id: Scalars['Int']['input'];
@@ -1488,11 +1425,6 @@ export type DeleteOneRespostasInput = {
 };
 
 export type DeleteOneRespostasPerguntasInput = {
-  /** The id of the record to delete. */
-  id: Scalars['Int']['input'];
-};
-
-export type DeleteOneSubModuloTypeInput = {
   /** The id of the record to delete. */
   id: Scalars['Int']['input'];
 };
@@ -2670,41 +2602,6 @@ export type ModuloTypeCountAggregate = {
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
 
-export type ModuloTypeDeleteFilter = {
-  and?: InputMaybe<Array<ModuloTypeDeleteFilter>>;
-  biblioteca?: InputMaybe<BooleanFieldComparison>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  cursoId?: InputMaybe<NumberFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  descricao?: InputMaybe<StringFieldComparison>;
-  id?: InputMaybe<IntFieldComparison>;
-  or?: InputMaybe<Array<ModuloTypeDeleteFilter>>;
-  ordem?: InputMaybe<NumberFieldComparison>;
-  titulo?: InputMaybe<StringFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type ModuloTypeDeleteResponse = {
-  __typename?: 'ModuloTypeDeleteResponse';
-  /** modulo biblioteca */
-  biblioteca?: Maybe<Scalars['Boolean']['output']>;
-  /** data criação do registro */
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** id do curso */
-  cursoId?: Maybe<Scalars['Float']['output']>;
-  /** data da exclusão do registro */
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** descricao do modulo */
-  descricao?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  /** ordem do modulo */
-  ordem?: Maybe<Scalars['Float']['output']>;
-  /** titulo do modulo */
-  titulo?: Maybe<Scalars['String']['output']>;
-  /** data atualização do registro */
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
 export type ModuloTypeEdge = {
   __typename?: 'ModuloTypeEdge';
   /** Cursor for this node. */
@@ -2884,20 +2781,17 @@ export type Mutation = {
   createOneSubModulo?: Maybe<SubModuloType>;
   deleteArquivo: ArquivoDeleteResponse;
   deleteManyAula: DeleteManyResponse;
-  deleteManyCursos: DeleteManyResponse;
   deleteManyModuloLiberacaoTravas: DeleteManyResponse;
-  deleteManyModulos: DeleteManyResponse;
-  deleteManySubModulos: DeleteManyResponse;
   deleteManyTurma: DeleteManyResponse;
-  deleteModulo: ModuloTypeDeleteResponse;
   deleteModuloLiberacaoTrava: ModuloLiberacaoTravaTypeDeleteResponse;
   deleteOneAula: AulaTypeDeleteResponse;
-  deleteOneCurso: CursoTypeDeleteResponse;
+  deleteOneCurso?: Maybe<CursoType>;
   deleteOneFormulario: FormulariosDeleteResponse;
+  deleteOneModulo?: Maybe<SubModuloType>;
   deleteOnePergunta: PerguntasDeleteResponse;
   deleteOneResposta: RespostasDeleteResponse;
   deleteOneRespostaPergunta: RespostasPerguntasDeleteResponse;
-  deleteOneSubModulo: SubModuloTypeDeleteResponse;
+  deleteOneSubModulo?: Maybe<SubModuloType>;
   deleteOneTurma: TurmaTypeDeleteResponse;
   deleteUsuario: UsuarioTypeDeleteResponse;
   importAluno?: Maybe<Array<AlunoType>>;
@@ -3048,33 +2942,13 @@ export type MutationDeleteManyAulaArgs = {
 };
 
 
-export type MutationDeleteManyCursosArgs = {
-  input: DeleteManyCursoTypesInput;
-};
-
-
 export type MutationDeleteManyModuloLiberacaoTravasArgs = {
   input: DeleteManyModuloLiberacaoTravaTypesInput;
 };
 
 
-export type MutationDeleteManyModulosArgs = {
-  input: DeleteManyModuloTypesInput;
-};
-
-
-export type MutationDeleteManySubModulosArgs = {
-  input: DeleteManySubModuloTypesInput;
-};
-
-
 export type MutationDeleteManyTurmaArgs = {
   input: DeleteManyTurmaTypesInput;
-};
-
-
-export type MutationDeleteModuloArgs = {
-  input: DeleteOneModuloTypeInput;
 };
 
 
@@ -3089,12 +2963,17 @@ export type MutationDeleteOneAulaArgs = {
 
 
 export type MutationDeleteOneCursoArgs = {
-  input: DeleteOneCursoTypeInput;
+  id: Scalars['Float']['input'];
 };
 
 
 export type MutationDeleteOneFormularioArgs = {
   input: DeleteOneFormulariosInput;
+};
+
+
+export type MutationDeleteOneModuloArgs = {
+  id: Scalars['Float']['input'];
 };
 
 
@@ -3114,7 +2993,7 @@ export type MutationDeleteOneRespostaPerguntaArgs = {
 
 
 export type MutationDeleteOneSubModuloArgs = {
-  input: DeleteOneSubModuloTypeInput;
+  id: Scalars['Float']['input'];
 };
 
 
@@ -4492,44 +4371,6 @@ export type SubModuloTypeCountAggregate = {
   url?: Maybe<Scalars['Int']['output']>;
 };
 
-export type SubModuloTypeDeleteFilter = {
-  and?: InputMaybe<Array<SubModuloTypeDeleteFilter>>;
-  arquivoId?: InputMaybe<NumberFieldComparison>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IntFieldComparison>;
-  mensagem?: InputMaybe<StringFieldComparison>;
-  moduloId?: InputMaybe<NumberFieldComparison>;
-  or?: InputMaybe<Array<SubModuloTypeDeleteFilter>>;
-  ordem?: InputMaybe<NumberFieldComparison>;
-  titulo?: InputMaybe<StringFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-  url?: InputMaybe<StringFieldComparison>;
-};
-
-export type SubModuloTypeDeleteResponse = {
-  __typename?: 'SubModuloTypeDeleteResponse';
-  /** id do arquivo */
-  arquivoId?: Maybe<Scalars['Float']['output']>;
-  /** data criação do registro */
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** data da exclusão do registro */
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  /** mensagem do modulo */
-  mensagem?: Maybe<Scalars['String']['output']>;
-  /** id do modulo */
-  moduloId?: Maybe<Scalars['Float']['output']>;
-  /** ordem do modulo */
-  ordem?: Maybe<Scalars['Float']['output']>;
-  /** titulo do modulo */
-  titulo?: Maybe<Scalars['String']['output']>;
-  /** data atualização do registro */
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** url do modulo */
-  url?: Maybe<Scalars['String']['output']>;
-};
-
 export type SubModuloTypeEdge = {
   __typename?: 'SubModuloTypeEdge';
   /** Cursor for this node. */
@@ -5364,11 +5205,11 @@ export type UpdateOneCursoMutationVariables = Exact<{
 export type UpdateOneCursoMutation = { __typename?: 'Mutation', updateOneCurso?: { __typename?: 'CursoType', id: number } | null };
 
 export type DeleteOneCursoMutationVariables = Exact<{
-  input: DeleteOneCursoTypeInput;
+  id: Scalars['Float']['input'];
 }>;
 
 
-export type DeleteOneCursoMutation = { __typename?: 'Mutation', deleteOneCurso: { __typename?: 'CursoTypeDeleteResponse', id?: number | null } };
+export type DeleteOneCursoMutation = { __typename?: 'Mutation', deleteOneCurso?: { __typename?: 'CursoType', id: number } | null };
 
 export type CreateOneModuloLiberacaTravaMutationVariables = Exact<{
   input: CreateOneModuloLiberacaoTravaTypeInput;
@@ -5449,11 +5290,11 @@ export type UpdateOneModuloMutationVariables = Exact<{
 export type UpdateOneModuloMutation = { __typename?: 'Mutation', UpdateOneModulo: { __typename?: 'ModuloType', titulo: string } };
 
 export type DeleteOneModuloMutationVariables = Exact<{
-  input: DeleteOneModuloTypeInput;
+  id: Scalars['Float']['input'];
 }>;
 
 
-export type DeleteOneModuloMutation = { __typename?: 'Mutation', deleteModulo: { __typename?: 'ModuloTypeDeleteResponse', titulo?: string | null } };
+export type DeleteOneModuloMutation = { __typename?: 'Mutation', deleteOneModulo?: { __typename?: 'SubModuloType', titulo: string } | null };
 
 export type CreateOnePerguntaMutationVariables = Exact<{
   input: CreateOnePerguntasInput;
@@ -5515,11 +5356,11 @@ export type UpdateOneSubModuloMutationVariables = Exact<{
 export type UpdateOneSubModuloMutation = { __typename?: 'Mutation', updateOneSubModulo?: { __typename?: 'SubModuloType', id: number } | null };
 
 export type DeleteOneSubModuloMutationVariables = Exact<{
-  input: DeleteOneSubModuloTypeInput;
+  id: Scalars['Float']['input'];
 }>;
 
 
-export type DeleteOneSubModuloMutation = { __typename?: 'Mutation', deleteOneSubModulo: { __typename?: 'SubModuloTypeDeleteResponse', id?: number | null } };
+export type DeleteOneSubModuloMutation = { __typename?: 'Mutation', deleteOneSubModulo?: { __typename?: 'SubModuloType', id: number } | null };
 
 export type CreateOneTurmaMutationVariables = Exact<{
   input: CreateOneTurmaTypeInput;
@@ -6051,8 +5892,8 @@ export type UpdateOneCursoMutationHookResult = ReturnType<typeof useUpdateOneCur
 export type UpdateOneCursoMutationResult = Apollo.MutationResult<UpdateOneCursoMutation>;
 export type UpdateOneCursoMutationOptions = Apollo.BaseMutationOptions<UpdateOneCursoMutation, UpdateOneCursoMutationVariables>;
 export const DeleteOneCursoDocument = gql`
-    mutation deleteOneCurso($input: DeleteOneCursoTypeInput!) {
-  deleteOneCurso(input: $input) {
+    mutation deleteOneCurso($id: Float!) {
+  deleteOneCurso(id: $id) {
     id
   }
 }
@@ -6072,7 +5913,7 @@ export type DeleteOneCursoMutationFn = Apollo.MutationFunction<DeleteOneCursoMut
  * @example
  * const [deleteOneCursoMutation, { data, loading, error }] = useDeleteOneCursoMutation({
  *   variables: {
- *      input: // value for 'input'
+ *      id: // value for 'id'
  *   },
  * });
  */
@@ -6448,8 +6289,8 @@ export type UpdateOneModuloMutationHookResult = ReturnType<typeof useUpdateOneMo
 export type UpdateOneModuloMutationResult = Apollo.MutationResult<UpdateOneModuloMutation>;
 export type UpdateOneModuloMutationOptions = Apollo.BaseMutationOptions<UpdateOneModuloMutation, UpdateOneModuloMutationVariables>;
 export const DeleteOneModuloDocument = gql`
-    mutation deleteOneModulo($input: DeleteOneModuloTypeInput!) {
-  deleteModulo(input: $input) {
+    mutation deleteOneModulo($id: Float!) {
+  deleteOneModulo(id: $id) {
     titulo
   }
 }
@@ -6469,7 +6310,7 @@ export type DeleteOneModuloMutationFn = Apollo.MutationFunction<DeleteOneModuloM
  * @example
  * const [deleteOneModuloMutation, { data, loading, error }] = useDeleteOneModuloMutation({
  *   variables: {
- *      input: // value for 'input'
+ *      id: // value for 'id'
  *   },
  * });
  */
@@ -6748,8 +6589,8 @@ export type UpdateOneSubModuloMutationHookResult = ReturnType<typeof useUpdateOn
 export type UpdateOneSubModuloMutationResult = Apollo.MutationResult<UpdateOneSubModuloMutation>;
 export type UpdateOneSubModuloMutationOptions = Apollo.BaseMutationOptions<UpdateOneSubModuloMutation, UpdateOneSubModuloMutationVariables>;
 export const DeleteOneSubModuloDocument = gql`
-    mutation deleteOneSubModulo($input: DeleteOneSubModuloTypeInput!) {
-  deleteOneSubModulo(input: $input) {
+    mutation deleteOneSubModulo($id: Float!) {
+  deleteOneSubModulo(id: $id) {
     id
   }
 }
@@ -6769,7 +6610,7 @@ export type DeleteOneSubModuloMutationFn = Apollo.MutationFunction<DeleteOneSubM
  * @example
  * const [deleteOneSubModuloMutation, { data, loading, error }] = useDeleteOneSubModuloMutation({
  *   variables: {
- *      input: // value for 'input'
+ *      id: // value for 'id'
  *   },
  * });
  */

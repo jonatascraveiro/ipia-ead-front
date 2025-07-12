@@ -76,20 +76,19 @@ export const useTabelaCurso = () => {
     (data: CursoType) => {
       showDialog({
         title: 'Deletar item?',
-        description: `Você tem certeza que deseja deletar ${data.nome}?`,
+        description: `Você tem certeza que deseja deletar ${data.nome}, esta ação não poderá ser desfeita?`,
         content: undefined,
         onConfirm: () => {
           mutateDelete({
             variables: {
-              input: {
-                id: data.id,
-              },
+              id: data.id,
             },
             onCompleted() {
               toast.success('Curso deletado com sucesso')
               closeDialog()
               apolloClient.cache.evict({ fieldName: 'curso' })
             },
+            refetchQueries: ['Cursos'],
           })
         },
       })
