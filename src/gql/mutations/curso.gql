@@ -1,0 +1,21 @@
+mutation createOneCurso($input: CreateCursoInput!, $arquivo: Upload) {
+  createOneCurso(input: $input, arquivo: $arquivo) {
+    id
+  }
+}
+
+mutation updateOneCurso(
+  $arquivo: Upload
+  $update: UpdateCursoInput!
+  $id: Float!
+) {
+  updateOneCurso(arquivo: $arquivo, id: $id, update: $update) {
+    id
+  }
+}
+
+mutation deleteOneCurso($id: Float!) {
+  deleteOneCurso(id: $id) {
+    id
+  }
+}

@@ -24,20 +24,19 @@ export const useTabelaSubModulo = ({
     (data: SubModuloType) => {
       showDialog({
         title: 'Deletar item?',
-        description: `Você tem certeza que deseja deletar ${data.titulo}?`,
+        description: `Você tem certeza que deseja deletar ${data.titulo}, esta ação não poderá ser desfeita?`,
         content: undefined,
         onConfirm: () => {
           mutateDelete({
             variables: {
-              input: {
-                id: data.id,
-              },
+              id: data.id,
             },
             onCompleted() {
               toast.success('SubMódulo deletado com sucesso')
               closeDialog()
               apolloClient.cache.evict({ fieldName: 'modulo' })
             },
+            refetchQueries: ['Modulo'],
           })
         },
       })

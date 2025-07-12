@@ -18,8 +18,8 @@ gql`
 `
 
 gql`
- mutation deleteOneSubModulo($input: DeleteOneSubModuloTypeInput!) {
-  deleteOneSubModulo(input: $input) {
+ mutation deleteOneSubModulo($id: Float!) {
+  deleteOneSubModulo(id: $id) {
     id
   }
 }
