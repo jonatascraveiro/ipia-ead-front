@@ -57,7 +57,7 @@ export const useTabelaAula = ({
     (data: AulaType) => {
       showDialog({
         title: 'Deletar item?',
-        description: `Você tem certeza que deseja deletar ${data.titulo}?`,
+        description: `Você tem certeza que deseja deletar ${data.titulo}, esta ação não poderá ser desfeita?`,
         content: undefined,
         onConfirm: () => {
           mutateDelete({
@@ -71,6 +71,7 @@ export const useTabelaAula = ({
               closeDialog()
               apolloClient.cache.evict({ fieldName: 'aulas' })
             },
+            refetchQueries: ['Aulas'],
           })
         },
       })

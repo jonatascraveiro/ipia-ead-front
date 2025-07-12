@@ -77,14 +77,12 @@ export const useTabelaModulo = ({
     (data: ModuloType) => {
       showDialog({
         title: 'Deletar item?',
-        description: `Você tem certeza que deseja deletar ${data.titulo}?`,
+        description: `Você tem certeza que deseja deletar ${data.titulo}, esta ação não poderá ser desfeita?`,
         content: undefined,
         onConfirm: () => {
           mutateDelete({
             variables: {
-              input: {
-                id: data.id,
-              },
+              id: data.id,
             },
             onCompleted() {
               const mensagem = biblioteca
@@ -94,6 +92,7 @@ export const useTabelaModulo = ({
               closeDialog()
               apolloClient.cache.evict({ fieldName: 'modulos' })
             },
+            refetchQueries: ['Modulos'],
           })
         },
       })
