@@ -27,9 +27,7 @@ export function EditarFormularioPage() {
   const urlVoltar = generatePath(ROTAS.FORMULARIO, {
     subModuloId,
   })
-  // const { tabela } = useTabelaPerguntas({
-  //   perguntas: data?.formulario?.perguntas || [],
-  // })
+
   return (
     <Page>
       <Page.Header>
@@ -54,11 +52,6 @@ export function EditarFormularioPage() {
               perguntas={data?.formulario?.perguntas || []}
               formularioId={+id}
             />
-            {/* <DataTable {...tabela} /> */}
-            {/* <FormSubModulo
-              subModulos={data.modulo.subModulos || []}
-              subModuloId={+id}
-            /> */}
           </CardForm>
         </>
       )}

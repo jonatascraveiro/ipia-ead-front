@@ -26,6 +26,11 @@ const ROTAS = {
   FORMULARIO_VISUALIZAR: '/sub-modulo/:subModuloId/formulario/:id',
   FORMULARIO_EDITAR: '/sub-modulo/:subModuloId/formulario/:id/editar',
 
+  FORMULARIO_AULA: '/aula/:aulaId/formulario',
+  FORMULARIO_AULA_CRIAR: '/aula/:aulaId/formulario/criar',
+  FORMULARIO_AULA_VISUALIZAR: '/aula/:aulaId/formulario/:id',
+  FORMULARIO_AULA_EDITAR: '/aula/:aulaId/formulario/:id/editar',
+
   INSCRICOES: '/inscricoes',
 
   IMPORTACOES: '/importacoes',
@@ -36,6 +41,7 @@ const ROTAS = {
   PERGUNTA_CRIAR: '/pergunta/criar',
   PERGUNTA_VISUALIZAR: '/pergunta/:id',
   PERGUNTA_EDITAR: '/pergunta/:id/editar',
+  PERGUNTA_AULA_EDITAR: '/pergunta-aula/:id/editar',
 
   MODULO: '/curso/:cursoId/modulo',
   MODULO_CRIAR: '/curso/:cursoId/modulo/criar',
@@ -59,6 +65,6 @@ const ROTAS = {
   USUARIO_EDITAR: '/usuario/:id',
   USUARIO_CRIAR: '/usuario/criar',
   LOGIN: '/login',
-}
+} as const
 
 export { ROTAS }

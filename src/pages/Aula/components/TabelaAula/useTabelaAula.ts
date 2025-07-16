@@ -50,6 +50,17 @@ export const useTabelaAula = ({
     [navigate, subModuloId],
   )
 
+  const handleFormulario = useCallback(
+    (data: AulaType) => {
+      navigate(
+        generatePath(ROTAS.FORMULARIO_AULA, {
+          aulaId: String(data.id),
+        }),
+      )
+    },
+    [navigate],
+  )
+
   const [mutateDelete] = useDeleteOneAulaMutation()
 
   const { showDialog, closeDialog } = useDialog()
@@ -104,6 +115,7 @@ export const useTabelaAula = ({
       getColumns({
         deletar: handleDeletar,
         editar: handleEditar,
+        formulario: handleFormulario,
       }),
     [handleDeletar, handleEditar],
   )

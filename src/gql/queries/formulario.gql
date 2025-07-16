@@ -1,35 +1,25 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-import { gql } from '@apollo/client'
-
-gql`
 query Formulario($id: Int!) {
   formulario(id: $id) {
     id
-        nome  
-        perguntas(sorting:{
-      field:descricao,direction:ASC
-    }) {
-          id
-        descricao  
-        multiEscolha
-        tipo
-        formularioId
-        }
-        subModulo{
-          titulo
-          id
-          modulo{
-            id 
-            titulo
-          }
-        }
-    
+    nome
+    perguntas(sorting: { field: descricao, direction: ASC }) {
+      id
+      descricao
+      multiEscolha
+      tipo
+      formularioId
+    }
+    subModulo {
+      titulo
+      id
+      modulo {
+        id
+        titulo
+      }
+    }
   }
 }
 
-`
-
-gql`
 query Formularios(
   $filter: FormulariosFilter
   $paging: CursorPaging!
@@ -38,22 +28,19 @@ query Formularios(
   formularios(filter: $filter, paging: $paging, sorting: $sorting) {
     edges {
       node {
-        
-         id
-        nome  
+        id
+        nome
         perguntas {
-      id
-    }
-    subModulo{
+          id
+        }
+        subModulo {
           titulo
           id
-          modulo{
-            id 
+          modulo {
+            id
             titulo
           }
         }
-       
-       
       }
     }
     pageInfo {
@@ -65,10 +52,6 @@ query Formularios(
   }
 }
 
-
-`
-
-gql`
 query FormulariosSelect(
   $filter: FormulariosFilter
   $paging: CursorPaging!
@@ -76,11 +59,10 @@ query FormulariosSelect(
 ) {
   formularios(filter: $filter, paging: $paging, sorting: $sorting) {
     edges {
-      node {              
+      node {
         id
-        nome        
+        nome
       }
-    }    
+    }
   }
 }
-`
