@@ -52,6 +52,7 @@ export const useTabelaPerguntas = ({
               apolloClient.cache.evict({ fieldName: 'perguntas' })
               apolloClient.cache.evict({ fieldName: 'formulario' })
             },
+            refetchQueries: ['AulaFormulario'],
           })
         },
       })

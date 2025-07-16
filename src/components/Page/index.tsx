@@ -1,5 +1,5 @@
 import { ArrowLeft } from 'lucide-react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { Button } from '../ui/button'
 
 const Page = ({ children }: { children: React.ReactNode }) => {
@@ -17,15 +17,17 @@ const PageHeader = ({ children }: { children: React.ReactNode }) => {
 const Titulo = ({
   children,
   url,
-}: { children: React.ReactNode; url?: string }) => {
+  back = false,
+}: { children: React.ReactNode; url?: string; back?: boolean }) => {
   return (
     <h1 className="text-2xl mb-4">
-      <IconeVoltar url={url} /> {children}
+      <IconeVoltar url={url} back={back} /> {children}
     </h1>
   )
 }
 
-const IconeVoltar = ({ url }: { url?: string }) => {
+const IconeVoltar = ({ url, back }: { url?: string; back?: boolean }) => {
+  const navigate = useNavigate()
   if (url) {
     return (
       <Link to={url}>
@@ -33,6 +35,13 @@ const IconeVoltar = ({ url }: { url?: string }) => {
           <ArrowLeft className="size-4" />
         </Button>
       </Link>
+    )
+  }
+  if (back) {
+    return (
+      <Button className="me-3" onClick={() => navigate(-1)}>
+        <ArrowLeft className="size-4" />
+      </Button>
     )
   }
   return null

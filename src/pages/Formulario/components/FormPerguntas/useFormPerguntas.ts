@@ -47,6 +47,7 @@ export const useFormPerguntas = ({
           apolloClient.cache.evict({ fieldName: 'formulario' })
           toggleModal()
         },
+        refetchQueries: ['AulaFormulario'],
       })
       return
     }
@@ -67,6 +68,7 @@ export const useFormPerguntas = ({
         apolloClient.cache.evict({ fieldName: 'formulario' })
         toggleModal()
       },
+      refetchQueries: ['AulaFormulario'],
     })
   }
 

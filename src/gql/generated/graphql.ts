@@ -509,6 +509,7 @@ export type AulaType = {
   descricao?: Maybe<Scalars['String']['output']>;
   /** video url do modulo */
   duracao: Scalars['Float']['output'];
+  formulario?: Maybe<Formularios>;
   id: Scalars['Int']['output'];
   modulo?: Maybe<ModuloType>;
   /** id do modulo */
@@ -637,6 +638,7 @@ export type AulaTypeFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   descricao?: InputMaybe<StringFieldComparison>;
   duracao?: InputMaybe<NumberFieldComparison>;
+  formulario?: InputMaybe<AulaTypeFilterFormulariosFilter>;
   id?: InputMaybe<IntFieldComparison>;
   modulo?: InputMaybe<AulaTypeFilterModuloTypeFilter>;
   moduloId?: InputMaybe<NumberFieldComparison>;
@@ -647,6 +649,18 @@ export type AulaTypeFilter = {
   titulo?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   videoUrl?: InputMaybe<StringFieldComparison>;
+};
+
+export type AulaTypeFilterFormulariosFilter = {
+  and?: InputMaybe<Array<AulaTypeFilterFormulariosFilter>>;
+  aulaId?: InputMaybe<NumberFieldComparison>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  nome?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<AulaTypeFilterFormulariosFilter>>;
+  subModuloId?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type AulaTypeFilterModuloTypeFilter = {
@@ -929,10 +943,12 @@ export type CreateEnderecoInput = {
 };
 
 export type CreateFormularioInput = {
+  /** id da aula */
+  aulaId?: InputMaybe<Scalars['Float']['input']>;
   /** nome da formulário */
   nome: Scalars['String']['input'];
   /** id do sub modulo */
-  subModuloId: Scalars['Float']['input'];
+  subModuloId?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type CreateImportacaoHistoricoInput = {
@@ -1700,6 +1716,9 @@ export enum EstadoSortFields {
 
 export type Formularios = {
   __typename?: 'Formularios';
+  aula?: Maybe<AulaType>;
+  /** aula_id */
+  aulaId?: Maybe<Scalars['Float']['output']>;
   /** data criação do registro */
   createdAt: Scalars['DateTime']['output'];
   /** data da exclusão do registro */
@@ -1710,7 +1729,7 @@ export type Formularios = {
   perguntas?: Maybe<Array<Perguntas>>;
   subModulo?: Maybe<SubModuloType>;
   /** id do submodulo */
-  subModuloId: Scalars['Float']['output'];
+  subModuloId?: Maybe<Scalars['Float']['output']>;
   /** data atualização do registro */
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -1723,6 +1742,7 @@ export type FormulariosPerguntasArgs = {
 
 export type FormulariosAggregateGroupBy = {
   __typename?: 'FormulariosAggregateGroupBy';
+  aulaId?: Maybe<Scalars['Float']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
@@ -1733,6 +1753,7 @@ export type FormulariosAggregateGroupBy = {
 
 export type FormulariosAvgAggregate = {
   __typename?: 'FormulariosAvgAggregate';
+  aulaId?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
   subModuloId?: Maybe<Scalars['Float']['output']>;
 };
@@ -1749,6 +1770,7 @@ export type FormulariosConnection = {
 
 export type FormulariosCountAggregate = {
   __typename?: 'FormulariosCountAggregate';
+  aulaId?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
@@ -1759,6 +1781,8 @@ export type FormulariosCountAggregate = {
 
 export type FormulariosDeleteResponse = {
   __typename?: 'FormulariosDeleteResponse';
+  /** aula_id */
+  aulaId?: Maybe<Scalars['Float']['output']>;
   /** data criação do registro */
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   /** data da exclusão do registro */
@@ -1782,6 +1806,8 @@ export type FormulariosEdge = {
 
 export type FormulariosFilter = {
   and?: InputMaybe<Array<FormulariosFilter>>;
+  aula?: InputMaybe<FormulariosFilterAulaTypeFilter>;
+  aulaId?: InputMaybe<NumberFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
@@ -1791,6 +1817,22 @@ export type FormulariosFilter = {
   subModulo?: InputMaybe<FormulariosFilterSubModuloTypeFilter>;
   subModuloId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type FormulariosFilterAulaTypeFilter = {
+  and?: InputMaybe<Array<FormulariosFilterAulaTypeFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  descricao?: InputMaybe<StringFieldComparison>;
+  duracao?: InputMaybe<NumberFieldComparison>;
+  id?: InputMaybe<IntFieldComparison>;
+  moduloId?: InputMaybe<NumberFieldComparison>;
+  or?: InputMaybe<Array<FormulariosFilterAulaTypeFilter>>;
+  ordem?: InputMaybe<NumberFieldComparison>;
+  subModuloId?: InputMaybe<NumberFieldComparison>;
+  titulo?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  videoUrl?: InputMaybe<StringFieldComparison>;
 };
 
 export type FormulariosFilterPerguntasFilter = {
@@ -1823,6 +1865,7 @@ export type FormulariosFilterSubModuloTypeFilter = {
 
 export type FormulariosMaxAggregate = {
   __typename?: 'FormulariosMaxAggregate';
+  aulaId?: Maybe<Scalars['Float']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
@@ -1833,6 +1876,7 @@ export type FormulariosMaxAggregate = {
 
 export type FormulariosMinAggregate = {
   __typename?: 'FormulariosMinAggregate';
+  aulaId?: Maybe<Scalars['Float']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
@@ -1848,6 +1892,7 @@ export type FormulariosSort = {
 };
 
 export enum FormulariosSortFields {
+  AulaId = 'aulaId',
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
   Id = 'id',
@@ -1858,6 +1903,7 @@ export enum FormulariosSortFields {
 
 export type FormulariosSumAggregate = {
   __typename?: 'FormulariosSumAggregate';
+  aulaId?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
   subModuloId?: Maybe<Scalars['Float']['output']>;
 };
@@ -3260,6 +3306,7 @@ export type PerguntasFilter = {
 
 export type PerguntasFilterFormulariosFilter = {
   and?: InputMaybe<Array<PerguntasFilterFormulariosFilter>>;
+  aulaId?: InputMaybe<NumberFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
@@ -4416,6 +4463,7 @@ export type SubModuloTypeFilterAulaTypeFilter = {
 
 export type SubModuloTypeFilterFormulariosFilter = {
   and?: InputMaybe<Array<SubModuloTypeFilterFormulariosFilter>>;
+  aulaId?: InputMaybe<NumberFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
@@ -4841,6 +4889,8 @@ export type UpdateEnderecoInput = {
 };
 
 export type UpdateFormularioInput = {
+  /** id da aula */
+  aulaId?: InputMaybe<Scalars['Float']['input']>;
   /** nome da formulário */
   nome?: InputMaybe<Scalars['String']['input']>;
   /** id do sub modulo */
@@ -5399,6 +5449,13 @@ export type AulaQueryVariables = Exact<{
 
 export type AulaQuery = { __typename?: 'Query', aula?: { __typename?: 'AulaType', ordem: number, moduloId?: number | null, descricao?: string | null, id: number, titulo: string, videoUrl?: string | null, duracao: number, modulo?: { __typename?: 'ModuloType', titulo: string, id: number, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } | null };
 
+export type AulaFormularioQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type AulaFormularioQuery = { __typename?: 'Query', aula?: { __typename?: 'AulaType', ordem: number, moduloId?: number | null, subModuloId?: number | null, descricao?: string | null, id: number, titulo: string, videoUrl?: string | null, duracao: number, modulo?: { __typename?: 'ModuloType', titulo: string, id: number, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null, formulario?: { __typename?: 'Formularios', id: number, nome: string, perguntas?: Array<{ __typename?: 'Perguntas', id: number, descricao: string, multiEscolha: boolean, tipo?: string | null, formularioId: number }> | null, subModulo?: { __typename?: 'SubModuloType', titulo: string, id: number, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null } | null } | null } | null };
+
 export type AulasQueryVariables = Exact<{
   filter?: InputMaybe<AulaTypeFilter>;
   paging: CursorPaging;
@@ -5406,7 +5463,7 @@ export type AulasQueryVariables = Exact<{
 }>;
 
 
-export type AulasQuery = { __typename?: 'Query', aulas: { __typename?: 'AulaTypeConnection', edges: Array<{ __typename?: 'AulaTypeEdge', node: { __typename?: 'AulaType', ordem: number, moduloId?: number | null, descricao?: string | null, id: number, titulo: string, videoUrl?: string | null, duracao: number, modulo?: { __typename?: 'ModuloType', titulo: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
+export type AulasQuery = { __typename?: 'Query', aulas: { __typename?: 'AulaTypeConnection', edges: Array<{ __typename?: 'AulaTypeEdge', node: { __typename?: 'AulaType', ordem: number, moduloId?: number | null, descricao?: string | null, id: number, titulo: string, videoUrl?: string | null, duracao: number, subModuloId?: number | null, modulo?: { __typename?: 'ModuloType', titulo: string } | null } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: any | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, startCursor?: any | null } } };
 
 export type AulasTotalQueryVariables = Exact<{
   filter?: InputMaybe<AulaTypeFilter>;
@@ -5553,7 +5610,7 @@ export type PerguntaQueryVariables = Exact<{
 }>;
 
 
-export type PerguntaQuery = { __typename?: 'Query', pergunta?: { __typename?: 'Perguntas', id: number, descricao: string, multiEscolha: boolean, tipo?: string | null, formularioId: number, formulario?: { __typename?: 'Formularios', nome: string, id: number, subModulo?: { __typename?: 'SubModuloType', titulo: string, id: number, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null } | null } | null, respostas?: Array<{ __typename?: 'Respostas', descricao: string, id: number, perguntaId: number, correta: boolean }> | null } | null };
+export type PerguntaQuery = { __typename?: 'Query', pergunta?: { __typename?: 'Perguntas', id: number, descricao: string, multiEscolha: boolean, tipo?: string | null, formularioId: number, formulario?: { __typename?: 'Formularios', nome: string, id: number, aulaId?: number | null, subModulo?: { __typename?: 'SubModuloType', titulo: string, id: number, modulo?: { __typename?: 'ModuloType', id: number, titulo: string } | null } | null } | null, respostas?: Array<{ __typename?: 'Respostas', descricao: string, id: number, perguntaId: number, correta: boolean }> | null } | null };
 
 export type PerguntasQueryVariables = Exact<{
   filter?: InputMaybe<PerguntasFilter>;
@@ -6838,6 +6895,80 @@ export type AulaQueryHookResult = ReturnType<typeof useAulaQuery>;
 export type AulaLazyQueryHookResult = ReturnType<typeof useAulaLazyQuery>;
 export type AulaSuspenseQueryHookResult = ReturnType<typeof useAulaSuspenseQuery>;
 export type AulaQueryResult = Apollo.QueryResult<AulaQuery, AulaQueryVariables>;
+export const AulaFormularioDocument = gql`
+    query AulaFormulario($id: Int!) {
+  aula(id: $id) {
+    ordem
+    moduloId
+    subModuloId
+    descricao
+    id
+    titulo
+    videoUrl
+    duracao
+    modulo {
+      titulo
+      id
+      curso {
+        id
+        nome
+      }
+    }
+    formulario {
+      id
+      nome
+      perguntas(sorting: {field: descricao, direction: ASC}) {
+        id
+        descricao
+        multiEscolha
+        tipo
+        formularioId
+      }
+      subModulo {
+        titulo
+        id
+        modulo {
+          id
+          titulo
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAulaFormularioQuery__
+ *
+ * To run a query within a React component, call `useAulaFormularioQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAulaFormularioQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAulaFormularioQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useAulaFormularioQuery(baseOptions: Apollo.QueryHookOptions<AulaFormularioQuery, AulaFormularioQueryVariables> & ({ variables: AulaFormularioQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AulaFormularioQuery, AulaFormularioQueryVariables>(AulaFormularioDocument, options);
+      }
+export function useAulaFormularioLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AulaFormularioQuery, AulaFormularioQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AulaFormularioQuery, AulaFormularioQueryVariables>(AulaFormularioDocument, options);
+        }
+export function useAulaFormularioSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<AulaFormularioQuery, AulaFormularioQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<AulaFormularioQuery, AulaFormularioQueryVariables>(AulaFormularioDocument, options);
+        }
+export type AulaFormularioQueryHookResult = ReturnType<typeof useAulaFormularioQuery>;
+export type AulaFormularioLazyQueryHookResult = ReturnType<typeof useAulaFormularioLazyQuery>;
+export type AulaFormularioSuspenseQueryHookResult = ReturnType<typeof useAulaFormularioSuspenseQuery>;
+export type AulaFormularioQueryResult = Apollo.QueryResult<AulaFormularioQuery, AulaFormularioQueryVariables>;
 export const AulasDocument = gql`
     query Aulas($filter: AulaTypeFilter, $paging: CursorPaging!, $sorting: [AulaTypeSort!]!) {
   aulas(filter: $filter, paging: $paging, sorting: $sorting) {
@@ -6850,6 +6981,7 @@ export const AulasDocument = gql`
         titulo
         videoUrl
         duracao
+        subModuloId
         modulo {
           titulo
         }
@@ -7895,6 +8027,7 @@ export const PerguntaDocument = gql`
     formulario {
       nome
       id
+      aulaId
       subModulo {
         titulo
         id

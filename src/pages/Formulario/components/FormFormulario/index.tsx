@@ -12,16 +12,19 @@ function FormFormulario({
   disabled = false,
   urlVoltar,
   subModuloId,
+  aulaId,
 }: {
   formulario?: FormularioQuery['formulario']
   disabled?: boolean
   urlVoltar: string
-  subModuloId: number
+  subModuloId?: number
+  aulaId?: number
 }) {
   const { form, onSubmit } = useFormFormulario({
     formulario,
     urlVoltar,
     subModuloId,
+    aulaId,
   })
 
   return (
