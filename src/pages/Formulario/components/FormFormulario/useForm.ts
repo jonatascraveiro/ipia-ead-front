@@ -5,7 +5,6 @@ import {
 } from '@/gql/generated/graphql'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 import { type FormularioSchema, schema } from './schema'
 
@@ -27,8 +26,7 @@ export const useFormFormulario = ({
       nome: formulario?.nome || '',
     },
   })
-
-  const navigate = useNavigate()
+  console.log(form)
   const [criar] = useCreateOneFormularioMutation()
   const [editar] = useUpdateOneFormularioMutation()
 
@@ -49,7 +47,11 @@ export const useFormFormulario = ({
         onCompleted() {
           toast.success('Formulário  editado com sucesso')
         },
-        refetchQueries: ['AulaFormulario', 'Formularios'],
+        refetchQueries: [
+          'AulaFormulario',
+          'Formularios',
+          'SubModuloFormulario',
+        ],
       })
       return
     }
@@ -67,9 +69,8 @@ export const useFormFormulario = ({
 
       onCompleted() {
         toast.success('Formulário criado com sucesso')
-        urlVoltar && navigate(urlVoltar)
       },
-      refetchQueries: ['AulaFormulario', 'Formularios'],
+      refetchQueries: ['AulaFormulario', 'Formularios', 'SubModuloFormulario'],
     })
   }
 

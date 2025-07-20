@@ -1,3 +1,4 @@
+import { IS_DEV } from '@/utils/constants'
 import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client'
 import { uploadLink } from './apollo-client'
 import { authMiddleware } from './authLink'
@@ -11,4 +12,5 @@ export const apolloClient = new ApolloClient({
       fetchPolicy: 'network-only',
     },
   },
+  connectToDevTools: IS_DEV,
 })

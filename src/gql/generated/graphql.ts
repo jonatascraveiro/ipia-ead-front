@@ -30,7 +30,7 @@ export type AddCidadesToEstadoInput = {
 
 export type AlunoType = {
   __typename?: 'AlunoType';
-  alunosProgressos?: Maybe<Array<ProgressoType>>;
+  alunosProgressos?: Maybe<Array<Progresso>>;
   /** ano_serie do aluno */
   anoSerie?: Maybe<Scalars['String']['output']>;
   arquivo?: Maybe<Arquivo>;
@@ -90,8 +90,8 @@ export type AlunoType = {
 
 
 export type AlunoTypeAlunosProgressosArgs = {
-  filter?: ProgressoTypeFilter;
-  sorting?: Array<ProgressoTypeSort>;
+  filter?: ProgressoFilter;
+  sorting?: Array<ProgressoSort>;
 };
 
 
@@ -186,7 +186,7 @@ export type AlunoTypeEdge = {
 };
 
 export type AlunoTypeFilter = {
-  alunosProgressos?: InputMaybe<AlunoTypeFilterProgressoTypeFilter>;
+  alunosProgressos?: InputMaybe<AlunoTypeFilterProgressoFilter>;
   and?: InputMaybe<Array<AlunoTypeFilter>>;
   anoSerie?: InputMaybe<StringFieldComparison>;
   arquivo?: InputMaybe<AlunoTypeFilterArquivoFilter>;
@@ -245,9 +245,9 @@ export type AlunoTypeFilterInscricaoTypeFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type AlunoTypeFilterProgressoTypeFilter = {
+export type AlunoTypeFilterProgressoFilter = {
   alunoId?: InputMaybe<NumberFieldComparison>;
-  and?: InputMaybe<Array<AlunoTypeFilterProgressoTypeFilter>>;
+  and?: InputMaybe<Array<AlunoTypeFilterProgressoFilter>>;
   assistido?: InputMaybe<BooleanFieldComparison>;
   aulaId?: InputMaybe<NumberFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
@@ -257,7 +257,7 @@ export type AlunoTypeFilterProgressoTypeFilter = {
   id?: InputMaybe<IntFieldComparison>;
   inicio?: InputMaybe<DateFieldComparison>;
   moduloId?: InputMaybe<NumberFieldComparison>;
-  or?: InputMaybe<Array<AlunoTypeFilterProgressoTypeFilter>>;
+  or?: InputMaybe<Array<AlunoTypeFilterProgressoFilter>>;
   subMmoduloId?: InputMaybe<NumberFieldComparison>;
   turmaId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
@@ -500,7 +500,7 @@ export type ArquivoSumAggregate = {
 
 export type AulaType = {
   __typename?: 'AulaType';
-  aulasProgressos?: Maybe<Array<ProgressoType>>;
+  aulasProgressos?: Maybe<Array<Progresso>>;
   /** data criação do registro */
   createdAt: Scalars['DateTime']['output'];
   /** data da exclusão do registro */
@@ -529,8 +529,8 @@ export type AulaType = {
 
 
 export type AulaTypeAulasProgressosArgs = {
-  filter?: ProgressoTypeFilter;
-  sorting?: Array<ProgressoTypeSort>;
+  filter?: ProgressoFilter;
+  sorting?: Array<ProgressoSort>;
 };
 
 export type AulaTypeAggregateGroupBy = {
@@ -633,7 +633,7 @@ export type AulaTypeEdge = {
 
 export type AulaTypeFilter = {
   and?: InputMaybe<Array<AulaTypeFilter>>;
-  aulasProgressos?: InputMaybe<AulaTypeFilterProgressoTypeFilter>;
+  aulasProgressos?: InputMaybe<AulaTypeFilterProgressoFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   descricao?: InputMaybe<StringFieldComparison>;
@@ -677,9 +677,9 @@ export type AulaTypeFilterModuloTypeFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type AulaTypeFilterProgressoTypeFilter = {
+export type AulaTypeFilterProgressoFilter = {
   alunoId?: InputMaybe<NumberFieldComparison>;
-  and?: InputMaybe<Array<AulaTypeFilterProgressoTypeFilter>>;
+  and?: InputMaybe<Array<AulaTypeFilterProgressoFilter>>;
   assistido?: InputMaybe<BooleanFieldComparison>;
   aulaId?: InputMaybe<NumberFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
@@ -689,7 +689,7 @@ export type AulaTypeFilterProgressoTypeFilter = {
   id?: InputMaybe<IntFieldComparison>;
   inicio?: InputMaybe<DateFieldComparison>;
   moduloId?: InputMaybe<NumberFieldComparison>;
-  or?: InputMaybe<Array<AulaTypeFilterProgressoTypeFilter>>;
+  or?: InputMaybe<Array<AulaTypeFilterProgressoFilter>>;
   subMmoduloId?: InputMaybe<NumberFieldComparison>;
   turmaId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
@@ -1028,9 +1028,9 @@ export type CreateOnePerguntasInput = {
   perguntas: CreatePerguntaInput;
 };
 
-export type CreateOneProgressoTypeInput = {
+export type CreateOneProgressoInput = {
   /** The record to create */
-  progressoType: CreateProgressoInput;
+  progresso: CreateProgressoInput;
 };
 
 export type CreateOneRespostasInput = {
@@ -1127,7 +1127,7 @@ export type CursoType = {
   ativo: Scalars['Boolean']['output'];
   /** data criação do registro */
   createdAt: Scalars['DateTime']['output'];
-  cursosProgressos?: Maybe<Array<ProgressoType>>;
+  cursosProgressos?: Maybe<Array<Progresso>>;
   /** data da exclusão do registro */
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   /** descricao do curso */
@@ -1147,8 +1147,8 @@ export type CursoType = {
 
 
 export type CursoTypeCursosProgressosArgs = {
-  filter?: ProgressoTypeFilter;
-  sorting?: Array<ProgressoTypeSort>;
+  filter?: ProgressoFilter;
+  sorting?: Array<ProgressoSort>;
 };
 
 
@@ -1215,7 +1215,7 @@ export type CursoTypeFilter = {
   arquivoId?: InputMaybe<NumberFieldComparison>;
   ativo?: InputMaybe<BooleanFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
-  cursosProgressos?: InputMaybe<CursoTypeFilterProgressoTypeFilter>;
+  cursosProgressos?: InputMaybe<CursoTypeFilterProgressoFilter>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   descricao?: InputMaybe<StringFieldComparison>;
   icone?: InputMaybe<StringFieldComparison>;
@@ -1252,9 +1252,9 @@ export type CursoTypeFilterModuloTypeFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type CursoTypeFilterProgressoTypeFilter = {
+export type CursoTypeFilterProgressoFilter = {
   alunoId?: InputMaybe<NumberFieldComparison>;
-  and?: InputMaybe<Array<CursoTypeFilterProgressoTypeFilter>>;
+  and?: InputMaybe<Array<CursoTypeFilterProgressoFilter>>;
   assistido?: InputMaybe<BooleanFieldComparison>;
   aulaId?: InputMaybe<NumberFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
@@ -1264,7 +1264,7 @@ export type CursoTypeFilterProgressoTypeFilter = {
   id?: InputMaybe<IntFieldComparison>;
   inicio?: InputMaybe<DateFieldComparison>;
   moduloId?: InputMaybe<NumberFieldComparison>;
-  or?: InputMaybe<Array<CursoTypeFilterProgressoTypeFilter>>;
+  or?: InputMaybe<Array<CursoTypeFilterProgressoFilter>>;
   subMmoduloId?: InputMaybe<NumberFieldComparison>;
   turmaId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
@@ -2571,7 +2571,7 @@ export type ModuloType = {
   descricao: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   moduloLiberacaoTravas?: Maybe<Array<ModuloLiberacaoTravaType>>;
-  modulosProgressos?: Maybe<Array<ProgressoType>>;
+  modulosProgressos?: Maybe<Array<Progresso>>;
   /** ordem do modulo */
   ordem: Scalars['Float']['output'];
   subModulos?: Maybe<Array<SubModuloType>>;
@@ -2595,8 +2595,8 @@ export type ModuloTypeModuloLiberacaoTravasArgs = {
 
 
 export type ModuloTypeModulosProgressosArgs = {
-  filter?: ProgressoTypeFilter;
-  sorting?: Array<ProgressoTypeSort>;
+  filter?: ProgressoFilter;
+  sorting?: Array<ProgressoSort>;
 };
 
 
@@ -2667,7 +2667,7 @@ export type ModuloTypeFilter = {
   descricao?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   moduloLiberacaoTrava?: InputMaybe<ModuloTypeFilterModuloLiberacaoTravaTypeFilter>;
-  modulosProgressos?: InputMaybe<ModuloTypeFilterProgressoTypeFilter>;
+  modulosProgressos?: InputMaybe<ModuloTypeFilterProgressoFilter>;
   or?: InputMaybe<Array<ModuloTypeFilter>>;
   ordem?: InputMaybe<NumberFieldComparison>;
   subModulos?: InputMaybe<ModuloTypeFilterSubModuloTypeFilter>;
@@ -2718,9 +2718,9 @@ export type ModuloTypeFilterModuloLiberacaoTravaTypeFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type ModuloTypeFilterProgressoTypeFilter = {
+export type ModuloTypeFilterProgressoFilter = {
   alunoId?: InputMaybe<NumberFieldComparison>;
-  and?: InputMaybe<Array<ModuloTypeFilterProgressoTypeFilter>>;
+  and?: InputMaybe<Array<ModuloTypeFilterProgressoFilter>>;
   assistido?: InputMaybe<BooleanFieldComparison>;
   aulaId?: InputMaybe<NumberFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
@@ -2730,7 +2730,7 @@ export type ModuloTypeFilterProgressoTypeFilter = {
   id?: InputMaybe<IntFieldComparison>;
   inicio?: InputMaybe<DateFieldComparison>;
   moduloId?: InputMaybe<NumberFieldComparison>;
-  or?: InputMaybe<Array<ModuloTypeFilterProgressoTypeFilter>>;
+  or?: InputMaybe<Array<ModuloTypeFilterProgressoFilter>>;
   subMmoduloId?: InputMaybe<NumberFieldComparison>;
   turmaId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
@@ -2806,7 +2806,7 @@ export type Mutation = {
   CreateOneInscricao: InscricaoType;
   CreateOneModulo: ModuloType;
   CreateOneModuloLiberacaoTrava: ModuloLiberacaoTravaType;
-  CreateOneProgresso: ProgressoType;
+  CreateOneProgresso: Progresso;
   CreateOneTurma: TurmaType;
   DeleteOneInscricao: InscricaoTypeDeleteResponse;
   UpdateOneAula: AulaType;
@@ -2857,7 +2857,7 @@ export type Mutation = {
   updateOneResposta: Respostas;
   updateOneRespostaPergunta: RespostasPerguntas;
   updateOneSubModulo?: Maybe<SubModuloType>;
-  updateProgresso: ProgressoType;
+  updateProgresso: Progresso;
 };
 
 
@@ -2882,7 +2882,7 @@ export type MutationCreateOneModuloLiberacaoTravaArgs = {
 
 
 export type MutationCreateOneProgressoArgs = {
-  input: CreateOneProgressoTypeInput;
+  input: CreateOneProgressoInput;
 };
 
 
@@ -3373,28 +3373,8 @@ export type PerguntasSumAggregate = {
   id?: Maybe<Scalars['Float']['output']>;
 };
 
-export type ProgressoCursoInput = {
-  /** id do aluno */
-  alunoId: Scalars['Float']['input'];
-  /** id do curso */
-  cursoId: Scalars['Float']['input'];
-  /** id da turma */
-  turmaId: Scalars['Float']['input'];
-};
-
-export type ProgressoSubModuloInput = {
-  /** id do aluno */
-  alunoId: Scalars['Float']['input'];
-  /** id do curso */
-  cursoId: Scalars['Float']['input'];
-  /** id do sub modulo */
-  subModuloId: Scalars['Float']['input'];
-  /** id da turma */
-  turmaId: Scalars['Float']['input'];
-};
-
-export type ProgressoType = {
-  __typename?: 'ProgressoType';
+export type Progresso = {
+  __typename?: 'Progresso';
   aluno?: Maybe<AlunoType>;
   /** Id do aluno */
   alunoId?: Maybe<Scalars['Float']['output']>;
@@ -3428,8 +3408,8 @@ export type ProgressoType = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
-export type ProgressoTypeAggregateGroupBy = {
-  __typename?: 'ProgressoTypeAggregateGroupBy';
+export type ProgressoAggregateGroupBy = {
+  __typename?: 'ProgressoAggregateGroupBy';
   alunoId?: Maybe<Scalars['Float']['output']>;
   assistido?: Maybe<Scalars['Boolean']['output']>;
   aulaId?: Maybe<Scalars['Float']['output']>;
@@ -3445,8 +3425,8 @@ export type ProgressoTypeAggregateGroupBy = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
-export type ProgressoTypeAvgAggregate = {
-  __typename?: 'ProgressoTypeAvgAggregate';
+export type ProgressoAvgAggregate = {
+  __typename?: 'ProgressoAvgAggregate';
   alunoId?: Maybe<Scalars['Float']['output']>;
   aulaId?: Maybe<Scalars['Float']['output']>;
   cursoId?: Maybe<Scalars['Float']['output']>;
@@ -3456,16 +3436,16 @@ export type ProgressoTypeAvgAggregate = {
   turmaId?: Maybe<Scalars['Float']['output']>;
 };
 
-export type ProgressoTypeConnection = {
-  __typename?: 'ProgressoTypeConnection';
+export type ProgressoConnection = {
+  __typename?: 'ProgressoConnection';
   /** Array of edges. */
-  edges: Array<ProgressoTypeEdge>;
+  edges: Array<ProgressoEdge>;
   /** Paging information */
   pageInfo: PageInfo;
 };
 
-export type ProgressoTypeCountAggregate = {
-  __typename?: 'ProgressoTypeCountAggregate';
+export type ProgressoCountAggregate = {
+  __typename?: 'ProgressoCountAggregate';
   alunoId?: Maybe<Scalars['Int']['output']>;
   assistido?: Maybe<Scalars['Int']['output']>;
   aulaId?: Maybe<Scalars['Int']['output']>;
@@ -3481,40 +3461,49 @@ export type ProgressoTypeCountAggregate = {
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
 
-export type ProgressoTypeEdge = {
-  __typename?: 'ProgressoTypeEdge';
-  /** Cursor for this node. */
-  cursor: Scalars['ConnectionCursor']['output'];
-  /** The node containing the ProgressoType */
-  node: ProgressoType;
+export type ProgressoCursoInput = {
+  /** id do aluno */
+  alunoId: Scalars['Float']['input'];
+  /** id do curso */
+  cursoId: Scalars['Float']['input'];
+  /** id da turma */
+  turmaId: Scalars['Float']['input'];
 };
 
-export type ProgressoTypeFilter = {
-  aluno?: InputMaybe<ProgressoTypeFilterAlunoTypeFilter>;
+export type ProgressoEdge = {
+  __typename?: 'ProgressoEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the Progresso */
+  node: Progresso;
+};
+
+export type ProgressoFilter = {
+  aluno?: InputMaybe<ProgressoFilterAlunoTypeFilter>;
   alunoId?: InputMaybe<NumberFieldComparison>;
-  and?: InputMaybe<Array<ProgressoTypeFilter>>;
+  and?: InputMaybe<Array<ProgressoFilter>>;
   assistido?: InputMaybe<BooleanFieldComparison>;
-  aula?: InputMaybe<ProgressoTypeFilterAulaTypeFilter>;
+  aula?: InputMaybe<ProgressoFilterAulaTypeFilter>;
   aulaId?: InputMaybe<NumberFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
-  curso?: InputMaybe<ProgressoTypeFilterCursoTypeFilter>;
+  curso?: InputMaybe<ProgressoFilterCursoTypeFilter>;
   cursoId?: InputMaybe<NumberFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   fim?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   inicio?: InputMaybe<DateFieldComparison>;
-  modulo?: InputMaybe<ProgressoTypeFilterModuloTypeFilter>;
+  modulo?: InputMaybe<ProgressoFilterModuloTypeFilter>;
   moduloId?: InputMaybe<NumberFieldComparison>;
-  or?: InputMaybe<Array<ProgressoTypeFilter>>;
+  or?: InputMaybe<Array<ProgressoFilter>>;
   subMmoduloId?: InputMaybe<NumberFieldComparison>;
-  subModulo?: InputMaybe<ProgressoTypeFilterSubModuloTypeFilter>;
-  turma?: InputMaybe<ProgressoTypeFilterTurmaTypeFilter>;
+  subModulo?: InputMaybe<ProgressoFilterSubModuloTypeFilter>;
+  turma?: InputMaybe<ProgressoFilterTurmaTypeFilter>;
   turmaId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type ProgressoTypeFilterAlunoTypeFilter = {
-  and?: InputMaybe<Array<ProgressoTypeFilterAlunoTypeFilter>>;
+export type ProgressoFilterAlunoTypeFilter = {
+  and?: InputMaybe<Array<ProgressoFilterAlunoTypeFilter>>;
   anoSerie?: InputMaybe<StringFieldComparison>;
   atualizado?: InputMaybe<BooleanFieldComparison>;
   bairro?: InputMaybe<StringFieldComparison>;
@@ -3533,7 +3522,7 @@ export type ProgressoTypeFilterAlunoTypeFilter = {
   municipioEscola?: InputMaybe<StringFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
   numero?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<ProgressoTypeFilterAlunoTypeFilter>>;
+  or?: InputMaybe<Array<ProgressoFilterAlunoTypeFilter>>;
   regiaoPlanilha?: InputMaybe<StringFieldComparison>;
   responsavel1?: InputMaybe<StringFieldComparison>;
   responsavel2?: InputMaybe<StringFieldComparison>;
@@ -3545,15 +3534,15 @@ export type ProgressoTypeFilterAlunoTypeFilter = {
   whatsAppResponsavel1?: InputMaybe<StringFieldComparison>;
 };
 
-export type ProgressoTypeFilterAulaTypeFilter = {
-  and?: InputMaybe<Array<ProgressoTypeFilterAulaTypeFilter>>;
+export type ProgressoFilterAulaTypeFilter = {
+  and?: InputMaybe<Array<ProgressoFilterAulaTypeFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   descricao?: InputMaybe<StringFieldComparison>;
   duracao?: InputMaybe<NumberFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   moduloId?: InputMaybe<NumberFieldComparison>;
-  or?: InputMaybe<Array<ProgressoTypeFilterAulaTypeFilter>>;
+  or?: InputMaybe<Array<ProgressoFilterAulaTypeFilter>>;
   ordem?: InputMaybe<NumberFieldComparison>;
   subModuloId?: InputMaybe<NumberFieldComparison>;
   titulo?: InputMaybe<StringFieldComparison>;
@@ -3561,8 +3550,8 @@ export type ProgressoTypeFilterAulaTypeFilter = {
   videoUrl?: InputMaybe<StringFieldComparison>;
 };
 
-export type ProgressoTypeFilterCursoTypeFilter = {
-  and?: InputMaybe<Array<ProgressoTypeFilterCursoTypeFilter>>;
+export type ProgressoFilterCursoTypeFilter = {
+  and?: InputMaybe<Array<ProgressoFilterCursoTypeFilter>>;
   arquivoId?: InputMaybe<NumberFieldComparison>;
   ativo?: InputMaybe<BooleanFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
@@ -3571,42 +3560,42 @@ export type ProgressoTypeFilterCursoTypeFilter = {
   icone?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<ProgressoTypeFilterCursoTypeFilter>>;
+  or?: InputMaybe<Array<ProgressoFilterCursoTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   url?: InputMaybe<StringFieldComparison>;
 };
 
-export type ProgressoTypeFilterModuloTypeFilter = {
-  and?: InputMaybe<Array<ProgressoTypeFilterModuloTypeFilter>>;
+export type ProgressoFilterModuloTypeFilter = {
+  and?: InputMaybe<Array<ProgressoFilterModuloTypeFilter>>;
   biblioteca?: InputMaybe<BooleanFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   cursoId?: InputMaybe<NumberFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   descricao?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
-  or?: InputMaybe<Array<ProgressoTypeFilterModuloTypeFilter>>;
+  or?: InputMaybe<Array<ProgressoFilterModuloTypeFilter>>;
   ordem?: InputMaybe<NumberFieldComparison>;
   titulo?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type ProgressoTypeFilterSubModuloTypeFilter = {
-  and?: InputMaybe<Array<ProgressoTypeFilterSubModuloTypeFilter>>;
+export type ProgressoFilterSubModuloTypeFilter = {
+  and?: InputMaybe<Array<ProgressoFilterSubModuloTypeFilter>>;
   arquivoId?: InputMaybe<NumberFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IntFieldComparison>;
   mensagem?: InputMaybe<StringFieldComparison>;
   moduloId?: InputMaybe<NumberFieldComparison>;
-  or?: InputMaybe<Array<ProgressoTypeFilterSubModuloTypeFilter>>;
+  or?: InputMaybe<Array<ProgressoFilterSubModuloTypeFilter>>;
   ordem?: InputMaybe<NumberFieldComparison>;
   titulo?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   url?: InputMaybe<StringFieldComparison>;
 };
 
-export type ProgressoTypeFilterTurmaTypeFilter = {
-  and?: InputMaybe<Array<ProgressoTypeFilterTurmaTypeFilter>>;
+export type ProgressoFilterTurmaTypeFilter = {
+  and?: InputMaybe<Array<ProgressoFilterTurmaTypeFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   cursoId?: InputMaybe<NumberFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
@@ -3616,12 +3605,12 @@ export type ProgressoTypeFilterTurmaTypeFilter = {
   id?: InputMaybe<IntFieldComparison>;
   inicio?: InputMaybe<DateFieldComparison>;
   nome?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<ProgressoTypeFilterTurmaTypeFilter>>;
+  or?: InputMaybe<Array<ProgressoFilterTurmaTypeFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type ProgressoTypeMaxAggregate = {
-  __typename?: 'ProgressoTypeMaxAggregate';
+export type ProgressoMaxAggregate = {
+  __typename?: 'ProgressoMaxAggregate';
   alunoId?: Maybe<Scalars['Float']['output']>;
   aulaId?: Maybe<Scalars['Float']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
@@ -3636,8 +3625,8 @@ export type ProgressoTypeMaxAggregate = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
-export type ProgressoTypeMinAggregate = {
-  __typename?: 'ProgressoTypeMinAggregate';
+export type ProgressoMinAggregate = {
+  __typename?: 'ProgressoMinAggregate';
   alunoId?: Maybe<Scalars['Float']['output']>;
   aulaId?: Maybe<Scalars['Float']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
@@ -3652,13 +3641,13 @@ export type ProgressoTypeMinAggregate = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
-export type ProgressoTypeSort = {
+export type ProgressoSort = {
   direction: SortDirection;
-  field: ProgressoTypeSortFields;
+  field: ProgressoSortFields;
   nulls?: InputMaybe<SortNulls>;
 };
 
-export enum ProgressoTypeSortFields {
+export enum ProgressoSortFields {
   AlunoId = 'alunoId',
   Assistido = 'assistido',
   AulaId = 'aulaId',
@@ -3674,8 +3663,19 @@ export enum ProgressoTypeSortFields {
   UpdatedAt = 'updatedAt'
 }
 
-export type ProgressoTypeSumAggregate = {
-  __typename?: 'ProgressoTypeSumAggregate';
+export type ProgressoSubModuloInput = {
+  /** id do aluno */
+  alunoId: Scalars['Float']['input'];
+  /** id do curso */
+  cursoId: Scalars['Float']['input'];
+  /** id do sub modulo */
+  subModuloId: Scalars['Float']['input'];
+  /** id da turma */
+  turmaId: Scalars['Float']['input'];
+};
+
+export type ProgressoSumAggregate = {
+  __typename?: 'ProgressoSumAggregate';
   alunoId?: Maybe<Scalars['Float']['output']>;
   aulaId?: Maybe<Scalars['Float']['output']>;
   cursoId?: Maybe<Scalars['Float']['output']>;
@@ -3705,6 +3705,7 @@ export type Query = {
   enderecos: EnderecoConnection;
   estado?: Maybe<Estado>;
   estados: EstadoConnection;
+  findModuloByCurso?: Maybe<Array<ModuloType>>;
   formulario?: Maybe<Formularios>;
   formularios: FormulariosConnection;
   importacaoHistoricoType?: Maybe<ImportacaoHistoricoType>;
@@ -3717,8 +3718,8 @@ export type Query = {
   modulos: ModuloTypeConnection;
   pergunta?: Maybe<Perguntas>;
   perguntas: PerguntasConnection;
-  progresso?: Maybe<ProgressoType>;
-  progressos: ProgressoTypeConnection;
+  progresso?: Maybe<Progresso>;
+  progressos: ProgressoConnection;
   resposta?: Maybe<Respostas>;
   respostaPergunta?: Maybe<RespostasPerguntas>;
   respostas: RespostasConnection;
@@ -3830,6 +3831,11 @@ export type QueryEstadosArgs = {
 };
 
 
+export type QueryFindModuloByCursoArgs = {
+  cursoId: Scalars['Float']['input'];
+};
+
+
 export type QueryFormularioArgs = {
   id: Scalars['Int']['input'];
 };
@@ -3908,9 +3914,9 @@ export type QueryProgressoArgs = {
 
 
 export type QueryProgressosArgs = {
-  filter?: ProgressoTypeFilter;
+  filter?: ProgressoFilter;
   paging?: CursorPaging;
-  sorting?: Array<ProgressoTypeSort>;
+  sorting?: Array<ProgressoSort>;
 };
 
 
@@ -4351,7 +4357,7 @@ export type SubModuloType = {
   moduloId: Scalars['Float']['output'];
   /** ordem do modulo */
   ordem: Scalars['Float']['output'];
-  subModulosProgressos?: Maybe<Array<ProgressoType>>;
+  subModulosProgressos?: Maybe<Array<Progresso>>;
   /** titulo do modulo */
   titulo: Scalars['String']['output'];
   /** data atualização do registro */
@@ -4368,8 +4374,8 @@ export type SubModuloTypeAulasArgs = {
 
 
 export type SubModuloTypeSubModulosProgressosArgs = {
-  filter?: ProgressoTypeFilter;
-  sorting?: Array<ProgressoTypeSort>;
+  filter?: ProgressoFilter;
+  sorting?: Array<ProgressoSort>;
 };
 
 export type SubModuloTypeAggregateGroupBy = {
@@ -4439,7 +4445,7 @@ export type SubModuloTypeFilter = {
   moduloId?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<SubModuloTypeFilter>>;
   ordem?: InputMaybe<NumberFieldComparison>;
-  subModulosProgressos?: InputMaybe<SubModuloTypeFilterProgressoTypeFilter>;
+  subModulosProgressos?: InputMaybe<SubModuloTypeFilterProgressoFilter>;
   titulo?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   url?: InputMaybe<StringFieldComparison>;
@@ -4487,9 +4493,9 @@ export type SubModuloTypeFilterModuloTypeFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type SubModuloTypeFilterProgressoTypeFilter = {
+export type SubModuloTypeFilterProgressoFilter = {
   alunoId?: InputMaybe<NumberFieldComparison>;
-  and?: InputMaybe<Array<SubModuloTypeFilterProgressoTypeFilter>>;
+  and?: InputMaybe<Array<SubModuloTypeFilterProgressoFilter>>;
   assistido?: InputMaybe<BooleanFieldComparison>;
   aulaId?: InputMaybe<NumberFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
@@ -4499,7 +4505,7 @@ export type SubModuloTypeFilterProgressoTypeFilter = {
   id?: InputMaybe<IntFieldComparison>;
   inicio?: InputMaybe<DateFieldComparison>;
   moduloId?: InputMaybe<NumberFieldComparison>;
-  or?: InputMaybe<Array<SubModuloTypeFilterProgressoTypeFilter>>;
+  or?: InputMaybe<Array<SubModuloTypeFilterProgressoFilter>>;
   subMmoduloId?: InputMaybe<NumberFieldComparison>;
   turmaId?: InputMaybe<NumberFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
@@ -5627,6 +5633,13 @@ export type SubModuloQueryVariables = Exact<{
 
 
 export type SubModuloQuery = { __typename?: 'Query', subModulo?: { __typename?: 'SubModuloType', id: number, mensagem: string, moduloId: number, ordem: number, titulo: string, updatedAt?: any | null, modulo?: { __typename?: 'ModuloType', id: number, titulo: string, curso?: { __typename?: 'CursoType', id: number, nome: string } | null } | null } | null };
+
+export type SubModuloFormularioQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type SubModuloFormularioQuery = { __typename?: 'Query', subModulo?: { __typename?: 'SubModuloType', id: number, titulo: string, moduloId: number, modulo?: { __typename?: 'ModuloType', cursoId: number } | null, formulario?: { __typename?: 'Formularios', id: number, nome: string, perguntas?: Array<{ __typename?: 'Perguntas', id: number, descricao: string, multiEscolha: boolean, tipo?: string | null, formularioId: number }> | null } | null } | null };
 
 export type SubModulosQueryVariables = Exact<{
   filter: SubModuloTypeFilter;
@@ -8206,6 +8219,62 @@ export type SubModuloQueryHookResult = ReturnType<typeof useSubModuloQuery>;
 export type SubModuloLazyQueryHookResult = ReturnType<typeof useSubModuloLazyQuery>;
 export type SubModuloSuspenseQueryHookResult = ReturnType<typeof useSubModuloSuspenseQuery>;
 export type SubModuloQueryResult = Apollo.QueryResult<SubModuloQuery, SubModuloQueryVariables>;
+export const SubModuloFormularioDocument = gql`
+    query SubModuloFormulario($id: Int!) {
+  subModulo(id: $id) {
+    id
+    titulo
+    moduloId
+    modulo {
+      cursoId
+    }
+    formulario {
+      id
+      nome
+      perguntas(sorting: {field: descricao, direction: ASC}) {
+        id
+        descricao
+        multiEscolha
+        tipo
+        formularioId
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useSubModuloFormularioQuery__
+ *
+ * To run a query within a React component, call `useSubModuloFormularioQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubModuloFormularioQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubModuloFormularioQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useSubModuloFormularioQuery(baseOptions: Apollo.QueryHookOptions<SubModuloFormularioQuery, SubModuloFormularioQueryVariables> & ({ variables: SubModuloFormularioQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SubModuloFormularioQuery, SubModuloFormularioQueryVariables>(SubModuloFormularioDocument, options);
+      }
+export function useSubModuloFormularioLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubModuloFormularioQuery, SubModuloFormularioQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SubModuloFormularioQuery, SubModuloFormularioQueryVariables>(SubModuloFormularioDocument, options);
+        }
+export function useSubModuloFormularioSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<SubModuloFormularioQuery, SubModuloFormularioQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<SubModuloFormularioQuery, SubModuloFormularioQueryVariables>(SubModuloFormularioDocument, options);
+        }
+export type SubModuloFormularioQueryHookResult = ReturnType<typeof useSubModuloFormularioQuery>;
+export type SubModuloFormularioLazyQueryHookResult = ReturnType<typeof useSubModuloFormularioLazyQuery>;
+export type SubModuloFormularioSuspenseQueryHookResult = ReturnType<typeof useSubModuloFormularioSuspenseQuery>;
+export type SubModuloFormularioQueryResult = Apollo.QueryResult<SubModuloFormularioQuery, SubModuloFormularioQueryVariables>;
 export const SubModulosDocument = gql`
     query SubModulos($filter: SubModuloTypeFilter!, $paging: CursorPaging!, $sorting: [SubModuloTypeSort!]!) {
   subModulos(filter: $filter, paging: $paging, sorting: $sorting) {

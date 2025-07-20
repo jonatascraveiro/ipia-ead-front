@@ -53,6 +53,3 @@ export function CriarFormularioAulaPage() {
     </Page>
   )
 }
-const parsePerguntas = () => {
-  return
-}

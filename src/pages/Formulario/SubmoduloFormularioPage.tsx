@@ -1,6 +1,6 @@
 import { Page } from '@/components/Page'
 import { CardForm } from '@/components/common/CardForm'
-import { useFormularioQuery, useSubModuloQuery } from '@/gql/generated/graphql'
+import { useSubModuloFormularioQuery } from '@/gql/generated/graphql'
 import { ROTAS } from '@/routes/rotas'
 import { generatePath, useParams } from 'react-router'
 
@@ -8,51 +8,47 @@ import { FormFormulario } from './components/FormFormulario'
 import { SkeletonForm } from './components/FormFormulario/skeletonForm'
 import { FormPerguntas } from './components/FormPerguntas'
 
-export function EditarFormularioPage() {
-  const id = useParams().id as string
-  const { data, loading } = useFormularioQuery({
-    variables: {
-      id: +id,
-    },
-    skip: !id,
-  })
-
+export function SubmoduloFormularioPage() {
   const subModuloId = useParams().subModuloId as string
-  const { data: subModulo } = useSubModuloQuery({
+  const { data, loading } = useSubModuloFormularioQuery({
     variables: {
       id: +subModuloId,
     },
     skip: !subModuloId,
   })
-  const urlVoltar = generatePath(ROTAS.FORMULARIO, {
-    subModuloId,
+
+  const urlVoltar = generatePath(ROTAS.MODULO_SUBMODULO_EDITAR, {
+    id: String(data?.subModulo?.moduloId),
+    cursoId: String(data?.subModulo?.modulo?.cursoId),
   })
 
   return (
     <Page>
       <Page.Header>
         <Page.Titulo url={urlVoltar}>
-          Editar Formulario de {subModulo?.subModulo?.titulo}
+          Formulario de {data?.subModulo?.titulo || ''}
         </Page.Titulo>
       </Page.Header>
       {loading && <SkeletonForm />}
-      {!loading && data?.formulario && (
+      {!loading && (
         <>
           <CardForm>
             <CardForm.Titulo>Formulário </CardForm.Titulo>
             <FormFormulario
-              formulario={data.formulario}
+              formulario={data?.subModulo?.formulario}
               urlVoltar={urlVoltar}
               subModuloId={+subModuloId}
             />
           </CardForm>
-          <CardForm>
-            <CardForm.Titulo>Perguntas </CardForm.Titulo>
-            <FormPerguntas
-              perguntas={data?.formulario?.perguntas || []}
-              formularioId={+id}
-            />
-          </CardForm>
+          {data?.subModulo?.formulario && (
+            <CardForm>
+              <CardForm.Titulo>Perguntas ds </CardForm.Titulo>
+              <FormPerguntas
+                perguntas={data?.subModulo?.formulario.perguntas || []}
+                formularioId={+data?.subModulo?.formulario?.id}
+              />
+            </CardForm>
+          )}
         </>
       )}
     </Page>
