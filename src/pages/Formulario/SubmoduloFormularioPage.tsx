@@ -42,7 +42,7 @@ export function SubmoduloFormularioPage() {
           </CardForm>
           {data?.subModulo?.formulario && (
             <CardForm>
-              <CardForm.Titulo>Perguntas ds </CardForm.Titulo>
+              <CardForm.Titulo>Perguntas </CardForm.Titulo>
               <FormPerguntas
                 perguntas={data?.subModulo?.formulario.perguntas || []}
                 formularioId={+data?.subModulo?.formulario?.id}
