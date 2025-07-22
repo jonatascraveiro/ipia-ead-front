@@ -1,0 +1,95 @@
+query Aula($id: Int!) {
+  aula(id: $id) {
+    ordem
+    moduloId
+    descricao
+    id
+    titulo
+    videoUrl
+    duracao
+    modulo {
+      titulo
+      id
+      curso {
+        id
+        nome
+      }
+    }
+  }
+}
+
+query AulaFormulario($id: Int!) {
+  aula(id: $id) {
+    ordem
+    moduloId
+    subModuloId
+    descricao
+    id
+    titulo
+    videoUrl
+    duracao
+    modulo {
+      titulo
+      id
+      curso {
+        id
+        nome
+      }
+    }
+    formulario {
+      id
+      nome
+      perguntas(sorting: { field: descricao, direction: ASC }) {
+        id
+        descricao
+        multiEscolha
+        tipo
+        formularioId
+      }
+      subModulo {
+        titulo
+        id
+        modulo {
+          id
+          titulo
+        }
+      }
+    }
+  }
+}
+
+query Aulas(
+  $filter: AulaTypeFilter
+  $paging: CursorPaging!
+  $sorting: [AulaTypeSort!]!
+) {
+  aulas(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        ordem
+        moduloId
+        descricao
+        id
+        titulo
+        videoUrl
+        duracao
+        subModuloId
+        modulo {
+          titulo
+        }
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+
+query AulasTotal($filter: AulaTypeFilter, $paging: CursorPaging!) {
+  aulas(filter: $filter, paging: $paging) {
+    totalCount
+  }
+}

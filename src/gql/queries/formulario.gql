@@ -1,0 +1,68 @@
+query Formulario($id: Int!) {
+  formulario(id: $id) {
+    id
+    nome
+    perguntas(sorting: { field: descricao, direction: ASC }) {
+      id
+      descricao
+      multiEscolha
+      tipo
+      formularioId
+    }
+    subModulo {
+      titulo
+      id
+      modulo {
+        id
+        titulo
+      }
+    }
+  }
+}
+
+query Formularios(
+  $filter: FormulariosFilter
+  $paging: CursorPaging!
+  $sorting: [FormulariosSort!]!
+) {
+  formularios(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        id
+        nome
+        perguntas {
+          id
+        }
+        subModulo {
+          titulo
+          id
+          modulo {
+            id
+            titulo
+          }
+        }
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+
+query FormulariosSelect(
+  $filter: FormulariosFilter
+  $paging: CursorPaging!
+  $sorting: [FormulariosSort!]!
+) {
+  formularios(filter: $filter, paging: $paging, sorting: $sorting) {
+    edges {
+      node {
+        id
+        nome
+      }
+    }
+  }
+}
