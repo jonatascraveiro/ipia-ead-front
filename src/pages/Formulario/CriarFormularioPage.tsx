@@ -6,6 +6,7 @@ import { FormFormulario } from './components/FormFormulario'
 
 export function CriarFormularioPage() {
   const subModuloId = useParams().subModuloId as string
+
   const { data: modulo } = useSubModuloQuery({
     variables: {
       id: +subModuloId,

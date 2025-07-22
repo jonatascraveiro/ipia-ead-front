@@ -4,17 +4,17 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 
 import DataTable from '@/components/DataTable'
-import type { SubModuloType } from '@/gql/generated/graphql'
 import { useModal } from '@/hooks/useModal'
+import type { PerguntaType } from '@/types/pergunta'
 import { useTabelaPerguntas } from '../TabelaPerguntas/useTabelaPerguntas'
 import { useFormPerguntas } from './useFormPerguntas'
 
 function FormPerguntas({
-  perguntas,
+  perguntas = [],
   disabled = false,
   formularioId,
 }: {
-  perguntas?: Partial<SubModuloType>[]
+  perguntas?: Partial<PerguntaType[]>
   disabled?: boolean
 
   formularioId?: number
@@ -32,7 +32,6 @@ function FormPerguntas({
         id: pergunta?.id || undefined,
         descricao: pergunta?.descricao || '',
         formularioId: formularioId,
-
         tipo: pergunta?.tipo || 'Múltipla escolha',
         multiEscolha: pergunta?.multiEscolha ?? false,
       })

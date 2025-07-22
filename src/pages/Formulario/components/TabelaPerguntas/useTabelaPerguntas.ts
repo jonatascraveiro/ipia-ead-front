@@ -12,7 +12,7 @@ export const useTabelaPerguntas = ({
   perguntas,
   handleEditarForm,
 }: {
-  perguntas: PerguntaType[]
+  perguntas?: Partial<PerguntaType[]>
   handleEditarForm: (data: PerguntaType) => void
 }) => {
   const navigate = useNavigate()
@@ -25,7 +25,7 @@ export const useTabelaPerguntas = ({
 
   const handleResposta = useCallback(
     (data: PerguntaType) => {
-      navigate(generatePath(ROTAS.PERGUNTA_EDITAR, { id: data.id }))
+      navigate(generatePath(ROTAS.PERGUNTA_EDITAR, { id: String(data.id) }))
     },
     [navigate],
   )
@@ -52,6 +52,7 @@ export const useTabelaPerguntas = ({
               apolloClient.cache.evict({ fieldName: 'perguntas' })
               apolloClient.cache.evict({ fieldName: 'formulario' })
             },
+            refetchQueries: ['AulaFormulario'],
           })
         },
       })

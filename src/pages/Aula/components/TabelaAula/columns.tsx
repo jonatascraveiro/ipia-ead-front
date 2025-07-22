@@ -6,11 +6,13 @@ import type { ColumnDef } from '@tanstack/react-table'
 type Acoes = {
   deletar: (data: AulaType) => void
   editar: (data: AulaType) => void
+  formulario: (data: AulaType) => void
 }
 
 export const getColumns = ({
   deletar,
   editar,
+  formulario,
 }: Acoes): ColumnDef<AulaType>[] => {
   return [
     {
@@ -43,6 +45,11 @@ export const getColumns = ({
             label: 'Deletar',
             icon: <Icone.deletar />,
             onClick: (row) => deletar(row),
+          },
+          {
+            label: 'Formulário',
+            icon: <Icone.formulario />,
+            onClick: (row) => formulario(row),
           },
         ],
       }),
