@@ -5,6 +5,6 @@ export type PerguntaType = {
   formularioId: number
   descricao: string
   multiEscolha: boolean
-  tipo: string
-  formulario: FormularioType
+  tipo?: string | null
+  formulario?: FormularioType
 }
