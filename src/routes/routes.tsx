@@ -15,9 +15,9 @@ import { CursoPage } from '@/pages/Curso/CursoPage'
 import { AlunosPage } from '@/pages/Aluno/AlunosPage'
 import { EditarCursoPage } from '@/pages/Curso/EditarCursoPage'
 import { VisualizarCursoPage } from '@/pages/Curso/VisualizarCursoPage'
-import { CriarFormularioPage } from '@/pages/Formulario/CriarFormularioPage'
-import { EditarFormularioPage } from '@/pages/Formulario/EditarFormularioPage'
-import { FormularioPage } from '@/pages/Formulario/FormularioPage'
+
+import { CriarFormularioAulaPage } from '@/pages/Formulario/CriarFormularioAulaPage'
+import { SubmoduloFormularioPage } from '@/pages/Formulario/SubmoduloFormularioPage'
 import { ImportacaoPage } from '@/pages/Importacao/ImportacaoPage'
 import { InscricaoPage } from '@/pages/Inscricao/IncricaoPage'
 import { InscricaoImportacaoPage } from '@/pages/InscricaoImportacao/InscricaoImportacaoPage'
@@ -28,7 +28,6 @@ import { CriarModuloPage } from '@/pages/Modulo/CriarModuloPage'
 import { EditarModuloPage } from '@/pages/Modulo/EditarModuloPage'
 import { EditarSubModuloPage } from '@/pages/Modulo/EditarSubModuloPage'
 import { ModuloPage } from '@/pages/Modulo/ModuloPage'
-import { CriarPerguntaPage } from '@/pages/Pergunta/CriarPerguntaPage'
 import { EditarPerguntaPage } from '@/pages/Pergunta/EditarPerguntaPage'
 import { PerguntaPage } from '@/pages/Pergunta/PerguntaPage'
 import { CriarTurmaPage } from '@/pages/Turma/CriarTurmaPage'
@@ -57,15 +56,14 @@ export default function AppRoutes() {
 
           <Route path={ROTAS.ALUNOS} element={<AlunosPage />} />
 
-          <Route path={ROTAS.FORMULARIO} element={<FormularioPage />} />
           <Route
-            path={ROTAS.FORMULARIO_CRIAR}
-            element={<CriarFormularioPage />}
+            path={ROTAS.FORMULARIO}
+            element={<SubmoduloFormularioPage />}
           />
 
           <Route
-            path={ROTAS.FORMULARIO_EDITAR}
-            element={<EditarFormularioPage />}
+            path={ROTAS.FORMULARIO_AULA}
+            element={<CriarFormularioAulaPage />}
           />
 
           <Route path={ROTAS.AULA} element={<AulaPage />} />
@@ -84,10 +82,7 @@ export default function AppRoutes() {
             path={ROTAS.MATERIAL_COMPLEMENTAR_CRIAR}
             element={<CriarMaterialComplementarPage biblioteca={true} />}
           />
-          {/* <Route
-            path={ROTAS.MATERIAL_COMPLEMENTAR_VISUALIZAR}
-            element={<VisualizarAulaPage biblioteca={true} />}
-          /> */}
+
           <Route
             path={ROTAS.MATERIAL_COMPLEMENTAR_EDITAR}
             element={<EditarMaterialComplementarPage biblioteca={true} />}
@@ -109,7 +104,6 @@ export default function AppRoutes() {
           />
 
           <Route path={ROTAS.PERGUNTA} element={<PerguntaPage />} />
-          <Route path={ROTAS.PERGUNTA_CRIAR} element={<CriarPerguntaPage />} />
 
           <Route
             path={ROTAS.PERGUNTA_EDITAR}

@@ -26,6 +26,8 @@ const ROTAS = {
   FORMULARIO_VISUALIZAR: '/sub-modulo/:subModuloId/formulario/:id',
   FORMULARIO_EDITAR: '/sub-modulo/:subModuloId/formulario/:id/editar',
 
+  FORMULARIO_AULA: '/aula/:aulaId/formulario',
+
   INSCRICOES: '/inscricoes',
 
   IMPORTACOES: '/importacoes',
@@ -59,6 +61,6 @@ const ROTAS = {
   USUARIO_EDITAR: '/usuario/:id',
   USUARIO_CRIAR: '/usuario/criar',
   LOGIN: '/login',
-}
+} as const
 
 export { ROTAS }
