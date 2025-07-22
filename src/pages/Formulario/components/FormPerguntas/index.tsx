@@ -26,7 +26,7 @@ function FormPerguntas({
   })
 
   const { tabela } = useTabelaPerguntas({
-    perguntas: perguntas,
+    perguntas: perguntas || [],
     handleEditarForm: (pergunta) => {
       form.reset({
         id: pergunta?.id || undefined,
