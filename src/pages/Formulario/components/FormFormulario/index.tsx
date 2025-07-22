@@ -22,7 +22,6 @@ function FormFormulario({
 }) {
   const { form, onSubmit } = useFormFormulario({
     formulario,
-    urlVoltar,
     subModuloId,
     aulaId,
   })

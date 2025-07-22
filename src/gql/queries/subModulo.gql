@@ -1,7 +1,5 @@
 query SubModulo($id: Int!) {
   subModulo(id: $id) {
-    # arquivoId
-
     id
     mensagem
     modulo {
@@ -16,7 +14,6 @@ query SubModulo($id: Int!) {
     ordem
     titulo
     updatedAt
-    # url
   }
 }
 
@@ -38,14 +35,6 @@ query SubModuloFormulario($id: Int!) {
         tipo
         formularioId
       }
-      # subModulo {
-      #   titulo
-      #   id
-      #   modulo {
-      #     id
-      #     titulo
-      #   }
-      # }
     }
   }
 }
@@ -58,8 +47,6 @@ query SubModulos(
   subModulos(filter: $filter, paging: $paging, sorting: $sorting) {
     edges {
       node {
-        #  arquivoId
-
         id
         mensagem
         modulo {

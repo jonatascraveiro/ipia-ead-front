@@ -10,12 +10,11 @@ import { type FormularioSchema, schema } from './schema'
 
 export const useFormFormulario = ({
   formulario,
-  urlVoltar,
   subModuloId,
   aulaId,
 }: {
   formulario?: FormularioQuery['formulario']
-  urlVoltar: string
+
   subModuloId?: number
   aulaId?: number
 }) => {
@@ -26,7 +25,7 @@ export const useFormFormulario = ({
       nome: formulario?.nome || '',
     },
   })
-  console.log(form)
+
   const [criar] = useCreateOneFormularioMutation()
   const [editar] = useUpdateOneFormularioMutation()
 
